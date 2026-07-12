@@ -1,0 +1,964 @@
+[
+  {
+    "id": "mainpat",
+    "name": "Mainpat (Mini Tibet)",
+    "state": "Chhattisgarh",
+    "is_popular": false,
+    "starting_cities": ["Raipur", "Ambikapur"],
+    "starting_city_distances": {"Raipur": 360, "Ambikapur": 50},
+    "description": "Shimla of Chhattisgarh, home to Tibetan monasteries, pine hills, and shaking earth.",
+    "lat": 22.81, "lon": 83.28, "best_season": "October to March",
+    "entry_tickets": {"daldali_shaking_land": 20, "monastery_donation": 50, "tiger_point_falls": 20},
+    "transportation": {"local_auto": 500, "private_cab": 2200, "public_bus": 150},
+    "accommodation": {"budget": 900, "mid_range": 2200, "luxury": 4500},
+    "food_cost_per_day": 400,
+    "women_safety": "High safety. Mainpat is a peaceful, family-oriented hill station with a large Buddhist monastery presence. Locals are warm and welcoming. Women solo travelers can comfortably explore during the day; standard precautions apply for night travel on remote ghat roads.",
+    "pros": ["Extremely pleasant weather throughout the year.", "Unique fusion of Tibetan and Chhattisgarhi cultures.", "Lesser crowded and budget-friendly stay options."],
+    "cons": ["Ghat roads can be narrow and winding.", "Limited luxury hotels; mostly homestays and state tourism resorts.", "Public transportation is infrequent; renting a vehicle is advised."],
+    "warnings": ["Daldali (bouncing land) can be slippery during monsoons; avoid stepping deep into swampy pockets without local guides.", "Mobile network coverage can be weak in deep forest points.", "Drive carefully on ghat roads during winters due to thick morning fog."],
+    "extra_tips": ["Try traditional Tibetan momos and thukpa at local refugee shops near the monastery.", "Visit the Dhakpo Shedupling Monastery early in the morning.", "Buy authentic hand-woven woolen carpets made by the Tibetan cooperatives."],
+    "itineraries": {
+      "3": [
+        {"day": 1, "title": "Arrival & Tibetan Monasteries", "activities": ["Drive up the scenic Mainpat Ghats.", "Visit the central Dhakpo Shedupling Monastery.", "Spend a peaceful evening walking around the Tibetan camp markets."], "sights": ["Mainpat Ghats", "Dhakpo Shedupling Monastery"]},
+        {"day": 2, "title": "Bouncing Land & Scenic Waterfalls", "activities": ["Visit Daldali (bouncing land) to experience the sponge-like shaking earth.", "Drive to Tiger Point waterfall.", "Enjoy sunset at Mehta Point offering panoramic valley views."], "sights": ["Daldali Shaking Land", "Tiger Point", "Mehta Point"]},
+        {"day": 3, "title": "Ulta Pani & Departure", "activities": ["Visit Ulta Pani, a unique spot where water appears to flow uphill.", "Drive back down the ghats for departure."], "sights": ["Ulta Pani", "Departure"]}
+      ]
+    }
+  },
+  {
+    "id": "chitrakote_falls",
+    "name": "Chitrakote & Tirathgarh Falls",
+    "state": "Chhattisgarh",
+    "is_popular": false,
+    "starting_cities": ["Raipur", "Jagdalpur"],
+    "starting_city_distances": {"Raipur": 290, "Jagdalpur": 40},
+    "description": " Horseshoe waterfalls on Indravati river and Kanger Valley caves.",
+    "lat": 19.20, "lon": 81.78, "best_season": "July to March",
+    "entry_tickets": {"waterfall_entry": 20, "boating_ticket": 100, "kanger_valley_entry": 50, "caves_entry": 50},
+    "transportation": {"local_auto": 400, "private_cab": 2000, "public_bus": 120},
+    "accommodation": {"budget": 800, "mid_range": 2200, "luxury": 4500},
+    "food_cost_per_day": 350,
+    "women_safety": "Medium-High safety. Very safe during daytime and around major resort zones (like Dandami Luxury Resort at the cliff edge). Bastar is rich in tribal heritage, and locals are helpful. However, solo women should avoid trekking deep in isolated forests or traveling on state highways after 8 PM.",
+    "pros": ["Breathtaking scenery, especially right after monsoons.", "Fascinating tribal markets (Haat) and local wooden crafts.", "State-managed resort cottages with direct waterfall views."],
+    "cons": ["Highly crowded during national holidays.", "Limited dining choices outside state-run resorts.", "Monsoon mist makes close boating inaccessible for safety."],
+    "warnings": ["Do not attempt to swim in the pool below Chitrakote or Tirathgarh falls; currents are extremely strong.", "Kutumsar Limestone caves can be claustrophobic.", "Respect local tribal taboos."],
+    "extra_tips": ["Take a local boat ride early in the morning.", "Try local delicacies like Chaprah (red ant chutney).", "Buy local Dhokra metal craft."],
+    "itineraries": {
+      "3": [
+        {"day": 1, "title": "Bastar Arrival & Horseshoe Falls", "activities": ["Travel from starting city to Chitrakote.", "Check-in at Dandami Luxury Resort.", "Watch the falls lit up by colored searchlights in the evening."], "sights": ["Chitrakote Falls Viewpoint"]},
+        {"day": 2, "title": "Tirathgarh & Kutumsar Caves", "activities": ["Drive to Kanger Valley National Park.", "Explore the three-tiered Tirathgarh Falls.", "Visit Kutumsar Caves to see stalactites."], "sights": ["Tirathgarh Falls", "Kutumsar Caves"]},
+        {"day": 3, "title": "Jagdalpur Palace & Departure", "activities": ["Visit Bastar Palace in Jagdalpur town.", "Shop for woodcarvings and terracotta items.", "Depart via Raipur/Jagdalpur Airport."], "sights": ["Bastar Palace", "Jagdalpur Market"]}
+      ]
+    }
+  },
+  {
+    "id": "raipur_city",
+    "name": "Raipur City Highlights",
+    "state": "Chhattisgarh",
+    "is_popular": true,
+    "starting_cities": ["Raipur", "Bilaspur"],
+    "starting_city_distances": {"Raipur": 5, "Bilaspur": 115},
+    "description": "Capital city with historical lakes, open-air museums, and modern parks.",
+    "lat": 21.25, "lon": 81.63, "best_season": "October to March",
+    "entry_tickets": {"purkhouti_muktangan": 50, "nandan_van_zoo": 100},
+    "transportation": {"local_auto": 250, "private_cab": 1500, "public_bus": 50},
+    "accommodation": {"budget": 900, "mid_range": 2200, "luxury": 5000},
+    "food_cost_per_day": 400,
+    "women_safety": "High safety. Raipur is a major metropolitan city with active street patrols and high lighting. Very safe for solo female travelers during day and evening hours.",
+    "pros": ["Excellent connectivity via flight, train, and roads.", "Great shopping malls.", "Wide choice of dining options."],
+    "cons": ["Heavy city traffic and dust in construction zones.", "Less 'nature-focused' compared to rural Chhattisgarh."],
+    "warnings": ["Always use metered autos or rideshare apps.", "Keep valuables secure in crowded market areas."],
+    "extra_tips": ["Visit Purkhouti Muktangan, an open-air cultural museum.", "Spend your evening at Swami Vivekanand Sarovar."],
+    "itineraries": {
+      "3": [
+        {"day": 1, "title": "Arrival & City Lakes", "activities": ["Check-in, visit Swami Vivekanand Sarovar.", "Explore local markets at Telibandha Lake."], "sights": ["Budha Talab", "Telibandha"]},
+        {"day": 2, "title": "Tribal Art & Brick Heritage", "activities": ["Visit Purkhouti Muktangan open-air museum.", "Drive to Sirpur (80km) to see the ancient Laxman Brick Temple."], "sights": ["Purkhouti Muktangan", "Sirpur Temple"]},
+        {"day": 3, "title": "Zoo Safari & Depart", "activities": ["Morning safari at Nandan Van Jungle Safari.", "Depart from Raipur."], "sights": ["Jungle Safari", "Raipur Junction"]}
+      ]
+    }
+  },
+  {
+    "id": "visakhapatnam",
+    "name": "Visakhapatnam (Vizag)",
+    "state": "Andhra Pradesh",
+    "is_popular": true,
+    "starting_cities": ["Visakhapatnam", "Vijayawada"],
+    "starting_city_distances": {"Visakhapatnam": 5, "Vijayawada": 350},
+    "description": "Coastal city with sandy beaches, ropeway hills, and submarine museums.",
+    "lat": 17.68, "lon": 83.21, "best_season": "October to March",
+    "entry_tickets": {"submarine_museum": 40, "ropeway": 100},
+    "transportation": {"local_auto": 300, "private_cab": 1800, "public_bus": 60},
+    "accommodation": {"budget": 1000, "mid_range": 2500, "luxury": 6000},
+    "food_cost_per_day": 450,
+    "women_safety": "High safety. Vizag is one of the safest coastal cities in India. Active beach policing makes RM and RK beach roads safe at all hours.",
+    "pros": ["Clean sandy beaches.", "Unique museums directly on the beach.", "Good connectivity."],
+    "cons": ["Humid climate.", "RK Beach is too dangerous for swimming."],
+    "warnings": ["Never swim at RK Beach due to rip currents.", "Negotiate auto rates beforehand."],
+    "extra_tips": ["Take the ropeway to Kailasagiri Hill.", "Try local bamboo chicken."],
+    "itineraries": {
+      "3": [
+        {"day": 1, "title": "Beach Sights & Submarines", "activities": ["Arrive at Vizag.", "Visit INS Kursura Submarine Museum on RK Beach.", "Watch sunset from RK Beach."], "sights": ["RK Beach", "Submarine Museum"]},
+        {"day": 2, "title": "Ropeways & Water Sports", "activities": ["Morning ropeway up Kailasagiri Hill.", "Head to Rushikonda Beach for kayaking."], "sights": ["Kailasagiri Hill", "Rushikonda Beach"]},
+        {"day": 3, "title": "Borra Caves Excursion & Depart", "activities": ["Explore Borra Caves.", "Depart from Vizag."], "sights": ["Borra Caves", "Departure"]}
+      ]
+    }
+  },
+  {
+    "id": "gandikota",
+    "name": "Gandikota Canyon",
+    "state": "Andhra Pradesh",
+    "is_popular": false,
+    "starting_cities": ["Bangalore", "Kadapa"],
+    "starting_city_distances": {"Bangalore": 280, "Kadapa": 85},
+    "description": "Grand Canyon of India formed by Penna river cutting red sandstone gorge.",
+    "lat": 14.81, "lon": 78.28, "best_season": "September to February",
+    "entry_tickets": {"belum_caves": 70},
+    "transportation": {"local_auto": 500, "private_cab": 2500, "public_bus": 150},
+    "accommodation": {"budget": 800, "mid_range": 2000, "luxury": 4500},
+    "food_cost_per_day": 350,
+    "women_safety": "Medium-High safety. Avoid late night isolated camping at the gorge cliff; choose official Haritha resorts.",
+    "pros": ["Spectacular canyon views.", "Historic fort ruins.", "Belum Caves day trip."],
+    "cons": ["Very hot day temperatures.", "Basic dining choices."],
+    "warnings": ["No barricades at the gorge cliff edges; stand back.", "Keep hydrated."],
+    "extra_tips": ["Watch sunrise over the canyon gorge.", "Explore Belum Caves."],
+    "itineraries": {
+      "3": [
+        {"day": 1, "title": "Arrival & Sunset Gorge", "activities": ["Arrive, watch sunset from gorge cliffs."], "sights": ["Penna Gorge"]},
+        {"day": 2, "title": "Fort Heritage", "activities": ["Explore Gandikota Fort, Jama Masjid, and Madhavaraya temple."], "sights": ["Gandikota Fort", "Madhavaraya Temple"]},
+        {"day": 3, "title": "Belum Caves & Depart", "activities": ["Explore subterranean Belum Caves.", "Depart via Kadapa."], "sights": ["Belum Caves", "Departure"]}
+      ]
+    }
+  },
+  {
+    "id": "tawang",
+    "name": "Tawang Monastery Valley",
+    "state": "Arunachal Pradesh",
+    "is_popular": true,
+    "starting_cities": ["Guwahati", "Tezpur"],
+    "starting_city_distances": {"Guwahati": 450, "Tezpur": 320},
+    "description": "High altitude valley home to India's largest monastery and snow passes.",
+    "lat": 27.58, "lon": 91.86, "best_season": "March to June, September to October",
+    "entry_tickets": {"inner_line_permit": 150},
+    "transportation": {"local_auto": 600, "private_cab": 4000, "public_bus": 300},
+    "accommodation": {"budget": 1200, "mid_range": 2800, "luxury": 5500},
+    "food_cost_per_day": 450,
+    "women_safety": "High safety. Monastic culture is exceptionally safe and welcoming to women solo travelers.",
+    "pros": ["Epic snow pass views.", "Stunning Buddhist heritage.", "Unique cool climate."],
+    "cons": ["Very long road journey.", "Requires ILP permit.", "Potential altitude sickness."],
+    "warnings": ["Sela Pass can be blocked by snow.", "Acclimatize in Dirang before going to Tawang."],
+    "extra_tips": ["Visit Tawang Monastery early morning.", "Carry warm woolens even in summer."],
+    "itineraries": {
+      "3": [
+        {"day": 1, "title": "Sela Pass to Tawang", "activities": ["Scenic drive over Sela Pass.", "Arrive and rest."], "sights": ["Sela Pass", "Tawang"]},
+        {"day": 2, "title": "Tawang Monastery", "activities": ["Explore Tawang Monastery.", "Visit Urgelling Monastery.", "Watch Tawang War Memorial light show."], "sights": ["Tawang Monastery", "War Memorial"]},
+        {"day": 3, "title": "Madhuri Lake & Depart", "activities": ["Excursion to Sangetsar Lake (Madhuri Lake).", "Depart via Tezpur."], "sights": ["Sangetsar Lake", "Departure"]}
+      ]
+    }
+  },
+  {
+    "id": "ziro_valley",
+    "name": "Ziro Valley",
+    "state": "Arunachal Pradesh",
+    "is_popular": false,
+    "starting_cities": ["Guwahati", "Itanagar"],
+    "starting_city_distances": {"Guwahati": 440, "Itanagar": 110},
+    "description": "UNESCO tentative valley home to Apatani tribe face-tattoo elders.",
+    "lat": 27.53, "lon": 93.83, "best_season": "March to October",
+    "entry_tickets": {"inner_line_permit": 150, "tarin_fish_farm": 30},
+    "transportation": {"local_auto": 600, "private_cab": 3200, "public_bus": 300},
+    "accommodation": {"budget": 1000, "mid_range": 2500, "luxury": 5500},
+    "food_cost_per_day": 450,
+    "women_safety": "High safety. Exceptionally safe and peace-loving tribal society.",
+    "pros": ["Fascinating village walks.", "Sustainable organic fish-cum-paddy farming.", "Pleasant weather."],
+    "cons": ["Rough highway roads.", "Limited vegetarian dining.", "ILP permit required."],
+    "warnings": ["Do not enter traditional homes without permission.", "Respect local custom flags."],
+    "extra_tips": ["Interact with Apatani elders in Hong village.", "Try local Kiwi wine."],
+    "itineraries": {
+      "3": [
+        {"day": 1, "title": "Arrival in Ziro", "activities": ["Arrive at homestay.", "Explore local bazaar."], "sights": ["Ziro Town"]},
+        {"day": 2, "title": "Hong & Hari Villages", "activities": ["Walk in Hong village to see Apatani elders.", "Visit Tarin Fish Farm."], "sights": ["Hong Village", "Tarin Fish Farm"]},
+        {"day": 3, "title": "Shiva Lingam & Depart", "activities": ["Visit Siddheshwar Nath Shiva Lingam.", "Depart."], "sights": ["Siddheshwar Temple", "Departure"]}
+      ]
+    }
+  },
+  {
+    "id": "guwahati",
+    "name": "Guwahati Temple Gateway",
+    "state": "Assam",
+    "is_popular": true,
+    "starting_cities": ["Guwahati", "Jorhat"],
+    "starting_city_distances": {"Guwahati": 5, "Jorhat": 300},
+    "description": "Brahmaputra river city home to the historic Kamakhya Shakti Temple.",
+    "lat": 26.14, "lon": 91.74, "best_season": "October to April",
+    "entry_tickets": {"kamakhya_vip": 500, "cruise_ticket": 300},
+    "transportation": {"local_auto": 300, "private_cab": 1800, "public_bus": 50},
+    "accommodation": {"budget": 900, "mid_range": 2200, "luxury": 5500},
+    "food_cost_per_day": 400,
+    "women_safety": "High safety. Safe public transit systems and active city center environments.",
+    "pros": ["Excellent airport/railway connections.", "River cruises on Brahmaputra.", "Great Assamese silk shopping."],
+    "cons": ["Heavy city humidity.", "Kamakhya queue wait times can be long."],
+    "warnings": ["Ignore unofficial temple priests demanding high fees.", "Be safe on evening river boat transits."],
+    "extra_tips": ["Enjoy sunset river cruise.", "Buy Mekhela Chador silk sarees."],
+    "itineraries": {
+      "3": [
+        {"day": 1, "title": "Kamakhya Temple", "activities": ["Visit Kamakhya Temple on Nilachal hill.", "Evening Brahmaputra sunset cruise."], "sights": ["Kamakhya Temple", "Brahmaputra Cruise"]},
+        {"day": 2, "title": "Umananda Island", "activities": ["Take boat to Umananda peacock island temple.", "Visit Sualkuchi weavers village (30km)."], "sights": ["Umananda Peacock Island", "Sualkuchi village"]},
+        {"day": 3, "title": "State Museum & Depart", "activities": ["Explore Assam State Museum.", "Depart from Guwahati."], "sights": ["Assam Museum", "Departure"]}
+      ]
+    }
+  },
+  {
+    "id": "majuli",
+    "name": "Majuli River Island",
+    "state": "Assam",
+    "is_popular": false,
+    "starting_cities": ["Jorhat", "Guwahati"],
+    "starting_city_distances": {"Jorhat": 20, "Guwahati": 310},
+    "description": "World's largest river island, center of Vaishnavite mask-making monasteries.",
+    "lat": 26.96, "lon": 94.22, "best_season": "October to March",
+    "entry_tickets": {"ferry_ticket": 30},
+    "transportation": {"local_auto": 400, "private_cab": 2200, "public_bus": 80},
+    "accommodation": {"budget": 700, "mid_range": 1800, "luxury": 4000},
+    "food_cost_per_day": 350,
+    "women_safety": "High safety. Peaceful, religious, and close-knit island community.",
+    "pros": ["Unique mask art.", "Extremely quiet village life.", "Scenic river views."],
+    "cons": ["Ferry cancellations in monsoons.", "Simple stilt cottage stays only."],
+    "warnings": ["Check the last return ferry schedule carefully.", "Remove footwear before entering Satras."],
+    "extra_tips": ["Rent a bicycle to explore paths.", "Visit Samaguri Satra."],
+    "itineraries": {
+      "3": [
+        {"day": 1, "title": "Ferry Crossing", "activities": ["Ferry ride from Jorhat.", "Sunset at river beach."], "sights": ["Ferry", "River Beach"]},
+        {"day": 2, "title": "Satras & Mask Making", "activities": ["Visit Kamalabari Satra.", "Demonstration of mask art at Samaguri Satra."], "sights": ["Kamalabari Satra", "Samaguri Satra"]},
+        {"day": 3, "title": "Clay Pottery & Depart", "activities": ["Visit Salmara pottery village.", "Return ferry to Jorhat."], "sights": ["Salmara Pottery", "Departure"]}
+      ]
+    }
+  },
+  {
+    "id": "bodhgaya",
+    "name": "Bodhgaya Mahabodhi Temple",
+    "state": "Bihar",
+    "is_popular": true,
+    "starting_cities": ["Gaya", "Patna"],
+    "starting_city_distances": {"Gaya": 15, "Patna": 115},
+    "description": "UNESCO site where Lord Buddha attained enlightenment under the Bodhi tree.",
+    "lat": 24.69, "lon": 84.99, "best_season": "October to March",
+    "entry_tickets": {"temple_entry": 0},
+    "transportation": {"local_auto": 300, "private_cab": 2000, "public_bus": 80},
+    "accommodation": {"budget": 800, "mid_range": 2200, "luxury": 5000},
+    "food_cost_per_day": 350,
+    "women_safety": "High safety. International tourist hub with high security patrols. Safe for solo female travelers.",
+    "pros": ["Stunning Mahabodhi temple architecture.", "Calm spiritual monasteries built by diverse Buddhist countries.", "Easy connectivity from Gaya."],
+    "cons": ["Chaotic street traffic outside temple gates.", "Fewer luxury hotel chains."],
+    "warnings": ["Cell phones and bags are not allowed inside Mahabodhi temple (locker counters available).", "Avoid street scams."],
+    "extra_tips": ["Meditate under the sacred Bodhi Tree.", "Visit the 80-foot giant Buddha statue."],
+    "itineraries": {
+      "3": [
+        {"day": 1, "title": "Mahabodhi Temple Complex", "activities": ["Visit Mahabodhi Temple.", "See Bodhi Tree.", "Walk in the gardens."], "sights": ["Mahabodhi Temple", "Bodhi Tree"]},
+        {"day": 2, "title": "International Monasteries", "activities": ["Visit Thai, Japanese, and Bhutanese monasteries.", "See the 80ft Buddha Statue."], "sights": ["Monasteries", "80ft Buddha"]},
+        {"day": 3, "title": "Gaya Sights & Depart", "activities": ["Visit Vishnupad Temple in Gaya.", "Depart from Gaya Station."], "sights": ["Vishnupad Temple", "Departure"]}
+      ]
+    }
+  },
+  {
+    "id": "valmiki_forest",
+    "name": "Valmiki Tiger Reserve",
+    "state": "Bihar",
+    "is_popular": false,
+    "starting_cities": ["Patna", "Gorakhpur"],
+    "starting_city_distances": {"Patna": 290, "Gorakhpur": 130},
+    "description": "Wild tiger reserve along Gandak river with eco-resorts.",
+    "lat": 27.42, "lon": 84.45, "best_season": "November to April",
+    "entry_tickets": {"reserve_entry": 100, "safari_jeep": 1500},
+    "transportation": {"local_auto": 400, "private_cab": 2500, "public_bus": 150},
+    "accommodation": {"budget": 800, "mid_range": 2000, "luxury": 4500},
+    "food_cost_per_day": 300,
+    "women_safety": "Medium-High safety. Standard forest department eco-cottage security. Stick to official guides.",
+    "pros": ["Dense forests with Gandak river views.", "Good wildlife sightings.", "Extremely offbeat."],
+    "cons": ["Limited emergency infrastructure.", "Basic vegetarian food options."],
+    "warnings": ["Do not venture out of eco-camps alone at night.", "River boating subject to monsoon flood alerts."],
+    "extra_tips": ["Book eco-huts managed by Bihar Forest Department.", "Visit Someshwar Fort peak ruins."],
+    "itineraries": {
+      "3": [
+        {"day": 1, "title": "Jungle Arrival", "activities": ["Drive to Valmiki Nagar.", "Stay in forest eco-huts.", "Evening walk near Gandak River."], "sights": ["Gandak River"]},
+        {"day": 2, "title": "Jungle Safari", "activities": ["Jungle safari to spot tigers and wild boars.", "Visit Jatashankar temple ruins."], "sights": ["Jungle Safari", "Jatashankar"]},
+        {"day": 3, "title": "Someshwar Hike & Depart", "activities": ["Hike Someshwar hills.", "Depart via Gorakhpur."], "sights": ["Someshwar Hills", "Departure"]}
+      ]
+    }
+  },
+  {
+    "id": "goa_beaches",
+    "name": "Calangute & Baga Beaches",
+    "state": "Goa",
+    "is_popular": true,
+    "starting_cities": ["Goa (Dabolim)", "Margao"],
+    "starting_city_distances": {"Goa (Dabolim)": 40, "Margao": 45},
+    "description": "Bustling sandy beaches with shacks, night markets, and water sports.",
+    "lat": 15.54, "lon": 73.75, "best_season": "November to February",
+    "entry_tickets": {"fort_aguada": 25},
+    "transportation": {"local_auto": 400, "private_cab": 1800, "public_bus": 50},
+    "accommodation": {"budget": 1000, "mid_range": 2500, "luxury": 6500},
+    "food_cost_per_day": 500,
+    "women_safety": "High safety. Highly tourist-friendly coastal culture. Dedicated pink taxis for women available. Solo female travelers are extremely comfortable.",
+    "pros": ["Vibrant beach shacks.", "Unmatched nightlife and dining.", "Water sports."],
+    "cons": ["Extremely crowded in December.", "High room rates in peak winter.", "Humid climate."],
+    "warnings": ["Avoid swimming near red flags.", "Use authorized vehicle rentals only."],
+    "extra_tips": ["Rent a scooter to explore North Goa.", "Visit Fort Aguada at sunset."],
+    "itineraries": {
+      "3": [
+        {"day": 1, "title": "Beach & Shacks", "activities": ["Check-in at Calangute.", "Relax at beach shacks, watch sunset at Baga."], "sights": ["Calangute Beach", "Baga Beach"]},
+        {"day": 2, "title": "Aguada Fort & Water Sports", "activities": ["Visit Fort Aguada.", "Try parasailing at Calangute beach.", "Evening shopping at local flea markets."], "sights": ["Fort Aguada", "Flea Market"]},
+        {"day": 3, "title": "Old Goa & Depart", "activities": ["Visit Basilica of Bom Jesus.", "Depart from Dabolim airport."], "sights": ["Old Goa Churches", "Departure"]}
+      ]
+    }
+  },
+  {
+    "id": "netravali_sanctuary",
+    "name": "Netravali Forest & Bubble Lake",
+    "state": "Goa",
+    "is_popular": false,
+    "starting_cities": ["Margao", "Panaji"],
+    "starting_city_distances": {"Margao": 45, "Panaji": 75},
+    "description": "Quiet forest sanctuary containing the mysterious bubbling lake of Gopinath temple.",
+    "lat": 15.08, "lon": 74.22, "best_season": "October to March",
+    "entry_tickets": {"temple_lake": 20, "savari_waterfall": 50},
+    "transportation": {"local_auto": 500, "private_cab": 2200, "public_bus": 80},
+    "accommodation": {"budget": 900, "mid_range": 2200, "luxury": 4500},
+    "food_cost_per_day": 400,
+    "women_safety": "High safety. Peaceful rural Goan culture. Quiet and secure temple grounds.",
+    "pros": ["Tranquil alternative to noisy beaches.", "Beautiful forest waterfalls.", "Fascinating bubble lake phenomenon."],
+    "cons": ["Limited public transit.", "Limited network coverage.", "Basic village homestays only."],
+    "warnings": ["Do not step deep into forest trails alone.", "Ghat roads have sharp curves."],
+    "extra_tips": ["Clap near the Bubble Lake to see water bubbles rise instantly.", "Hike up to Savari Waterfall."],
+    "itineraries": {
+      "3": [
+        {"day": 1, "title": "Bubble Lake", "activities": ["Arrive at Netravali village homestay.", "Visit Gopinath temple and see the Bubble Lake."], "sights": ["Bubble Lake"]},
+        {"day": 2, "title": "Savari Waterfall Hike", "activities": ["Trek through dense forests to Savari Waterfall.", "Swim in the forest pool."], "sights": ["Savari Waterfall"]},
+        {"day": 3, "title": "Spice Plantation & Depart", "activities": ["Tour a organic spice farm.", "Depart via Margao."], "sights": ["Spice Plantation", "Departure"]}
+      ]
+    }
+  },
+  {
+    "id": "polo_forest",
+    "name": "Polo Forest Ruins",
+    "state": "Gujarat",
+    "is_popular": false,
+    "starting_cities": ["Ahmedabad", "Himmatnagar"],
+    "starting_city_distances": {"Ahmedabad": 150, "Himmatnagar": 70},
+    "description": "Ancient Jain and Hindu temple ruins inside a dense teak forest.",
+    "lat": 24.15, "lon": 73.21, "best_season": "September to February",
+    "entry_tickets": {"forest_entry": 20},
+    "transportation": {"local_auto": 400, "private_cab": 2000, "public_bus": 120},
+    "accommodation": {"budget": 800, "mid_range": 2200, "luxury": 4500},
+    "food_cost_per_day": 300,
+    "women_safety": "High safety. Active state eco-tourism camps and family-oriented weekend crowds.",
+    "pros": ["Beautiful forest walks.", "Intricate ancient carvings.", "Great birdwatching."],
+    "cons": ["Weekends can be noisy with school picnics.", "Limited dining inside the forest area."],
+    "warnings": ["Avoid feeding wild monkeys.", "Leave forest trails before dark."],
+    "extra_tips": ["Visit Sharaneshwar Shiva temple ruins.", "Explore Lakhena Jain temple."],
+    "itineraries": {
+      "3": [
+        {"day": 1, "title": "Ahmedabad to Polo Forest", "activities": ["Drive from Ahmedabad.", "Check in to forest resort.", "Sunset walk near Harnav river."], "sights": ["Harnav River"]},
+        {"day": 2, "title": "Jain & Shiva Temple Ruins", "activities": ["Visit Sharaneshwar Shiva temple ruins.", "Explore Lakhena Jain temple.", "Walk through Polo Forest paths."], "sights": ["Sharaneshwar Temple", "Lakhena Temple", "Forest Trails"]},
+        {"day": 3, "title": "Harnav Dam & Return", "activities": ["Visit Harnav Dam viewpoint.", "Depart to Ahmedabad."], "sights": ["Harnav Dam"]}
+      ]
+    }
+  },
+  {
+    "id": "gir_forest",
+    "name": "Gir National Park",
+    "state": "Gujarat",
+    "is_popular": true,
+    "starting_cities": ["Rajkot", "Junagadh"],
+    "starting_city_distances": {"Rajkot": 160, "Junagadh": 60},
+    "description": "Home of the Asiatic Lion, dry deciduous forests, and eco-safaris.",
+    "lat": 21.12, "lon": 70.60, "best_season": "December to March",
+    "entry_tickets": {"safari_permit": 800},
+    "transportation": {"local_auto": 400, "private_cab": 2200, "public_bus": 100},
+    "accommodation": {"budget": 1000, "mid_range": 2500, "luxury": 6000},
+    "food_cost_per_day": 400,
+    "women_safety": "High safety. Eco-tours managed directly by Gujarat Forest Department. High security.",
+    "pros": ["Guaranteed sighting of wild Asiatic Lions.", "Well-managed safari routes.", "Good luxury resorts."],
+    "cons": ["Park is closed during monsoon (June-Oct).", "Must book safari permits months in advance online."],
+    "warnings": ["Do not wear bright clothes or strong perfumes on safari.", "Stick to jeep trails."],
+    "extra_tips": ["Visit Devalia Safari Park for quick lion view.", "Try local Kathiyawadi cuisine."],
+    "itineraries": {
+      "3": [
+        {"day": 1, "title": "Arrival & Orientation", "activities": ["Drive from Rajkot.", "Settle in at resort.", "Visit Gir orientation center."], "sights": ["Gir Forest"]},
+        {"day": 2, "title": "Lion Safari", "activities": ["Morning open-jeep lion safari.", "Afternoon visit to Somnath Temple (45km)."], "sights": ["Safari Trail", "Somnath Temple"]},
+        {"day": 3, "title": "Devalia Zoo & Depart", "activities": ["Visit Devalia Safari park.", "Depart via Rajkot."], "sights": ["Devalia Park", "Departure"]}
+      ]
+    }
+  },
+  {
+    "id": "kurukshetra",
+    "name": "Kurukshetra Heritage",
+    "state": "Haryana",
+    "is_popular": true,
+    "starting_cities": ["Chandigarh", "Delhi"],
+    "starting_city_distances": {"Chandigarh": 95, "Delhi": 160},
+    "description": "Historic holy town where Mahabharata war occurred, home to Brahma Sarovar.",
+    "lat": 29.96, "lon": 76.81, "best_season": "October to March",
+    "entry_tickets": {"panorama_science_museum": 40},
+    "transportation": {"local_auto": 250, "private_cab": 1600, "public_bus": 60},
+    "accommodation": {"budget": 700, "mid_range": 1800, "luxury": 4000},
+    "food_cost_per_day": 300,
+    "women_safety": "High safety. Quiet pilgrim town. Highly safe for solo travelers.",
+    "pros": ["Massive holy lakes (Brahma Sarovar).", "Good historical museums.", "Quiet town near highway."],
+    "cons": ["Limited luxury hotels.", "Pure vegetarian food only."],
+    "warnings": ["Avoid bathing in deep water zones of Sarovar.", "Beware of monkeys near temples."],
+    "extra_tips": ["Visit during Gita Mahotsav (Nov/Dec) to see lit up lakes.", "See Jyotisar, where the Gita was spoken."],
+    "itineraries": {
+      "3": [
+        {"day": 1, "title": "Brahma Sarovar", "activities": ["Visit Brahma Sarovar lake complex.", "See massive bronze chariot statue.", "Evening prayer Aarti."], "sights": ["Brahma Sarovar", "Chariot Monument"]},
+        {"day": 2, "title": "Jyotisar & Panorama", "activities": ["Visit Jyotisar temple under banyan tree.", "Explore Kurukshetra Panorama & Science Centre."], "sights": ["Jyotisar", "Panorama Museum"]},
+        {"day": 3, "title": "Museums & Depart", "activities": ["Visit Krishna Museum.", "Depart via Kurukshetra Junction."], "sights": ["Krishna Museum", "Departure"]}
+      ]
+    }
+  },
+  {
+    "id": "morni_hills",
+    "name": "Morni Hills & Tikkar Taal",
+    "state": "Haryana",
+    "is_popular": false,
+    "starting_cities": ["Chandigarh", "Panchkula"],
+    "starting_city_distances": {"Chandigarh": 45, "Panchkula": 35},
+    "description": "Quiet hill station with pine trees, old fort ruins, and two interconnected lakes.",
+    "lat": 30.69, "lon": 77.08, "best_season": "October to April",
+    "entry_tickets": {"morni_fort": 20, "adventure_park": 50},
+    "transportation": {"local_auto": 400, "private_cab": 1800, "public_bus": 80},
+    "accommodation": {"budget": 800, "mid_range": 2000, "luxury": 4000},
+    "food_cost_per_day": 350,
+    "women_safety": "High safety. Very safe and close to Chandigarh. Standard hill precautions apply.",
+    "pros": ["Quick mountain escape from Chandigarh.", "Scenic twin lakes (Tikkar Taal).", "Lush pine vegetation."],
+    "cons": ["Limited luxury resorts.", "Fewer active restaurants."],
+    "warnings": ["Ghat roads can be narrow.", "Avoid boating in lakes during heavy rains."],
+    "extra_tips": ["Hike up to the ruined Morni Fort.", "Enjoy lake boating at Tikkar Taal."],
+    "itineraries": {
+      "3": [
+        {"day": 1, "title": "Arrive Morni", "activities": ["Drive up from Chandigarh.", "Check in to resort.", "Walk in pine groves."], "sights": ["Pine forest"]},
+        {"day": 2, "title": "Tikkar Taal Lake", "activities": ["Spend day at Tikkar Taal lake.", "Try boating or zip-lining at adventure park.", "Visit Morni Fort ruins."], "sights": ["Tikkar Taal", "Morni Fort"]},
+        {"day": 3, "title": "Herbal Garden & Depart", "activities": ["Visit Herbal Garden.", "Depart to Chandigarh."], "sights": ["Herbal Garden", "Departure"]}
+      ]
+    }
+  },
+  {
+    "id": "manali",
+    "name": "Manali Peak Solang Valley",
+    "state": "Himachal Pradesh",
+    "is_popular": true,
+    "starting_cities": ["Chandigarh", "Kullu"],
+    "starting_city_distances": {"Chandigarh": 270, "Kullu": 40},
+    "description": "Famous snow-valley hill station with shopping lanes and paragliding peaks.",
+    "lat": 32.24, "lon": 77.18, "best_season": "March to June, October to December",
+    "entry_tickets": {"hadimba_temple": 0, "solang_ropeway": 700},
+    "transportation": {"local_auto": 400, "private_cab": 2200, "public_bus": 80},
+    "accommodation": {"budget": 900, "mid_range": 2200, "luxury": 6000},
+    "food_cost_per_day": 400,
+    "women_safety": "High safety. Highly tourist-friendly and cosmopolitan hill culture. Extremely comfortable for solo female travelers.",
+    "pros": ["Spectacular snow activities and paragliding.", "Vibrant Mall Road.", "High quality hotels."],
+    "cons": ["Heavy traffic jams in peak summer.", "Highly commercialized.", "Crowded sightseeing points."],
+    "warnings": ["Check Rohtang Pass permit availability online beforehand.", "Avoid adventure sports from uncertified operators."],
+    "extra_tips": ["Walk around Old Manali cafes for a peaceful vibe.", "Visit Hadimba Temple."],
+    "itineraries": {
+      "3": [
+        {"day": 1, "title": "Mall Road & Hadimba", "activities": ["Check-in, visit wood-carved Hadimba Temple.", "Stroll on Mall Road in the evening."], "sights": ["Hadimba Temple", "Mall Road"]},
+        {"day": 2, "title": "Solang Valley Adventure", "activities": ["Drive to Solang Valley for paragliding or skiing.", "Take ropeway up to view snow peaks."], "sights": ["Solang Valley", "Snow Point"]},
+        {"day": 3, "title": "Old Manali Cafes & Depart", "activities": ["Explore Old Manali streets.", "Depart to Chandigarh."], "sights": ["Old Manali", "Departure"]}
+      ]
+    }
+  },
+  {
+    "id": "tirthan_valley",
+    "name": "Tirthan Valley & GHNP",
+    "state": "Himachal Pradesh",
+    "is_popular": false,
+    "starting_cities": ["Chandigarh", "Aut"],
+    "starting_city_distances": {"Chandigarh": 240, "Aut": 25},
+    "description": "Pine forest valley bordering the Great Himalayan National Park, famous for trout streams.",
+    "lat": 31.64, "lon": 77.35, "best_season": "March to June, October to November",
+    "entry_tickets": {"ghnp_permit": 100},
+    "transportation": {"local_auto": 500, "private_cab": 2800, "public_bus": 150},
+    "accommodation": {"budget": 900, "mid_range": 2200, "luxury": 5000},
+    "food_cost_per_day": 400,
+    "women_safety": "High safety. Peaceful Himachali village culture. Locals are extremely honest and helpful.",
+    "pros": ["Pristine mountain river hikes.", "Lesser crowded than Manali.", "Beautiful wooden homestays."],
+    "cons": ["Narrow mountain paths.", "Very limited nightlife.", "Limited local public transit."],
+    "warnings": ["Avoid stepping into the river during rain alerts (upstream dam releases can happen).", "Acclimatize to heights."],
+    "extra_tips": ["Hike up to the ancient watchtower of Chehni Kothi.", "Try trout fishing."],
+    "itineraries": {
+      "3": [
+        {"day": 1, "title": "Arrive Gushaini", "activities": ["Riverside cottage check-in.", "Walk along Tirthan River."], "sights": ["Tirthan River"]},
+        {"day": 2, "title": "Waterfall Hike", "activities": ["Trek to Choie Waterfall.", "Visit Great Himalayan National Park entry gate."], "sights": ["Choie Waterfall", "GHNP Entry"]},
+        {"day": 3, "title": "Jalori Pass & Depart", "activities": ["Drive to Jalori Pass.", "Hike to Serolsar Lake and depart."], "sights": ["Jalori Pass", "Serolsar Lake"]}
+      ]
+    }
+  },
+  {
+    "id": "ranchi_hills",
+    "name": "Ranchi Valley Waterfalls",
+    "state": "Jharkhand",
+    "is_popular": true,
+    "starting_cities": ["Ranchi", "Jamshedpur"],
+    "starting_city_distances": {"Ranchi": 5, "Jamshedpur": 120},
+    "description": "Capital city surrounded by scenic hills, waterfalls, and Patratu valley roads.",
+    "lat": 23.34, "lon": 85.30, "best_season": "October to March",
+    "entry_tickets": {"rock_garden": 30, "patratu_dam_boating": 100},
+    "transportation": {"local_auto": 300, "private_cab": 1800, "public_bus": 60},
+    "accommodation": {"budget": 900, "mid_range": 2200, "luxury": 5000},
+    "food_cost_per_day": 400,
+    "women_safety": "High safety. Major city center with active commercial activities and policing. Safe for solo female travelers.",
+    "pros": ["Good hotel choices.", "Stunning waterfalls nearby.", "Great highway connectivity."],
+    "cons": ["Traffic congestion in the city.", "Industrial dust in outer zones."],
+    "warnings": ["Check waterfall water levels before visiting in dry season.", "Negotiate auto rates."],
+    "extra_tips": ["Drive the hairpins of Patratu Valley.", "Visit Hundru Falls."],
+    "itineraries": {
+      "3": [
+        {"day": 1, "title": "City Lakes & Gardens", "activities": ["Arrive at Ranchi.", "Visit Ranchi Lake and Rock Garden.", "Spend evening at Kanke Dam."], "sights": ["Ranchi Lake", "Rock Garden"]},
+        {"day": 2, "title": "Hundru Falls & Patratu", "activities": ["Drive to Hundru Falls (45km).", "Visit Jonha Falls.", "Drive to Patratu Valley for sunset lake boating."], "sights": ["Hundru Falls", "Patratu Valley"]},
+        {"day": 3, "title": "Pahari Mandir & Depart", "activities": ["Climb Pahari Mandir temple hill for city views.", "Depart from Ranchi Airport."], "sights": ["Pahari Mandir", "Departure"]}
+      ]
+    }
+  },
+  {
+    "id": "netarhat",
+    "name": "Netarhat Pine Hill",
+    "state": "Jharkhand",
+    "is_popular": false,
+    "starting_cities": ["Ranchi", "Raipur"],
+    "starting_city_distances": {"Ranchi": 150, "Raipur": 420},
+    "description": "Queen of Chotanagpur, a quiet hill station with misty pine forests and plateau sunrises.",
+    "lat": 23.48, "lon": 84.27, "best_season": "October to April",
+    "entry_tickets": {"sunset_point": 20},
+    "transportation": {"local_auto": 500, "private_cab": 2500, "public_bus": 180},
+    "accommodation": {"budget": 900, "mid_range": 2200, "luxury": 4500},
+    "food_cost_per_day": 400,
+    "women_safety": "Medium-High safety. Safe school/town area during day; avoid remote highway forest driving late at night.",
+    "pros": ["Stunning mist cover and valley views.", "Beautiful dense pine groves.", "Quiet and inexpensive stay."],
+    "cons": ["Limited public transit options.", "Basic food joints only.", "Limited multi-cuisine restaurants."],
+    "warnings": ["Carry warm clothes even in early summer.", "Do not walk deep in isolated forest points alone."],
+    "extra_tips": ["Watch sunrise at Sunrise Point and sunset at Magnolia Point.", "See Lodh Falls."],
+    "itineraries": {
+      "3": [
+        {"day": 1, "title": "Ranchi to Netarhat", "activities": ["Drive from Ranchi.", "Check in to tourist bungalow.", "Walk in Pine Forest.", "Sunset at Magnolia Point."], "sights": ["Pine Forest", "Magnolia Point"]},
+        {"day": 2, "title": "Lodh Falls", "activities": ["Sunrise at Sunrise Point.", "Take excursion to Lodh Falls.", "Enjoy Netarhat Lake in evening."], "sights": ["Lodh Falls", "Netarhat Lake"]},
+        {"day": 3, "title": "Koel View & Depart", "activities": ["Visit Koel River Viewpoint.", "Depart to Ranchi."], "sights": ["Koel Viewpoint", "Departure"]}
+      ]
+    }
+  },
+  {
+    "id": "mysore",
+    "name": "Mysore Palace Heritage",
+    "state": "Karnataka",
+    "is_popular": true,
+    "starting_cities": ["Bangalore", "Mysore Junction"],
+    "starting_city_distances": {"Bangalore": 145, "Mysore Junction": 5},
+    "description": "Cultural capital famous for the majestic lit-up Amba Vilas Palace and sandalwood.",
+    "lat": 12.30, "lon": 76.65, "best_season": "October to March",
+    "entry_tickets": {"mysore_palace": 70, "brindavan_gardens": 50},
+    "transportation": {"local_auto": 250, "private_cab": 1600, "public_bus": 50},
+    "accommodation": {"budget": 800, "mid_range": 2200, "luxury": 5500},
+    "food_cost_per_day": 400,
+    "women_safety": "High safety. Highly secure heritage city with a calm environment and tourist police. Safe for solo women.",
+    "pros": ["Exquisite palace architecture.", "Fantastic South Indian filter coffee and Mysore Pak sweet.", "Good cleanliness and parks."],
+    "cons": ["Palace gets heavily crowded on Sundays.", "Hot summer temperatures."],
+    "warnings": ["Beware of fake sandalwood dealers on streets.", "No photography allowed inside palace main halls."],
+    "extra_tips": ["Watch Mysore Palace illuminated on Sunday evenings.", "Climb Chamundi Hills."],
+    "itineraries": {
+      "3": [
+        {"day": 1, "title": "Mysore Palace", "activities": ["Check-in.", "Visit the grand Mysore Palace.", "Stroll in local Devaraja Market."], "sights": ["Mysore Palace", "Devaraja Market"]},
+        {"day": 2, "title": "Chamundi Hills & Gardens", "activities": ["Morning drive to Chamundeshwari Temple.", "Visit Jaganmohan Palace Art Gallery.", "Evening musical fountains at Brindavan Gardens."], "sights": ["Chamundi Hills", "Brindavan Gardens"]},
+        {"day": 3, "title": "Srirangapatna & Depart", "activities": ["Visit Tipu Sultan's summer palace in Srirangapatna.", "Depart to Bangalore."], "sights": ["Srirangapatna Ruins", "Departure"]}
+      ]
+    }
+  },
+  {
+    "id": "gokarna",
+    "name": "Gokarna Cliffs",
+    "state": "Karnataka",
+    "is_popular": false,
+    "starting_cities": ["Bangalore", "Goa (Dabolim)"],
+    "starting_city_distances": {"Bangalore": 480, "Goa (Dabolim)": 140},
+    "description": "Quiet beach town with rocky cliffs, OM beach, and ancient temples.",
+    "lat": 14.54, "lon": 74.31, "best_season": "October to March",
+    "entry_tickets": {"mirjan_fort": 20},
+    "transportation": {"local_auto": 300, "private_cab": 1800, "public_bus": 50},
+    "accommodation": {"budget": 800, "mid_range": 2000, "luxury": 4500},
+    "food_cost_per_day": 400,
+    "women_safety": "High safety. Highly comfortable backpacker hub; safe solo treks. Avoid dark beaches alone late at night.",
+    "pros": ["Beautiful cliff treks.", "Quiet beach shacks.", "Good yoga and spiritual vibes."],
+    "cons": ["Rocky trails require good shoes.", "Humid climate.", "Limited luxury hotels."],
+    "warnings": ["Strong ocean currents; do not swim at Paradise Beach.", "Observe dress codes near temples."],
+    "extra_tips": ["Do the Kudle to Paradise beach hike.", "Visit the mossy Mirjan Fort."],
+    "itineraries": {
+      "3": [
+        {"day": 1, "title": "Kudle Beach", "activities": ["Arrive at Gokarna.", "Relax and watch sunset at Kudle Beach."], "sights": ["Kudle Beach"]},
+        {"day": 2, "title": "Five Beach Hike", "activities": ["Trek Kudle to Om and Paradise beaches.", "Take a return ferry ride."], "sights": ["Om Beach", "Paradise Beach"]},
+        {"day": 3, "title": "Mahabaleshwar & Depart", "activities": ["Visit Mahabaleshwar Temple.", "Explore Mirjan Fort and depart."], "sights": ["Mahabaleshwar Temple", "Mirjan Fort"]}
+      ]
+    }
+  },
+  {
+    "id": "munnar",
+    "name": "Munnar Tea Hills",
+    "state": "Kerala",
+    "is_popular": true,
+    "starting_cities": ["Kochi", "Madurai"],
+    "starting_city_distances": {"Kochi": 130, "Madurai": 160},
+    "description": "Lush green rolling tea gardens, reservoirs, and mountain parks.",
+    "lat": 10.08, "lon": 77.05, "best_season": "September to May",
+    "entry_tickets": {"tea_museum": 75, "eravikulam_park": 125},
+    "transportation": {"local_auto": 400, "private_cab": 2200, "public_bus": 80},
+    "accommodation": {"budget": 950, "mid_range": 2400, "luxury": 5500},
+    "food_cost_per_day": 380,
+    "women_safety": "High safety. Kerala's high tourism focus and gentle community make Munnar extremely secure.",
+    "pros": ["Stunning tea carpet landscapes.", "Cool climate.", "Good family resorts."],
+    "cons": ["Winding ghat roads get congested.", "Mobile network drops in deep tea valleys."],
+    "warnings": ["Landslide risks during monsoons (June-August).", "Drive carefully on curves."],
+    "extra_tips": ["Look for wild Nilgiri Tahr goats at Eravikulam.", "Visit Lockhart Tea Factory."],
+    "itineraries": {
+      "3": [
+        {"day": 1, "title": "Tea Gardens", "activities": ["Drive up from Kochi.", "Explore tea estates.", "Visit KDHP Tea Museum."], "sights": ["Tea Museum", "Tea Fields"]},
+        {"day": 2, "title": "Dam Boating & Views", "activities": ["Visit Mattupetty Dam.", "Boating at Kundala Lake.", "Sunset views at Top Station."], "sights": ["Mattupetty Dam", "Top Station"]},
+        {"day": 3, "title": "National Park & Depart", "activities": ["Safari at Eravikulam National Park.", "Depart to Kochi."], "sights": ["Eravikulam", "Departure"]}
+      ]
+    }
+  },
+  {
+    "id": "vagamon",
+    "name": "Vagamon Meadows",
+    "state": "Kerala",
+    "is_popular": false,
+    "starting_cities": ["Kochi", "Kottayam"],
+    "starting_city_distances": {"Kochi": 100, "Kottayam": 60},
+    "description": "Quiet green hill station with pine forests, mist-clad meadows, and paragliding hills.",
+    "lat": 9.68, "lon": 76.90, "best_season": "September to May",
+    "entry_tickets": {"pine_forest": 20, "meadows": 30},
+    "transportation": {"local_auto": 400, "private_cab": 2200, "public_bus": 100},
+    "accommodation": {"budget": 900, "mid_range": 2200, "luxury": 4800},
+    "food_cost_per_day": 350,
+    "women_safety": "High safety. Peaceful, eco-friendly Kerala village life. Very secure.",
+    "pros": ["Tranquil, uncommercialized green hills.", "Paragliding spots.", "Great local homestays."],
+    "cons": ["Heavy mist can block roads.", "Limited high-end restaurants."],
+    "warnings": ["Check fog conditions before night driving.", "Use certified paragliding guides."],
+    "extra_tips": ["Walk in the Kurisumala pine forest.", "Eat traditional Kerala meals on banana leaves."],
+    "itineraries": {
+      "3": [
+        {"day": 1, "title": "Pine Forest", "activities": ["Drive from Kochi.", "Walk in Vagamon Pine Forest."], "sights": ["Pine Forest"]},
+        {"day": 2, "title": "Meadows & Sunset", "activities": ["Explore Vagamon Meadows.", "Visit Kurisumala Ashram.", "Sunset at Suicide Point."], "sights": ["Vagamon Meadows", "Suicide Point"]},
+        {"day": 3, "title": "Tea Gardens & Depart", "activities": ["Walk in local tea gardens.", "Depart to Kochi."], "sights": ["Tea Gardens", "Departure"]}
+      ]
+    }
+  },
+  {
+    "id": "khajuraho",
+    "name": "Khajuraho Temples",
+    "state": "Madhya Pradesh",
+    "is_popular": true,
+    "starting_cities": ["Jhanshi", "Jabalpur", "Khajuraho"],
+    "starting_city_distances": {"Jhanshi": 175, "Jabalpur": 260, "Khajuraho": 5},
+    "description": "UNESCO temple complex famous for intricate medieval carvings and sculptures.",
+    "lat": 24.85, "lon": 79.93, "best_season": "October to March",
+    "entry_tickets": {"temple_complex": 40, "light_sound_show": 250},
+    "transportation": {"local_auto": 300, "private_cab": 1800, "public_bus": 100},
+    "accommodation": {"budget": 800, "mid_range": 2200, "luxury": 5000},
+    "food_cost_per_day": 350,
+    "women_safety": "High safety. Dedicated tourist policing and active guides. Safe for solo female travelers.",
+    "pros": ["World-renowned temple carvings.", "Easy walkability between western group of temples.", "Good luxury hotel options."],
+    "cons": ["Touts near temples can be persistent.", "Hot day temperatures outside winter."],
+    "warnings": ["Hire only government-approved guides showing official IDs.", "Avoid buying fake antiques from street sellers."],
+    "extra_tips": ["Watch the evening Light & Sound Show.", "Visit the nearby Raneh Waterfalls (canyon)."],
+    "itineraries": {
+      "3": [
+        {"day": 1, "title": "Western Temples", "activities": ["Check-in.", "Explore the grand Western Group of Temples (Kandariya Mahadev).", "Watch light & sound show in evening."], "sights": ["Western Temples", "Light Show"]},
+        {"day": 2, "title": "Eastern Temples & Raneh Canyon", "activities": ["Visit Eastern Group of Temples (Jain temples).", "Drive to Raneh Falls to see the colored granite canyon."], "sights": ["Eastern Temples", "Raneh Canyon"]},
+        {"day": 3, "title": "Panna Safari & Depart", "activities": ["Morning safari at Panna Tiger Reserve (25km).", "Depart via Khajuraho."], "sights": ["Panna Tiger Reserve", "Departure"]}
+      ]
+    }
+  },
+  {
+    "id": "amarkantak",
+    "name": "Amarkantak Springs",
+    "state": "Madhya Pradesh",
+    "is_popular": false,
+    "starting_cities": ["Bilaspur", "Raipur", "Jabalpur"],
+    "starting_city_distances": {"Bilaspur": 120, "Raipur": 220, "Jabalpur": 220},
+    "description": "Source of Narmada and Sone rivers in Vindhya-Satpura forests, holy temple town.",
+    "lat": 22.67, "lon": 81.75, "best_season": "October to March",
+    "entry_tickets": {"kapildhara_falls": 20},
+    "transportation": {"local_auto": 400, "private_cab": 2000, "public_bus": 150},
+    "accommodation": {"budget": 800, "mid_range": 2000, "luxury": 4000},
+    "food_cost_per_day": 350,
+    "women_safety": "High safety. Exceptionally peaceful, sacred temple town atmosphere.",
+    "pros": ["Cool mountain climate.", "Historic Kalachuri brick temples.", "Lush sal woods."],
+    "cons": ["Strictly vegetarian food town.", "Fewer luxury hotel chains.", "Crowded during holy days."],
+    "warnings": ["Rocks near Dudhdhara falls are highly slippery.", "Beware of wild monkeys."],
+    "extra_tips": ["Attend evening Narmada Aarti at Narmada Udgam.", "Visit ancient Kalachuri temples."],
+    "itineraries": {
+      "3": [
+        {"day": 1, "title": "River Source Temples", "activities": ["Drive up from Bilaspur.", "Visit Narmada Udgam Temple.", "Explore Kalachuri temples."], "sights": ["Narmada Udgam", "Kalachuri Temples"]},
+        {"day": 2, "title": "Waterfalls", "activities": ["Visit Kapildhara and Dudhdhara waterfalls.", "Visit Kabir Chabutra in the forest.", "See Sri Yantra temple."], "sights": ["Kapildhara Falls", "Kabir Chabutra"]},
+        {"day": 3, "title": "Sonmuda Sunset & Depart", "activities": ["Watch sunrise at Sonmuda (Sone source).", "Depart to Bilaspur."], "sights": ["Sonmuda Viewpoint", "Departure"]}
+      ]
+    }
+  },
+  {
+    "id": "mahabaleshwar",
+    "name": "Mahabaleshwar Valley",
+    "state": "Maharashtra",
+    "is_popular": true,
+    "starting_cities": ["Pune", "Mumbai"],
+    "starting_city_distances": {"Pune": 120, "Mumbai": 260},
+    "description": "Popular Western Ghats hill station famous for strawberry farms and viewpoint cliffs.",
+    "lat": 17.92, "lon": 73.65, "best_season": "October to May",
+    "entry_tickets": {"mapro_garden": 0, "pratapsingh_fort": 20},
+    "transportation": {"local_auto": 300, "private_cab": 1800, "public_bus": 80},
+    "accommodation": {"budget": 1000, "mid_range": 2500, "luxury": 6000},
+    "food_cost_per_day": 450,
+    "women_safety": "High safety. Family-focused tourism hub with active municipal patrols. Highly safe.",
+    "pros": ["Stunning canyon views.", "Fresh strawberries and creams.", "Good choice of resorts."],
+    "cons": ["Heavy weekend traffic from Mumbai/Pune.", "Very wet and foggy in monsoons."],
+    "warnings": ["Avoid driving in thick monsoon fog.", "Monkeys are common near viewpoints."],
+    "extra_tips": ["Visit Mapro Garden for strawberry shakes.", "Explore the historic Pratapgad Fort (20km)."],
+    "itineraries": {
+      "3": [
+        {"day": 1, "title": "City Views & Lakes", "activities": ["Arrive at Mahabaleshwar.", "Boating at Venna Lake.", "Sunset at Bombay Point."], "sights": ["Venna Lake", "Bombay Point"]},
+        {"day": 2, "title": "Pratapgad Fort & Strawberries", "activities": ["Explore Pratapgad Fort.", "Visit Mapro Garden for lunch.", "View Arthur's Seat cliff gorge."], "sights": ["Pratapgad Fort", "Mapro Garden", "Arthur's Seat"]},
+        {"day": 3, "title": "Panchgani & Depart", "activities": ["Visit Table Land in Panchgani.", "Depart to Pune."], "sights": ["Table Land Panchgani", "Departure"]}
+      ]
+    }
+  },
+  {
+    "id": "lonar_lake",
+    "name": "Lonar Crater Lake",
+    "state": "Maharashtra",
+    "is_popular": false,
+    "starting_cities": ["Aurangabad", "Jalna"],
+    "starting_city_distances": {"Aurangabad": 140, "Jalna": 90},
+    "description": "Soda lake formed inside meteor impact crater, ancient temple ruins.",
+    "lat": 19.97, "lon": 76.53, "best_season": "November to March",
+    "entry_tickets": {"temples": 0},
+    "transportation": {"local_auto": 300, "private_cab": 2000, "public_bus": 100},
+    "accommodation": {"budget": 800, "mid_range": 1800, "luxury": 3500},
+    "food_cost_per_day": 300,
+    "women_safety": "High safety. Standard Maharashtrian rural safety. Avoid solo forest hiking after dark.",
+    "pros": ["Unique geological meteor site.", "Khajuraho-like carvings at Daitya Sudan.", "Inexpensive travel."],
+    "cons": ["Hot weather in summer.", "Rocky crater trail descent.", "Simple hotels only."],
+    "warnings": ["Watch out for slippery rocks during crater walk.", "Do not consume lake water."],
+    "extra_tips": ["Visit Gomukh temple where water flows continuously.", "See Daitya Sudan temple in town."],
+    "itineraries": {
+      "3": [
+        {"day": 1, "title": "Arrive Lonar", "activities": ["Check-in at MTDC resort.", "Stroll outer crater rim."], "sights": ["Crater Rim"]},
+        {"day": 2, "title": "Crater Hike", "activities": ["Descend the crater forest.", "Visit Gomukh and Kamalja temples.", "Explore Daitya Sudan temple in town."], "sights": ["Gomukh Temple", "Daitya Sudan"]},
+        {"day": 3, "title": "Stepwells & Depart", "activities": ["Visit Limbi Barav stepwell.", "Depart to Aurangabad."], "sights": ["Limbi Barav", "Departure"]}
+      ]
+    }
+  },
+  {
+    "id": "puri_beach",
+    "name": "Puri Jagannath Temple",
+    "state": "Odisha",
+    "is_popular": true,
+    "starting_cities": ["Bhubaneswar", "Puri"],
+    "starting_city_distances": {"Bhubaneswar": 60, "Puri": 5},
+    "description": "Famous beach city home to Jagannath Temple and Konark Sun Temple.",
+    "lat": 19.81, "lon": 85.83, "best_season": "October to March",
+    "entry_tickets": {"konark_sun_temple": 40},
+    "transportation": {"local_auto": 250, "private_cab": 1600, "public_bus": 50},
+    "accommodation": {"budget": 800, "mid_range": 2200, "luxury": 5000},
+    "food_cost_per_day": 350,
+    "women_safety": "High safety. Spiritual pilgrim city with strong security guards. Safe for solo women.",
+    "pros": ["Beautiful golden sand beaches.", "Konark Sun Temple UNESCO site nearby.", "Great local seafood and sweets."],
+    "cons": ["Jagannath temple can be extremely crowded.", "Non-Hindus are not allowed inside Jagannath main temple (can view from library roof)."],
+    "warnings": ["Ignore aggressive pandas (priests) asking for donations.", "Bathing in Puri sea requires caution due to high waves."],
+    "extra_tips": ["Try Puri's famous Khaja sweet.", "Take a day trip to Konark Sun Temple (35km)."],
+    "itineraries": {
+      "3": [
+        {"day": 1, "title": "Jagannath Temple & Beach", "activities": ["Check-in.", "Visit the temple area.", "Spend evening at Golden Beach."], "sights": ["Jagannath Temple", "Puri Beach"]},
+        {"day": 2, "title": "Konark Sun Temple", "activities": ["Drive along Marine Drive to Konark Sun Temple.", "Explore stone wheels and carvings.", "Visit Chandrabhaga beach."], "sights": ["Konark Temple", "Chandrabhaga Beach"]},
+        {"day": 3, "title": "Chilika Lake & Depart", "activities": ["Drive to Chilika Lake (Satapada) to spot dolphins.", "Depart via Bhubaneswar."], "sights": ["Chilika Lake", "Departure"]}
+      ]
+    }
+  },
+  {
+    "id": "debrigarh_lake",
+    "name": "Debrigarh Sanctuary",
+    "state": "Odisha",
+    "is_popular": false,
+    "starting_cities": ["Sambalpur", "Raipur"],
+    "starting_city_distances": {"Sambalpur": 40, "Raipur": 260},
+    "description": "Lakeside wildlife sanctuary on Hirakud Reservoir with eco-camps.",
+    "lat": 21.55, "lon": 83.87, "best_season": "November to April",
+    "entry_tickets": {"reserve_entry": 100, "boat_ride": 200},
+    "transportation": {"local_auto": 500, "private_cab": 2200, "public_bus": 150},
+    "accommodation": {"budget": 1000, "mid_range": 2500, "luxury": 5000},
+    "food_cost_per_day": 400,
+    "women_safety": "High safety. Managed eco-camps run by forest department. Very secure.",
+    "pros": ["Lakeside cottages.", "Frequent bison and deer sightings.", "Tranquil environment."],
+    "cons": ["Limited food menu inside eco-camp.", "Cell signals are weak."],
+    "warnings": ["Do not get out of jeep during forest safaris.", "Reservoir shores can have soft mud."],
+    "extra_tips": ["Take sunset boat cruise.", "Visit Barabakhra Caves (Sai's hideout)."],
+    "itineraries": {
+      "3": [
+        {"day": 1, "title": "Lakeside Camp", "activities": ["Arrive, check-in at eco-cottages.", "Evening walk near lake shore."], "sights": ["Hirakud Lake"]},
+        {"day": 2, "title": "Jeep Safari & Cruise", "activities": ["Morning open-jeep safari.", "Evening boat cruise in Hirakud reservoir."], "sights": ["Jungle Safari", "Sunset Cruise"]},
+        {"day": 3, "title": "Veer Sai Caves & Depart", "activities": ["Hike to Barabakhra Caves.", "Depart via Sambalpur."], "sights": ["Barabakhra Caves", "Departure"]}
+      ]
+    }
+  },
+  {
+    "id": "jaipur_pink_city",
+    "name": "Jaipur (Pink City)",
+    "state": "Rajasthan",
+    "is_popular": true,
+    "starting_cities": ["Jaipur", "Jaipur Airport"],
+    "starting_city_distances": {"Jaipur": 5, "Jaipur Airport": 15},
+    "description": "Capital of Rajasthan, famous for Hawa Mahal, Amer Fort, and colorful bazaars.",
+    "lat": 26.91, "lon": 75.78, "best_season": "October to March",
+    "entry_tickets": {"amer_fort": 100, "hawa_mahal": 50, "city_palace": 300},
+    "transportation": {"local_auto": 300, "private_cab": 1800, "public_bus": 50},
+    "accommodation": {"budget": 900, "mid_range": 2500, "luxury": 6500},
+    "food_cost_per_day": 450,
+    "women_safety": "Medium-High safety. Dedicated tourist police active. Solo women should negotiate cab rates via apps and watch out for pushy guides.",
+    "pros": ["Stunning heritage buildings.", "Incredible shopping choices.", "High quality heritage hotels."],
+    "cons": ["Chaotic traffic.", "Persistent hawkers near major palaces."],
+    "warnings": ["Avoid buying gemstones from roadside vendors (common commission scams).", "Negotiate auto rates."],
+    "extra_tips": ["Watch sunset from Nahargarh Fort.", "Try local Dal Baati Churma."],
+    "itineraries": {
+      "3": [
+        {"day": 1, "title": "Palaces", "activities": ["Visit Hawa Mahal and City Palace.", "See Jantar Mantar.", "Photos at Patrika Gate."], "sights": ["Hawa Mahal", "City Palace", "Patrika Gate"]},
+        {"day": 2, "title": "Forts & Sunset", "activities": ["Explore Amer Fort.", "See Jal Mahal.", "Watch sunset at Nahargarh Fort."], "sights": ["Amer Fort", "Jal Mahal", "Nahargarh"]},
+        {"day": 3, "title": "Museum & Shopping", "activities": ["Visit Albert Hall Museum.", "Shop at Bapu Bazar and depart."], "sights": ["Albert Hall", "Bapu Bazar", "Departure"]}
+      ]
+    }
+  },
+  {
+    "id": "kota_bundi",
+    "name": "Kota & Bundi Canyons",
+    "state": "Rajasthan",
+    "is_popular": false,
+    "starting_cities": ["Jaipur", "Kota Junction"],
+    "starting_city_distances": {"Jaipur": 240, "Kota Junction": 5},
+    "description": "Garadia Mahadev river canyon, Bundi stepwells, and ancient palace paintings.",
+    "lat": 25.18, "lon": 75.83, "best_season": "October to March",
+    "entry_tickets": {"garadia_mahadev": 100, "chambal_river_front": 200, "bundi_fort": 150},
+    "transportation": {"local_auto": 400, "private_cab": 1800, "public_bus": 120},
+    "accommodation": {"budget": 900, "mid_range": 2200, "luxury": 5000},
+    "food_cost_per_day": 400,
+    "women_safety": "High safety. Quiet historical areas. Locals are extremely helpful.",
+    "pros": ["Spectacular canyon view.", "Stunning murals in Bundi Palace.", "Very few tourists."],
+    "cons": ["Hot weather in summer.", "Bundi fort pathways are steep and rocky."],
+    "warnings": ["Keep bags secure at Bundi Fort due to wild monkeys.", "Do not swim in Chambal river (crocodiles)."],
+    "extra_tips": ["Buy Kota Doria sarees.", "Boat ride in Kishore Sagar at night."],
+    "itineraries": {
+      "3": [
+        {"day": 1, "title": "Kota River Front", "activities": ["Visit Kota Garh.", "Walk along Chambal River Front."], "sights": ["Kota Garh", "Chambal River Front"]},
+        {"day": 2, "title": "Garadia Gorge", "activities": ["Excursion to Garadia Mahadev Gorge.", "Visit Seven Wonders Park and Kishore Sagar."], "sights": ["Garadia Mahadev", "Kishore Sagar"]},
+        {"day": 3, "title": "Bundi Stepwells & Depart", "activities": ["Drive to Bundi.", "Explore Taragarh Fort and Raniji ki Baori stepwell.", "Depart."], "sights": ["Taragarh Fort", "Stepwells", "Departure"]}
+      ]
+    }
+  },
+  {
+    "id": "chamoli_auli",
+    "name": "Chamoli & Auli slopes",
+    "state": "Uttarakhand",
+    "is_popular": true,
+    "starting_cities": ["Rishikesh", "Dehradun"],
+    "starting_city_distances": {"Rishikesh": 200, "Dehradun": 235},
+    "description": "Ski resort Auli, Badrinath temple, and river confluences.",
+    "lat": 30.29, "lon": 79.33, "best_season": "May to June, September to November",
+    "entry_tickets": {"ropeway": 1000},
+    "transportation": {"local_auto": 500, "private_cab": 3500, "public_bus": 250},
+    "accommodation": {"budget": 1000, "mid_range": 2500, "luxury": 5000},
+    "food_cost_per_day": 400,
+    "women_safety": "High safety. Pilgrim and family-friendly valley district with a safe local community.",
+    "pros": ["Stunning views of Nanda Devi peak.", "World class cable car.", "Great spiritual vibes."],
+    "cons": ["Heavy monsoons can trigger landslides.", "Auli ropeway is expensive.", "Crowded during pilgrimage season."],
+    "warnings": ["Check weather road blocks before driving.", "Keep medications handy for altitude."],
+    "extra_tips": ["Visit Mana, the last Indian village before Tibet border.", "Try local Garhwali Kafuli dish."],
+    "itineraries": {
+      "3": [
+        {"day": 1, "title": "Rishikesh to Joshimath", "activities": ["Scenic drive up the mountains, crossing Prayags.", "Arrive in Joshimath."], "sights": ["Devprayag", "Joshimath"]},
+        {"day": 2, "title": "Auli Cable Car", "activities": ["Take ropeway to Auli.", "Explore alpine meadows, enjoy snow peaks.", "Return to Joshimath."], "sights": ["Auli Meadows", "Nanda Devi View"]},
+        {"day": 3, "title": "Mana Village & Depart", "activities": ["Visit Badrinath Temple.", "Drive to Mana Village.", "Drive back to Rishikesh."], "sights": ["Badrinath Temple", "Mana Village", "Departure"]}
+      ]
+    }
+  },
+  {
+    "id": "chopta_valley",
+    "name": "Chopta (Mini Switzerland)",
+    "state": "Uttarakhand",
+    "is_popular": false,
+    "starting_cities": ["Rishikesh", "Dehradun"],
+    "starting_city_distances": {"Rishikesh": 165, "Dehradun": 200},
+    "description": "Alpine meadow hamlet serving as base for trek to Tungnath, the highest Shiva temple.",
+    "lat": 30.48, "lon": 79.18, "best_season": "April to November",
+    "entry_tickets": {"deoriatal_permit": 150},
+    "transportation": {"local_auto": 400, "private_cab": 3200, "public_bus": 200},
+    "accommodation": {"budget": 700, "mid_range": 1800, "luxury": 4000},
+    "food_cost_per_day": 350,
+    "women_safety": "High safety. Quiet, remote, and safe Himalayan community. Safe for solo travelers.",
+    "pros": ["360-degree views of snow peaks.", "Beautiful meadows (bugyals).", "Tranquil camp stays."],
+    "cons": ["Limited electricity in camps (solar panels only).", "No luxury hotels.", "Chilly temperatures."],
+    "warnings": ["Acclimatize properly before starting the 3.5km Tungnath hike.", "Avoid trekking during snowstorms."],
+    "extra_tips": ["Start trek early to catch sunrise from Chandrashila Peak.", "Visit Deoria Tal reflecting Chaukhamba peaks."],
+    "itineraries": {
+      "3": [
+        {"day": 1, "title": "Rishikesh to Chopta", "activities": ["Drive up from Rishikesh.", "Stay in alpine Swiss tents."], "sights": ["Chopta Meadows"]},
+        {"day": 2, "title": "Tungnath Summit Trek", "activities": ["Trek to Tungnath Temple and Chandrashila Peak.", "Return to camp for bonfire."], "sights": ["Tungnath Temple", "Chandrashila"]},
+        {"day": 3, "title": "Deoria Tal & Depart", "activities": ["Trek to Deoria Tal lake.", "Depart to Rishikesh."], "sights": ["Deoria Tal", "Departure"]}
+      ]
+    }
+  },
+  {
+    "id": "agra_taj",
+    "name": "Agra (Taj Mahal Heritage)",
+    "state": "Uttar Pradesh",
+    "is_popular": true,
+    "starting_cities": ["Agra", "Delhi"],
+    "starting_city_distances": {"Agra": 5, "Delhi": 200},
+    "description": "World-famous monument of love, massive red forts, and Mughal history.",
+    "lat": 27.18, "lon": 78.00, "best_season": "October to March",
+    "entry_tickets": {"taj_mahal": 50, "agra_fort": 50},
+    "transportation": {"local_auto": 250, "private_cab": 1600, "public_bus": 50},
+    "accommodation": {"budget": 800, "mid_range": 2200, "luxury": 5500},
+    "food_cost_per_day": 400,
+    "women_safety": "Medium safety. High police security around monuments. Touts and fake guides can be persistent; solo female travelers should book rides via rideshare apps and ignore solicitations.",
+    "pros": ["Taj Mahal is a spectacular bucket list site.", "Easily connected to Delhi.", "Excellent Mughal food."],
+    "cons": ["Very persistent hawkers.", "Crowded city streets.", "Winter fog can block morning views."],
+    "warnings": ["Taj Mahal is closed on Fridays.", "Hire only government-approved guides with IDs."],
+    "extra_tips": ["Visit Taj at sunrise.", "Go to Mehtab Bagh across the river for cheap sunset view of the Taj.", "Try local sweet 'Petha'."],
+    "itineraries": {
+      "3": [
+        {"day": 1, "title": "Taj Sunrise & Fort", "activities": ["Visit Taj Mahal at sunrise.", "Explore Agra Fort.", "Sunset at Mehtab Bagh."], "sights": ["Taj Mahal", "Agra Fort", "Mehtab Bagh"]},
+        {"day": 2, "title": "Fatehpur Sikri Excursion", "activities": ["Drive to Fatehpur Sikri ruins (40km).", "Visit Buland Darwaza.", "Enjoy dinner in Agra."], "sights": ["Fatehpur Sikri", "Buland Darwaza"]},
+        {"day": 3, "title": "Baby Taj & Depart", "activities": ["Visit Tomb of I'timad-ud-Daulah (Baby Taj).", "Depart via Delhi train."], "sights": ["Baby Taj", "Departure"]}
+      ]
+    }
+  },
+  {
+    "id": "bateshwar_temples",
+    "name": "Bateshwar River Temples",
+    "state": "Uttar Pradesh",
+    "is_popular": false,
+    "starting_cities": ["Agra", "Gwalior"],
+    "starting_city_distances": {"Agra": 70, "Gwalior": 110},
+    "description": "Complex of 101 ancient Shiva temples sitting directly on a bend of the Yamuna River.",
+    "lat": 26.93, "lon": 78.53, "best_season": "October to March",
+    "entry_tickets": {"temples": 0},
+    "transportation": {"local_auto": 400, "private_cab": 2000, "public_bus": 100},
+    "accommodation": {"budget": 700, "mid_range": 1800, "luxury": 4000},
+    "food_cost_per_day": 300,
+    "women_safety": "Medium-High safety. Rural pilgrim center. Women should travel in groups or during daylight hours; avoid isolated river spots alone.",
+    "pros": ["Highly photogenic row of white temples.", "Serene river banks without any vendors.", "Historical chambers to explore."],
+    "cons": ["Limited lodging near the temples (best to stay in Agra).", "No direct public buses.", "Very basic food."],
+    "warnings": ["River water currents can be swift near the temple steps.", "Monkeys are common."],
+    "extra_tips": ["Take a local boat ride along the temple banks at sunset.", "Visit during the Bateshwar Cattle Fair (Nov) for rural experiences."],
+    "itineraries": {
+      "3": [
+        {"day": 1, "title": "Agra to Bateshwar", "activities": ["Drive from Agra to Bateshwar.", "Check in to local guest house.", "Watch sunset over Yamuna river temples."], "sights": ["Yamuna River Temples"]},
+        {"day": 2, "title": "Exploring 101 Temples", "activities": ["Walk through the rows of white temples.", "Visit Chambal Sanctuary (25km) to spot river dolphins and gharials."], "sights": ["Bateshwar Shiva Complex", "Chambal Sanctuary"]},
+        {"day": 3, "title": "Depart to Agra", "activities": ["Morning river prayers.", "Drive back to Agra/Gwalior for departure."], "sights": ["Yamuna Banks", "Departure"]}
+      ]
+    }
+  }
+]
