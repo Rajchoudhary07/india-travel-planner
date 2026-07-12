@@ -306,6 +306,10 @@ function bindEvents() {
         if (matchedPlace) {
             elements.stateSelect.value = matchedPlace.state;
             handleStateChange();
+            
+            // Set destinationHiddenInput value AFTER state change because handleStateChange resets it!
+            elements.destinationHiddenInput.value = placeId;
+            
             elements.citySelect.value = startingCity;
             elements.homeSelect.value = homeCity;
             elements.daysInput.value = days;
