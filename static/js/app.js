@@ -1407,15 +1407,51 @@ function renderPackingChecklist(data) {
     const container = elements.packingChecklistContainer;
     container.innerHTML = '';
     
-    // Core travel essentials with FontAwesome icons representing each item
-    const baseItems = [
-        { name: "Waterproof Hiking Backpack 50L", icon: "fa-solid fa-backpack" },
-        { name: "Universal Travel Adapter Plug", icon: "fa-solid fa-plug" },
-        { name: "Fast Charging 20000mAh Power Bank", icon: "fa-solid fa-battery-three-quarters" },
-        { name: "Quick Dry Compact Microfiber Towel", icon: "fa-solid fa-rug" },
-        { name: "Waterproof Trekking Shoes", icon: "fa-solid fa-shoe-prints" },
-        { name: "Mini Emergency First Aid Kit", icon: "fa-solid fa-kit-medical" }
-    ];
+    const dest = data.destination.toLowerCase();
+    let baseItems = [];
+    
+    // Categorize based on destination name keywords
+    if (dest.includes('beach') || dest.includes('goa') || dest.includes('vizag') || dest.includes('visakhapatnam')) {
+        // Beach / Coastal Category
+        baseItems = [
+            { name: "Waterproof Beach Mat Blanket", icon: "fa-solid fa-sheet-plastic" },
+            { name: "SPF 50 Broad Spectrum Sunscreen", icon: "fa-solid fa-sun" },
+            { name: "Polarized UV400 Sunglasses", icon: "fa-solid fa-glasses" },
+            { name: "Waterproof Dry Bag for Phones", icon: "fa-solid fa-bag-shopping" },
+            { name: "Quick Dry Microfiber Beach Towel", icon: "fa-solid fa-rug" },
+            { name: "Anti Slip Beach Slippers Water Shoes", icon: "fa-solid fa-shoe-prints" }
+        ];
+    } else if (dest.includes('mainpat') || dest.includes('tawang') || dest.includes('monastery') || dest.includes('mountain') || dest.includes('hill') || dest.includes('shimla') || dest.includes('rishikesh')) {
+        // Mountain / High-Altitude / Hill Station Category
+        baseItems = [
+            { name: "Thermal Inner Wear Set Fleece Lined", icon: "fa-solid fa-shirt" },
+            { name: "Waterproof Windproof Winter Jacket", icon: "fa-solid fa-person-snowboarding" },
+            { name: "Waterproof Hiking Backpack 50L", icon: "fa-solid fa-backpack" },
+            { name: "Waterproof Trekking Shoes with Grip", icon: "fa-solid fa-shoe-prints" },
+            { name: "Polarized Hiking Sunglasses", icon: "fa-solid fa-glasses" },
+            { name: "Mini Emergency First Aid Kit", icon: "fa-solid fa-kit-medical" }
+        ];
+    } else if (dest.includes('forest') || dest.includes('bubble') || dest.includes('falls') || dest.includes('waterfall') || dest.includes('chitrakote') || dest.includes('jungle') || dest.includes('valley')) {
+        // Forest / Jungle / Waterfall / Nature Walk Category
+        baseItems = [
+            { name: "Waterproof Rain Poncho Raincoat", icon: "fa-solid fa-cloud-showers-water" },
+            { name: "Natural Insect Mosquito Repellent Spray", icon: "fa-solid fa-spray-can" },
+            { name: "Waterproof Dry Bag for Electronics", icon: "fa-solid fa-bag-shopping" },
+            { name: "Waterproof Hiking Trekking Shoes", icon: "fa-solid fa-shoe-prints" },
+            { name: "LED Rechargeable Headlamp Flashlight", icon: "fa-solid fa-lightbulb" },
+            { name: "Mini Emergency First Aid Kit", icon: "fa-solid fa-kit-medical" }
+        ];
+    } else {
+        // General / Urban / Heritage City Category
+        baseItems = [
+            { name: "Universal Travel Adapter Plug", icon: "fa-solid fa-plug" },
+            { name: "Fast Charging 20000mAh Power Bank", icon: "fa-solid fa-battery-three-quarters" },
+            { name: "RFID Blocking Travel Wallet Passport Holder", icon: "fa-solid fa-wallet" },
+            { name: "Anti Theft Lightweight Daypack", icon: "fa-solid fa-backpack" },
+            { name: "Compact Travel Umbrella Windproof", icon: "fa-solid fa-umbrella" },
+            { name: "Reusable Insulated Water Bottle", icon: "fa-solid fa-bottle-water" }
+        ];
+    }
     
     const amazonTag = localStorage.getItem('amazon_affiliate_tag') || 'offbeatyatra2-21';
     
