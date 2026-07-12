@@ -265,10 +265,7 @@ function bindEvents() {
 
     // Lead Form triggers
     elements.leadFormTrigger.addEventListener('click', () => {
-        if (!activeItinerary) return;
-        elements.leadStartCity.textContent = activeItinerary.starting_city;
-        elements.leadDestName.textContent = activeItinerary.destination;
-        elements.leadModal.classList.remove('hidden');
+        showNotification('Coming Soon!', 'We are currently onboarding verified local tour & taxi operators in this region. Direct custom quotes will be live soon!', 'info');
     });
     
     elements.closeLeadModal.addEventListener('click', () => {
