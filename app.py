@@ -19,7 +19,8 @@ def index():
     """
     Renders the main single page application interface.
     """
-    return render_template('index.html')
+    adsense_id = os.environ.get("ADSENSE_CLIENT_ID", "")
+    return render_template('index.html', adsense_id=adsense_id)
 
 @app.route('/api/places', methods=['GET'])
 def get_places():
@@ -115,6 +116,14 @@ def not_found_error(error):
 @app.errorhandler(500)
 def internal_error(error):
     return jsonify({"error": "Internal server error"}), 500
+
+@app.route('/ads.txt')
+def ads_txt():
+    """
+    Serves the Google AdSense ads.txt authorization record.
+    """
+    content = "google.com, pub-5830823262791349, DIRECT, f08c47fec0942fa0"
+    return content, 200, {'Content-Type': 'text/plain'}
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5001))
