@@ -141,6 +141,7 @@ const elements = {
     settingsPanel: document.getElementById('settings-panel'),
     userApiKey: document.getElementById('user-api-key'),
     userUpiId: document.getElementById('user-upi-id'),
+    userSheetUrl: document.getElementById('user-sheet-url'),
     saveSettings: document.getElementById('save-settings'),
     closeSettings: document.getElementById('close-settings'),
     
@@ -222,6 +223,10 @@ function initApp() {
     if (!localStorage.getItem('amazon_affiliate_tag')) {
         localStorage.setItem('amazon_affiliate_tag', 'offbeatyatra2-21');
     }
+    const savedSheet = localStorage.getItem('google_sheet_api_url');
+    if (savedSheet) {
+        elements.userSheetUrl.value = savedSheet;
+    }
     
     // 2. Fetch available destinations list
     fetchDestinations();
@@ -262,6 +267,8 @@ function bindEvents() {
     elements.saveSettings.addEventListener('click', () => {
         const keyVal = elements.userApiKey.value.trim();
         const upiVal = elements.userUpiId.value.trim();
+        const tagVal = elements.userAmazonTag.value.trim();
+        const sheetVal = elements.userSheetUrl.value.trim();
         
         if (keyVal) {
             localStorage.setItem('gemini_api_key', keyVal);
@@ -279,6 +286,12 @@ function bindEvents() {
             localStorage.setItem('amazon_affiliate_tag', tagVal);
         } else {
             localStorage.removeItem('amazon_affiliate_tag');
+        }
+
+        if (sheetVal) {
+            localStorage.setItem('google_sheet_api_url', sheetVal);
+        } else {
+            localStorage.removeItem('google_sheet_api_url');
         }
         
         showNotification('Settings Saved', 'Configurations updated successfully.', 'success');
@@ -378,16 +391,39 @@ function bindEvents() {
         };
         
         try {
-            const response = await fetch('https://formsubmit.co/ajax/dramaticjanhawk@gmail.com', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify(payload)
-            });
+            const sheetUrl = localStorage.getItem('google_sheet_api_url');
+            const promises = [];
             
-            if (response.ok) {
+            // 1. Dispatch to FormSubmit email relay
+            promises.push(
+                fetch('https://formsubmit.co/ajax/dramaticjanhawk@gmail.com', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                })
+            );
+            
+            // 2. If Google Sheet API URL is set, POST there live in background
+            if (sheetUrl) {
+                promises.push(
+                    fetch(sheetUrl, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(payload)
+                    }).catch(err => console.warn('Google Sheet submission error:', err))
+                );
+            }
+            
+            const responses = await Promise.all(promises);
+            const mainResponse = responses[0]; // Email response
+            
+            if (mainResponse && mainResponse.ok) {
                 // Save to local storage for backup and admin dashboard viewing
                 const currentPartners = JSON.parse(localStorage.getItem('hotel_partnerships') || '[]');
                 currentPartners.push({
@@ -397,11 +433,11 @@ function bindEvents() {
                 });
                 localStorage.setItem('hotel_partnerships', JSON.stringify(currentPartners));
 
-                showNotification('Proposal Submitted!', 'Your partnership details and discount agreement have been emailed to us.', 'success');
+                showNotification('Proposal Submitted!', 'Your partnership details and discount agreement have been saved & emailed.', 'success');
                 elements.partnerInquiryForm.reset();
                 elements.partnerModal.classList.add('hidden');
             } else {
-                throw new Error('Failed to dispatch mail');
+                throw new Error('Failed to dispatch proposal mail');
             }
         } catch (err) {
             console.error(err);
