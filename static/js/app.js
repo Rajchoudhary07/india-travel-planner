@@ -1277,7 +1277,7 @@ function renderSponsoredStay(data) {
                     <i class="fa-solid fa-rectangle-ad" style="color: var(--accent-gold); margin-right: 4px;"></i>
                     <strong>Own a hotel or homestay in ${data.destination}?</strong> List your property here as our recommended Stay Partner!
                 </div>
-                <a href="mailto:sponsor@offbeatyatra.online?subject=Sponsorship%20Inquiry:%20${encodeURIComponent(data.destination)}" style="color: var(--accent-gold); text-decoration: underline; font-weight: 700;"><i class="fa-solid fa-envelope"></i> Partner with Us</a>
+                <a href="mailto:dramaticjanhawk@gmail.com?subject=Sponsorship%20Inquiry:%20${encodeURIComponent(data.destination)}" style="color: var(--accent-gold); text-decoration: underline; font-weight: 700;"><i class="fa-solid fa-envelope"></i> Partner with Us</a>
             </div>
         `;
     }
