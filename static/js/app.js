@@ -1168,7 +1168,7 @@ function renderAffiliateDeals(data) {
     
     // Deal 1: Accommodation stay recommendation (Booking.com affiliate mock redirect)
     const hotelDeal = document.createElement('a');
-    hotelDeal.href = `https://www.booking.com/searchresults.html?ss=${destEncoded}&aid=20261234`;
+    hotelDeal.href = `https://www.booking.com/searchresults.html?ss=${destEncoded}`;
     hotelDeal.target = '_blank';
     hotelDeal.className = 'deal-btn-link';
     hotelDeal.innerHTML = `
@@ -1349,58 +1349,17 @@ function renderSponsoredStay(data) {
     const container = elements.sponsoredStayContainer;
     container.innerHTML = '';
     
-    const dest = data.destination.toLowerCase();
-    
-    // Check if destination matches any of our sponsored hotels
-    if (dest.includes('mainpat')) {
-        container.style.display = 'block';
-        container.innerHTML = `
-            <div style="display: flex; align-items: center; gap: 8px; font-weight: 700; color: var(--accent-gold); margin-bottom: 4px;">
-                <i class="fa-solid fa-hotel"></i> Recommended Stay Partner
-            </div>
+    // Show generic partnership billboard inviting local hoteliers to pay for sponsor space
+    container.style.display = 'block';
+    container.innerHTML = `
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; width: 100%;">
             <div>
-                <strong>Tiger Point Eco Resort (Mainpat Stay Partner)</strong>: Get premium Swiss cottages & luxury forest tents starting at ₹2,500/night. 
-                Use promo code <span style="background: rgba(255,210,105,0.15); padding: 2px 6px; border-radius: 4px; border: 1px solid var(--accent-gold); font-weight: bold; color: var(--accent-gold);">OFFBEATYATRA</span> to claim a flat <strong>10% direct discount</strong> on your booking!
-                <a href="tel:+919876543210" style="color: var(--accent-cyan); text-decoration: none; margin-left: 10px; font-weight: 600;"><i class="fa-solid fa-phone"></i> Call Direct</a>
+                <i class="fa-solid fa-hotel" style="color: var(--accent-gold); margin-right: 6px;"></i>
+                <strong>Own a hotel, resort, or homestay in ${data.destination}?</strong> Feature your property here as our Recommended Stay Partner!
             </div>
-        `;
-    } else if (dest.includes('chitrakote') || dest.includes('bastar')) {
-        container.style.display = 'block';
-        container.innerHTML = `
-            <div style="display: flex; align-items: center; gap: 8px; font-weight: 700; color: var(--accent-gold); margin-bottom: 4px;">
-                <i class="fa-solid fa-hotel"></i> Recommended Stay Partner
-            </div>
-            <div>
-                <strong>Bastar Jungle Resort (Chitrakote Partner)</strong>: Experience eco-friendly wooden chalets tucked deep inside Sal plantations. 
-                Use promo code <span style="background: rgba(255,210,105,0.15); padding: 2px 6px; border-radius: 4px; border: 1px solid var(--accent-gold); font-weight: bold; color: var(--accent-gold);">OFFBEATYATRA</span> for a flat <strong>10% direct discount</strong>!
-                <a href="tel:+919876543211" style="color: var(--accent-cyan); text-decoration: none; margin-left: 10px; font-weight: 600;"><i class="fa-solid fa-phone"></i> Call Direct</a>
-            </div>
-        `;
-    } else if (dest.includes('rishikesh')) {
-        container.style.display = 'block';
-        container.innerHTML = `
-            <div style="display: flex; align-items: center; gap: 8px; font-weight: 700; color: var(--accent-gold); margin-bottom: 4px;">
-                <i class="fa-solid fa-hotel"></i> Recommended Stay Partner
-            </div>
-            <div>
-                <strong>Rishikesh Valley Forest Retreat</strong>: Rejuvenate at an offbeat nature resort overlooking clean valley streams. 
-                Use promo code <span style="background: rgba(255,210,105,0.15); padding: 2px 6px; border-radius: 4px; border: 1px solid var(--accent-gold); font-weight: bold; color: var(--accent-gold);">OFFBEATYATRA</span> to save <strong>10% on cottages</strong>!
-                <a href="tel:+919876543212" style="color: var(--accent-cyan); text-decoration: none; margin-left: 10px; font-weight: 600;"><i class="fa-solid fa-phone"></i> Call Direct</a>
-            </div>
-        `;
-    } else {
-        // Show generic partnership billboard inviting local hoteliers to pay for sponsor space!
-        container.style.display = 'block';
-        container.innerHTML = `
-            <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;">
-                <div>
-                    <i class="fa-solid fa-rectangle-ad" style="color: var(--accent-gold); margin-right: 4px;"></i>
-                    <strong>Own a hotel or homestay in ${data.destination}?</strong> List your property here as our recommended Stay Partner!
-                </div>
-                <a href="mailto:dramaticjanhawk@gmail.com?subject=Sponsorship%20Inquiry:%20${encodeURIComponent(data.destination)}" style="color: var(--accent-gold); text-decoration: underline; font-weight: 700;"><i class="fa-solid fa-envelope"></i> Partner with Us</a>
-            </div>
-        `;
-    }
+            <a href="mailto:dramaticjanhawk@gmail.com?subject=Stay%20Partner%20Inquiry:%20${encodeURIComponent(data.destination)}" style="color: var(--accent-gold); text-decoration: underline; font-weight: 700; white-space: nowrap;"><i class="fa-solid fa-envelope"></i> Partner with Us</a>
+        </div>
+    `;
 }
 
 function renderPackingChecklist(data) {
