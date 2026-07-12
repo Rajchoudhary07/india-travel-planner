@@ -51,8 +51,74 @@
                     <input type="password" id="user-api-key" placeholder="AIzaSy..." class="form-input">
                 </div>
                 <div class="settings-actions">
+                    <button id="view-leads-dashboard" class="btn btn-secondary btn-sm" style="color: var(--accent-gold); border-color: rgba(255, 210, 105, 0.4);"><i class="fa-solid fa-database"></i> Leads Dashboard</button>
                     <button id="save-settings" class="btn btn-primary btn-sm">Save Key</button>
                     <button id="close-settings" class="btn btn-secondary btn-sm">Close</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lead Form Modal -->
+        <div id="lead-modal" class="settings-panel hidden">
+            <div class="settings-content lead-modal-content">
+                <h3><i class="fa-solid fa-file-invoice-dollar"></i> Get Free Local Quote</h3>
+                <p>Our travel partners in <strong id="lead-start-city">starting city</strong> will build a customized package for your trip to <strong id="lead-dest-name">destination</strong>.</p>
+                <form id="lead-inquiry-form" style="margin-top: 15px; display: flex; flex-direction: column; gap: 12px;">
+                    <div class="form-group" style="text-align: left;">
+                        <label for="lead-name" style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase;">Your Full Name</label>
+                        <input type="text" id="lead-name" required placeholder="e.g. Raj Choudhary" class="form-input" style="margin-top: 4px;">
+                    </div>
+                    <div class="form-group" style="text-align: left;">
+                        <label for="lead-whatsapp" style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase;">WhatsApp Number</label>
+                        <input type="tel" id="lead-whatsapp" required placeholder="e.g. +91 9876543210" class="form-input" style="margin-top: 4px;">
+                    </div>
+                    <div class="form-group" style="text-align: left;">
+                        <label for="lead-email" style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase;">Email Address</label>
+                        <input type="email" id="lead-email" required placeholder="e.g. name@example.com" class="form-input" style="margin-top: 4px;">
+                    </div>
+                    <div class="form-group" style="text-align: left;">
+                        <label for="lead-date" style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase;">Approx Date of Travel</label>
+                        <input type="date" id="lead-date" required class="form-input" style="margin-top: 4px;">
+                    </div>
+                    <div class="form-group" style="text-align: left;">
+                        <label for="lead-notes" style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase;">Special Requests (Optional)</label>
+                        <textarea id="lead-notes" placeholder="e.g. Need a private cab for 4 people..." class="form-input" rows="2" style="margin-top: 4px; resize: none;"></textarea>
+                    </div>
+                    <div class="settings-actions" style="margin-top: 8px;">
+                        <button type="submit" class="btn btn-primary btn-sm">Submit Request</button>
+                        <button type="button" id="close-lead-modal" class="btn btn-secondary btn-sm">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Leads Dashboard Modal -->
+        <div id="leads-dashboard-modal" class="settings-panel hidden">
+            <div class="settings-content dashboard-content" style="max-width: 650px; width: 90%;">
+                <div class="dashboard-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid var(--border-light); padding-bottom: 8px;">
+                    <h3 style="margin: 0;"><i class="fa-solid fa-table-list"></i> Leads Database</h3>
+                    <button id="export-leads-csv" class="btn btn-primary btn-sm"><i class="fa-solid fa-file-csv"></i> Export to CSV</button>
+                </div>
+                <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px; text-align: left;">Every time a user requests a quote, it is captured below. Sell these leads to travel operators for commissions!</p>
+                <div class="leads-table-wrapper" style="max-height: 250px; overflow-y: auto; border: 1px solid var(--border-light); border-radius: 6px; background: rgba(0,0,0,0.2);">
+                    <table style="width: 100%; border-collapse: collapse; font-size: 11.5px; text-align: left;">
+                        <thead>
+                           <tr style="background: rgba(255,255,255,0.05); border-bottom: 1px solid var(--border-light);">
+                               <th style="padding: 8px; border-right: 1px solid var(--border-light);">Date</th>
+                               <th style="padding: 8px; border-right: 1px solid var(--border-light);">Name</th>
+                               <th style="padding: 8px; border-right: 1px solid var(--border-light);">Contact</th>
+                               <th style="padding: 8px; border-right: 1px solid var(--border-light);">Trip Details</th>
+                               <th style="padding: 8px;">Budget</th>
+                           </tr>
+                        </thead>
+                        <tbody id="leads-table-body">
+                           <!-- Leads rendered dynamically by JS -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="settings-actions" style="margin-top: 15px;">
+                    <button id="clear-leads" class="btn btn-danger btn-sm" style="background: #ef4444; border-color: #dc2626;"><i class="fa-solid fa-trash-can"></i> Clear All</button>
+                    <button id="close-leads-dashboard" class="btn btn-secondary btn-sm">Close</button>
                 </div>
             </div>
         </div>
@@ -388,6 +454,18 @@
                                 <!-- Populated by JS -->
                             </div>
                         </div>
+                    </div>
+
+                    <!-- Lead Generation Panel -->
+                    <div class="lead-generation-card card" style="display: flex; align-items: center; justify-content: space-between; gap: 20px; background: linear-gradient(135deg, rgba(255, 210, 105, 0.06) 0%, rgba(255, 126, 95, 0.06) 100%); border: 1px solid rgba(255, 210, 105, 0.2); padding: 22px 28px; margin-top: 20px; border-radius: var(--border-radius-lg);">
+                        <div style="display: flex; align-items: center; gap: 20px;">
+                            <div style="font-size: 32px; color: var(--accent-gold); text-shadow: 0 0 10px rgba(255, 210, 105, 0.3);"><i class="fa-solid fa-headset"></i></div>
+                            <div style="text-align: left;">
+                                <h3 style="margin: 0 0 4px 0; font-family: var(--font-heading); color: var(--text-primary); font-size: 17px;">Want this exact trip custom arranged?</h3>
+                                <p style="margin: 0; font-size: 13px; color: var(--text-secondary);">Get a free, no-obligation customized package quote from our verified local travel operators for private cabs, guides, and hotel stays.</p>
+                            </div>
+                        </div>
+                        <button id="lead-form-trigger" class="btn btn-primary" style="white-space: nowrap; flex-shrink: 0;"><i class="fa-solid fa-file-signature"></i> Get Free Local Quote</button>
                     </div>
                 </div>
             </section>

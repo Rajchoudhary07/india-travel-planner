@@ -144,7 +144,22 @@ const elements = {
     closeSettings: document.getElementById('close-settings'),
     
     // Action buttons
-    printBtn: document.getElementById('print-itinerary-btn')
+    printBtn: document.getElementById('print-itinerary-btn'),
+    
+    // Lead Generation & Admin elements
+    leadFormTrigger: document.getElementById('lead-form-trigger'),
+    leadModal: document.getElementById('lead-modal'),
+    closeLeadModal: document.getElementById('close-lead-modal'),
+    leadInquiryForm: document.getElementById('lead-inquiry-form'),
+    leadStartCity: document.getElementById('lead-start-city'),
+    leadDestName: document.getElementById('lead-dest-name'),
+    
+    viewLeadsDashboard: document.getElementById('view-leads-dashboard'),
+    leadsDashboardModal: document.getElementById('leads-dashboard-modal'),
+    closeLeadsDashboard: document.getElementById('close-leads-dashboard'),
+    leadsTableBody: document.getElementById('leads-table-body'),
+    clearLeadsBtn: document.getElementById('clear-leads'),
+    exportLeadsCsvBtn: document.getElementById('export-leads-csv')
 };
 
 // ==========================================================================
@@ -206,6 +221,47 @@ function bindEvents() {
     // Print button handler
     elements.printBtn.addEventListener('click', () => {
         window.print();
+    });
+
+    // Lead Form triggers
+    elements.leadFormTrigger.addEventListener('click', () => {
+        if (!activeItinerary) return;
+        elements.leadStartCity.textContent = activeItinerary.starting_city;
+        elements.leadDestName.textContent = activeItinerary.destination;
+        elements.leadModal.classList.remove('hidden');
+    });
+    
+    elements.closeLeadModal.addEventListener('click', () => {
+        elements.leadModal.classList.add('hidden');
+    });
+    
+    // Submit Lead Inquiry
+    elements.leadInquiryForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        submitLeadInquiry();
+    });
+    
+    // Admin Dashboard triggers
+    elements.viewLeadsDashboard.addEventListener('click', () => {
+        elements.settingsPanel.classList.add('hidden');
+        renderLeadsTable();
+        elements.leadsDashboardModal.classList.remove('hidden');
+    });
+    
+    elements.closeLeadsDashboard.addEventListener('click', () => {
+        elements.leadsDashboardModal.classList.add('hidden');
+    });
+    
+    elements.clearLeadsBtn.addEventListener('click', () => {
+        if (confirm("Are you sure you want to delete all collected leads? This action is permanent.")) {
+            localStorage.removeItem('travel_leads');
+            renderLeadsTable();
+            showNotification('Database Cleared', 'All travel leads have been deleted.', 'info');
+        }
+    });
+    
+    elements.exportLeadsCsvBtn.addEventListener('click', () => {
+        exportLeadsToCSV();
     });
 }
 
@@ -944,4 +1000,117 @@ function renderAffiliateDeals(data) {
         <i class="fa-solid fa-up-right-from-square"></i>
     `;
     elements.dealsContainer.appendChild(tourDeal);
+}
+
+function submitLeadInquiry() {
+    const name = document.getElementById('lead-name').value.trim();
+    const whatsapp = document.getElementById('lead-whatsapp').value.trim();
+    const email = document.getElementById('lead-email').value.trim();
+    const travelDate = document.getElementById('lead-date').value;
+    const notes = document.getElementById('lead-notes').value.trim();
+    
+    const lead = {
+        id: Date.now(),
+        dateSubmitted: new Date().toLocaleDateString('en-IN'),
+        name: name,
+        whatsapp: whatsapp,
+        email: email,
+        travelDate: travelDate,
+        notes: notes,
+        destination: activeItinerary.destination,
+        state: activeItinerary.state,
+        starting_city: activeItinerary.starting_city,
+        duration: activeItinerary.duration_days,
+        budget: activeItinerary.cost_summary.total_estimated,
+        style: activeItinerary.travel_style
+    };
+    
+    // Save to localStorage
+    const currentLeads = JSON.parse(localStorage.getItem('travel_leads') || '[]');
+    currentLeads.push(lead);
+    localStorage.setItem('travel_leads', JSON.stringify(currentLeads));
+    
+    // Reset and close
+    elements.leadInquiryForm.reset();
+    elements.leadModal.classList.add('hidden');
+    
+    showNotification('Inquiry Submitted!', 'Our travel partner will reach out via WhatsApp/Email shortly.', 'success');
+}
+
+function renderLeadsTable() {
+    elements.leadsTableBody.innerHTML = '';
+    const leads = JSON.parse(localStorage.getItem('travel_leads') || '[]');
+    
+    if (leads.length === 0) {
+        elements.leadsTableBody.innerHTML = `
+            <tr>
+                <td colspan="5" style="padding: 20px; text-align: center; color: var(--text-muted); background: rgba(0,0,0,0.1);">No leads collected yet. Submit a quote request on the showcase to see them here!</td>
+            </tr>
+        `;
+        return;
+    }
+    
+    // Render descending (newest first)
+    leads.slice().reverse().forEach(lead => {
+        const tr = document.createElement('tr');
+        tr.style.borderBottom = '1px solid var(--border-light)';
+        tr.innerHTML = `
+            <td style="padding: 8px; border-right: 1px solid var(--border-light); color: var(--text-muted);">${lead.dateSubmitted}</td>
+            <td style="padding: 8px; border-right: 1px solid var(--border-light); font-weight: 600;">${lead.name}</td>
+            <td style="padding: 8px; border-right: 1px solid var(--border-light); line-height: 1.3;">
+                <div><i class="fa-brands fa-whatsapp" style="color: #25d366;"></i> ${lead.whatsapp}</div>
+                <div style="font-size: 10px; opacity: 0.7;"><i class="fa-solid fa-envelope"></i> ${lead.email}</div>
+            </td>
+            <td style="padding: 8px; border-right: 1px solid var(--border-light); line-height: 1.3;">
+                <strong>${lead.destination}</strong><br>
+                <span style="font-size: 10px; opacity: 0.7;">${lead.duration} Days | ${lead.starting_city} starting</span>
+            </td>
+            <td style="padding: 8px; font-weight: 600; color: var(--accent-sunset);">₹${lead.budget.toLocaleString('en-IN')}</td>
+        `;
+        elements.leadsTableBody.appendChild(tr);
+    });
+}
+
+function exportLeadsToCSV() {
+    const leads = JSON.parse(localStorage.getItem('travel_leads') || '[]');
+    if (leads.length === 0) {
+        showNotification('No Data', 'No leads available to export.', 'info');
+        return;
+    }
+    
+    // Create CSV content headers
+    let csvContent = "date_submitted,name,whatsapp,email,travel_date,destination,state,starting_city,duration_days,estimated_cost_inr,travel_style,notes\n";
+    
+    // Append rows
+    leads.forEach(lead => {
+        const cleanNotes = (lead.notes || '').replace(/"/g, '""');
+        const row = [
+            `"${lead.dateSubmitted}"`,
+            `"${lead.name}"`,
+            `"${lead.whatsapp}"`,
+            `"${lead.email}"`,
+            `"${lead.travelDate}"`,
+            `"${lead.destination}"`,
+            `"${lead.state}"`,
+            `"${lead.starting_city}"`,
+            lead.duration,
+            lead.budget,
+            `"${lead.style}"`,
+            `"${cleanNotes}"`
+        ].join(",");
+        csvContent += row + "\n";
+    });
+    
+    // Download Link creation
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.setAttribute("href", url);
+    link.setAttribute("download", `travel_leads_${new Date().toISOString().slice(0,10)}.csv`);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    showNotification('Export Successful', 'Leads spreadsheet downloaded as CSV.', 'success');
 }
