@@ -3,8 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% if preloaded_itinerary %}
+    <title>Offbeat {{ preloaded_itinerary.destination }} Itinerary Planner ({{ preloaded_itinerary.duration_days }} Days) | YātrāAI</title>
+    <meta name="description" content="Get a detailed {{ preloaded_itinerary.duration_days }}-day offbeat travel plan to {{ preloaded_itinerary.destination }}, {{ preloaded_itinerary.state }}. View dynamic cost allocations, map routes, gear checklists, and local safety tips.">
+    {% else %}
     <title>YātrāAI - Discover Hidden Gems & Custom Itineraries in India</title>
     <meta name="description" content="Generate cost-effective, personalized, and AI-powered itineraries for the most beautiful, undiscovered offbeat destinations in India.">
+    {% endif %}
+    
+    <script>
+        window.PRELOADED_ITINERARY = {{ preloaded_itinerary_json|safe if preloaded_itinerary_json else 'null' }};
+    </script>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

@@ -125,6 +125,69 @@ def ads_txt():
     content = "google.com, pub-5830823262791349, DIRECT, f08c47fec0942fa0"
     return content, 200, {'Content-Type': 'text/plain'}
 
+@app.route('/sitemap.xml', methods=['GET'])
+def sitemap():
+    """
+    Generates sitemap.xml dynamically listing all destinations.
+    """
+    from flask import make_response
+    db = load_places_database()
+    
+    # Base domain
+    base_url = "https://offbeatyatra.online"
+    
+    pages = []
+    # Add home page
+    pages.append(f"<url><loc>{base_url}/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>")
+    
+    # Add all dynamic destination pages
+    for place in db:
+        place_id = place["id"]
+        pages.append(f"<url><loc>{base_url}/itinerary/{place_id}</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>")
+        
+    sitemap_xml = f"""<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{''.join(pages)}
+</urlset>
+"""
+    response = make_response(sitemap_xml)
+    response.headers["Content-Type"] = "application/xml"
+    return response
+
+import json
+
+@app.route('/itinerary/<place_id>')
+def itinerary_page(place_id):
+    """
+    Serves index.html with preloaded itinerary data for programmatic SEO.
+    """
+    place_data = get_place_by_id(place_id)
+    if not place_data:
+        # Load main page if place is not found
+        return render_template('index.html', adsense_id=os.environ.get("ADSENSE_CLIENT_ID", ""))
+        
+    # Generate default preloaded itinerary for search engine crawlers
+    default_starting_city = place_data["starting_cities"][0] if place_data["starting_cities"] else "Raipur"
+    itinerary = generate_ai_itinerary(
+        place_data=place_data,
+        home_city=default_starting_city,
+        starting_city=default_starting_city,
+        days=place_data.get("default_days", 4),
+        budget=12000,
+        travel_style="mid_range",
+        api_key=None  # Force server-side local rules-engine to run fast & avoid key leaks
+    )
+    
+    adsense_id = os.environ.get("ADSENSE_CLIENT_ID", "")
+    preloaded_json = json.dumps(itinerary)
+    
+    return render_template(
+        'index.html',
+        adsense_id=adsense_id,
+        preloaded_itinerary=itinerary,
+        preloaded_itinerary_json=preloaded_json
+    )
+
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5001))
     app.run(host='0.0.0.0', port=port, debug=True)

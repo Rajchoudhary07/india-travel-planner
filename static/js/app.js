@@ -203,6 +203,13 @@ function initApp() {
     
     // 2. Fetch available destinations list
     fetchDestinations();
+
+    // 3. If page contains a preloaded itinerary (programmatic SEO), show it instantly
+    if (window.PRELOADED_ITINERARY) {
+        activeItinerary = window.PRELOADED_ITINERARY;
+        renderItinerary(activeItinerary);
+        showState('itinerary');
+    }
 }
 
 function bindEvents() {
