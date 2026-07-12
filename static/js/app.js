@@ -955,6 +955,9 @@ function renderMap(data) {
         if (startCoords) bounds.push(startCoords);
         if (homeCoords && data.home_city !== data.starting_city) bounds.push(homeCoords);
         
+        // Save route bounds on map object for invalidateSize recalculation when container displays
+        travelMap._routeBounds = bounds;
+        
         if (bounds.length > 1) {
             travelMap.fitBounds(bounds, {
                 padding: [50, 50]
@@ -1084,6 +1087,17 @@ function showState(state) {
         elements.itineraryShowcase.classList.remove('hidden');
         elements.submitBtn.removeAttribute('disabled');
         elements.submitBtn.querySelector('span').textContent = 'Regenerate Itinerary';
+        
+        // Force Leaflet to recalculate container dimensions once it becomes visible
+        if (travelMap) {
+            setTimeout(() => {
+                travelMap.invalidateSize();
+                if (travelMap._routeBounds && travelMap._routeBounds.length > 0) {
+                    // Zoom out to fit the full route nicely
+                    travelMap.fitBounds(travelMap._routeBounds, { padding: [60, 60] });
+                }
+            }, 300);
+        }
     }
 }
 
