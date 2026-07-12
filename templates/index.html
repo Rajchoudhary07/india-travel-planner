@@ -12,7 +12,7 @@
     {% endif %}
     
     <script>
-        window.PRELOADED_ITINERARY = {{ preloaded_itinerary_json|safe if preloaded_itinerary_json else 'null' }};
+        window.PRELOADED_ITINERARY = {% if preloaded_itinerary_json %}{{ preloaded_itinerary_json|safe }}{% else %}null{% endif %};
     </script>
     
     <!-- Google Fonts -->
@@ -357,12 +357,32 @@
                     <!-- Visual Split Layout: Map & Cost -->
                     <div class="layout-grid-2">
                         <!-- Interactive Map Card -->
-                        <div class="map-card card">
+                        <div class="map-card card" style="position: relative;">
                             <div class="card-header">
                                 <h3><i class="fa-solid fa-map-location-dot"></i> Geographical Map</h3>
                                 <p>Interactive route line and sightseeing plotting</p>
                             </div>
-                            <div id="map-container" class="map-container"></div>
+                            <div id="map-container" class="map-container" style="position: relative;"></div>
+                            
+                            <!-- Floating Route Info Panel -->
+                            <div id="map-route-info" class="map-route-info" style="display: none;">
+                                <div class="route-info-header">
+                                    <h4><i class="fa-solid fa-route"></i> Travel Route Summary</h4>
+                                </div>
+                                <div class="route-info-stats">
+                                    <div class="stat-box">
+                                        <span class="stat-label">Total Distance</span>
+                                        <span class="stat-val" id="map-distance">-- km</span>
+                                    </div>
+                                    <div class="stat-box">
+                                        <span class="stat-label">Est. Travel Time</span>
+                                        <span class="stat-val" id="map-time">-- hrs</span>
+                                    </div>
+                                </div>
+                                <div class="route-info-instructions" id="map-instructions">
+                                    Enter details to plot route.
+                                </div>
+                            </div>
                         </div>
 
                         <!-- Budget & Costs Breakdown Card -->

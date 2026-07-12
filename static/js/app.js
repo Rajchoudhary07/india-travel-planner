@@ -835,7 +835,6 @@ function renderMap(data) {
         `);
         mapMarkers.push(startMarker);
         
-        // Draw dashed route connection line
         mapRouteLine = L.polyline([startCoords, [centerLat, centerLon]], {
             color: '#ffd269',
             weight: 3,
@@ -843,6 +842,64 @@ function renderMap(data) {
             opacity: 0.8
         }).addTo(travelMap);
         mapMarkers.push(mapRouteLine);
+        
+        // Plot dynamic sightseeing markers around destination center coordinate
+        const sightsList = [];
+        data.itinerary.forEach(day => {
+            day.sights.forEach(sight => {
+                if (!sightsList.includes(sight)) {
+                    sightsList.push(sight);
+                }
+            });
+        });
+
+        sightsList.forEach((sight, index) => {
+            // Scatter sights around center coordinate in a spiral
+            const angle = (index * 2 * Math.PI) / (sightsList.length || 1);
+            const radius = 0.012 + (index * 0.004); // Spiral coordinate displacement
+            const sightLat = centerLat + Math.sin(angle) * radius;
+            const sightLon = centerLon + Math.cos(angle) * radius;
+
+            const sightMarker = L.circleMarker([sightLat, sightLon], {
+                radius: 7,
+                fillColor: '#00f2fe',
+                color: '#ffffff',
+                weight: 2,
+                opacity: 0.9,
+                fillOpacity: 0.9
+            }).addTo(travelMap);
+
+            sightMarker.bindPopup(`
+                <div style="color: #040814; font-family: sans-serif; font-size: 12px; line-height: 1.3;">
+                    <strong style="color: #008fa0;"><i class="fa-solid fa-camera"></i> Sightseeing Spot</strong><br>
+                    <strong>${sight}</strong>
+                </div>
+            `);
+            mapMarkers.push(sightMarker);
+        });
+
+        // Populate floating Route Summary Panel
+        const distanceEl = document.getElementById('map-distance');
+        const timeEl = document.getElementById('map-time');
+        const instEl = document.getElementById('map-instructions');
+        const infoPanel = document.getElementById('map-route-info');
+        
+        // Find distance from places list database
+        const placeDetails = placesData.find(p => p.id === data.place_id);
+        const distance = placeDetails && placeDetails.starting_city_distances ? placeDetails.starting_city_distances[data.starting_city] : null;
+        
+        if (distance) {
+            const hours = Math.floor(distance / 50); // Assumed 50 km/h driving speed
+            const minutes = Math.round(((distance / 50) - hours) * 60);
+            const timeString = minutes > 0 ? `${hours}h ${minutes}m` : `${hours}h`;
+            
+            distanceEl.textContent = `${distance} km`;
+            timeEl.textContent = timeString;
+            instEl.innerHTML = `<i class="fa-solid fa-car-side"></i> Driving transit from <strong>${data.starting_city}</strong> to <strong>${data.destination}</strong>.`;
+            infoPanel.style.display = 'flex';
+        } else {
+            infoPanel.style.display = 'none';
+        }
         
         // Fit map bounds to show everything (home, starting point, and destination)
         const bounds = [ [centerLat, centerLon] ];
