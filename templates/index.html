@@ -232,6 +232,74 @@
             </div>
         </div>
 
+        <!-- Hotel Partnership Modal -->
+        <div id="partner-modal" class="settings-panel hidden">
+            <div class="settings-content" style="max-width: 480px; text-align: left;">
+                <h3 style="margin-bottom: 8px; display: flex; align-items: center; gap: 8px; color: var(--accent-gold); font-family: var(--font-heading); font-size: 18px;">
+                    <i class="fa-solid fa-hotel"></i> Stay Partnership Proposal
+                </h3>
+                <p style="font-size: 12.5px; color: var(--text-secondary); margin-bottom: 15px;">Submit your property details. Once approved, your recommended stay banner will be listed live.</p>
+                
+                <form id="partner-inquiry-form" style="display: flex; flex-direction: column; gap: 12px;">
+                    <div class="form-group">
+                        <label for="partner-hotel-name">Property/Hotel Name</label>
+                        <input type="text" id="partner-hotel-name" class="form-input" required placeholder="e.g. Tiger Point Swiss Cottages">
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div class="form-group">
+                            <label for="partner-dest">Destination Region</label>
+                            <input type="text" id="partner-dest" class="form-input" required placeholder="e.g. Mainpat">
+                        </div>
+                        <div class="form-group">
+                            <label for="partner-name">Owner/Manager Name</label>
+                            <input type="text" id="partner-name" class="form-input" required placeholder="e.g. Amit Sharma">
+                        </div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div class="form-group">
+                            <label for="partner-phone">WhatsApp Number</label>
+                            <input type="tel" id="partner-phone" class="form-input" required placeholder="e.g. +91 98765 43210">
+                        </div>
+                        <div class="form-group">
+                            <label for="partner-email">Email Address</label>
+                            <input type="email" id="partner-email" class="form-input" required placeholder="e.g. contact@hotel.com">
+                        </div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div class="form-group">
+                            <label for="partner-promo">Custom Promo Code</label>
+                            <input type="text" id="partner-promo" class="form-input" required placeholder="e.g. OFFBEATYATRA">
+                        </div>
+                        <div class="form-group">
+                            <label for="partner-discount">Discount Offered (%)</label>
+                            <input type="number" id="partner-discount" class="form-input" min="5" max="30" value="10" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="partner-desc">Short Description (Max 150 chars)</label>
+                        <textarea id="partner-desc" class="form-input" style="height: 60px; resize: none;" required placeholder="e.g. Cozy luxury tents overlooking the pine valleys with home cooked meals..."></textarea>
+                    </div>
+                    
+                    <!-- Legal Agreement Section -->
+                    <div style="background: rgba(255, 210, 105, 0.05); border: 1px solid rgba(255, 210, 105, 0.15); padding: 10px; border-radius: 6px; font-size: 11.5px; color: var(--text-secondary); line-height: 1.35; display: flex; gap: 8px;">
+                        <input type="checkbox" id="partner-agree" required style="margin-top: 2px;">
+                        <label for="partner-agree" style="cursor: pointer; line-height: 1.4;">
+                            I hereby agree to offer a flat <strong>10% (or specified) discount</strong> to all OffbeatYatra customers using our promo code. I declare that our services are genuine, free of scams, and comply with all safety regulations.
+                        </label>
+                    </div>
+                    
+                    <div class="settings-actions" style="margin-top: 10px; display: flex; gap: 8px;">
+                        <button type="submit" class="btn btn-primary btn-sm" style="flex: 2; font-weight: 700;"><i class="fa-solid fa-file-contract"></i> Submit Agreement</button>
+                        <button type="button" id="close-partner-modal" class="btn btn-secondary btn-sm" style="flex: 1;">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
         <main class="main-content">
             <!-- Sidebar Panel: Inputs -->
             <section class="planner-sidebar card">

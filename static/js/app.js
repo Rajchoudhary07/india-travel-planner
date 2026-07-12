@@ -185,7 +185,12 @@ const elements = {
     quickPlanDays: document.getElementById('quick-plan-days'),
     quickPlanStyle: document.getElementById('quick-plan-style'),
     quickPlanBudget: document.getElementById('quick-plan-budget'),
-    closeQuickPlan: document.getElementById('close-quick-plan')
+    closeQuickPlan: document.getElementById('close-quick-plan'),
+
+    // Partner elements
+    partnerModal: document.getElementById('partner-modal'),
+    partnerInquiryForm: document.getElementById('partner-inquiry-form'),
+    closePartnerModal: document.getElementById('close-partner-modal')
 };
 
 // ==========================================================================
@@ -329,6 +334,68 @@ function bindEvents() {
     elements.leadInquiryForm.addEventListener('submit', (e) => {
         e.preventDefault();
         submitLeadInquiry();
+    });
+    
+    // Partner Modal event listeners
+    elements.closePartnerModal.addEventListener('click', () => {
+        elements.partnerModal.classList.add('hidden');
+    });
+    
+    elements.sponsoredStayContainer.addEventListener('click', (e) => {
+        const link = e.target.closest('#partner-billboard-link');
+        if (link) {
+            e.preventDefault();
+            if (activeItinerary) {
+                document.getElementById('partner-dest').value = activeItinerary.destination;
+            }
+            elements.partnerModal.classList.remove('hidden');
+        }
+    });
+    
+    elements.partnerInquiryForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const submitBtn = elements.partnerInquiryForm.querySelector('button[type="submit"]');
+        const origText = submitBtn.innerHTML;
+        submitBtn.setAttribute('disabled', 'true');
+        submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Submitting Proposal...`;
+        
+        const payload = {
+            hotel_name: document.getElementById('partner-hotel-name').value.trim(),
+            destination: document.getElementById('partner-dest').value.trim(),
+            manager_name: document.getElementById('partner-name').value.trim(),
+            whatsapp: document.getElementById('partner-phone').value.trim(),
+            email: document.getElementById('partner-email').value.trim(),
+            promo_code: document.getElementById('partner-promo').value.trim(),
+            discount_percent: document.getElementById('partner-discount').value.trim(),
+            description: document.getElementById('partner-desc').value.trim(),
+            agreement_signed: document.getElementById('partner-agree').checked ? "Agreed to 10% Discount & No Scams Terms" : "No"
+        };
+        
+        try {
+            const response = await fetch('https://formsubmit.co/ajax/dramaticjanhawk@gmail.com', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            });
+            
+            if (response.ok) {
+                showNotification('Proposal Submitted!', 'Your partnership details and discount agreement have been emailed to us.', 'success');
+                elements.partnerInquiryForm.reset();
+                elements.partnerModal.classList.add('hidden');
+            } else {
+                throw new Error('Failed to dispatch mail');
+            }
+        } catch (err) {
+            console.error(err);
+            showNotification('Dispatch Error', 'Failed to submit proposal email. Please try again.', 'error');
+        } finally {
+            submitBtn.removeAttribute('disabled');
+            submitBtn.innerHTML = origText;
+        }
     });
     
     // Admin Dashboard triggers
@@ -1357,7 +1424,7 @@ function renderSponsoredStay(data) {
                 <i class="fa-solid fa-hotel" style="color: var(--accent-gold); margin-right: 6px;"></i>
                 <strong>Own a hotel, resort, or homestay in ${data.destination}?</strong> Feature your property here as our Recommended Stay Partner!
             </div>
-            <a href="mailto:dramaticjanhawk@gmail.com?subject=Stay%20Partner%20Inquiry:%20${encodeURIComponent(data.destination)}" style="color: var(--accent-gold); text-decoration: underline; font-weight: 700; white-space: nowrap;"><i class="fa-solid fa-envelope"></i> Partner with Us</a>
+            <a href="#" id="partner-billboard-link" style="color: var(--accent-gold); text-decoration: underline; font-weight: 700; white-space: nowrap;"><i class="fa-solid fa-envelope"></i> Partner with Us</a>
         </div>
     `;
 }
