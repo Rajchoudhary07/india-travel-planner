@@ -1420,28 +1420,41 @@ body {
 }
 
 /* ==========================================================================
-   Print Stylesheet Formatting (Optimized for exports)
+   Print Stylesheet Formatting (Optimized for exports with Paywall security)
    ========================================================================== */
 @media print {
-    body {
+    /* If the body is NOT unlocked via payment, hide everything to prevent print bypass */
+    body:not(.unlocked-premium) {
+        display: none !important;
+    }
+
+    body.unlocked-premium {
         background: white !important;
         color: black !important;
         font-size: 12pt !important;
     }
     
-    .app-container {
+    body.unlocked-premium .app-container {
         padding: 0 !important;
     }
     
-    .orb, .main-header, .planner-sidebar, .map-card, #print-itinerary-btn, .settings-panel, .welcome-visual {
+    body.unlocked-premium .orb, 
+    body.unlocked-premium .main-header, 
+    body.unlocked-premium .planner-sidebar, 
+    body.unlocked-premium .map-card, 
+    body.unlocked-premium .affiliate-deals-section,
+    body.unlocked-premium .lead-generation-card,
+    body.unlocked-premium #premium-pdf-btn, 
+    body.unlocked-premium .settings-panel, 
+    body.unlocked-premium .welcome-visual {
         display: none !important;
     }
     
-    .main-content {
+    body.unlocked-premium .main-content {
         grid-template-columns: 1fr !important;
     }
     
-    .card {
+    body.unlocked-premium .card {
         background: transparent !important;
         box-shadow: none !important;
         border: none !important;
@@ -1450,31 +1463,31 @@ body {
         page-break-inside: avoid;
     }
     
-    #itinerary-dest-name {
+    body.unlocked-premium #itinerary-dest-name {
         color: black !important;
         font-size: 24pt !important;
     }
     
-    .timeline::before {
+    body.unlocked-premium .timeline::before {
         background: #ccc !important;
     }
     
-    .timeline-content {
+    body.unlocked-premium .timeline-content {
         background: transparent !important;
         border: 1px solid #ddd !important;
         color: black !important;
     }
     
-    .activities-list li {
+    body.unlocked-premium .activities-list li {
         color: #333 !important;
     }
     
-    .sight-tag {
+    body.unlocked-premium .sight-tag {
         border: 1px solid #ccc !important;
         color: #333 !important;
     }
     
-    .cost-card {
+    body.unlocked-premium .cost-card {
         page-break-before: always;
     }
 }

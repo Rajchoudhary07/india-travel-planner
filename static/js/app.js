@@ -145,7 +145,6 @@ const elements = {
     closeSettings: document.getElementById('close-settings'),
     
     // Action buttons
-    printBtn: document.getElementById('print-itinerary-btn'),
     premiumPdfBtn: document.getElementById('premium-pdf-btn'),
     
     // Lead Generation & Admin elements
@@ -239,11 +238,6 @@ function bindEvents() {
         
         showNotification('Settings Saved', 'Configurations updated successfully.', 'success');
         elements.settingsPanel.classList.add('hidden');
-    });
-
-    // Print button handler
-    elements.printBtn.addEventListener('click', () => {
-        window.print();
     });
 
     // Lead Form triggers
@@ -1201,8 +1195,13 @@ function verifyAndUnlockPremiumPDF() {
     
     showNotification('Payment Verified!', 'Premium print view unlocked. Loading print options...', 'success');
     
-    // Trigger print window
+    // Unlock print styles & trigger print window
+    document.body.classList.add('unlocked-premium');
     setTimeout(() => {
         window.print();
+        // Remove print styles lock after printing is opened
+        setTimeout(() => {
+            document.body.classList.remove('unlocked-premium');
+        }, 1000);
     }, 1000);
 }
