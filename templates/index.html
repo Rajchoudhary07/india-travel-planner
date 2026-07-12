@@ -173,6 +173,65 @@
             </div>
         </div>
 
+        <!-- Quick Plan Modal -->
+        <div id="quick-plan-modal" class="settings-panel hidden">
+            <div class="settings-content" style="max-width: 420px; text-align: left;">
+                <h3 style="margin-bottom: 8px; display: flex; align-items: center; gap: 8px; color: var(--accent-cyan); font-family: var(--font-heading); font-size: 18px;">
+                    <i class="fa-solid fa-plane-departure"></i> Quick Plan: <span id="quick-plan-dest-name">Destination</span>
+                </h3>
+                <p style="font-size: 12.5px; color: var(--text-secondary); margin-bottom: 15px;">Configure your parameters to instantly generate your custom travel itinerary.</p>
+                
+                <form id="quick-plan-form" style="display: flex; flex-direction: column; gap: 12px;">
+                    <input type="hidden" id="quick-plan-place-id">
+                    
+                    <div class="form-group">
+                        <label for="quick-plan-home"><i class="fa-solid fa-house-user"></i> Origin / Home City</label>
+                        <select id="quick-plan-home" class="form-input" required>
+                            <option value="Delhi">Delhi</option>
+                            <option value="Mumbai">Mumbai</option>
+                            <option value="Kolkata" selected>Kolkata</option>
+                            <option value="Chennai">Chennai</option>
+                            <option value="Bangalore">Bangalore</option>
+                            <option value="Hyderabad">Hyderabad</option>
+                            <option value="Raipur">Raipur</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="quick-plan-start"><i class="fa-solid fa-city"></i> Starting City</label>
+                        <select id="quick-plan-start" class="form-input" required>
+                            <!-- Dynamically populated by JS -->
+                        </select>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div class="form-group">
+                            <label for="quick-plan-days"><i class="fa-solid fa-calendar-days"></i> Duration (Days)</label>
+                            <input type="number" id="quick-plan-days" class="form-input" min="1" max="15" value="4" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="quick-plan-style"><i class="fa-solid fa-wallet"></i> Travel Style</label>
+                            <select id="quick-plan-style" class="form-input">
+                                <option value="budget">Budget</option>
+                                <option value="mid_range" selected>Mid-Range</option>
+                                <option value="luxury">Luxury</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="quick-plan-budget"><i class="fa-solid fa-indian-rupee-sign"></i> Total Budget (INR)</label>
+                        <input type="number" id="quick-plan-budget" class="form-input" min="2000" max="100000" value="12000" required>
+                    </div>
+                    
+                    <div class="settings-actions" style="margin-top: 15px; display: flex; gap: 8px;">
+                        <button type="submit" class="btn btn-primary btn-sm" style="flex: 2; font-weight: 700;"><i class="fa-solid fa-wand-magic-sparkles"></i> Generate Itinerary</button>
+                        <button type="button" id="close-quick-plan" class="btn btn-secondary btn-sm" style="flex: 1;">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
         <main class="main-content">
             <!-- Sidebar Panel: Inputs -->
             <section class="planner-sidebar card">

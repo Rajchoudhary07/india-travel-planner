@@ -173,7 +173,19 @@ const elements = {
     // Monetization checklist and sponsor elements
     userAmazonTag: document.getElementById('user-amazon-tag'),
     sponsoredStayContainer: document.getElementById('sponsored-stay-container'),
-    packingChecklistContainer: document.getElementById('packing-checklist-container')
+    packingChecklistContainer: document.getElementById('packing-checklist-container'),
+
+    // Quick Plan elements
+    quickPlanModal: document.getElementById('quick-plan-modal'),
+    quickPlanForm: document.getElementById('quick-plan-form'),
+    quickPlanDestName: document.getElementById('quick-plan-dest-name'),
+    quickPlanPlaceId: document.getElementById('quick-plan-place-id'),
+    quickPlanHome: document.getElementById('quick-plan-home'),
+    quickPlanStart: document.getElementById('quick-plan-start'),
+    quickPlanDays: document.getElementById('quick-plan-days'),
+    quickPlanStyle: document.getElementById('quick-plan-style'),
+    quickPlanBudget: document.getElementById('quick-plan-budget'),
+    closeQuickPlan: document.getElementById('close-quick-plan')
 };
 
 // ==========================================================================
@@ -270,6 +282,43 @@ function bindEvents() {
     
     elements.closeLeadModal.addEventListener('click', () => {
         elements.leadModal.classList.add('hidden');
+    });
+    
+    // Quick Plan listeners
+    elements.closeQuickPlan.addEventListener('click', () => {
+        elements.quickPlanModal.classList.add('hidden');
+    });
+    
+    elements.quickPlanForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const placeId = elements.quickPlanPlaceId.value;
+        const startingCity = elements.quickPlanStart.value;
+        const homeCity = elements.quickPlanHome.value;
+        const days = parseInt(elements.quickPlanDays.value);
+        const budget = parseFloat(elements.quickPlanBudget.value);
+        const travelStyle = elements.quickPlanStyle.value;
+        
+        elements.quickPlanModal.classList.add('hidden');
+        
+        // Populate inputs in the sidebar for consistency
+        const matchedPlace = placesData.find(p => p.id === placeId);
+        if (matchedPlace) {
+            elements.stateSelect.value = matchedPlace.state;
+            handleStateChange();
+            elements.citySelect.value = startingCity;
+            elements.homeSelect.value = homeCity;
+            elements.daysInput.value = days;
+            elements.daysVal.textContent = `${days} Days`;
+            elements.budgetInput.value = budget;
+            
+            // Select the active radio button for style
+            const radio = document.querySelector(`input[name="travel-style"][value="${travelStyle}"]`);
+            if (radio) radio.checked = true;
+            
+            // Generate the plan
+            generateItinerary();
+        }
     });
     
     // Submit Lead Inquiry
@@ -487,25 +536,24 @@ function populatePreviewTags(places) {
         tag.className = 'preview-tag';
         tag.textContent = `${place.name} (${place.state})`;
         tag.addEventListener('click', () => {
-            // Preset values in dropdowns
-            elements.stateSelect.value = place.state;
-            handleStateChange();
+            // Preset place values in Quick Plan Modal
+            elements.quickPlanPlaceId.value = place.id;
+            elements.quickPlanDestName.textContent = place.name;
             
-            elements.destinationHiddenInput.value = place.id;
+            // Populate starting cities select box in Quick Plan Modal
+            elements.quickPlanStart.innerHTML = '';
+            place.starting_cities.forEach(city => {
+                const opt = document.createElement('option');
+                opt.value = city;
+                opt.textContent = city;
+                elements.quickPlanStart.appendChild(opt);
+            });
             
-            // Mark corresponding card active
-            const targetCard = document.querySelector(`.dest-card-item[data-id="${place.id}"]`);
-            if (targetCard) {
-                document.querySelectorAll('.dest-card-item').forEach(el => el.classList.remove('active'));
-                targetCard.classList.add('active');
-            }
+            // Prefill home select values if already selected
+            elements.quickPlanHome.value = elements.homeSelect.value;
             
-            // Highlight selectors into focus
-            elements.stateSelect.focus();
-            elements.stateSelect.style.borderColor = 'var(--accent-cyan)';
-            setTimeout(() => {
-                elements.stateSelect.style.borderColor = '';
-            }, 1500);
+            // Display modal
+            elements.quickPlanModal.classList.remove('hidden');
         });
         elements.previewTagsContainer.appendChild(tag);
     });
