@@ -121,8 +121,8 @@
                     <h3 style="margin: 0;"><i class="fa-solid fa-table-list"></i> Leads Database</h3>
                     <button id="export-leads-csv" class="btn btn-primary btn-sm"><i class="fa-solid fa-file-csv"></i> Export to CSV</button>
                 </div>
-                <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px; text-align: left;">Every time a user requests a quote, it is captured below. Sell these leads to travel operators for commissions!</p>
-                <div class="leads-table-wrapper" style="max-height: 250px; overflow-y: auto; border: 1px solid var(--border-light); border-radius: 6px; background: rgba(0,0,0,0.2);">
+                <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px; text-align: left;">Captured customer inquiries requesting travel package quotes.</p>
+                <div class="leads-table-wrapper" style="max-height: 180px; overflow-y: auto; border: 1px solid var(--border-light); border-radius: 6px; background: rgba(0,0,0,0.2); margin-bottom: 20px;">
                     <table style="width: 100%; border-collapse: collapse; font-size: 11.5px; text-align: left;">
                         <thead>
                            <tr style="background: rgba(255,255,255,0.05); border-bottom: 1px solid var(--border-light);">
@@ -138,8 +138,35 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="settings-actions" style="margin-top: 15px;">
-                    <button id="clear-leads" class="btn btn-danger btn-sm" style="background: #ef4444; border-color: #dc2626;"><i class="fa-solid fa-trash-can"></i> Clear All</button>
+
+                <!-- Partnerships Database Section -->
+                <div class="dashboard-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid var(--border-light); padding-bottom: 8px; padding-top: 10px;">
+                    <h3 style="margin: 0; color: var(--accent-gold);"><i class="fa-solid fa-hotel"></i> Stay Partnerships (Agreements)</h3>
+                    <button id="export-partners-csv" class="btn btn-primary btn-sm" style="background: linear-gradient(135deg, var(--accent-gold) 0%, #ff7e5f 100%); border-color: var(--accent-gold); color: #000; font-weight: 700;"><i class="fa-solid fa-file-csv"></i> Export to CSV</button>
+                </div>
+                <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px; text-align: left;">Hotel partnership agreements submitted directly by owners and managers.</p>
+                <div class="leads-table-wrapper" style="max-height: 180px; overflow-y: auto; border: 1px solid var(--border-light); border-radius: 6px; background: rgba(0,0,0,0.2);">
+                    <table style="width: 100%; border-collapse: collapse; font-size: 11.5px; text-align: left;">
+                        <thead>
+                           <tr style="background: rgba(255,255,255,0.05); border-bottom: 1px solid var(--border-light);">
+                               <th style="padding: 8px; border-right: 1px solid var(--border-light);">Date</th>
+                               <th style="padding: 8px; border-right: 1px solid var(--border-light);">Hotel Name</th>
+                               <th style="padding: 8px; border-right: 1px solid var(--border-light);">Contact Details</th>
+                               <th style="padding: 8px; border-right: 1px solid var(--border-light);">Promo/Discount</th>
+                               <th style="padding: 8px;">Agreement Status</th>
+                           </tr>
+                        </thead>
+                        <tbody id="partners-table-body">
+                           <!-- Partnerships rendered dynamically by JS -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="settings-actions" style="margin-top: 20px; display: flex; justify-content: space-between; gap: 8px;">
+                    <div style="display: flex; gap: 8px;">
+                        <button id="clear-leads" class="btn btn-danger btn-sm" style="background: #ef4444; border-color: #dc2626;"><i class="fa-solid fa-trash-can"></i> Clear Leads</button>
+                        <button id="clear-partners" class="btn btn-danger btn-sm" style="background: #ef4444; border-color: #dc2626;"><i class="fa-solid fa-trash-can"></i> Clear Partners</button>
+                    </div>
                     <button id="close-leads-dashboard" class="btn btn-secondary btn-sm">Close</button>
                 </div>
             </div>

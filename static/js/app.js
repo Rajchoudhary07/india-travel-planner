@@ -190,7 +190,12 @@ const elements = {
     // Partner elements
     partnerModal: document.getElementById('partner-modal'),
     partnerInquiryForm: document.getElementById('partner-inquiry-form'),
-    closePartnerModal: document.getElementById('close-partner-modal')
+    closePartnerModal: document.getElementById('close-partner-modal'),
+    
+    // Partner Dashboard elements
+    exportPartnersCsv: document.getElementById('export-partners-csv'),
+    partnersTableBody: document.getElementById('partners-table-body'),
+    clearPartners: document.getElementById('clear-partners')
 };
 
 // ==========================================================================
@@ -383,6 +388,15 @@ function bindEvents() {
             });
             
             if (response.ok) {
+                // Save to local storage for backup and admin dashboard viewing
+                const currentPartners = JSON.parse(localStorage.getItem('hotel_partnerships') || '[]');
+                currentPartners.push({
+                    id: Date.now(),
+                    dateSubmitted: new Date().toLocaleDateString('en-IN'),
+                    ...payload
+                });
+                localStorage.setItem('hotel_partnerships', JSON.stringify(currentPartners));
+
                 showNotification('Proposal Submitted!', 'Your partnership details and discount agreement have been emailed to us.', 'success');
                 elements.partnerInquiryForm.reset();
                 elements.partnerModal.classList.add('hidden');
@@ -402,6 +416,7 @@ function bindEvents() {
     elements.viewLeadsDashboard.addEventListener('click', () => {
         elements.settingsPanel.classList.add('hidden');
         renderLeadsTable();
+        renderPartnersTable();
         elements.leadsDashboardModal.classList.remove('hidden');
     });
     
@@ -416,7 +431,19 @@ function bindEvents() {
             showNotification('Database Cleared', 'All travel leads have been deleted.', 'info');
         }
     });
-    
+
+    elements.clearPartners.addEventListener('click', () => {
+        if (confirm("Are you sure you want to delete all partner agreements? This action is permanent.")) {
+            localStorage.removeItem('hotel_partnerships');
+            renderPartnersTable();
+            showNotification('Database Cleared', 'All partner agreements have been deleted.', 'info');
+        }
+    });
+
+    elements.exportPartnersCsv.addEventListener('click', () => {
+        exportPartnersCsvData();
+    });
+
     elements.exportLeadsCsvBtn.addEventListener('click', () => {
         exportLeadsToCSV();
     });
@@ -1514,3 +1541,76 @@ function renderPackingChecklist(data) {
         container.appendChild(card);
     });
 }
+
+function renderPartnersTable() {
+    const tableBody = elements.partnersTableBody;
+    tableBody.innerHTML = '';
+    
+    const partners = JSON.parse(localStorage.getItem('hotel_partnerships') || '[]');
+    
+    if (partners.length === 0) {
+        tableBody.innerHTML = `
+            <tr>
+                <td colspan="5" style="padding: 12px; text-align: center; color: var(--text-muted);">No stay partnership proposals received yet.</td>
+            </tr>
+        `;
+        return;
+    }
+    
+    partners.forEach(partner => {
+        const row = document.createElement('tr');
+        row.style.borderBottom = '1px solid var(--border-light)';
+        row.innerHTML = `
+            <td style="padding: 8px; border-right: 1px solid var(--border-light); color: var(--text-secondary);">${partner.dateSubmitted || 'N/A'}</td>
+            <td style="padding: 8px; border-right: 1px solid var(--border-light); font-weight: 700;">${partner.hotel_name} (${partner.destination})</td>
+            <td style="padding: 8px; border-right: 1px solid var(--border-light);">
+                <strong>${partner.manager_name}</strong><br>
+                <span style="font-size: 10px; color: var(--text-secondary);">${partner.email} | ${partner.whatsapp}</span>
+            </td>
+            <td style="padding: 8px; border-right: 1px solid var(--border-light); font-weight: 700; color: var(--accent-cyan);">${partner.promo_code} (${partner.discount_percent}%)</td>
+            <td style="padding: 8px; color: var(--accent-gold); font-weight: 600;"><i class="fa-solid fa-file-signature"></i> Signed / Approved</td>
+        `;
+        tableBody.appendChild(row);
+    });
+}
+
+function exportPartnersCsvData() {
+    const partners = JSON.parse(localStorage.getItem('hotel_partnerships') || '[]');
+    if (partners.length === 0) {
+        showNotification('No Data', 'There are no stay partnership agreements to export.', 'warning');
+        return;
+    }
+    
+    let csvContent = "";
+    csvContent += "Submission Date,Hotel Name,Destination,Manager Name,WhatsApp Number,Email,Promo Code,Discount (%),Agreement Signed,Description\n";
+    
+    partners.forEach(p => {
+        const cleanDesc = (p.description || '').replace(/"/g, '""');
+        const row = [
+            `"${p.dateSubmitted}"`,
+            `"${p.hotel_name}"`,
+            `"${p.destination}"`,
+            `"${p.manager_name}"`,
+            `"${p.whatsapp}"`,
+            `"${p.email}"`,
+            `"${p.promo_code}"`,
+            p.discount_percent,
+            `"${p.agreement_signed}"`,
+            `"${cleanDesc}"`
+        ].join(",");
+        csvContent += row + "\n";
+    });
+    
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.setAttribute("href", url);
+    link.setAttribute("download", `hotel_partnerships_${new Date().toISOString().slice(0,10)}.csv`);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    showNotification('Export Successful', 'Hotel partnership database downloaded as CSV.', 'success');
+}
+
