@@ -1280,48 +1280,48 @@ function renderPackingChecklist(data) {
     const container = elements.packingChecklistContainer;
     container.innerHTML = '';
     
-    // Core travel essentials
+    // Core travel essentials with FontAwesome icons representing each item
     const baseItems = [
-        "Waterproof Hiking Backpack 50L",
-        "Universal Travel Adapter Plug",
-        "Fast Charging 20000mAh Power Bank",
-        "Quick Dry Compact Microfiber Towel",
-        "Waterproof Trekking Shoes",
-        "Mini Emergency First Aid Kit"
+        { name: "Waterproof Hiking Backpack 50L", icon: "fa-solid fa-backpack" },
+        { name: "Universal Travel Adapter Plug", icon: "fa-solid fa-plug" },
+        { name: "Fast Charging 20000mAh Power Bank", icon: "fa-solid fa-battery-three-quarters" },
+        { name: "Quick Dry Compact Microfiber Towel", icon: "fa-solid fa-rug" },
+        { name: "Waterproof Trekking Shoes", icon: "fa-solid fa-shoe-prints" },
+        { name: "Mini Emergency First Aid Kit", icon: "fa-solid fa-kit-medical" }
     ];
     
     const amazonTag = localStorage.getItem('amazon_affiliate_tag') || 'offbeatyatra2-21';
     
     baseItems.forEach((item, idx) => {
-        const itemDiv = document.createElement('div');
-        itemDiv.className = 'packing-item';
+        const card = document.createElement('div');
+        card.className = 'packing-item-card';
         
         const itemId = `pack-item-${idx}`;
-        const searchUrl = `https://www.amazon.in/s?k=${encodeURIComponent(item)}&tag=${amazonTag}`;
+        const searchUrl = `https://www.amazon.in/s?k=${encodeURIComponent(item.name)}&tag=${amazonTag}`;
         
-        itemDiv.innerHTML = `
-            <label class="packing-item-left" for="${itemId}">
-                <input type="checkbox" id="${itemId}">
-                <span>${item}</span>
-            </label>
-            <a href="${searchUrl}" target="_blank" class="amazon-buy-link" title="Check prices on Amazon">
-                <i class="fa-brands fa-amazon"></i> Shop
+        card.innerHTML = `
+            <div class="packing-item-icon">
+                <i class="${item.icon}"></i>
+            </div>
+            <div class="packing-card-header">
+                <input type="checkbox" id="${itemId}" class="packing-checkbox">
+                <label class="packing-card-title" for="${itemId}">${item.name}</label>
+            </div>
+            <a href="${searchUrl}" target="_blank" class="amazon-card-btn">
+                <i class="fa-brands fa-amazon"></i> Shop on Amazon
             </a>
         `;
         
-        // Add checkbox listener to toggle line-through style
-        const checkbox = itemDiv.querySelector('input');
+        // Add checkbox listener to toggle checked state card class
+        const checkbox = card.querySelector('.packing-checkbox');
         checkbox.addEventListener('change', (e) => {
-            const labelSpan = itemDiv.querySelector('.packing-item-left span');
             if (e.target.checked) {
-                labelSpan.style.textDecoration = 'line-through';
-                labelSpan.style.color = 'var(--text-muted)';
+                card.classList.add('checked');
             } else {
-                labelSpan.style.textDecoration = 'none';
-                labelSpan.style.color = 'var(--text-primary)';
+                card.classList.remove('checked');
             }
         });
         
-        container.appendChild(itemDiv);
+        container.appendChild(card);
     });
 }

@@ -1420,6 +1420,143 @@ body {
 }
 
 /* ==========================================================================
+   Packing Checklist Card Grid Styles
+   ========================================================================== */
+.packing-item-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px 20px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.packing-item-card:hover {
+    border-color: var(--accent-cyan);
+    background: rgba(0, 242, 254, 0.03);
+    transform: translateY(-4px);
+    box-shadow: 0 6px 15px rgba(0, 242, 254, 0.08);
+}
+
+.packing-item-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-cyan), var(--accent-sunset));
+    opacity: 0;
+    transition: var(--transition-smooth);
+}
+
+.packing-item-card:hover::before {
+    opacity: 1;
+}
+
+.packing-item-icon {
+    width: 44px;
+    height: 44px;
+    background: rgba(255, 210, 105, 0.08);
+    border: 1px solid rgba(255, 210, 105, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-gold);
+    font-size: 18px;
+    margin-bottom: 12px;
+    transition: var(--transition-smooth);
+}
+
+.packing-item-card:hover .packing-item-icon {
+    background: rgba(0, 242, 254, 0.1);
+    border-color: var(--accent-cyan);
+    color: var(--accent-cyan);
+    transform: scale(1.1) rotate(5deg);
+}
+
+.packing-card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.packing-checkbox {
+    accent-color: var(--accent-cyan);
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    margin: 0;
+}
+
+.packing-card-title {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-align: left;
+    cursor: pointer;
+    user-select: none;
+    line-height: 1.3;
+}
+
+.packing-item-card.checked {
+    border-color: rgba(255, 255, 255, 0.06);
+    background: rgba(255, 255, 255, 0.005);
+    opacity: 0.6;
+    transform: none;
+}
+
+.packing-item-card.checked .packing-card-title {
+    text-decoration: line-through;
+    color: var(--text-muted);
+}
+
+.packing-item-card.checked .packing-item-icon {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: transparent;
+    color: var(--text-muted);
+    transform: none;
+}
+
+.amazon-card-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    width: 100%;
+    padding: 8px 12px;
+    background: linear-gradient(135deg, #ff9900 0%, #ff5500 100%);
+    border: none;
+    border-radius: 6px;
+    color: #000 !important;
+    font-size: 11px;
+    font-weight: 700;
+    text-decoration: none;
+    text-align: center;
+    transition: var(--transition-smooth);
+    margin-top: auto;
+    cursor: pointer;
+}
+
+.amazon-card-btn:hover {
+    background: linear-gradient(135deg, #ffaa11 0%, #ff6611 100%);
+    transform: scale(1.02);
+    box-shadow: 0 4px 10px rgba(255, 153, 0, 0.25);
+}
+
+.amazon-card-btn i {
+    font-size: 12px;
+    color: #000 !important;
+}
+
+/* ==========================================================================
    Print Stylesheet Formatting (Optimized for exports with Paywall security)
    ========================================================================== */
 @media print {
