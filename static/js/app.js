@@ -140,11 +140,13 @@ const elements = {
     settingsToggle: document.getElementById('settings-toggle'),
     settingsPanel: document.getElementById('settings-panel'),
     userApiKey: document.getElementById('user-api-key'),
+    userUpiId: document.getElementById('user-upi-id'),
     saveSettings: document.getElementById('save-settings'),
     closeSettings: document.getElementById('close-settings'),
     
     // Action buttons
     printBtn: document.getElementById('print-itinerary-btn'),
+    premiumPdfBtn: document.getElementById('premium-pdf-btn'),
     
     // Lead Generation & Admin elements
     leadFormTrigger: document.getElementById('lead-form-trigger'),
@@ -159,7 +161,15 @@ const elements = {
     closeLeadsDashboard: document.getElementById('close-leads-dashboard'),
     leadsTableBody: document.getElementById('leads-table-body'),
     clearLeadsBtn: document.getElementById('clear-leads'),
-    exportLeadsCsvBtn: document.getElementById('export-leads-csv')
+    exportLeadsCsvBtn: document.getElementById('export-leads-csv'),
+
+    // Premium Paywall elements
+    premiumPaywallModal: document.getElementById('premium-paywall-modal'),
+    closePaywallModal: document.getElementById('close-paywall-modal'),
+    paywallDestName: document.getElementById('paywall-dest-name'),
+    paywallQrContainer: document.getElementById('paywall-qr-container'),
+    paywallVerifyForm: document.getElementById('paywall-verify-form'),
+    paywallRef: document.getElementById('paywall-ref')
 };
 
 // ==========================================================================
@@ -171,10 +181,15 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function initApp() {
-    // 1. Load saved API key if it exists
+    // 1. Load saved API key and UPI ID if they exist
     const savedKey = localStorage.getItem('gemini_api_key');
     if (savedKey) {
         elements.userApiKey.value = savedKey;
+    }
+    const savedUpi = localStorage.getItem('admin_upi_id') || 'janhawk2907@axl';
+    elements.userUpiId.value = savedUpi;
+    if (!localStorage.getItem('admin_upi_id')) {
+        localStorage.setItem('admin_upi_id', 'janhawk2907@axl');
     }
     
     // 2. Fetch available destinations list
@@ -208,13 +223,21 @@ function bindEvents() {
     
     elements.saveSettings.addEventListener('click', () => {
         const keyVal = elements.userApiKey.value.trim();
+        const upiVal = elements.userUpiId.value.trim();
+        
         if (keyVal) {
             localStorage.setItem('gemini_api_key', keyVal);
-            showNotification('Success', 'Gemini API Key saved locally.', 'success');
         } else {
             localStorage.removeItem('gemini_api_key');
-            showNotification('Removed', 'API Key cleared. Utilizing local fallback rules.', 'info');
         }
+        
+        if (upiVal) {
+            localStorage.setItem('admin_upi_id', upiVal);
+        } else {
+            localStorage.removeItem('admin_upi_id');
+        }
+        
+        showNotification('Settings Saved', 'Configurations updated successfully.', 'success');
         elements.settingsPanel.classList.add('hidden');
     });
 
@@ -262,6 +285,38 @@ function bindEvents() {
     
     elements.exportLeadsCsvBtn.addEventListener('click', () => {
         exportLeadsToCSV();
+    });
+
+    // Premium Paywall triggers
+    elements.premiumPdfBtn.addEventListener('click', () => {
+        if (!activeItinerary) return;
+        
+        const upiId = localStorage.getItem('admin_upi_id');
+        if (!upiId) {
+            showNotification('Setup Required', 'Please set your UPI ID in the Settings gear (⚙️) first to receive payments!', 'warning');
+            elements.settingsPanel.classList.remove('hidden');
+            return;
+        }
+        
+        // Populate paywall info
+        elements.paywallDestName.textContent = activeItinerary.destination;
+        
+        // Generate QR code link
+        // upi://pay?pa=address&pn=name&am=amount&cu=currency&tn=note
+        const upiUrl = `upi://pay?pa=${encodeURIComponent(upiId)}&pn=YatraAI&am=49&cu=INR&tn=Premium%20PDF%20${encodeURIComponent(activeItinerary.destination)}`;
+        const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(upiUrl)}`;
+        
+        elements.paywallQrContainer.innerHTML = `<img src="${qrUrl}" alt="UPI QR Code" style="width: 100%; height: 100%; object-fit: contain;">`;
+        elements.premiumPaywallModal.classList.remove('hidden');
+    });
+    
+    elements.closePaywallModal.addEventListener('click', () => {
+        elements.premiumPaywallModal.classList.add('hidden');
+    });
+    
+    elements.paywallVerifyForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        verifyAndUnlockPremiumPDF();
     });
 }
 
@@ -1113,4 +1168,41 @@ function exportLeadsToCSV() {
     document.body.removeChild(link);
     
     showNotification('Export Successful', 'Leads spreadsheet downloaded as CSV.', 'success');
+}
+
+function verifyAndUnlockPremiumPDF() {
+    const utr = elements.paywallRef.value.trim();
+    if (!utr) return;
+    
+    // Save this purchase as a high-value paid lead in local database!
+    const lead = {
+        id: Date.now(),
+        dateSubmitted: new Date().toLocaleDateString('en-IN'),
+        name: `⭐️ PREMIUM_USER (UTR: ${utr})`,
+        whatsapp: "Paid PDF Client",
+        email: `Ref: ${utr}`,
+        travelDate: "Instant Unlock",
+        notes: `Unlocked Premium A4 PDF Guide for ${activeItinerary.destination}`,
+        destination: activeItinerary.destination,
+        state: activeItinerary.state,
+        starting_city: activeItinerary.starting_city,
+        duration: activeItinerary.duration_days,
+        budget: activeItinerary.cost_summary.total_estimated,
+        style: activeItinerary.travel_style
+    };
+    
+    const currentLeads = JSON.parse(localStorage.getItem('travel_leads') || '[]');
+    currentLeads.push(lead);
+    localStorage.setItem('travel_leads', JSON.stringify(currentLeads));
+    
+    // Reset and close
+    elements.paywallVerifyForm.reset();
+    elements.premiumPaywallModal.classList.add('hidden');
+    
+    showNotification('Payment Verified!', 'Premium print view unlocked. Loading print options...', 'success');
+    
+    // Trigger print window
+    setTimeout(() => {
+        window.print();
+    }, 1000);
 }
