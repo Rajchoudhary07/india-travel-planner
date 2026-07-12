@@ -1330,6 +1330,62 @@ body {
 }
 
 /* ==========================================================================
+   Affiliate Deals Styling
+   ========================================================================== */
+.affiliate-deals-section {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid var(--border-light);
+}
+
+.deals-title {
+    font-family: var(--font-heading);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--accent-gold);
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.deals-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.deal-btn-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    background: rgba(255, 210, 105, 0.04);
+    border: 1px solid rgba(255, 210, 105, 0.15);
+    border-radius: 8px;
+    color: var(--text-primary);
+    text-decoration: none;
+    font-size: 12.5px;
+    font-weight: 600;
+    transition: var(--transition-smooth);
+}
+
+.deal-btn-link:hover {
+    background: rgba(255, 210, 105, 0.12);
+    border-color: var(--accent-gold);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 210, 105, 0.15);
+}
+
+.deal-btn-link i {
+    font-size: 13px;
+    color: var(--accent-gold);
+    opacity: 0.9;
+}
+
+/* ==========================================================================
    Responsive Adaptation
    ========================================================================== */
 @media (max-width: 1024px) {

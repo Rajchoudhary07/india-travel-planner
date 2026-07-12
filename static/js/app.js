@@ -134,6 +134,7 @@ const elements = {
     tipsContainer: document.getElementById('tips-container'),
     factsContainer: document.getElementById('facts-container'),
     previewTagsContainer: document.getElementById('preview-tags-container'),
+    dealsContainer: document.getElementById('deals-container'),
     
     // Settings panel
     settingsToggle: document.getElementById('settings-toggle'),
@@ -517,6 +518,9 @@ function renderItinerary(data, targetBudget) {
 
     // 8. Render Safety, Warnings, and Pros & Cons
     renderSafetyAndWarnings(data);
+
+    // 9. Render Targeted Affiliate Booking Deals
+    renderAffiliateDeals(data);
 }
 
 function renderCostChart(summary) {
@@ -898,4 +902,46 @@ function showNotification(title, message, type = 'info') {
         notif.style.animation = 'slideOut 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards';
         setTimeout(() => notif.remove(), 300);
     }, 4000);
+}
+
+function renderAffiliateDeals(data) {
+    elements.dealsContainer.innerHTML = '';
+    
+    // Encode parameters to build secure travel links
+    const destEncoded = encodeURIComponent(data.destination);
+    const homeEncoded = encodeURIComponent(data.home_city);
+    const startEncoded = encodeURIComponent(data.starting_city);
+    
+    // Deal 1: Accommodation stay recommendation (Booking.com affiliate mock redirect)
+    const hotelDeal = document.createElement('a');
+    hotelDeal.href = `https://www.booking.com/searchresults.html?ss=${destEncoded}&aid=20261234`;
+    hotelDeal.target = '_blank';
+    hotelDeal.className = 'deal-btn-link';
+    hotelDeal.innerHTML = `
+        <span><i class="fa-solid fa-hotel"></i> Book stays in ${data.destination} (Booking.com)</span>
+        <i class="fa-solid fa-up-right-from-square"></i>
+    `;
+    elements.dealsContainer.appendChild(hotelDeal);
+    
+    // Deal 2: Transport booking recommendation (MakeMyTrip transit flights/trains)
+    const flightDeal = document.createElement('a');
+    flightDeal.href = `https://www.makemytrip.com/flights/search?tripType=O&itinerary=${homeEncoded}-${startEncoded}-12/08/2026`;
+    flightDeal.target = '_blank';
+    flightDeal.className = 'deal-btn-link';
+    flightDeal.innerHTML = `
+        <span><i class="fa-solid fa-plane"></i> Book travel from ${data.home_city} to ${data.starting_city} (MakeMyTrip)</span>
+        <i class="fa-solid fa-up-right-from-square"></i>
+    `;
+    elements.dealsContainer.appendChild(flightDeal);
+    
+    // Deal 3: Tours & Sights packages (Thrillophilia offbeat bookings)
+    const tourDeal = document.createElement('a');
+    tourDeal.href = `https://www.thrillophilia.com/search?q=${destEncoded}`;
+    tourDeal.target = '_blank';
+    tourDeal.className = 'deal-btn-link';
+    tourDeal.innerHTML = `
+        <span><i class="fa-solid fa-map-location-dot"></i> Book local tours & experiences (Thrillophilia)</span>
+        <i class="fa-solid fa-up-right-from-square"></i>
+    `;
+    elements.dealsContainer.appendChild(tourDeal);
 }
