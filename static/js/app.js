@@ -168,7 +168,12 @@ const elements = {
     paywallDestName: document.getElementById('paywall-dest-name'),
     paywallQrContainer: document.getElementById('paywall-qr-container'),
     paywallVerifyForm: document.getElementById('paywall-verify-form'),
-    paywallRef: document.getElementById('paywall-ref')
+    paywallRef: document.getElementById('paywall-ref'),
+
+    // Monetization checklist and sponsor elements
+    userAmazonTag: document.getElementById('user-amazon-tag'),
+    sponsoredStayContainer: document.getElementById('sponsored-stay-container'),
+    packingChecklistContainer: document.getElementById('packing-checklist-container')
 };
 
 // ==========================================================================
@@ -189,6 +194,11 @@ function initApp() {
     elements.userUpiId.value = savedUpi;
     if (!localStorage.getItem('admin_upi_id')) {
         localStorage.setItem('admin_upi_id', 'janhawk2907@axl');
+    }
+    const savedTag = localStorage.getItem('amazon_affiliate_tag') || 'offbeatyatra2-21';
+    elements.userAmazonTag.value = savedTag;
+    if (!localStorage.getItem('amazon_affiliate_tag')) {
+        localStorage.setItem('amazon_affiliate_tag', 'offbeatyatra2-21');
     }
     
     // 2. Fetch available destinations list
@@ -234,6 +244,12 @@ function bindEvents() {
             localStorage.setItem('admin_upi_id', upiVal);
         } else {
             localStorage.removeItem('admin_upi_id');
+        }
+
+        if (tagVal) {
+            localStorage.setItem('amazon_affiliate_tag', tagVal);
+        } else {
+            localStorage.removeItem('amazon_affiliate_tag');
         }
         
         showNotification('Settings Saved', 'Configurations updated successfully.', 'success');
@@ -626,6 +642,12 @@ function renderItinerary(data, targetBudget) {
 
     // 9. Render Targeted Affiliate Booking Deals
     renderAffiliateDeals(data);
+
+    // 10. Render Sponsored Stay Partnerships
+    renderSponsoredStay(data);
+
+    // 11. Render Travel Packing Checklist
+    renderPackingChecklist(data);
 }
 
 function renderCostChart(summary) {
@@ -1039,16 +1061,6 @@ function renderAffiliateDeals(data) {
     `;
     elements.dealsContainer.appendChild(flightDeal);
     
-    // Deal 3: Tours & Sights packages (Thrillophilia offbeat bookings)
-    const tourDeal = document.createElement('a');
-    tourDeal.href = `https://www.thrillophilia.com/search?q=${destEncoded}`;
-    tourDeal.target = '_blank';
-    tourDeal.className = 'deal-btn-link';
-    tourDeal.innerHTML = `
-        <span><i class="fa-solid fa-map-location-dot"></i> Book local tours & experiences (Thrillophilia)</span>
-        <i class="fa-solid fa-up-right-from-square"></i>
-    `;
-    elements.dealsContainer.appendChild(tourDeal);
 }
 
 function submitLeadInquiry() {
@@ -1204,4 +1216,112 @@ function verifyAndUnlockPremiumPDF() {
             document.body.classList.remove('unlocked-premium');
         }, 1000);
     }, 1000);
+}
+
+function renderSponsoredStay(data) {
+    const container = elements.sponsoredStayContainer;
+    container.innerHTML = '';
+    
+    const dest = data.destination.toLowerCase();
+    
+    // Check if destination matches any of our sponsored hotels
+    if (dest.includes('mainpat')) {
+        container.style.display = 'block';
+        container.innerHTML = `
+            <div style="display: flex; align-items: center; gap: 8px; font-weight: 700; color: var(--accent-gold); margin-bottom: 4px;">
+                <i class="fa-solid fa-hotel"></i> Recommended Stay Partner
+            </div>
+            <div>
+                <strong>Tiger Point Eco Resort (Mainpat Stay Partner)</strong>: Get premium Swiss cottages & luxury forest tents starting at ₹2,500/night. 
+                Use promo code <span style="background: rgba(255,210,105,0.15); padding: 2px 6px; border-radius: 4px; border: 1px solid var(--accent-gold); font-weight: bold; color: var(--accent-gold);">OFFBEATYATRA</span> to claim a flat <strong>10% direct discount</strong> on your booking!
+                <a href="tel:+919876543210" style="color: var(--accent-cyan); text-decoration: none; margin-left: 10px; font-weight: 600;"><i class="fa-solid fa-phone"></i> Call Direct</a>
+            </div>
+        `;
+    } else if (dest.includes('chitrakote') || dest.includes('bastar')) {
+        container.style.display = 'block';
+        container.innerHTML = `
+            <div style="display: flex; align-items: center; gap: 8px; font-weight: 700; color: var(--accent-gold); margin-bottom: 4px;">
+                <i class="fa-solid fa-hotel"></i> Recommended Stay Partner
+            </div>
+            <div>
+                <strong>Bastar Jungle Resort (Chitrakote Partner)</strong>: Experience eco-friendly wooden chalets tucked deep inside Sal plantations. 
+                Use promo code <span style="background: rgba(255,210,105,0.15); padding: 2px 6px; border-radius: 4px; border: 1px solid var(--accent-gold); font-weight: bold; color: var(--accent-gold);">OFFBEATYATRA</span> for a flat <strong>10% direct discount</strong>!
+                <a href="tel:+919876543211" style="color: var(--accent-cyan); text-decoration: none; margin-left: 10px; font-weight: 600;"><i class="fa-solid fa-phone"></i> Call Direct</a>
+            </div>
+        `;
+    } else if (dest.includes('rishikesh')) {
+        container.style.display = 'block';
+        container.innerHTML = `
+            <div style="display: flex; align-items: center; gap: 8px; font-weight: 700; color: var(--accent-gold); margin-bottom: 4px;">
+                <i class="fa-solid fa-hotel"></i> Recommended Stay Partner
+            </div>
+            <div>
+                <strong>Rishikesh Valley Forest Retreat</strong>: Rejuvenate at an offbeat nature resort overlooking clean valley streams. 
+                Use promo code <span style="background: rgba(255,210,105,0.15); padding: 2px 6px; border-radius: 4px; border: 1px solid var(--accent-gold); font-weight: bold; color: var(--accent-gold);">OFFBEATYATRA</span> to save <strong>10% on cottages</strong>!
+                <a href="tel:+919876543212" style="color: var(--accent-cyan); text-decoration: none; margin-left: 10px; font-weight: 600;"><i class="fa-solid fa-phone"></i> Call Direct</a>
+            </div>
+        `;
+    } else {
+        // Show generic partnership billboard inviting local hoteliers to pay for sponsor space!
+        container.style.display = 'block';
+        container.innerHTML = `
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;">
+                <div>
+                    <i class="fa-solid fa-rectangle-ad" style="color: var(--accent-gold); margin-right: 4px;"></i>
+                    <strong>Own a hotel or homestay in ${data.destination}?</strong> List your property here as our recommended Stay Partner!
+                </div>
+                <a href="mailto:sponsor@offbeatyatra.online?subject=Sponsorship%20Inquiry:%20${encodeURIComponent(data.destination)}" style="color: var(--accent-gold); text-decoration: underline; font-weight: 700;"><i class="fa-solid fa-envelope"></i> Partner with Us</a>
+            </div>
+        `;
+    }
+}
+
+function renderPackingChecklist(data) {
+    const container = elements.packingChecklistContainer;
+    container.innerHTML = '';
+    
+    // Core travel essentials
+    const baseItems = [
+        "Waterproof Hiking Backpack 50L",
+        "Universal Travel Adapter Plug",
+        "Fast Charging 20000mAh Power Bank",
+        "Quick Dry Compact Microfiber Towel",
+        "Waterproof Trekking Shoes",
+        "Mini Emergency First Aid Kit"
+    ];
+    
+    const amazonTag = localStorage.getItem('amazon_affiliate_tag') || 'offbeatyatra2-21';
+    
+    baseItems.forEach((item, idx) => {
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'packing-item';
+        
+        const itemId = `pack-item-${idx}`;
+        const searchUrl = `https://www.amazon.in/s?k=${encodeURIComponent(item)}&tag=${amazonTag}`;
+        
+        itemDiv.innerHTML = `
+            <label class="packing-item-left" for="${itemId}">
+                <input type="checkbox" id="${itemId}">
+                <span>${item}</span>
+            </label>
+            <a href="${searchUrl}" target="_blank" class="amazon-buy-link" title="Check prices on Amazon">
+                <i class="fa-brands fa-amazon"></i> Shop
+            </a>
+        `;
+        
+        // Add checkbox listener to toggle line-through style
+        const checkbox = itemDiv.querySelector('input');
+        checkbox.addEventListener('change', (e) => {
+            const labelSpan = itemDiv.querySelector('.packing-item-left span');
+            if (e.target.checked) {
+                labelSpan.style.textDecoration = 'line-through';
+                labelSpan.style.color = 'var(--text-muted)';
+            } else {
+                labelSpan.style.textDecoration = 'none';
+                labelSpan.style.color = 'var(--text-primary)';
+            }
+        });
+        
+        container.appendChild(itemDiv);
+    });
 }

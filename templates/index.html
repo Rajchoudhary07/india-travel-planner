@@ -59,6 +59,10 @@
                     <label for="user-upi-id"><i class="fa-solid fa-indian-rupee-sign"></i> Admin UPI ID (for receiving ₹49 PDF payments)</label>
                     <input type="text" id="user-upi-id" placeholder="e.g. yourname@upi" value="janhawk2907@axl" class="form-input">
                 </div>
+                <div class="form-group">
+                    <label for="user-amazon-tag"><i class="fa-brands fa-amazon"></i> Amazon Affiliate Tag (for gear recommendations)</label>
+                    <input type="text" id="user-amazon-tag" placeholder="e.g. offbeatyatra2-21" value="offbeatyatra2-21" class="form-input">
+                </div>
                 <div class="settings-actions">
                     <button id="view-leads-dashboard" class="btn btn-secondary btn-sm" style="color: var(--accent-gold); border-color: rgba(255, 210, 105, 0.4);"><i class="fa-solid fa-database"></i> Leads Dashboard</button>
                     <button id="save-settings" class="btn btn-primary btn-sm">Save Key</button>
@@ -318,6 +322,11 @@
                                 <span class="tag-badge" id="state-badge">State</span>
                                 <h2 id="itinerary-dest-name">Destination Name</h2>
                                 <p id="itinerary-description" class="lead">Description of the place goes here...</p>
+                                
+                                <!-- Sponsored Stay Container -->
+                                <div id="sponsored-stay-container" style="margin-top: 12px; padding: 12px 16px; border-radius: 8px; border: 1px dashed var(--accent-gold); background: rgba(255, 210, 105, 0.03); font-size: 13px; text-align: left; display: none; line-height: 1.4;">
+                                    <!-- Injected dynamically by JS -->
+                                </div>
                             </div>
                             <div class="header-metadata">
                                 <div class="meta-item">
@@ -505,6 +514,17 @@
                             </div>
                         </div>
                         <button id="lead-form-trigger" class="btn btn-primary" style="white-space: nowrap; flex-shrink: 0;"><i class="fa-solid fa-file-signature"></i> Get Free Local Quote</button>
+                    </div>
+
+                    <!-- Travel Packing Checklist Card -->
+                    <div class="packing-checklist-card card" style="margin-top: 20px;">
+                        <div class="card-header" style="border-bottom: 1px solid var(--border-light); padding-bottom: 10px; margin-bottom: 15px; text-align: left;">
+                            <h3 style="margin: 0 0 4px 0;"><i class="fa-solid fa-clipboard-check"></i> 🎒 Essential Gear Packing Checklist</h3>
+                            <p style="margin: 0; font-size: 13px; color: var(--text-secondary);">Gear up for your adventure! Select the items you've packed and grab any missing essentials on Amazon.</p>
+                        </div>
+                        <div id="packing-checklist-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; text-align: left;">
+                            <!-- Populated dynamically by JS -->
+                        </div>
                     </div>
                 </div>
             </section>
