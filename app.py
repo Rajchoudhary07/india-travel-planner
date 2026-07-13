@@ -20,7 +20,12 @@ def index():
     Renders the main single page application interface.
     """
     adsense_id = os.environ.get("ADSENSE_CLIENT_ID", "")
-    return render_template('index.html', adsense_id=adsense_id)
+    return render_template(
+        'index.html', 
+        adsense_id=adsense_id,
+        preloaded_itinerary=None,
+        preloaded_itinerary_json=None
+    )
 
 @app.route('/api/places', methods=['GET'])
 def get_places():
@@ -124,6 +129,13 @@ def ads_txt():
     """
     content = "google.com, pub-5830823262791349, DIRECT, f08c47fec0942fa0"
     return content, 200, {'Content-Type': 'text/plain'}
+
+@app.route('/google957e1c3f57564602.html')
+def google_verification():
+    """
+    Serves the Google Search Console verification HTML file content.
+    """
+    return "google-site-verification: google957e1c3f57564602.html", 200, {'Content-Type': 'text/html'}
 
 @app.route('/sitemap.xml', methods=['GET'])
 def sitemap():
