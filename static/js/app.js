@@ -845,6 +845,21 @@ function renderItinerary(data, targetBudget) {
     elements.bestSeason.textContent = data.best_season;
     elements.startingPoint.textContent = data.starting_city;
     
+    // Set Premium Print Meta
+    const printTitle = document.getElementById('print-guide-dest');
+    const printState = document.getElementById('print-meta-state');
+    const printDays = document.getElementById('print-meta-days');
+    const printStart = document.getElementById('print-meta-start');
+    const printStyle = document.getElementById('print-meta-style');
+    const printBudget = document.getElementById('print-meta-budget');
+    
+    if (printTitle) printTitle.textContent = `${data.destination} Travel Plan`;
+    if (printState) printState.textContent = data.state;
+    if (printDays) printDays.textContent = `${data.duration_days} Days`;
+    if (printStart) printStart.textContent = data.starting_city;
+    if (printStyle) printStyle.textContent = data.travel_style;
+    if (printBudget) printBudget.textContent = `₹${data.cost_summary.total_estimated.toLocaleString('en-IN')}`;
+    
     if (data.is_ai_generated) {
         elements.aiStatus.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles"></i> Gemini AI Optimized';
         elements.aiStatus.style.color = 'var(--accent-cyan)';

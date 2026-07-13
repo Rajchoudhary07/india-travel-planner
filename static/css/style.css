@@ -1763,6 +1763,10 @@ body.light-theme .orb {
     line-height: 1.3;
 }
 
+.print-only-cover {
+    display: none;
+}
+
 /* ==========================================================================
    Print Stylesheet Formatting (Optimized for exports with Paywall security)
    ========================================================================== */
@@ -1775,7 +1779,7 @@ body.light-theme .orb {
     body.unlocked-premium {
         background: white !important;
         color: black !important;
-        font-size: 12pt !important;
+        font-size: 11pt !important;
     }
     
     body.unlocked-premium .app-container {
@@ -1785,7 +1789,6 @@ body.light-theme .orb {
     body.unlocked-premium .orb, 
     body.unlocked-premium .main-header, 
     body.unlocked-premium .planner-sidebar, 
-    body.unlocked-premium .map-card, 
     body.unlocked-premium .affiliate-deals-section,
     body.unlocked-premium .lead-generation-card,
     body.unlocked-premium #premium-pdf-btn, 
@@ -1796,6 +1799,108 @@ body.light-theme .orb {
     
     body.unlocked-premium .main-content {
         grid-template-columns: 1fr !important;
+        display: block !important;
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+    
+    /* Cover Page Styles in Print */
+    body.unlocked-premium .print-only-cover {
+        display: flex !important;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        height: 100%;
+        text-align: center;
+        background: #ffffff !important;
+        color: #0f172a !important;
+        page-break-after: always;
+        padding: 50px 30px;
+        box-sizing: border-box;
+        border: 10px double #0f172a;
+    }
+    
+    body.unlocked-premium .print-brand {
+        font-family: 'Outfit', sans-serif;
+        font-size: 32pt;
+        font-weight: 800;
+        color: #0f172a !important;
+        margin-bottom: 25px;
+    }
+    
+    body.unlocked-premium .print-cover-tag {
+        font-family: 'Outfit', sans-serif;
+        font-size: 11pt;
+        font-weight: 700;
+        letter-spacing: 4px;
+        color: #475569 !important;
+        margin-bottom: 35px;
+        border-bottom: 2px solid #0f172a;
+        padding-bottom: 8px;
+    }
+    
+    body.unlocked-premium #print-guide-dest {
+        font-family: 'Outfit', sans-serif;
+        font-size: 36pt;
+        font-weight: 900;
+        color: #0f172a !important;
+        margin-bottom: 50px;
+        text-transform: uppercase;
+        letter-spacing: -0.5px;
+    }
+    
+    body.unlocked-premium .print-meta-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        width: 100%;
+        max-width: 580px;
+        margin-bottom: 60px;
+    }
+    
+    body.unlocked-premium .print-meta-item {
+        display: flex;
+        flex-direction: column;
+        padding: 12px 15px;
+        background: #f8fafc !important;
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+        text-align: center;
+    }
+    
+    body.unlocked-premium .print-meta-item .label {
+        font-size: 8pt;
+        color: #64748b !important;
+        text-transform: uppercase;
+        font-weight: 700;
+        margin-bottom: 4px;
+        letter-spacing: 1px;
+    }
+    
+    body.unlocked-premium .print-meta-item .value {
+        font-size: 13pt;
+        font-weight: 800;
+        color: #0f172a !important;
+    }
+    
+    body.unlocked-premium .print-cover-footer {
+        font-size: 9pt;
+        color: #64748b !important;
+        margin-top: auto;
+    }
+    
+    body.unlocked-premium .print-cover-footer .url {
+        font-weight: 700;
+        color: #0f172a !important;
+        margin-top: 6px;
+    }
+    
+    body.unlocked-premium .page-break {
+        page-break-before: always;
+        height: 0;
+        margin: 0;
+        border: 0;
     }
     
     body.unlocked-premium .card {
@@ -1803,10 +1908,22 @@ body.light-theme .orb {
         box-shadow: none !important;
         border: none !important;
         padding: 0 !important;
-        margin-bottom: 20px !important;
+        margin-bottom: 25px !important;
         page-break-inside: avoid;
     }
     
+    /* Map layout in Print */
+    body.unlocked-premium .map-card {
+        display: block !important;
+        page-break-inside: avoid;
+        margin: 25px 0 !important;
+        height: 380px !important;
+        border: 1px solid #94a3b8 !important;
+        border-radius: 8px !important;
+        overflow: hidden !important;
+        position: relative !important;
+    }
+
     body.unlocked-premium #itinerary-dest-name {
         color: black !important;
         font-size: 24pt !important;
@@ -1820,6 +1937,7 @@ body.light-theme .orb {
         background: transparent !important;
         border: 1px solid #ddd !important;
         color: black !important;
+        padding: 15px !important;
     }
     
     body.unlocked-premium .activities-list li {
@@ -1833,5 +1951,23 @@ body.light-theme .orb {
     
     body.unlocked-premium .cost-card {
         page-break-before: always;
+    }
+    
+    /* Packing Checklist Print Cleanup */
+    body.unlocked-premium .amazon-card-btn {
+        display: none !important;
+    }
+    
+    body.unlocked-premium .packing-checkbox {
+        transform: scale(1.3) !important;
+        margin-right: 8px !important;
+    }
+    
+    body.unlocked-premium .packing-item-card {
+        border: 1px solid #ddd !important;
+        background: #fff !important;
+        padding: 10px !important;
+        box-shadow: none !important;
+        page-break-inside: avoid;
     }
 }
