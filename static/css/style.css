@@ -131,35 +131,65 @@ body {
     z-index: 1;
 }
 
-/* Glowing Decorative Orbs */
+/* Glowing Decorative Orbs (Floating Live Wallpaper) */
 .orb {
     position: fixed;
     border-radius: 50%;
     filter: blur(100px);
     z-index: -1;
-    opacity: 0.3;
+    opacity: 0.28;
     pointer-events: none;
+    mix-blend-mode: screen;
 }
+
+body.light-theme .orb {
+    mix-blend-mode: multiply;
+    opacity: 0.45;
+}
+
 .orb-1 {
     top: -10%;
     right: 10%;
     width: 500px;
     height: 500px;
     background: radial-gradient(circle, var(--orb-color-1) 0%, transparent 80%);
+    animation: floatOrb1 28s ease-in-out infinite alternate;
 }
+
 .orb-2 {
     bottom: 10%;
     left: -10%;
     width: 600px;
     height: 600px;
     background: radial-gradient(circle, var(--orb-color-2) 0%, transparent 80%);
+    animation: floatOrb2 35s ease-in-out infinite alternate;
 }
+
 .orb-3 {
     top: 40%;
     left: 45%;
-    width: 300px;
-    height: 300px;
+    width: 350px;
+    height: 350px;
     background: radial-gradient(circle, var(--orb-color-3) 0%, transparent 80%);
+    animation: floatOrb3 22s ease-in-out infinite alternate;
+}
+
+@keyframes floatOrb1 {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(60px, -40px) scale(1.1); }
+    100% { transform: translate(-30px, 20px) scale(0.95); }
+}
+
+@keyframes floatOrb2 {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-80px, 60px) scale(1.05); }
+    100% { transform: translate(40px, -30px) scale(0.9); }
+}
+
+@keyframes floatOrb3 {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(50px, 50px) scale(1.15); }
+    100% { transform: translate(-50px, -50px) scale(0.85); }
 }
 
 /* ==========================================================================
