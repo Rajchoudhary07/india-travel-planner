@@ -197,7 +197,12 @@ const elements = {
     // Partner Dashboard elements
     exportPartnersCsv: document.getElementById('export-partners-csv'),
     partnersTableBody: document.getElementById('partners-table-body'),
-    clearPartners: document.getElementById('clear-partners')
+    clearPartners: document.getElementById('clear-partners'),
+    
+    // Theme elements
+    themeToggle: document.getElementById('theme-toggle'),
+    themeIconSun: document.getElementById('theme-icon-sun'),
+    themeIconMoon: document.getElementById('theme-icon-moon')
 };
 
 // ==========================================================================
@@ -231,6 +236,18 @@ function initApp() {
     const savedBookingAid = localStorage.getItem('booking_affiliate_id');
     if (savedBookingAid) {
         elements.userBookingAid.value = savedBookingAid;
+    }
+    
+    // Load saved Theme mode
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    if (savedTheme === 'light') {
+        document.body.classList.add('light-theme');
+        if (elements.themeIconSun) elements.themeIconSun.style.display = 'inline-block';
+        if (elements.themeIconMoon) elements.themeIconMoon.style.display = 'none';
+    } else {
+        document.body.classList.remove('light-theme');
+        if (elements.themeIconSun) elements.themeIconSun.style.display = 'none';
+        if (elements.themeIconMoon) elements.themeIconMoon.style.display = 'inline-block';
     }
     
     // 2. Fetch available destinations list
@@ -308,6 +325,27 @@ function bindEvents() {
         
         showNotification('Settings Saved', 'Configurations updated successfully.', 'success');
         elements.settingsPanel.classList.add('hidden');
+    });
+
+    // Theme Toggle listener
+    elements.themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('light-theme');
+        const isLight = document.body.classList.contains('light-theme');
+        
+        if (isLight) {
+            localStorage.setItem('theme', 'light');
+            if (elements.themeIconSun) elements.themeIconSun.style.display = 'inline-block';
+            if (elements.themeIconMoon) elements.themeIconMoon.style.display = 'none';
+        } else {
+            localStorage.setItem('theme', 'dark');
+            if (elements.themeIconSun) elements.themeIconSun.style.display = 'none';
+            if (elements.themeIconMoon) elements.themeIconMoon.style.display = 'inline-block';
+        }
+        
+        // Redraw map with correct tiles if an itinerary is loaded
+        if (travelMap && activeItinerary) {
+            renderMap(activeItinerary);
+        }
     });
 
     // Lead Form triggers
@@ -905,9 +943,10 @@ function renderCostChart(summary) {
 function renderTimeline(daysList) {
     elements.timelineContainer.innerHTML = '';
     
-    daysList.forEach((dayData) => {
+    daysList.forEach((dayData, idx) => {
         const step = document.createElement('div');
         step.className = 'timeline-step';
+        step.style.animationDelay = `${idx * 0.12}s`;
         
         let activitiesHTML = '';
         dayData.activities.forEach(activity => {
@@ -960,7 +999,12 @@ function renderMap(data) {
         scrollWheelZoom: false
     }).setView([centerLat, centerLon], 10);
     
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    const isLightTheme = document.body.classList.contains('light-theme');
+    const tileUrl = isLightTheme 
+        ? 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png'
+        : 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png';
+        
+    L.tileLayer(tileUrl, {
         attribution: '&copy; OpenStreetMap &copy; CARTO',
         maxZoom: 20
     }).addTo(travelMap);
