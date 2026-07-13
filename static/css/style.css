@@ -90,6 +90,75 @@ body.light-theme .btn-icon:hover {
     background: rgba(15, 23, 42, 0.1);
 }
 
+/* Light Theme Destination Selectors & Style Options Overrides */
+body.light-theme .option-card {
+    background: #ffffff;
+    color: var(--text-secondary);
+    border-color: rgba(15, 23, 42, 0.15);
+}
+
+body.light-theme .option-card i {
+    color: var(--text-secondary);
+}
+
+body.light-theme .option-card span {
+    color: var(--text-secondary);
+}
+
+body.light-theme .style-option input:checked + .option-card {
+    background: rgba(79, 172, 254, 0.08);
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 12px rgba(79, 172, 254, 0.15);
+}
+
+body.light-theme .style-option input:checked + .option-card i {
+    color: var(--accent-blue);
+}
+
+body.light-theme .style-option input:checked + .option-card span {
+    color: var(--text-primary);
+}
+
+body.light-theme .dest-list-items {
+    background: #ffffff;
+    border-color: rgba(15, 23, 42, 0.15);
+}
+
+body.light-theme .dest-card-item {
+    background: rgba(15, 23, 42, 0.03);
+    border-color: rgba(15, 23, 42, 0.08);
+    color: var(--text-secondary);
+}
+
+body.light-theme .dest-card-item:hover {
+    background: rgba(15, 23, 42, 0.06);
+    border-color: var(--text-secondary);
+    color: var(--text-primary);
+}
+
+body.light-theme .dest-card-item.active {
+    background: rgba(79, 172, 254, 0.08);
+    border-color: var(--accent-blue);
+    color: var(--text-primary);
+    box-shadow: 0 0 8px rgba(79, 172, 254, 0.15);
+}
+
+body.light-theme .dest-card-item.active i {
+    color: var(--accent-blue);
+    opacity: 1;
+}
+
+body.light-theme .popular-col .dest-card-item.active {
+    background: rgba(255, 126, 95, 0.08);
+    border-color: var(--accent-sunset);
+    box-shadow: 0 0 8px rgba(255, 126, 95, 0.15);
+}
+
+body.light-theme .popular-col .dest-card-item.active i {
+    color: var(--accent-sunset);
+    opacity: 1;
+}
+
 /* ==========================================================================
    Reset & Core Styling
    ========================================================================== */
