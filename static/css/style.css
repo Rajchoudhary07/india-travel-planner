@@ -33,6 +33,9 @@
     --orb-color-1: rgba(79, 172, 254, 0.2);
     --orb-color-2: rgba(255, 126, 95, 0.15);
     --orb-color-3: rgba(0, 242, 254, 0.15);
+    
+    /* Honeycomb Grid (Large Matte Design) */
+    --bg-honeycomb: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='242.48' viewBox='0 0 140 242.48'%3E%3Cpath d='M0 0 L70 40.41 L140 0 L140 80.83 L70 121.24 L0 80.83 Z M0 121.24 L70 161.65 L140 121.24 L140 202.07 L70 242.48 L0 202.07 Z' fill='none' stroke='%2300f2fe' stroke-width='1.2' stroke-opacity='0.04'/%3E%3C/svg%3E");
 }
 
 /* ==========================================================================
@@ -54,6 +57,9 @@ body.light-theme {
     --orb-color-1: rgba(0, 242, 254, 0.06);
     --orb-color-2: rgba(79, 172, 254, 0.06);
     --orb-color-3: rgba(255, 126, 95, 0.04);
+    
+    /* Honeycomb Grid (Light Mode) */
+    --bg-honeycomb: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='242.48' viewBox='0 0 140 242.48'%3E%3Cpath d='M0 0 L70 40.41 L140 0 L140 80.83 L70 121.24 L0 80.83 Z M0 121.24 L70 161.65 L140 121.24 L140 202.07 L70 242.48 L0 202.07 Z' fill='none' stroke='%230f172a' stroke-width='1.2' stroke-opacity='0.035'/%3E%3C/svg%3E");
 }
 
 /* Light Theme Component Overrides */
@@ -95,13 +101,16 @@ body.light-theme .btn-icon:hover {
 
 body {
     background-color: var(--bg-dark);
+    background-image: var(--bg-honeycomb);
+    background-size: 140px 242.48px;
+    background-attachment: fixed;
     color: var(--text-primary);
     font-family: var(--font-body);
     font-size: 15px;
     line-height: 1.6;
     overflow-x: hidden;
     min-height: 100vh;
-    transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), background-image 0.4s ease, color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Scrollbar customization */
