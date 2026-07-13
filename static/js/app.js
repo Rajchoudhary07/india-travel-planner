@@ -142,6 +142,7 @@ const elements = {
     userApiKey: document.getElementById('user-api-key'),
     userUpiId: document.getElementById('user-upi-id'),
     userSheetUrl: document.getElementById('user-sheet-url'),
+    userBookingAid: document.getElementById('user-booking-aid'),
     saveSettings: document.getElementById('save-settings'),
     closeSettings: document.getElementById('close-settings'),
     
@@ -227,6 +228,10 @@ function initApp() {
     if (savedSheet) {
         elements.userSheetUrl.value = savedSheet;
     }
+    const savedBookingAid = localStorage.getItem('booking_affiliate_id');
+    if (savedBookingAid) {
+        elements.userBookingAid.value = savedBookingAid;
+    }
     
     // 2. Fetch available destinations list
     fetchDestinations();
@@ -269,6 +274,7 @@ function bindEvents() {
         const upiVal = elements.userUpiId.value.trim();
         const tagVal = elements.userAmazonTag.value.trim();
         const sheetVal = elements.userSheetUrl.value.trim();
+        const bookingAidVal = elements.userBookingAid.value.trim();
         
         if (keyVal) {
             localStorage.setItem('gemini_api_key', keyVal);
@@ -292,6 +298,12 @@ function bindEvents() {
             localStorage.setItem('google_sheet_api_url', sheetVal);
         } else {
             localStorage.removeItem('google_sheet_api_url');
+        }
+
+        if (bookingAidVal) {
+            localStorage.setItem('booking_affiliate_id', bookingAidVal);
+        } else {
+            localStorage.removeItem('booking_affiliate_id');
         }
         
         showNotification('Settings Saved', 'Configurations updated successfully.', 'success');
@@ -1298,7 +1310,11 @@ function renderAffiliateDeals(data) {
     
     // Deal 1: Accommodation stay recommendation (Booking.com affiliate mock redirect)
     const hotelDeal = document.createElement('a');
-    hotelDeal.href = `https://www.booking.com/searchresults.html?ss=${destEncoded}`;
+    const bookingAid = localStorage.getItem('booking_affiliate_id') || '';
+    const hotelUrl = bookingAid 
+        ? `https://www.booking.com/searchresults.html?ss=${destEncoded}&aid=${bookingAid}` 
+        : `https://www.booking.com/searchresults.html?ss=${destEncoded}`;
+    hotelDeal.href = hotelUrl;
     hotelDeal.target = '_blank';
     hotelDeal.className = 'deal-btn-link';
     hotelDeal.innerHTML = `
