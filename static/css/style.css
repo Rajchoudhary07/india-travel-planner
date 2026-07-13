@@ -25,9 +25,9 @@
     --font-body: 'Inter', sans-serif;
     
     /* Layout */
-    --border-radius-lg: 16px;
-    --border-radius-md: 10px;
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --border-radius-lg: 24px;
+    --border-radius-md: 14px;
+    --transition-smooth: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     
     /* Neon Blur Orbs Color */
     --orb-color-1: rgba(79, 172, 254, 0.2);
@@ -2038,5 +2038,111 @@ body.light-theme .orb {
         padding: 10px !important;
         box-shadow: none !important;
         page-break-inside: avoid;
+    }
+}
+
+/* Cute 3D Floating Elements & Parallax Sky */
+.cute-3d-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+    perspective: 1000px;
+    overflow: hidden;
+}
+
+.floater {
+    position: absolute;
+    font-size: 58px;
+    pointer-events: none;
+    filter: drop-shadow(0 15px 20px rgba(0, 0, 0, 0.16)) drop-shadow(0 4px 6px rgba(0, 0, 0, 0.08));
+    transform-style: preserve-3d;
+    will-change: transform;
+    opacity: 0.85;
+    transition: transform 0.28s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+body.light-theme .floater {
+    filter: drop-shadow(0 12px 18px rgba(15, 23, 42, 0.1));
+    opacity: 0.95;
+}
+
+.floater-plane {
+    top: 15%;
+    left: 8%;
+    animation: floatPlane 22s ease-in-out infinite alternate;
+    transform: translate3d(calc(var(--tilt-x, 0px) * 1.6), calc(var(--tilt-y, 0px) * 1.6), 60px) rotate(-12deg);
+}
+
+.floater-cloud {
+    top: 45%;
+    right: 5%;
+    font-size: 72px;
+    animation: floatCloud 28s ease-in-out infinite alternate;
+    transform: translate3d(calc(var(--tilt-x, 0px) * 1.2), calc(var(--tilt-y, 0px) * 1.2), 30px);
+}
+
+.floater-balloon {
+    top: 25%;
+    right: 22%;
+    font-size: 64px;
+    animation: floatBalloon 32s ease-in-out infinite alternate;
+    transform: translate3d(calc(var(--tilt-x, 0px) * 2.0), calc(var(--tilt-y, 0px) * 2.0), 90px) rotate(8deg);
+}
+
+.floater-camera {
+    bottom: 12%;
+    left: 6%;
+    font-size: 52px;
+    animation: floatCamera 20s ease-in-out infinite alternate;
+    transform: translate3d(calc(var(--tilt-x, 0px) * 1.4), calc(var(--tilt-y, 0px) * 1.4), 45px) rotate(15deg);
+}
+
+.floater-compass {
+    bottom: 18%;
+    right: 8%;
+    font-size: 50px;
+    animation: floatCompass 24s ease-in-out infinite alternate;
+    transform: translate3d(calc(var(--tilt-x, 0px) * 1.8), calc(var(--tilt-y, 0px) * 1.8), 70px) rotate(-5deg);
+}
+
+/* Animations for Floating 3D Elements */
+@keyframes floatPlane {
+    0% { margin-top: 0px; margin-left: 0px; transform: translate3d(calc(var(--tilt-x, 0px) * 1.6), calc(var(--tilt-y, 0px) * 1.6), 60px) rotate(-12deg) rotateY(0deg); }
+    50% { margin-top: -30px; margin-left: 20px; transform: translate3d(calc(var(--tilt-x, 0px) * 1.6), calc(var(--tilt-y, 0px) * 1.6), 80px) rotate(-8deg) rotateY(15deg); }
+    100% { margin-top: 15px; margin-left: -15px; transform: translate3d(calc(var(--tilt-x, 0px) * 1.6), calc(var(--tilt-y, 0px) * 1.6), 60px) rotate(-15deg) rotateY(-10deg); }
+}
+
+@keyframes floatCloud {
+    0% { margin-top: 0px; transform: translate3d(calc(var(--tilt-x, 0px) * 1.2), calc(var(--tilt-y, 0px) * 1.2), 30px) scale(1); }
+    50% { margin-top: -20px; transform: translate3d(calc(var(--tilt-x, 0px) * 1.2), calc(var(--tilt-y, 0px) * 1.2), 40px) scale(1.05); }
+    100% { margin-top: 20px; transform: translate3d(calc(var(--tilt-x, 0px) * 1.2), calc(var(--tilt-y, 0px) * 1.2), 30px) scale(0.95); }
+}
+
+@keyframes floatBalloon {
+    0% { margin-top: 0px; transform: translate3d(calc(var(--tilt-x, 0px) * 2.0), calc(var(--tilt-y, 0px) * 2.0), 90px) rotate(8deg); }
+    50% { margin-top: -45px; transform: translate3d(calc(var(--tilt-x, 0px) * 2.0), calc(var(--tilt-y, 0px) * 2.0), 110px) rotate(-4deg); }
+    100% { margin-top: 15px; transform: translate3d(calc(var(--tilt-x, 0px) * 2.0), calc(var(--tilt-y, 0px) * 2.0), 90px) rotate(12deg); }
+}
+
+@keyframes floatCamera {
+    0% { margin-top: 0px; transform: translate3d(calc(var(--tilt-x, 0px) * 1.4), calc(var(--tilt-y, 0px) * 1.4), 45px) rotate(15deg); }
+    50% { margin-top: -25px; transform: translate3d(calc(var(--tilt-x, 0px) * 1.4), calc(var(--tilt-y, 0px) * 1.4), 60px) rotate(5deg); }
+    100% { margin-top: 10px; transform: translate3d(calc(var(--tilt-x, 0px) * 1.4), calc(var(--tilt-y, 0px) * 1.4), 45px) rotate(20deg); }
+}
+
+@keyframes floatCompass {
+    0% { margin-top: 0px; transform: translate3d(calc(var(--tilt-x, 0px) * 1.8), calc(var(--tilt-y, 0px) * 1.8), 70px) rotate(-5deg) rotateX(0deg); }
+    50% { margin-top: -35px; transform: translate3d(calc(var(--tilt-x, 0px) * 1.8), calc(var(--tilt-y, 0px) * 1.8), 90px) rotate(-15deg) rotateX(15deg); }
+    100% { margin-top: 15px; transform: translate3d(calc(var(--tilt-x, 0px) * 1.8), calc(var(--tilt-y, 0px) * 1.8), 70px) rotate(5deg) rotateX(-10deg); }
+}
+
+/* Hide 3D floaters in print templates to avoid layout clutter */
+@media print {
+    .cute-3d-container, .floater {
+        display: none !important;
     }
 }
