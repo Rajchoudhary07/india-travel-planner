@@ -348,6 +348,24 @@ function bindEvents() {
         }
     });
 
+    // 3D Parallax & Cursor Spotlight tracking
+    document.addEventListener('mousemove', (e) => {
+        const x = e.clientX;
+        const y = e.clientY;
+        
+        document.documentElement.style.setProperty('--mouse-x', `${x}px`);
+        document.documentElement.style.setProperty('--mouse-y', `${y}px`);
+        
+        // 3D Parallax offsets relative to screen center
+        const centerX = window.innerWidth / 2;
+        const centerY = window.innerHeight / 2;
+        const tiltX = (x - centerX) / centerX * 16; // Shift range: -16px to +16px
+        const tiltY = (y - centerY) / centerY * 16;
+        
+        document.documentElement.style.setProperty('--tilt-x', `${tiltX}px`);
+        document.documentElement.style.setProperty('--tilt-y', `${tiltY}px`);
+    });
+
     // Lead Form triggers
     elements.leadFormTrigger.addEventListener('click', () => {
         showNotification('Coming Soon!', 'We are currently onboarding verified local tour & taxi operators in this region. Direct custom quotes will be live soon!', 'info');

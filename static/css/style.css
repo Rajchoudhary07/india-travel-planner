@@ -99,6 +99,32 @@ body.light-theme .btn-icon:hover {
     box-sizing: border-box;
 }
 
+/* Interactive Cursor Spotlight (3D Honeycomb Highlight Overlay) */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: -1;
+    background: radial-gradient(
+        500px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
+        rgba(0, 242, 254, 0.05),
+        transparent 80%
+    );
+    transition: opacity 0.3s ease;
+}
+
+body.light-theme::before {
+    background: radial-gradient(
+        500px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
+        rgba(79, 172, 254, 0.07),
+        transparent 80%
+    );
+}
+
 body {
     background-color: var(--bg-dark);
     background-image: var(--bg-honeycomb);
@@ -140,7 +166,7 @@ body {
     z-index: 1;
 }
 
-/* Glowing Decorative Orbs (Floating Live Wallpaper) */
+/* Glowing Decorative Orbs (Floating Live Wallpaper & 3D Tilt) */
 .orb {
     position: fixed;
     border-radius: 50%;
@@ -149,6 +175,8 @@ body {
     opacity: 0.28;
     pointer-events: none;
     mix-blend-mode: screen;
+    transform: translate3d(var(--tilt-x, 0px), var(--tilt-y, 0px), 0);
+    transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 body.light-theme .orb {
