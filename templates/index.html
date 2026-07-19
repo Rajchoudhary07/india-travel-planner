@@ -60,10 +60,7 @@
             </div>
             <div class="header-tagline">Offbeat India Travel Planner</div>
             <div class="api-key-container" style="display: flex; gap: 8px;">
-                <button id="theme-toggle" class="btn btn-icon" title="Toggle Theme" style="font-size: 15px;">
-                    <i class="fa-solid fa-sun" id="theme-icon-sun" style="display: none;"></i>
-                    <i class="fa-solid fa-moon" id="theme-icon-moon"></i>
-                </button>
+
                 <button id="settings-toggle" class="btn btn-icon" title="API Settings">
                     <i class="fa-solid fa-gear"></i>
                 </button>
@@ -269,6 +266,17 @@
                         </div>
                     </div>
                     
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div class="form-group">
+                            <label for="quick-plan-travelers"><i class="fa-solid fa-users"></i> Total People</label>
+                            <input type="number" id="quick-plan-travelers" class="form-input" min="1" max="20" value="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="quick-plan-female"><i class="fa-solid fa-venus"></i> Female Travelers</label>
+                            <input type="number" id="quick-plan-female" class="form-input" min="0" max="20" value="0" required>
+                        </div>
+                    </div>
+                    
                     <div class="form-group">
                         <label for="quick-plan-budget"><i class="fa-solid fa-indian-rupee-sign"></i> Total Budget (INR)</label>
                         <input type="number" id="quick-plan-budget" class="form-input" min="2000" max="100000" value="12000" required>
@@ -434,6 +442,18 @@
                             <span id="days-val">4 Days</span>
                         </div>
                         <input type="range" id="days-input" min="3" max="6" value="4" class="form-slider">
+                    </div>
+
+                    <!-- Travelers Count Input Group -->
+                    <div class="form-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                        <div>
+                            <label for="travelers-input"><i class="fa-solid fa-users"></i> Total People</label>
+                            <input type="number" id="travelers-input" class="form-input" min="1" max="20" value="1" required style="width: 100%;">
+                        </div>
+                        <div>
+                            <label for="female-travelers-input"><i class="fa-solid fa-venus"></i> Female Travelers</label>
+                            <input type="number" id="female-travelers-input" class="form-input" min="0" max="20" value="0" required style="width: 100%;">
+                        </div>
                     </div>
 
                     <!-- Travel Style -->

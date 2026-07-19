@@ -199,10 +199,7 @@ const elements = {
     partnersTableBody: document.getElementById('partners-table-body'),
     clearPartners: document.getElementById('clear-partners'),
     
-    // Theme elements
-    themeToggle: document.getElementById('theme-toggle'),
-    themeIconSun: document.getElementById('theme-icon-sun'),
-    themeIconMoon: document.getElementById('theme-icon-moon')
+    // Theme elements (Forced Dark Mode)
 };
 
 // ==========================================================================
@@ -238,17 +235,9 @@ function initApp() {
         elements.userBookingAid.value = savedBookingAid;
     }
     
-    // Load saved Theme mode
-    const savedTheme = localStorage.getItem('theme') || 'dark';
-    if (savedTheme === 'light') {
-        document.body.classList.add('light-theme');
-        if (elements.themeIconSun) elements.themeIconSun.style.display = 'inline-block';
-        if (elements.themeIconMoon) elements.themeIconMoon.style.display = 'none';
-    } else {
-        document.body.classList.remove('light-theme');
-        if (elements.themeIconSun) elements.themeIconSun.style.display = 'none';
-        if (elements.themeIconMoon) elements.themeIconMoon.style.display = 'inline-block';
-    }
+    // Load saved Theme mode (Forced Dark Mode Only)
+    document.body.classList.remove('light-theme');
+    localStorage.setItem('theme', 'dark');
     
     // 2. Fetch available destinations list
     fetchDestinations();
@@ -327,26 +316,7 @@ function bindEvents() {
         elements.settingsPanel.classList.add('hidden');
     });
 
-    // Theme Toggle listener
-    elements.themeToggle.addEventListener('click', () => {
-        document.body.classList.toggle('light-theme');
-        const isLight = document.body.classList.contains('light-theme');
-        
-        if (isLight) {
-            localStorage.setItem('theme', 'light');
-            if (elements.themeIconSun) elements.themeIconSun.style.display = 'inline-block';
-            if (elements.themeIconMoon) elements.themeIconMoon.style.display = 'none';
-        } else {
-            localStorage.setItem('theme', 'dark');
-            if (elements.themeIconSun) elements.themeIconSun.style.display = 'none';
-            if (elements.themeIconMoon) elements.themeIconMoon.style.display = 'inline-block';
-        }
-        
-        // Redraw map with correct tiles if an itinerary is loaded
-        if (travelMap && activeItinerary) {
-            renderMap(activeItinerary);
-        }
-    });
+
 
     // 3D Parallax & Cursor Spotlight tracking
     document.addEventListener('mousemove', (e) => {
@@ -389,6 +359,8 @@ function bindEvents() {
         const days = parseInt(elements.quickPlanDays.value);
         const budget = parseFloat(elements.quickPlanBudget.value);
         const travelStyle = elements.quickPlanStyle.value;
+        const travelers = parseInt(document.getElementById('quick-plan-travelers').value) || 1;
+        const female = parseInt(document.getElementById('quick-plan-female').value) || 0;
         
         elements.quickPlanModal.classList.add('hidden');
         
@@ -406,6 +378,8 @@ function bindEvents() {
             elements.daysInput.value = days;
             elements.daysVal.textContent = `${days} Days`;
             elements.budgetInput.value = budget;
+            document.getElementById('travelers-input').value = travelers;
+            document.getElementById('female-travelers-input').value = female;
             
             // Select the active radio button for style
             const radio = document.querySelector(`input[name="travel-style"][value="${travelStyle}"]`);
@@ -835,6 +809,8 @@ async function generateItinerary() {
     const budget = parseFloat(elements.budgetInput.value);
     const travelStyle = document.querySelector('input[name="travel-style"]:checked').value;
     const apiKey = localStorage.getItem('gemini_api_key') || '';
+    const totalTravelers = parseInt(document.getElementById('travelers-input').value) || 1;
+    const femaleTravelers = parseInt(document.getElementById('female-travelers-input').value) || 0;
     
     if (!placeId || !startingCity) {
         showNotification('Input Needed', 'Please complete State, City, and Destination selections.', 'info');
@@ -873,6 +849,8 @@ async function generateItinerary() {
                 days: days,
                 budget: budget,
                 travel_style: travelStyle,
+                total_travelers: totalTravelers,
+                female_travelers: femaleTravelers,
                 api_key: apiKey
             })
         });
@@ -1654,87 +1632,118 @@ function renderSponsoredStay(data) {
 function renderPackingChecklist(data) {
     const container = elements.packingChecklistContainer;
     container.innerHTML = '';
+    container.style.display = 'block'; // Reset to block to allow vertical categories flow
     
     const dest = data.destination.toLowerCase();
-    let baseItems = [];
     
-    // Categorize based on destination name keywords
+    // Core shared essentials
+    const commonItems = [
+        { name: "Universal Travel Adapter Plug", icon: "fa-solid fa-plug" },
+        { name: "Fast Charging 20000mAh Power Bank", icon: "fa-solid fa-battery-three-quarters" },
+        { name: "First Aid Kit & Motion Sickness Pills", icon: "fa-solid fa-kit-medical" },
+        { name: "RFID Blocking Travel Document Holder", icon: "fa-solid fa-passport" },
+        { name: "Hand Sanitizer & Pocket Wet Wipes", icon: "fa-solid fa-soap" },
+        { name: "Insulated Thermal Water Bottle", icon: "fa-solid fa-bottle-water" },
+        { name: "Lightweight Anti-Theft Daypack", icon: "fa-solid fa-backpack" }
+    ];
+
+    // Destination-specific extras to append to common
     if (dest.includes('beach') || dest.includes('goa') || dest.includes('vizag') || dest.includes('visakhapatnam')) {
-        // Beach / Coastal Category
-        baseItems = [
+        commonItems.push(
             { name: "Waterproof Beach Mat Blanket", icon: "fa-solid fa-sheet-plastic" },
             { name: "SPF 50 Broad Spectrum Sunscreen", icon: "fa-solid fa-sun" },
             { name: "Polarized UV400 Sunglasses", icon: "fa-solid fa-glasses" },
             { name: "Waterproof Dry Bag for Phones", icon: "fa-solid fa-bag-shopping" },
             { name: "Quick Dry Microfiber Beach Towel", icon: "fa-solid fa-rug" },
             { name: "Anti Slip Beach Slippers Water Shoes", icon: "fa-solid fa-shoe-prints" }
-        ];
+        );
     } else if (dest.includes('mainpat') || dest.includes('tawang') || dest.includes('monastery') || dest.includes('mountain') || dest.includes('hill') || dest.includes('shimla') || dest.includes('rishikesh')) {
-        // Mountain / High-Altitude / Hill Station Category
-        baseItems = [
+        commonItems.push(
             { name: "Thermal Inner Wear Set Fleece Lined", icon: "fa-solid fa-shirt" },
             { name: "Waterproof Windproof Winter Jacket", icon: "fa-solid fa-person-snowboarding" },
             { name: "Waterproof Hiking Backpack 50L", icon: "fa-solid fa-backpack" },
             { name: "Waterproof Trekking Shoes with Grip", icon: "fa-solid fa-shoe-prints" },
-            { name: "Polarized Hiking Sunglasses", icon: "fa-solid fa-glasses" },
-            { name: "Mini Emergency First Aid Kit", icon: "fa-solid fa-kit-medical" }
-        ];
+            { name: "Polarized Hiking Sunglasses", icon: "fa-solid fa-glasses" }
+        );
     } else if (dest.includes('forest') || dest.includes('bubble') || dest.includes('falls') || dest.includes('waterfall') || dest.includes('chitrakote') || dest.includes('jungle') || dest.includes('valley')) {
-        // Forest / Jungle / Waterfall / Nature Walk Category
-        baseItems = [
+        commonItems.push(
             { name: "Waterproof Rain Poncho Raincoat", icon: "fa-solid fa-cloud-showers-water" },
             { name: "Natural Insect Mosquito Repellent Spray", icon: "fa-solid fa-spray-can" },
             { name: "Waterproof Dry Bag for Electronics", icon: "fa-solid fa-bag-shopping" },
             { name: "Waterproof Hiking Trekking Shoes", icon: "fa-solid fa-shoe-prints" },
-            { name: "LED Rechargeable Headlamp Flashlight", icon: "fa-solid fa-lightbulb" },
-            { name: "Mini Emergency First Aid Kit", icon: "fa-solid fa-kit-medical" }
-        ];
-    } else {
-        // General / Urban / Heritage City Category
-        baseItems = [
-            { name: "Universal Travel Adapter Plug", icon: "fa-solid fa-plug" },
-            { name: "Fast Charging 20000mAh Power Bank", icon: "fa-solid fa-battery-three-quarters" },
-            { name: "RFID Blocking Travel Wallet Passport Holder", icon: "fa-solid fa-wallet" },
-            { name: "Anti Theft Lightweight Daypack", icon: "fa-solid fa-backpack" },
-            { name: "Compact Travel Umbrella Windproof", icon: "fa-solid fa-umbrella" },
-            { name: "Reusable Insulated Water Bottle", icon: "fa-solid fa-bottle-water" }
-        ];
+            { name: "LED Rechargeable Headlamp Flashlight", icon: "fa-solid fa-lightbulb" }
+        );
     }
-    
+
+    const menItems = [
+        { name: "Travel Beard Trimmer & Shaving Kit", icon: "fa-solid fa-scissors" },
+        { name: "Quick-Dry Men's Polo Shirts", icon: "fa-solid fa-shirt" },
+        { name: "Lightweight Travel Cargo Shorts", icon: "fa-solid fa-person-shelter" },
+        { name: "Men's Deodorant Stick & Grooming Wax", icon: "fa-solid fa-user" }
+    ];
+
+    const womenItems = [
+        { name: "Female Hygiene Products & Disposal Bags", icon: "fa-solid fa-pump-soap" },
+        { name: "Personal Safety Alarm Whistle / Spray", icon: "fa-solid fa-bell" },
+        { name: "Cotton Dupatta / Scarf (for religious entries)", icon: "fa-solid fa-feather" },
+        { name: "Hydrating Moisturizer & Lip Balm SPF", icon: "fa-solid fa-sparkles" },
+        { name: "Hair Ties, Bobby Pins & Compact Brush", icon: "fa-solid fa-wand-magic" }
+    ];
+
     const amazonTag = localStorage.getItem('amazon_affiliate_tag') || 'offbeatyatra2-21';
-    
-    baseItems.forEach((item, idx) => {
-        const card = document.createElement('div');
-        card.className = 'packing-item-card';
+
+    function createGroup(title, iconClass, items, itemOffsetId) {
+        const groupDiv = document.createElement('div');
+        groupDiv.className = 'packing-category-group';
         
-        const itemId = `pack-item-${idx}`;
-        const searchUrl = `https://www.amazon.in/s?k=${encodeURIComponent(item.name)}&tag=${amazonTag}`;
+        const header = document.createElement('h4');
+        header.innerHTML = `<i class="${iconClass}"></i> ${title}`;
+        groupDiv.appendChild(header);
         
-        card.innerHTML = `
-            <div class="packing-item-icon">
-                <i class="${item.icon}"></i>
-            </div>
-            <div class="packing-card-header">
-                <input type="checkbox" id="${itemId}" class="packing-checkbox">
-                <label class="packing-card-title" for="${itemId}">${item.name}</label>
-            </div>
-            <a href="${searchUrl}" target="_blank" class="amazon-card-btn">
-                <i class="fa-brands fa-amazon"></i> Shop on Amazon
-            </a>
-        `;
+        const grid = document.createElement('div');
+        grid.className = 'packing-grid';
         
-        // Add checkbox listener to toggle checked state card class
-        const checkbox = card.querySelector('.packing-checkbox');
-        checkbox.addEventListener('change', (e) => {
-            if (e.target.checked) {
-                card.classList.add('checked');
-            } else {
-                card.classList.remove('checked');
-            }
+        items.forEach((item, index) => {
+            const card = document.createElement('div');
+            card.className = 'packing-item-card';
+            
+            const itemId = `pack-item-${itemOffsetId}-${index}`;
+            const searchUrl = `https://www.amazon.in/s?k=${encodeURIComponent(item.name)}&tag=${amazonTag}`;
+            
+            card.innerHTML = `
+                <div class="packing-item-icon">
+                    <i class="${item.icon}"></i>
+                </div>
+                <div class="packing-card-header">
+                    <input type="checkbox" id="${itemId}" class="packing-checkbox">
+                    <label class="packing-card-title" for="${itemId}">${item.name}</label>
+                </div>
+                <a href="${searchUrl}" target="_blank" class="amazon-card-btn">
+                    <i class="fa-brands fa-amazon"></i> Shop on Amazon
+                </a>
+            `;
+            
+            const checkbox = card.querySelector('.packing-checkbox');
+            checkbox.addEventListener('change', (e) => {
+                if (e.target.checked) {
+                    card.classList.add('checked');
+                } else {
+                    card.classList.remove('checked');
+                }
+            });
+            
+            grid.appendChild(card);
         });
         
-        container.appendChild(card);
-    });
+        groupDiv.appendChild(grid);
+        return groupDiv;
+    }
+
+    // Append groups in order: Men, Women, Both
+    container.appendChild(createGroup("Men's Specific Essentials", "fa-solid fa-mars", menItems, "men"));
+    container.appendChild(createGroup("Women's Specific & Safety Essentials", "fa-solid fa-venus", womenItems, "women"));
+    container.appendChild(createGroup("Shared Travel Essentials (For Both)", "fa-solid fa-people-arrows", commonItems, "both"));
+}
 }
 
 function renderPartnersTable() {

@@ -76,6 +76,8 @@ def handle_generate_itinerary():
         budget = data.get("budget")
         travel_style = data.get("travel_style", "mid_range")
         api_key = data.get("api_key") # User-provided API key from frontend
+        total_travelers = int(data.get("total_travelers", 1))
+        female_travelers = int(data.get("female_travelers", 0))
         
         # Validations
         if not place_id:
@@ -104,6 +106,8 @@ def handle_generate_itinerary():
             days=days,
             budget=int(budget),
             travel_style=travel_style,
+            total_travelers=total_travelers,
+            female_travelers=female_travelers,
             api_key=api_key
         )
         

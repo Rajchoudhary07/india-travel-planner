@@ -138,14 +138,14 @@ def calculate_haversine_distance(coords1, coords2):
     
     return R * c
 
-def generate_local_itinerary_fallback(place_data, home_city, starting_city, days, budget, travel_style):
+def generate_local_itinerary_fallback(place_data, home_city, starting_city, days, budget, travel_style, total_travelers=1, female_travelers=0):
     """
     Generates a high-quality, customized itinerary using local rules.
     This acts as a fallback when Gemini API key is missing or invalid.
     Calculates dynamic long-distance transit costs using geodesic distances from Home to Starting City,
     and local transit costs from Starting City to the destination.
     """
-    logger.info(f"Local fallback generating for {place_data['name']} starting from {starting_city} for user from {home_city}.")
+    logger.info(f"Local fallback generating for {place_data['name']} starting from {starting_city} for user from {home_city}. Group size: {total_travelers}, female travelers: {female_travelers}.")
     
     # 1. Select the base day-by-day itinerary
     days_str = str(days)
@@ -195,14 +195,20 @@ def generate_local_itinerary_fallback(place_data, home_city, starting_city, days
         
     # Calculate travel transport cost: Round trip transit from starting city + daily local travel
     local_transit_cost = int((local_distance * 2 * km_rate) + (local_daily * days))
+    if travel_style == 'budget':
+        local_transit_cost = local_transit_cost * total_travelers
+    elif travel_style == 'mid_range':
+        auto_count = math.ceil(total_travelers / 3)
+        local_transit_cost = local_transit_cost * auto_count
     
     # Calculate Home to Starting City travel cost
     home_transit_cost = 0
     if home_city != starting_city:
-        home_transit_cost = int(home_distance * home_transit_rate * 2) # Round trip home transit
+        home_transit_cost = int(home_distance * home_transit_rate * 2) * total_travelers # Round trip home transit
         
-    total_lodging = stay_cost_per_night * days
-    total_food = place_data['food_cost_per_day'] * days
+    room_count = math.ceil(total_travelers / 2)
+    total_lodging = stay_cost_per_night * days * room_count
+    total_food = place_data['food_cost_per_day'] * days * total_travelers
     
     # 5. Calculate entry ticket costs
     total_tickets = 0
@@ -216,14 +222,19 @@ def generate_local_itinerary_fallback(place_data, home_city, starting_city, days
             ticket_price = place_data['entry_tickets'].get(clean_sight_key, 0)
             day_tickets += ticket_price
             
-        total_tickets += day_tickets
+        total_tickets += day_tickets * total_travelers
         
+        # Modify activities if women safety is concern
+        activities = list(day_info["activities"])
+        if female_travelers > 0:
+            activities = [act.replace("Evening:", "Early Evening (wrap up by 7:30 PM):").replace("Night:", "Evening (secure private transit to hotel):") for act in activities]
+            
         days_plan.append({
             "day": day_info["day"],
             "title": day_info["title"],
-            "activities": day_info["activities"],
+            "activities": activities,
             "sights": day_info["sights"],
-            "estimated_tickets_cost": day_tickets
+            "estimated_tickets_cost": day_tickets * total_travelers
         })
         
     # Dynamic adventure additions for 4, 5, or 6 days to make it extremely detailed & explorable:
@@ -388,7 +399,7 @@ def generate_local_itinerary_fallback(place_data, home_city, starting_city, days
     
     return result
 
-def generate_ai_itinerary(place_data, home_city, starting_city, days, budget, travel_style, api_key=None):
+def generate_ai_itinerary(place_data, home_city, starting_city, days, budget, travel_style, total_travelers=1, female_travelers=0, api_key=None):
     """
     Generates a highly personalized, AI-driven travel plan using Google Gemini API.
     Computes geodesic distance from Home City to Starting City and injects it into context.
@@ -397,7 +408,7 @@ def generate_ai_itinerary(place_data, home_city, starting_city, days, budget, tr
     key = api_key or os.environ.get("GEMINI_API_KEY")
     if not key:
         logger.info("No Gemini API Key found. Falling back to local generator.")
-        return generate_local_itinerary_fallback(place_data, home_city, starting_city, days, budget, travel_style)
+        return generate_local_itinerary_fallback(place_data, home_city, starting_city, days, budget, travel_style, total_travelers, female_travelers)
         
     try:
         client = genai.Client(api_key=key)
@@ -431,7 +442,7 @@ def generate_ai_itinerary(place_data, home_city, starting_city, days, budget, tr
         }
         
         prompt = f"""
-        You are a expert local travel planner in India specializing in both popular hotspots and hidden gems.
+        You are a expert local travel planner in India specializing in popular hotspots and hidden gems.
         Your goal is to customize a detailed day-by-day travel itinerary for:
         - Destination: {place_data['name']} ({place_data['state']})
         - User Home Town: {home_city}
@@ -439,15 +450,23 @@ def generate_ai_itinerary(place_data, home_city, starting_city, days, budget, tr
         - Duration: {days} Days
         - Total Budget: {budget} INR
         - Travel Style: {travel_style} (Options: budget, mid_range, luxury)
+        - Total Number of Travelers: {total_travelers}
+        - Number of Female Travelers in group: {female_travelers}
 
         Use this verified ground-truth data about the place to calculate realistic costs, safety profiles, warnings, and schedule realistic sights:
         {json.dumps(db_context, indent=2)}
 
         CONSTRAINTS:
         1. All calculations must be in INR. The total estimated cost in 'cost_summary' must fit the budget ({budget} INR).
-        2. Calculate the 'home_transit_cost' for round-trip travel from {home_city} to {starting_city} (approx rates per km: luxury=7.5, mid_range=2.8, budget=1.2). If {home_city} equals {starting_city}, set 'home_transit_cost' to 0.
-        3. Day 1 should describe leaving from {home_city} (flight/train) and arriving at {place_data['name']} via {starting_city}.
-        4. Integrate a comprehensive 'women_safety' review based on the ground-truth data.
+        2. All lodging, food, and local activity ticket prices must be multiplied dynamically for {total_travelers} travelers (i.e. 'lodging_cost' = stay_cost_per_night * days * room_count, etc.). Adjust lodging based on total travelers assuming 2-3 people per room.
+        3. Calculate the 'home_transit_cost' for round-trip travel from {home_city} to {starting_city} for ALL {total_travelers} travelers (approx rates per km per traveler: luxury=7.5, mid_range=2.8, budget=1.2). If {home_city} equals {starting_city}, set 'home_transit_cost' to 0.
+        4. Day 1 should describe leaving from {home_city} (flight/train) and arriving at {place_data['name']} via {starting_city}.
+        5. Integrate a comprehensive 'women_safety' review based on the ground-truth data.
+        6. SAFETY PROTOCOLS: If female_travelers > 0 (or if it's a female solo traveler):
+           - In the 'day_by_day' activities, schedule earlier evening wrap-up times (e.g. returning to hotel by 8:00 PM).
+           - Suggest pre-arranged private cabs or trusted state transit instead of local hitchhiking or late-night remote sharing autos.
+           - Recommend centrally-located, high-security stays with active security desks.
+           - Provide custom warning tips in the 'warnings' or 'extra_tips' fields explicitly addressing female safety (e.g. safe zones, emergency contacts, local dress guidelines).
         5. List pros, cons, and warnings clearly.
         6. The day-by-day itinerary MUST be highly detailed, adventurous, and rich with exploration. Mention MULTIPLE hidden spots, local viewpoint tracks, lesser-known wilderness trails, village homestays, and regional activities (instead of just 1 or 2 tourist sights) so that travelers can explore anywhere.
         7. For 4, 5, or 6 days, distribute the activities evenly and include full-day excursions to surrounding offbeat valley areas or wilderness reserves.
@@ -512,7 +531,7 @@ def generate_ai_itinerary(place_data, home_city, starting_city, days, budget, tr
         logger.info(f"Calling Gemini API to generate itinerary starting from home {home_city} to {place_data['name']}...")
         
         response = client.models.generate_content(
-            model='gemini-2.5-flash',
+            model='gemini-3.5-flash',
             contents=prompt,
             config=types.GenerateContentConfig(
                 response_mime_type="application/json",
