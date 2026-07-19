@@ -3,10 +3,10 @@
    ========================================================================== */
 :root {
     --bg-dark: #120705;
-    --bg-card: rgba(26, 12, 10, 0.55);
-    --bg-card-hover: rgba(38, 18, 15, 0.7);
-    --border-light: rgba(255, 235, 230, 0.08);
-    --border-glow: rgba(255, 126, 95, 0.25);
+    --bg-card: rgba(20, 9, 8, 0.28);
+    --bg-card-hover: rgba(30, 14, 12, 0.38);
+    --border-light: rgba(255, 255, 255, 0.12);
+    --border-glow: rgba(255, 126, 95, 0.3);
     
     /* Core Palettes */
     --accent-cyan: #ff7e5f;
@@ -34,8 +34,8 @@
     --orb-color-2: rgba(226, 88, 62, 0.15);
     --orb-color-3: rgba(255, 210, 105, 0.15);
     
-    /* Dynamic 3D background */
-    --bg-terracotta: linear-gradient(rgba(18, 7, 5, 0.5), rgba(18, 7, 5, 0.5)), url('/static/img/bg-terracotta.png');
+    /* Dynamic 3D background (Highly visible background) */
+    --bg-terracotta: linear-gradient(rgba(18, 7, 5, 0.22), rgba(18, 7, 5, 0.22)), url('/static/img/bg-terracotta.png');
 }
 
 /* ==========================================================================
@@ -43,10 +43,10 @@
    ========================================================================== */
 body.light-theme {
     --bg-dark: #faf5f3;
-    --bg-card: rgba(255, 255, 255, 0.75);
-    --bg-card-hover: rgba(255, 255, 255, 0.88);
-    --border-light: rgba(45, 22, 18, 0.08);
-    --border-glow: rgba(226, 88, 62, 0.25);
+    --bg-card: rgba(255, 255, 255, 0.38);
+    --bg-card-hover: rgba(255, 255, 255, 0.52);
+    --border-light: rgba(255, 255, 255, 0.3);
+    --border-glow: rgba(226, 88, 62, 0.35);
     
     /* Typography Colors */
     --text-primary: #2d1612;
@@ -58,7 +58,7 @@ body.light-theme {
     --orb-color-2: rgba(226, 88, 62, 0.06);
     --orb-color-3: rgba(255, 210, 105, 0.06);
     
-    --bg-terracotta: linear-gradient(rgba(250, 245, 243, 0.45), rgba(250, 245, 243, 0.45)), url('/static/img/bg-terracotta.png');
+    --bg-terracotta: linear-gradient(rgba(250, 245, 243, 0.15), rgba(250, 245, 243, 0.15)), url('/static/img/bg-terracotta.png');
 }
 
 /* Light Theme Component Overrides */
@@ -77,6 +77,11 @@ body.light-theme .form-input:focus {
 body.light-theme .form-input option {
     background-color: #ffffff;
     color: var(--text-primary);
+}
+
+body.light-theme .card {
+    box-shadow: 0 8px 32px 0 rgba(45, 22, 18, 0.08), 
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.45);
 }
 
 body.light-theme .btn-icon {
@@ -366,11 +371,13 @@ body.light-theme .orb {
    ========================================================================== */
 .card {
     background: var(--bg-card);
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(28px) saturate(220%);
+    -webkit-backdrop-filter: blur(28px) saturate(220%);
     border: 1px solid var(--border-light);
     border-radius: var(--border-radius-lg);
     padding: 24px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.22), 
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
     transition: var(--transition-smooth);
 }
 
