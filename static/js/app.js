@@ -1744,7 +1744,6 @@ function renderPackingChecklist(data) {
     container.appendChild(createGroup("Women's Specific & Safety Essentials", "fa-solid fa-venus", womenItems, "women"));
     container.appendChild(createGroup("Shared Travel Essentials (For Both)", "fa-solid fa-people-arrows", commonItems, "both"));
 }
-}
 
 function renderPartnersTable() {
     const tableBody = elements.partnersTableBody;
