@@ -2,23 +2,23 @@
    Design Tokens & Root Variables (Default Dark Mode)
    ========================================================================== */
 :root {
-    --bg-dark: #070b19;
-    --bg-card: rgba(16, 24, 48, 0.6);
-    --bg-card-hover: rgba(22, 34, 66, 0.75);
-    --border-light: rgba(255, 255, 255, 0.08);
-    --border-glow: rgba(0, 242, 254, 0.15);
+    --bg-dark: #120705;
+    --bg-card: rgba(26, 12, 10, 0.55);
+    --bg-card-hover: rgba(38, 18, 15, 0.7);
+    --border-light: rgba(255, 235, 230, 0.08);
+    --border-glow: rgba(255, 126, 95, 0.25);
     
     /* Core Palettes */
-    --accent-cyan: #00f2fe;
-    --accent-blue: #4facfe;
+    --accent-cyan: #ff7e5f;
+    --accent-blue: #e2583e;
     --accent-gold: #ffd269;
-    --accent-sunset: #ff7e5f;
-    --accent-green: #39ff14;
+    --accent-sunset: #ff9f43;
+    --accent-green: #2ecc71;
     
     /* Typography Colors */
-    --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
-    --text-muted: #64748b;
+    --text-primary: #fff7f5;
+    --text-secondary: #e8d5d1;
+    --text-muted: #bda09a;
     
     /* Fonts */
     --font-heading: 'Outfit', sans-serif;
@@ -30,36 +30,35 @@
     --transition-smooth: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     
     /* Neon Blur Orbs Color */
-    --orb-color-1: rgba(79, 172, 254, 0.2);
-    --orb-color-2: rgba(255, 126, 95, 0.15);
-    --orb-color-3: rgba(0, 242, 254, 0.15);
+    --orb-color-1: rgba(255, 126, 95, 0.2);
+    --orb-color-2: rgba(226, 88, 62, 0.15);
+    --orb-color-3: rgba(255, 210, 105, 0.15);
     
-    /* Honeycomb Grid (Large Matte Design) */
-    --bg-honeycomb: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='242.48' viewBox='0 0 140 242.48'%3E%3Cpath d='M0 0 L70 40.41 L140 0 L140 80.83 L70 121.24 L0 80.83 Z M0 121.24 L70 161.65 L140 121.24 L140 202.07 L70 242.48 L0 202.07 Z' fill='none' stroke='%2300f2fe' stroke-width='1.2' stroke-opacity='0.04'/%3E%3C/svg%3E");
+    /* Dynamic 3D background */
+    --bg-terracotta: linear-gradient(rgba(18, 7, 5, 0.5), rgba(18, 7, 5, 0.5)), url('/static/img/bg-terracotta.png');
 }
 
 /* ==========================================================================
    Light Mode Theme Variables
    ========================================================================== */
 body.light-theme {
-    --bg-dark: #f1f5f9; /* Slate 100 */
-    --bg-card: rgba(255, 255, 255, 0.85); /* Solid white glass */
-    --bg-card-hover: rgba(255, 255, 255, 0.95);
-    --border-light: rgba(15, 23, 42, 0.08); /* Dark slate borders */
-    --border-glow: rgba(79, 172, 254, 0.25);
+    --bg-dark: #faf5f3;
+    --bg-card: rgba(255, 255, 255, 0.75);
+    --bg-card-hover: rgba(255, 255, 255, 0.88);
+    --border-light: rgba(45, 22, 18, 0.08);
+    --border-glow: rgba(226, 88, 62, 0.25);
     
     /* Typography Colors */
-    --text-primary: #0f172a; /* Slate 900 */
-    --text-secondary: #475569; /* Slate 600 */
-    --text-muted: #64748b; /* Slate 500 */
+    --text-primary: #2d1612;
+    --text-secondary: #5c3b35;
+    --text-muted: #8c6a63;
     
     /* Neon Blur Orb Color (Light Mode Variant) */
-    --orb-color-1: rgba(0, 242, 254, 0.06);
-    --orb-color-2: rgba(79, 172, 254, 0.06);
-    --orb-color-3: rgba(255, 126, 95, 0.04);
+    --orb-color-1: rgba(255, 126, 95, 0.08);
+    --orb-color-2: rgba(226, 88, 62, 0.06);
+    --orb-color-3: rgba(255, 210, 105, 0.06);
     
-    /* Honeycomb Grid (Light Mode) */
-    --bg-honeycomb: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='242.48' viewBox='0 0 140 242.48'%3E%3Cpath d='M0 0 L70 40.41 L140 0 L140 80.83 L70 121.24 L0 80.83 Z M0 121.24 L70 161.65 L140 121.24 L140 202.07 L70 242.48 L0 202.07 Z' fill='none' stroke='%230f172a' stroke-width='1.2' stroke-opacity='0.035'/%3E%3C/svg%3E");
+    --bg-terracotta: linear-gradient(rgba(250, 245, 243, 0.45), rgba(250, 245, 243, 0.45)), url('/static/img/bg-terracotta.png');
 }
 
 /* Light Theme Component Overrides */
@@ -180,7 +179,7 @@ body::before {
     z-index: -1;
     background: radial-gradient(
         500px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
-        rgba(0, 242, 254, 0.05),
+        rgba(255, 126, 95, 0.07),
         transparent 80%
     );
     transition: opacity 0.3s ease;
@@ -189,15 +188,17 @@ body::before {
 body.light-theme::before {
     background: radial-gradient(
         500px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
-        rgba(79, 172, 254, 0.07),
+        rgba(226, 88, 62, 0.08),
         transparent 80%
     );
 }
 
 body {
     background-color: var(--bg-dark);
-    background-image: var(--bg-honeycomb);
-    background-size: 140px 242.48px;
+    background-image: var(--bg-terracotta);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
     background-attachment: fixed;
     color: var(--text-primary);
     font-family: var(--font-body);
@@ -374,8 +375,8 @@ body.light-theme .orb {
 }
 
 .card:hover {
-    border-color: rgba(0, 242, 254, 0.25);
-    box-shadow: 0 10px 40px rgba(0, 242, 254, 0.05);
+    border-color: var(--border-glow);
+    box-shadow: 0 12px 40px rgba(255, 126, 95, 0.12);
 }
 
 .card-header {
