@@ -2146,3 +2146,182 @@ body.light-theme .floater {
         display: none !important;
     }
 }
+
+/* Featured Hidden Gems Grid Styling */
+.featured-gems-section {
+    margin-top: 30px;
+    text-align: left;
+    width: 100%;
+}
+
+.featured-gems-section h3 {
+    font-size: 18px;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.gems-subtext {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+}
+
+.gems-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    width: 100%;
+}
+
+.gem-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-light);
+    border-radius: 20px;
+    padding: 20px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.gem-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    border-color: var(--accent-cyan);
+    box-shadow: 0 12px 30px rgba(0, 242, 254, 0.12);
+}
+
+body.light-theme .gem-card:hover {
+    box-shadow: 0 12px 30px rgba(79, 172, 254, 0.12);
+    border-color: var(--accent-blue);
+}
+
+.gem-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.gem-card-title-group {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.gem-card-title {
+    font-family: var(--font-heading);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.gem-card-state {
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--accent-cyan);
+    letter-spacing: 0.5px;
+}
+
+body.light-theme .gem-card-state {
+    color: var(--accent-blue);
+}
+
+.gem-card-category {
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-light);
+    color: var(--text-secondary);
+}
+
+body.light-theme .gem-card-category {
+    background: rgba(15, 23, 42, 0.04);
+}
+
+.gem-card-desc {
+    font-size: 12.5px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.gem-card-ratings {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    border-top: 1px dashed var(--border-light);
+    padding-top: 12px;
+}
+
+.rating-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.rating-stars {
+    color: var(--accent-gold);
+    display: flex;
+    gap: 2px;
+    align-items: center;
+}
+
+.rating-num {
+    font-weight: 700;
+    margin-left: 5px;
+    font-size: 11px;
+    color: var(--text-primary);
+}
+
+.gem-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.gem-card-season {
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+.gem-card-season i {
+    margin-right: 4px;
+}
+
+.gem-card-action {
+    background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+    border: none;
+    border-radius: 12px;
+    color: #070b19;
+    padding: 6px 12px;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+body.light-theme .gem-card-action {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: #ffffff;
+}
+
+.gem-card:hover .gem-card-action {
+    transform: scale(1.05);
+}

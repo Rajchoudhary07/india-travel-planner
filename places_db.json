@@ -960,5 +960,57 @@
         {"day": 3, "title": "Depart to Agra", "activities": ["Morning river prayers.", "Drive back to Agra/Gwalior for departure."], "sights": ["Yamuna Banks", "Departure"]}
       ]
     }
+  },
+  {
+    "id": "araku_valley",
+    "name": "Araku Valley",
+    "state": "Andhra Pradesh",
+    "is_popular": false,
+    "starting_cities": ["Visakhapatnam", "Araku"],
+    "starting_city_distances": {"Visakhapatnam": 115, "Araku": 5},
+    "description": "Hill station with organic coffee plantations, waterfalls, tribal museums, and the stunning Borra Caves.",
+    "lat": 18.33, "lon": 82.87, "best_season": "September to March",
+    "entry_tickets": {"borra_caves": 80, "tribal_museum": 40, "padmapuram_gardens": 30},
+    "transportation": {"local_auto": 300, "private_cab": 1800, "public_bus": 90},
+    "accommodation": {"budget": 900, "mid_range": 2200, "luxury": 4800},
+    "food_cost_per_day": 350,
+    "women_safety": "High safety. Very friendly local tribes. Safest hill station for solo women travelers; normal daylight travel guidelines apply.",
+    "pros": ["Cool pleasant weather compared to the humid coast.", "Unique scenic train route through 84 tunnels.", "Aromatic coffee and local bamboo chicken."],
+    "cons": ["Limited high-speed mobile internet.", "Sparse streetlights after dark.", "Winding ghat roads require slow driving."],
+    "warnings": ["Be careful of slippery rocks at Katiki Waterfalls.", "Do not drive on ghat roads late at night due to mist."],
+    "extra_tips": ["Book a Vistadome train ticket from Vizag to Araku in advance for panoramic view.", "Visit local tribal museum for authentic arts.", "Try Araku brand organic coffee."],
+    "itineraries": {
+      "3": [
+        {"day": 1, "title": "Train Journey & Coffee Plantations", "activities": ["Board the early morning scenic train to Araku.", "Visit coffee plantations.", "Spend evening at Padmapuram Gardens."], "sights": ["Vistadome Route", "Araku Coffee Plantations", "Padmapuram Gardens"]},
+        {"day": 2, "title": "Borra Caves & Katiki Waterfalls", "activities": ["Explore million-year-old Borra Caves.", "Trek to Katiki Waterfalls.", "Try bamboo chicken from roadside local vendors."], "sights": ["Borra Caves", "Katiki Falls"]},
+        {"day": 3, "title": "Tribal Museum & Departure", "activities": ["Visit Araku Tribal Museum.", "Drive back via scenic Ananthagiri ghats for departure."], "sights": ["Tribal Museum", "Ananthagiri Ghats"]}
+      ]
+    }
+  },
+  {
+    "id": "mawlynnong",
+    "name": "Mawlynnong Village",
+    "state": "Meghalaya",
+    "is_popular": false,
+    "starting_cities": ["Shillong", "Guwahati"],
+    "starting_city_distances": {"Shillong": 78, "Guwahati": 172},
+    "description": "Acclaimed as Asia's Cleanest Village, featuring pristine bamboo walkways, living root bridges, and balancing stone wonders.",
+    "lat": 25.20, "lon": 91.92, "best_season": "September to May",
+    "entry_tickets": {"village_cleanliness_fee": 50, "root_bridge_entry": 40, "sky_walk": 30},
+    "transportation": {"local_auto": 400, "private_cab": 2500, "public_bus": 150},
+    "accommodation": {"budget": 1000, "mid_range": 2200, "luxury": 4500},
+    "food_cost_per_day": 350,
+    "women_safety": "Highest safety in India. Meghalaya has a matrilineal society. Extremely safe and respectful for solo women travelers at all times.",
+    "pros": ["Pristine cleanliness and beautiful flower-lined pathways.", "Iconic Jingmaham Living Root Bridge nearby.", "Direct homestay interaction with Khasi tribes."],
+    "cons": ["Limited luxury facilities; mostly basic homestays.", "Very heavy rainfall during monsoons.", "Public transport is infrequent from Shillong."],
+    "warnings": ["Do not litter; heavy fines are imposed by the village council.", "Root bridges can be very slippery during rain."],
+    "extra_tips": ["Climb the bamboo Sky Walk for a view across the plains of Bangladesh.", "Stay in a traditional thatch hut homestay.", "Enjoy home-cooked Khasi meals."],
+    "itineraries": {
+      "3": [
+        {"day": 1, "title": "Shillong to Cleanest Village", "activities": ["Scenic drive from Shillong to Mawlynnong.", "Explore the flower-paved village paths.", "Climb Sky View bamboo watchtower for Bangladesh border view."], "sights": ["Mawlynnong Village", "Sky View Tower"]},
+        {"day": 2, "title": "Living Root Bridges & Balancing Rock", "activities": ["Trek down to Riwai Living Root Bridge.", "Visit natural Balancing Rock.", "Bathe in the clear waters of nearby waterfall streams."], "sights": ["Riwai Living Root Bridge", "Balancing Rock"]},
+        {"day": 3, "title": "Dawn Walk & Departure", "activities": ["Walk around the village at sunrise.", "Drive back to Shillong/Guwahati for departure."], "sights": ["Village Walks", "Departure"]}
+      ]
+    }
   }
 ]

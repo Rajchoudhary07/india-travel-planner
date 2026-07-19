@@ -133,7 +133,7 @@ const elements = {
     timelineContainer: document.getElementById('timeline-container'),
     tipsContainer: document.getElementById('tips-container'),
     factsContainer: document.getElementById('facts-container'),
-    previewTagsContainer: document.getElementById('preview-tags-container'),
+    featuredGemsGrid: document.getElementById('featured-gems-grid'),
     dealsContainer: document.getElementById('deals-container'),
     
     // Settings panel
@@ -724,20 +724,85 @@ function populateStatesDropdown(places) {
 }
 
 function populatePreviewTags(places) {
-    elements.previewTagsContainer.innerHTML = '';
+    if (!elements.featuredGemsGrid) return;
+    elements.featuredGemsGrid.innerHTML = '';
     
-    // Specifically prioritize Chhattisgarh places for home previews
-    const cgPlaces = places.filter(p => p.state === 'Chhattisgarh');
-    const otherPlaces = places.filter(p => p.state !== 'Chhattisgarh').sort(() => 0.5 - Math.random());
+    // Curated rating metadata
+    const GEM_RATINGS = {
+        "mainpat": { beauty: 4.8, trip: 4.6, category: "Hill Station" },
+        "chitrakote_falls": { beauty: 5.0, trip: 4.7, category: "Waterfalls" },
+        "gandikota": { beauty: 4.9, trip: 4.8, category: "Canyon & Ruins" },
+        "tawang": { beauty: 5.0, trip: 4.9, category: "Lakes & Passes" },
+        "ziro_valley": { beauty: 4.8, trip: 4.6, category: "Cultural Meadows" },
+        "araku_valley": { beauty: 4.7, trip: 4.8, category: "Coffee & Caves" },
+        "mawlynnong": { beauty: 4.9, trip: 4.5, category: "Eco-Village" },
+        "chopta_valley": { beauty: 5.0, trip: 4.9, category: "Trek & Snow" }
+    };
+
+    function generateStarsHtml(rating) {
+        let starsHtml = '';
+        const fullStars = Math.floor(rating);
+        const hasHalf = rating % 1 >= 0.4;
+        
+        for (let i = 1; i <= 5; i++) {
+            if (i <= fullStars) {
+                starsHtml += '<i class="fa-solid fa-star"></i>';
+            } else if (i === fullStars + 1 && hasHalf) {
+                starsHtml += '<i class="fa-solid fa-star-half-stroke"></i>';
+            } else {
+                starsHtml += '<i class="fa-regular fa-star"></i>';
+            }
+        }
+        return starsHtml;
+    }
+
+    // Filter places to find our curated gems list
+    const featuredIds = Object.keys(GEM_RATINGS);
+    const featuredPlaces = places.filter(p => featuredIds.includes(p.id));
     
-    // Combine to showcase CG offbeats first
-    const combined = [...cgPlaces, ...otherPlaces.slice(0, 3)];
-    
-    combined.forEach(place => {
-        const tag = document.createElement('div');
-        tag.className = 'preview-tag';
-        tag.textContent = `${place.name} (${place.state})`;
-        tag.addEventListener('click', () => {
+    // Sort them according to our array order
+    featuredPlaces.sort((a, b) => featuredIds.indexOf(a.id) - featuredIds.indexOf(b.id));
+
+    featuredPlaces.forEach(place => {
+        const ratingInfo = GEM_RATINGS[place.id] || { beauty: 4.5, trip: 4.5, category: "Hidden Gem" };
+        
+        const card = document.createElement('div');
+        card.className = 'gem-card';
+        
+        card.innerHTML = `
+            <div class="gem-card-header">
+                <div class="gem-card-title-group">
+                    <span class="gem-card-state">${place.state}</span>
+                    <h4 class="gem-card-title">${place.name}</h4>
+                </div>
+                <span class="gem-card-category">${ratingInfo.category}</span>
+            </div>
+            <p class="gem-card-desc">${place.description}</p>
+            <div class="gem-card-ratings">
+                <div class="rating-row">
+                    <span>Beauty Index:</span>
+                    <div class="rating-stars">
+                        ${generateStarsHtml(ratingInfo.beauty)}
+                        <span class="rating-num">${ratingInfo.beauty.toFixed(1)}</span>
+                    </div>
+                </div>
+                <div class="rating-row">
+                    <span>Adventure Value:</span>
+                    <div class="rating-stars">
+                        ${generateStarsHtml(ratingInfo.trip)}
+                        <span class="rating-num">${ratingInfo.trip.toFixed(1)}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="gem-card-footer">
+                <span class="gem-card-season">
+                    <i class="fa-regular fa-calendar"></i> ${place.best_season.split(' to ')[0]}
+                </span>
+                <button class="gem-card-action">Plan Trip <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+        `;
+
+        card.addEventListener('click', () => {
             // Preset place values in Quick Plan Modal
             elements.quickPlanPlaceId.value = place.id;
             elements.quickPlanDestName.textContent = place.name;
@@ -752,12 +817,13 @@ function populatePreviewTags(places) {
             });
             
             // Prefill home select values if already selected
-            elements.quickPlanHome.value = elements.homeSelect.value;
+            elements.quickPlanHome.value = elements.homeSelect.value || (elements.homeSelect.options[0] ? elements.homeSelect.options[0].value : '');
             
             // Display modal
             elements.quickPlanModal.classList.remove('hidden');
         });
-        elements.previewTagsContainer.appendChild(tag);
+
+        elements.featuredGemsGrid.appendChild(card);
     });
 }
 
