@@ -2,23 +2,23 @@
    Design Tokens & Root Variables (Default Dark Mode)
    ========================================================================== */
 :root {
-    --bg-dark: #120705;
-    --bg-card: rgba(20, 9, 8, 0.28);
-    --bg-card-hover: rgba(30, 14, 12, 0.38);
-    --border-light: rgba(255, 255, 255, 0.12);
-    --border-glow: rgba(255, 126, 95, 0.3);
+    --bg-dark: #0a0403;
+    --bg-card: rgba(22, 11, 9, 0.45);
+    --bg-card-hover: rgba(35, 17, 14, 0.55);
+    --border-light: rgba(255, 235, 230, 0.12);
+    --border-glow: rgba(255, 159, 67, 0.45);
     
     /* Core Palettes */
-    --accent-cyan: #ff7e5f;
-    --accent-blue: #e2583e;
-    --accent-gold: #ffd269;
+    --accent-cyan: #ff9f43;
+    --accent-blue: #ee5253;
+    --accent-gold: #f39c12;
     --accent-sunset: #ff9f43;
-    --accent-green: #2ecc71;
+    --accent-green: #1dd1a1;
     
     /* Typography Colors */
-    --text-primary: #fff7f5;
-    --text-secondary: #e8d5d1;
-    --text-muted: #bda09a;
+    --text-primary: #fffbf9;
+    --text-secondary: #ebdcd7;
+    --text-muted: #bc9f98;
     
     /* Fonts */
     --font-heading: 'Outfit', sans-serif;
@@ -30,12 +30,12 @@
     --transition-smooth: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     
     /* Neon Blur Orbs Color */
-    --orb-color-1: rgba(255, 126, 95, 0.2);
-    --orb-color-2: rgba(226, 88, 62, 0.15);
-    --orb-color-3: rgba(255, 210, 105, 0.15);
+    --orb-color-1: rgba(255, 159, 67, 0.18);
+    --orb-color-2: rgba(238, 82, 83, 0.12);
+    --orb-color-3: rgba(243, 156, 18, 0.12);
     
     /* Dynamic 3D background (Highly visible background) */
-    --bg-terracotta: linear-gradient(rgba(18, 7, 5, 0.22), rgba(18, 7, 5, 0.22)), url('/static/img/bg-terracotta.png');
+    --bg-terracotta: linear-gradient(rgba(10, 4, 3, 0.22), rgba(10, 4, 3, 0.22)), url('/static/img/bg-terracotta.png');
 }
 
 /* ==========================================================================
@@ -184,7 +184,7 @@ body::before {
     z-index: -1;
     background: radial-gradient(
         500px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
-        rgba(255, 126, 95, 0.07),
+        rgba(255, 159, 67, 0.08),
         transparent 80%
     );
     transition: opacity 0.3s ease;
@@ -2334,15 +2334,40 @@ body.light-theme .gem-card-action {
     transform: scale(1.05);
 }
 
-/* Packing Checklist Group Styling */
+/* Columns for Packing Checklist */
+#packing-checklist-container {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+}
+
+@media (max-width: 992px) {
+    #packing-checklist-container {
+        flex-direction: column;
+    }
+}
+
 .packing-category-group {
-    margin-bottom: 25px;
+    flex: 1;
+    background: rgba(22, 11, 9, 0.45);
+    border: 1px solid var(--border-light);
+    border-radius: var(--border-radius-lg);
+    padding: 20px;
+    backdrop-filter: blur(28px) saturate(220%);
+    -webkit-backdrop-filter: blur(28px) saturate(220%);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.22),
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+    display: flex;
+    flex-direction: column;
     width: 100%;
 }
 
 .packing-category-group h4 {
     font-family: var(--font-heading);
-    font-size: 14.5px;
+    font-size: 14px;
     font-weight: 700;
     color: var(--text-primary);
     margin: 0 0 15px 0;
@@ -2359,7 +2384,159 @@ body.light-theme .gem-card-action {
 }
 
 .packing-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    display: flex;
+    flex-direction: column;
     gap: 12px;
+    width: 100%;
+}
+
+/* Beautiful Packing Product Cards */
+.packing-item-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+.packing-item-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255, 153, 0, 0.03) 0%, transparent 100%);
+    pointer-events: none;
+}
+
+.packing-item-card:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 153, 0, 0.4);
+    box-shadow: 0 6px 20px rgba(255, 153, 0, 0.06);
+}
+
+.packing-item-card.checked {
+    opacity: 0.6;
+    border-color: var(--border-light);
+    background: rgba(255, 255, 255, 0.01);
+}
+
+.packing-card-body-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.packing-item-icon {
+    font-size: 16px;
+    color: var(--accent-gold);
+    width: 24px;
+    text-align: center;
+}
+
+.packing-card-title-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+}
+
+.packing-card-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-primary);
+    cursor: pointer;
+    line-height: 1.4;
+}
+
+.packing-checkbox {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--accent-cyan);
+    cursor: pointer;
+}
+
+/* Affiliate urgency badges */
+.packing-item-badge {
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 20px;
+    display: inline-block;
+    letter-spacing: 0.5px;
+}
+
+.packing-item-badge.safety {
+    background: rgba(231, 76, 60, 0.12);
+    color: #ff6b6b;
+    border: 1px solid rgba(231, 76, 60, 0.2);
+}
+
+.packing-item-badge.essential {
+    background: rgba(46, 204, 113, 0.12);
+    color: #2ecc71;
+    border: 1px solid rgba(46, 204, 113, 0.2);
+}
+
+.packing-item-badge.high-rated {
+    background: rgba(52, 152, 219, 0.12);
+    color: #3498db;
+    border: 1px solid rgba(52, 152, 219, 0.2);
+}
+
+.packing-item-badge.weather {
+    background: rgba(241, 196, 15, 0.12);
+    color: #f1c40f;
+    border: 1px solid rgba(241, 196, 15, 0.2);
+}
+
+.packing-item-badge.cultural {
+    background: rgba(155, 89, 182, 0.12);
+    color: #9b59b6;
+    border: 1px solid rgba(155, 89, 182, 0.2);
+}
+
+.packing-item-badge.recommended {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-secondary);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Amazon High Conversion Buy Button */
+.amazon-buy-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #ff9900 0%, #e67e22 100%);
+    color: #0d0503 !important;
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    text-decoration: none !important;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(230, 126, 34, 0.2);
+    width: 100%;
+    margin-top: 4px;
+}
+
+.amazon-buy-btn:hover {
+    background: linear-gradient(135deg, #ffb300 0%, #f39c12 100%);
+    transform: scale(1.02);
+    box-shadow: 0 6px 20px rgba(230, 126, 34, 0.35);
+}
+
+.amazon-buy-btn i {
+    font-size: 13px;
 }

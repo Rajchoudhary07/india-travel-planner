@@ -1632,7 +1632,7 @@ function renderSponsoredStay(data) {
 function renderPackingChecklist(data) {
     const container = elements.packingChecklistContainer;
     container.innerHTML = '';
-    container.style.display = 'block'; // Reset to block to allow vertical categories flow
+    container.style.display = 'flex'; // Enable flex row layout for columns
     
     const dest = data.destination.toLowerCase();
     
@@ -1692,6 +1692,18 @@ function renderPackingChecklist(data) {
 
     const amazonTag = localStorage.getItem('amazon_affiliate_tag') || 'offbeatyatra2-21';
 
+    function getBadgeForItem(name) {
+        const n = name.toLowerCase();
+        if (n.includes("safety") || n.includes("alarm")) return { text: "⚠️ Safety Essential", class: "safety" };
+        if (n.includes("adapter") || n.includes("power bank")) return { text: "⚡ Tech Essential", class: "essential" };
+        if (n.includes("first aid") || n.includes("hygiene")) return { text: "🩺 Must Have", class: "high-rated" };
+        if (n.includes("rain") || n.includes("poncho")) return { text: "🌧️ Rain Ready", class: "weather" };
+        if (n.includes("thermal") || n.includes("winter") || n.includes("jacket")) return { text: "❄️ Cold Climate", class: "weather" };
+        if (n.includes("beach") || n.includes("sunscreen")) return { text: "🏖️ Beach Essential", class: "weather" };
+        if (n.includes("dupatta") || n.includes("scarf")) return { text: "🧣 Culture Ready", class: "cultural" };
+        return { text: "⭐️ Highly Rated", class: "recommended" };
+    }
+
     function createGroup(title, iconClass, items, itemOffsetId) {
         const groupDiv = document.createElement('div');
         groupDiv.className = 'packing-category-group';
@@ -1709,18 +1721,26 @@ function renderPackingChecklist(data) {
             
             const itemId = `pack-item-${itemOffsetId}-${index}`;
             const searchUrl = `https://www.amazon.in/s?k=${encodeURIComponent(item.name)}&tag=${amazonTag}`;
+            const badge = getBadgeForItem(item.name);
             
             card.innerHTML = `
-                <div class="packing-item-icon">
-                    <i class="${item.icon}"></i>
+                <div class="packing-card-header-row">
+                    <span class="packing-item-badge ${badge.class}">${badge.text}</span>
                 </div>
-                <div class="packing-card-header">
-                    <input type="checkbox" id="${itemId}" class="packing-checkbox">
-                    <label class="packing-card-title" for="${itemId}">${item.name}</label>
+                <div class="packing-card-body-row">
+                    <div class="packing-item-icon">
+                        <i class="${item.icon}"></i>
+                    </div>
+                    <div class="packing-card-title-container">
+                        <input type="checkbox" id="${itemId}" class="packing-checkbox">
+                        <label class="packing-card-title" for="${itemId}">${item.name}</label>
+                    </div>
                 </div>
-                <a href="${searchUrl}" target="_blank" class="amazon-card-btn">
-                    <i class="fa-brands fa-amazon"></i> Shop on Amazon
-                </a>
+                <div class="packing-card-action-row">
+                    <a href="${searchUrl}" target="_blank" class="amazon-buy-btn">
+                        <i class="fa-brands fa-amazon"></i> Buy on Amazon ➔
+                    </a>
+                </div>
             `;
             
             const checkbox = card.querySelector('.packing-checkbox');
