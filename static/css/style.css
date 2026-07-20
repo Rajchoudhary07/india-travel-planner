@@ -2540,3 +2540,60 @@ body.light-theme .gem-card-action {
 .amazon-buy-btn i {
     font-size: 13px;
 }
+
+/* Sight Gallery Rounded Frame Styling */
+.sight-gallery-container {
+    display: flex;
+    gap: 16px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+.sight-image-frame {
+    width: 130px;
+    height: 130px;
+    border-radius: 18px;
+    border: 1px solid var(--border-light);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    background-size: cover;
+    background-position: center;
+    background-color: rgba(255, 255, 255, 0.02);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.22), 
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    align-items: flex-end;
+}
+
+.sight-image-frame:hover {
+    transform: scale(1.05) translateY(-3px);
+    border-color: var(--accent-cyan);
+    box-shadow: 0 8px 25px rgba(255, 159, 67, 0.2);
+}
+
+.sight-image-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 16px;
+    color: var(--text-muted);
+    z-index: 1;
+}
+
+.sight-image-title {
+    width: 100%;
+    background: linear-gradient(to top, rgba(10, 4, 3, 0.9) 0%, rgba(10, 4, 3, 0.4) 60%, transparent 100%);
+    color: #fff;
+    font-size: 10.5px;
+    font-weight: 700;
+    text-align: center;
+    padding: 8px 4px 6px 4px;
+    z-index: 2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: var(--font-heading);
+}

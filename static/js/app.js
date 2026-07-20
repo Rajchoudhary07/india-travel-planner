@@ -557,6 +557,16 @@ function bindEvents() {
         e.preventDefault();
         verifyAndUnlockPremiumPDF();
     });
+    
+    // Lightbox modal close listeners
+    const lightboxModal = document.getElementById('lightbox-modal');
+    if (lightboxModal) {
+        lightboxModal.addEventListener('click', (e) => {
+            if (e.target === lightboxModal || e.target.closest('#close-lightbox') || e.target.id === 'close-lightbox') {
+                lightboxModal.classList.add('hidden');
+            }
+        });
+    }
 }
 
 // ==========================================================================
@@ -1017,6 +1027,43 @@ function renderCostChart(summary) {
     });
 }
 
+async function getSightImage(sightName) {
+    try {
+        const cleanName = sightName.replace(/[^a-zA-Z0-9 ]/g, "").trim();
+        const url = `https://en.wikipedia.org/w/api.php?action=query&format=json&prop=pageimages&piprop=original&titles=${encodeURIComponent(cleanName)}&origin=*`;
+        const response = await fetch(url);
+        const data = await response.json();
+        const pages = data.query.pages;
+        const pageId = Object.keys(pages)[0];
+        if (pageId !== "-1" && pages[pageId].original) {
+            return pages[pageId].original.source;
+        }
+    } catch (e) {
+        console.error("Wikipedia image fetch failed:", e);
+    }
+    return getTravelFallbackImage(sightName);
+}
+
+function getTravelFallbackImage(sightName) {
+    const n = sightName.toLowerCase();
+    if (n.includes("monastery") || n.includes("temple") || n.includes("church") || n.includes("mosque")) {
+        return "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=500&q=80";
+    }
+    if (n.includes("waterfall") || n.includes("falls") || n.includes("river") || n.includes("lake") || n.includes("stream") || n.includes("pool")) {
+        return "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=500&q=80";
+    }
+    if (n.includes("ghat") || n.includes("mountain") || n.includes("hill") || n.includes("trek") || n.includes("valley") || n.includes("forest") || n.includes("trail") || n.includes("climb")) {
+        return "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=500&q=80";
+    }
+    if (n.includes("beach") || n.includes("coast") || n.includes("sea") || n.includes("ocean") || n.includes("island")) {
+        return "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=500&q=80";
+    }
+    if (n.includes("cave") || n.includes("rock") || n.includes("fort") || n.includes("ruin") || n.includes("palace") || n.includes("castle")) {
+        return "https://images.unsplash.com/photo-1507608869274-d3177c8bb4c7?auto=format&fit=crop&w=500&q=80";
+    }
+    return "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=500&q=80";
+}
+
 function renderTimeline(daysList) {
     elements.timelineContainer.innerHTML = '';
     
@@ -1056,9 +1103,49 @@ function renderTimeline(daysList) {
                     ${sightsHTML}
                     ${ticketPriceHTML}
                 </div>
+                <!-- Sights Gallery Row with Clickable Rounded Square Image Frames -->
+                <div class="sight-gallery-container" style="display: flex; gap: 14px; margin-top: 15px; flex-wrap: wrap;">
+                    <!-- Populated dynamically -->
+                </div>
             </div>
         `;
+        
         elements.timelineContainer.appendChild(step);
+        
+        // Dynamically fetch and display sight pictures
+        if (dayData.sights && dayData.sights.length > 0) {
+            const gallery = step.querySelector('.sight-gallery-container');
+            dayData.sights.forEach(sight => {
+                const card = document.createElement('div');
+                card.className = 'sight-image-frame';
+                card.innerHTML = `
+                    <div class="sight-image-loading">
+                        <i class="fa-solid fa-spinner fa-spin"></i>
+                    </div>
+                    <div class="sight-image-title">${sight}</div>
+                `;
+                gallery.appendChild(card);
+                
+                // Fetch image asynchronously from Wikipedia or Unsplash fallback
+                getSightImage(sight).then(imgUrl => {
+                    const spinner = card.querySelector('.sight-image-loading');
+                    if (spinner) spinner.style.display = 'none';
+                    card.style.backgroundImage = `url('${imgUrl}')`;
+                    
+                    // Attach fullscreen click handler
+                    card.addEventListener('click', () => {
+                        const modal = document.getElementById('lightbox-modal');
+                        const img = document.getElementById('lightbox-img');
+                        const title = document.getElementById('lightbox-title');
+                        if (modal && img && title) {
+                            img.src = imgUrl;
+                            title.textContent = sight;
+                            modal.classList.remove('hidden');
+                        }
+                    });
+                });
+            });
+        }
     });
 }
 
