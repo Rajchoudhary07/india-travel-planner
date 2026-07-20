@@ -350,6 +350,19 @@ def generate_local_itinerary_fallback(place_data, home_city, starting_city, days
             total_lodging += stay_cost_per_night
             local_transit_cost += local_daily
             
+    # Force the last day to always be Departure
+    days_plan[-1] = {
+        "day": days,
+        "title": "Local Souvenir Shopping & Departure Gateway",
+        "activities": [
+            "Morning: Check out of your lodging and visit the nearest tribal / rural handcraft cooperatives to buy local souvenirs.",
+            "Afternoon: Pack up luggage and sit down for a traditional local regional lunch at a family-run dhaba/eatery.",
+            f"Evening: Board your return transit vehicle back to the gateway city of {starting_city} to depart back home."
+        ],
+        "sights": ["Artisan Souvenir Cooperatives", f"{starting_city} Transit Gateway"],
+        "estimated_tickets_cost": 0
+    }
+
     # Include home transit cost inside overall transport cost, but keep the separate key for detail breakdown
     total_estimated_cost = total_lodging + local_transit_cost + total_food + total_tickets + home_transit_cost
     
@@ -460,7 +473,7 @@ def generate_ai_itinerary(place_data, home_city, starting_city, days, budget, tr
         1. All calculations must be in INR. The total estimated cost in 'cost_summary' must fit the budget ({budget} INR).
         2. All lodging, food, and local activity ticket prices must be multiplied dynamically for {total_travelers} travelers (i.e. 'lodging_cost' = stay_cost_per_night * days * room_count, etc.). Adjust lodging based on total travelers assuming 2-3 people per room.
         3. Calculate the 'home_transit_cost' for round-trip travel from {home_city} to {starting_city} for ALL {total_travelers} travelers (approx rates per km per traveler: luxury=7.5, mid_range=2.8, budget=1.2). If {home_city} equals {starting_city}, set 'home_transit_cost' to 0.
-        4. Day 1 should describe leaving from {home_city} (flight/train) and arriving at {place_data['name']} via {starting_city}.
+        4. Day 1 should describe leaving from {home_city} (flight/train) and arriving at {place_data['name']} via {starting_city}. Day {days} (the final day) must describe local morning sightseeing/shopping, checking out of the lodging, and returning back home via {starting_city} (Departure).
         5. Integrate a comprehensive 'women_safety' review based on the ground-truth data.
         6. SAFETY PROTOCOLS: If female_travelers > 0 (or if it's a female solo traveler):
            - In the 'day_by_day' activities, schedule earlier evening wrap-up times (e.g. returning to hotel by 8:00 PM).

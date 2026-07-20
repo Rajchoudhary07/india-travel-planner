@@ -1041,7 +1041,7 @@ async function getSightImage(sightName) {
     } catch (e) {
         console.error("Wikipedia image fetch failed:", e);
     }
-    return getTravelFallbackImage(sightName);
+    return 'none';
 }
 
 function getTravelFallbackImage(sightName) {
@@ -1130,19 +1130,32 @@ function renderTimeline(daysList) {
                 getSightImage(sight).then(imgUrl => {
                     const spinner = card.querySelector('.sight-image-loading');
                     if (spinner) spinner.style.display = 'none';
-                    card.style.backgroundImage = `url('${imgUrl}')`;
                     
-                    // Attach fullscreen click handler
-                    card.addEventListener('click', () => {
-                        const modal = document.getElementById('lightbox-modal');
-                        const img = document.getElementById('lightbox-img');
-                        const title = document.getElementById('lightbox-title');
-                        if (modal && img && title) {
-                            img.src = imgUrl;
-                            title.textContent = sight;
-                            modal.classList.remove('hidden');
-                        }
-                    });
+                    if (imgUrl === 'none') {
+                        card.style.background = 'rgba(22, 11, 9, 0.6)';
+                        card.style.cursor = 'default';
+                        card.innerHTML = `
+                            <div style="padding: 10px; text-align: center; font-size: 10px; color: var(--text-muted); display: flex; align-items: center; justify-content: center; height: 100%; width: 100%; flex-direction: column; box-sizing: border-box; line-height: 1.3;">
+                                <i class="fa-solid fa-image-slash" style="font-size: 18px; margin-bottom: 6px; color: var(--accent-blue);"></i>
+                                <span style="font-weight: 600; font-family: var(--font-heading);">No image found of</span>
+                                <span style="color: var(--text-secondary); word-break: break-word; font-size: 9px; margin-top: 2px;">"${sight}"</span>
+                            </div>
+                        `;
+                    } else {
+                        card.style.backgroundImage = `url('${imgUrl}')`;
+                        
+                        // Attach fullscreen click handler
+                        card.addEventListener('click', () => {
+                            const modal = document.getElementById('lightbox-modal');
+                            const img = document.getElementById('lightbox-img');
+                            const title = document.getElementById('lightbox-title');
+                            if (modal && img && title) {
+                                img.src = imgUrl;
+                                title.textContent = sight;
+                                modal.classList.remove('hidden');
+                            }
+                        });
+                    }
                 });
             });
         }
