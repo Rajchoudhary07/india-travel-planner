@@ -1027,7 +1027,81 @@ function renderCostChart(summary) {
     });
 }
 
+const SIGHT_IMAGE_REGISTRY = {
+    // Mainpat
+    "Mainpat Ghats": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80",
+    "Dhakpo Shedupling Monastery": "https://images.unsplash.com/photo-1590076275572-ac1f3ec60cc9?auto=format&fit=crop&w=600&q=80",
+    "Daldali Shaking Land": "https://images.unsplash.com/photo-1500485035595-cbe6f645feb1?auto=format&fit=crop&w=600&q=80",
+    "Tiger Point": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=600&q=80",
+    "Mehta Point": "https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&w=600&q=80",
+    "Ulta Pani": "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=600&q=80",
+    
+    // Chitrakote
+    "Chitrakote Falls": "https://images.unsplash.com/photo-1627894481066-b33a59ad592b?auto=format&fit=crop&w=600&q=80",
+    "Tirathgarh Falls": "https://images.unsplash.com/photo-1546182990-dffeafbe841d?auto=format&fit=crop&w=600&q=80",
+    
+    // Araku Valley
+    "Borra Caves": "https://images.unsplash.com/photo-1507608869274-d3177c8bb4c7?auto=format&fit=crop&w=600&q=80",
+    "Katiki Falls": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=600&q=80",
+    "Padmapuram Gardens": "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=600&q=80",
+    "Araku Coffee Plantations": "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=600&q=80",
+    
+    // Mawlynnong
+    "Mawlynnong Village": "https://images.unsplash.com/photo-1508873535684-277a3cbcc4e8?auto=format&fit=crop&w=600&q=80",
+    "Riwai Living Root Bridge": "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=600&q=80",
+    "Balancing Rock": "https://images.unsplash.com/photo-1507608869274-d3177c8bb4c7?auto=format&fit=crop&w=600&q=80",
+    "Sky View Tower": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80",
+    
+    // Tawang
+    "Tawang Monastery": "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=600&q=80",
+    "Sela Pass": "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=600&q=80",
+    
+    // Ziro Valley
+    "Ziro Pine Grove": "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=600&q=80",
+    "Tarin Fish Farm": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
+    
+    // Majuli
+    "Kamalabari Satra": "https://images.unsplash.com/photo-1601579624467-f703ccb63ee2?auto=format&fit=crop&w=600&q=80",
+    "Dakhinpat Satra": "https://images.unsplash.com/photo-1590076275572-ac1f3ec60cc9?auto=format&fit=crop&w=600&q=80",
+    
+    // Bodhgaya
+    "Mahabodhi Temple": "https://images.unsplash.com/photo-1601579624467-f703ccb63ee2?auto=format&fit=crop&w=600&q=80",
+    "Great Buddha Statue": "https://images.unsplash.com/photo-1601579624467-f703ccb63ee2?auto=format&fit=crop&w=600&q=80",
+    
+    // Gandikota
+    "Gandikota Gorge": "https://images.unsplash.com/photo-1616038242814-a6eac7845d88?auto=format&fit=crop&w=600&q=80",
+    "Gandikota Fort": "https://images.unsplash.com/photo-1507608869274-d3177c8bb4c7?auto=format&fit=crop&w=600&q=80",
+    
+    // Munnar
+    "Eravikulam National Park": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80",
+    "Munnar Tea Estates": "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=600&q=80",
+    "Mattupetty Dam": "https://images.unsplash.com/photo-1500485035595-cbe6f645feb1?auto=format&fit=crop&w=600&q=80",
+    
+    // Gokarna
+    "Om Beach": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
+    "Half Moon Beach": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
+    "Mahabaleshwar Temple Gokarna": "https://images.unsplash.com/photo-1601579624467-f703ccb63ee2?auto=format&fit=crop&w=600&q=80",
+    
+    // Auli
+    "Auli Ski Slopes": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
+    "Auli Ropeway": "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=600&q=80",
+    
+    // Lonar
+    "Lonar Crater Lake": "https://images.unsplash.com/photo-1583212292454-1fe6229603b7?auto=format&fit=crop&w=600&q=80",
+    "Daitya Sudan Temple": "https://images.unsplash.com/photo-1601579624467-f703ccb63ee2?auto=format&fit=crop&w=600&q=80",
+    
+    // Khajuraho
+    "Kandariya Mahadev Temple": "https://images.unsplash.com/photo-1608958416719-74fbfda1f215?auto=format&fit=crop&w=600&q=80",
+    "Lakshmana Temple": "https://images.unsplash.com/photo-1608958416719-74fbfda1f215?auto=format&fit=crop&w=600&q=80"
+};
+
 async function getSightImage(sightName) {
+    // 1. Check curated image registry
+    if (SIGHT_IMAGE_REGISTRY[sightName]) {
+        return SIGHT_IMAGE_REGISTRY[sightName];
+    }
+    
+    // 2. Fall back to live Wikipedia lookup
     try {
         const cleanName = sightName.replace(/[^a-zA-Z0-9 ]/g, "").trim();
         const url = `https://en.wikipedia.org/w/api.php?action=query&format=json&prop=pageimages&piprop=original&titles=${encodeURIComponent(cleanName)}&origin=*`;
