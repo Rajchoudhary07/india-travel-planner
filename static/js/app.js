@@ -247,6 +247,7 @@ function initApp() {
         activeItinerary = window.PRELOADED_ITINERARY;
         renderItinerary(activeItinerary);
         showState('itinerary');
+        initJanhawkChatbot(activeItinerary.destination, 'mainpat');
     }
 }
 
@@ -266,14 +267,47 @@ function bindEvents() {
         generateItinerary();
     });
 
-    // Settings panel toggles
-    elements.settingsToggle.addEventListener('click', () => {
-        elements.settingsPanel.classList.remove('hidden');
-    });
+    // Settings panel toggles (Safe Check)
+    if (elements.settingsToggle) {
+        elements.settingsToggle.addEventListener('click', () => {
+            elements.settingsPanel.classList.remove('hidden');
+        });
+    }
     
-    elements.closeSettings.addEventListener('click', () => {
-        elements.settingsPanel.classList.add('hidden');
-    });
+    if (elements.closeSettings) {
+        elements.closeSettings.addEventListener('click', () => {
+            elements.settingsPanel.classList.add('hidden');
+        });
+    }
+
+    // Janhawk Chatbot event listeners
+    const janhawkForm = document.getElementById('janhawk-form');
+    const janhawkInput = document.getElementById('janhawk-input');
+    const toggleChat = document.getElementById('toggle-chat-window');
+    const launcherChat = document.getElementById('janhawk-launcher');
+    const widgetChat = document.getElementById('janhawk-widget');
+
+    if (janhawkForm && janhawkInput) {
+        janhawkForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const msgText = janhawkInput.value.trim();
+            if (msgText) {
+                janhawkInput.value = '';
+                sendJanhawkMessage(msgText);
+            }
+        });
+    }
+
+    if (toggleChat && launcherChat && widgetChat) {
+        toggleChat.addEventListener('click', () => {
+            widgetChat.classList.add('hidden');
+            launcherChat.classList.remove('hidden');
+        });
+        launcherChat.addEventListener('click', () => {
+            launcherChat.classList.add('hidden');
+            widgetChat.classList.remove('hidden');
+        });
+    }
     
     elements.saveSettings.addEventListener('click', () => {
         const keyVal = elements.userApiKey.value.trim();
@@ -878,6 +912,9 @@ async function generateItinerary() {
         // Render outputs
         renderItinerary(data, budget);
         showState('itinerary');
+        
+        // Initialize Janhawk Chatbot for this destination
+        initJanhawkChatbot(data.destination, placeId);
         
     } catch (error) {
         clearInterval(headingInterval);
@@ -2000,5 +2037,121 @@ function exportPartnersCsvData() {
     document.body.removeChild(link);
     
     showNotification('Export Successful', 'Hotel partnership database downloaded as CSV.', 'success');
+}
+
+// ==========================================================================
+// Janhawk AI Context Chatbot Helpers
+// ==========================================================================
+
+let activePlaceId = null;
+
+function initJanhawkChatbot(destinationName, placeId) {
+    activePlaceId = placeId;
+    
+    const messagesContainer = document.getElementById('janhawk-messages');
+    if (!messagesContainer) return;
+    
+    // Clear log and set initial welcome message
+    messagesContainer.innerHTML = '';
+    
+    appendJanhawkMessage(`Namaste! I am <b>Janhawk</b>, your local guide for <b>${destinationName}</b>. Ask me anything about hotels, local travel, safety, warnings, or food in <b>${destinationName}</b>! I am here to help you customize your stay. 🦅`);
+    
+    // Pop up the widget automatically
+    const widget = document.getElementById('janhawk-widget');
+    const launcher = document.getElementById('janhawk-launcher');
+    if (widget) widget.classList.remove('hidden');
+    if (launcher) launcher.classList.add('hidden');
+}
+
+function appendJanhawkMessage(text) {
+    const container = document.getElementById('janhawk-messages');
+    if (!container) return;
+    
+    const msg = document.createElement('div');
+    msg.style.alignSelf = 'flex-start';
+    msg.style.background = 'rgba(255, 255, 255, 0.05)';
+    msg.style.border = '1px solid var(--border-light)';
+    msg.style.color = 'var(--text-primary)';
+    msg.style.padding = '10px 14px';
+    msg.style.borderRadius = '16px 16px 16px 2px';
+    msg.style.fontSize = '12px';
+    msg.style.lineHeight = '1.45';
+    msg.style.maxWidth = '85%';
+    msg.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+    msg.style.wordBreak = 'break-word';
+    msg.innerHTML = text;
+    
+    container.appendChild(msg);
+    container.scrollTop = container.scrollHeight;
+}
+
+function appendUserMessage(text) {
+    const container = document.getElementById('janhawk-messages');
+    if (!container) return;
+    
+    const msg = document.createElement('div');
+    msg.style.alignSelf = 'flex-end';
+    msg.style.background = 'linear-gradient(135deg, #e2583e 0%, #ff9f43 100%)';
+    msg.style.color = '#fff';
+    msg.style.padding = '10px 14px';
+    msg.style.borderRadius = '16px 16px 2px 16px';
+    msg.style.fontSize = '12px';
+    msg.style.lineHeight = '1.45';
+    msg.style.maxWidth = '85%';
+    msg.style.boxShadow = '0 2px 10px rgba(226, 88, 62, 0.15)';
+    msg.style.wordBreak = 'break-word';
+    msg.textContent = text;
+    
+    container.appendChild(msg);
+    container.scrollTop = container.scrollHeight;
+}
+
+async function sendJanhawkMessage(userMsg) {
+    appendUserMessage(userMsg);
+    
+    // Show a typing bubble
+    const container = document.getElementById('janhawk-messages');
+    const typingIndicator = document.createElement('div');
+    typingIndicator.style.alignSelf = 'flex-start';
+    typingIndicator.style.color = 'var(--text-muted)';
+    typingIndicator.style.fontSize = '11px';
+    typingIndicator.style.fontStyle = 'italic';
+    typingIndicator.style.marginLeft = '5px';
+    typingIndicator.style.marginVertical = '5px';
+    typingIndicator.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Janhawk is thinking...';
+    container.appendChild(typingIndicator);
+    container.scrollTop = container.scrollHeight;
+    
+    const apiKey = localStorage.getItem('gemini_api_key') || '';
+    
+    try {
+        const response = await fetch('/api/chat', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                place_id: activePlaceId,
+                message: userMsg,
+                api_key: apiKey
+            })
+        });
+        
+        if (typingIndicator.parentNode) {
+            container.removeChild(typingIndicator);
+        }
+        
+        if (!response.ok) {
+            throw new Error("Chat service offline");
+        }
+        
+        const data = await response.json();
+        appendJanhawkMessage(data.reply);
+    } catch (e) {
+        if (typingIndicator.parentNode) {
+            container.removeChild(typingIndicator);
+        }
+        appendJanhawkMessage("Sorry, I am facing connectivity issues at the moment. Please ask me about local stays, sights, or warnings again!");
+    }
 }
 

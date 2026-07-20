@@ -1,7 +1,7 @@
 import os
 from flask import Flask, jsonify, request, render_template, send_from_directory
 
-from ai_engine import load_places_database, get_place_by_id, generate_ai_itinerary
+from ai_engine import load_places_database, get_place_by_id, generate_ai_itinerary, get_janhawk_chat_reply
 
 # Initialize Flask app
 app = Flask(
@@ -203,6 +203,34 @@ def itinerary_page(place_id):
         preloaded_itinerary=itinerary,
         preloaded_itinerary_json=preloaded_json
     )
+
+@app.route('/api/chat', methods=['POST'])
+def chat():
+    """
+    Janhawk AI Travel Chatbot endpoint context-policed to the active destination.
+    """
+    try:
+        data = request.get_json()
+        if not data:
+            return jsonify({"error": "Missing request payload"}), 400
+            
+        place_id = data.get("place_id")
+        user_message = data.get("message")
+        api_key = data.get("api_key")
+        
+        if not place_id or not user_message:
+            return jsonify({"error": "Missing place_id or user message"}), 400
+            
+        place_data = get_place_by_id(place_id)
+        if not place_data:
+            return jsonify({"error": f"Destination with ID '{place_id}' not found"}), 404
+            
+        reply = get_janhawk_chat_reply(place_data, user_message, api_key)
+        return jsonify({"reply": reply})
+        
+    except Exception as e:
+        app.logger.error(f"Error in janhawk chat handler: {e}")
+        return jsonify({"error": "Internal server error during chat"}), 500
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5001))
