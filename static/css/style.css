@@ -2384,8 +2384,8 @@ body.light-theme .gem-card-action {
 }
 
 .packing-grid {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     gap: 12px;
     width: 100%;
 }

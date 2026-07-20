@@ -1806,24 +1806,37 @@ function renderSponsoredStay(data) {
 function renderPackingChecklist(data) {
     const container = elements.packingChecklistContainer;
     container.innerHTML = '';
-    container.style.display = 'flex'; // Enable flex row layout for columns
+    container.style.display = 'block'; // Single container layout
     
     const dest = data.destination.toLowerCase();
     
-    // Core shared essentials
-    const commonItems = [
+    // Core shared essentials combined with generic men and women gear for both
+    const allItems = [
         { name: "Universal Travel Adapter Plug", icon: "fa-solid fa-plug" },
         { name: "Fast Charging 20000mAh Power Bank", icon: "fa-solid fa-battery-three-quarters" },
         { name: "First Aid Kit & Motion Sickness Pills", icon: "fa-solid fa-kit-medical" },
         { name: "RFID Blocking Travel Document Holder", icon: "fa-solid fa-passport" },
         { name: "Hand Sanitizer & Pocket Wet Wipes", icon: "fa-solid fa-soap" },
         { name: "Insulated Thermal Water Bottle", icon: "fa-solid fa-bottle-water" },
-        { name: "Lightweight Anti-Theft Daypack", icon: "fa-solid fa-backpack" }
+        { name: "Lightweight Anti-Theft Daypack", icon: "fa-solid fa-backpack" },
+        
+        // Men's Specific (now generic/unisex for both)
+        { name: "Travel Beard Trimmer & Shaving Kit", icon: "fa-solid fa-scissors" },
+        { name: "Quick-Dry Travel Polo Shirts", icon: "fa-solid fa-shirt" },
+        { name: "Lightweight Travel Cargo Shorts", icon: "fa-solid fa-person-shelter" },
+        { name: "Deodorant Stick & Travel Grooming Kit", icon: "fa-solid fa-user" },
+        
+        // Women's Specific (now generic/unisex for both)
+        { name: "Hygiene Products & Safe Disposal Bags", icon: "fa-solid fa-pump-soap" },
+        { name: "Personal Safety Alarm Whistle & Pepper Spray", icon: "fa-solid fa-bell" },
+        { name: "Cotton Dupatta / Scarf (for religious entries)", icon: "fa-solid fa-feather" },
+        { name: "Hydrating Moisturizer & Lip Balm SPF", icon: "fa-solid fa-sparkles" },
+        { name: "Hair Ties, Bobby Pins & Compact Brush", icon: "fa-solid fa-wand-magic" }
     ];
 
-    // Destination-specific extras to append to common
+    // Destination-specific extras
     if (dest.includes('beach') || dest.includes('goa') || dest.includes('vizag') || dest.includes('visakhapatnam')) {
-        commonItems.push(
+        allItems.push(
             { name: "Waterproof Beach Mat Blanket", icon: "fa-solid fa-sheet-plastic" },
             { name: "SPF 50 Broad Spectrum Sunscreen", icon: "fa-solid fa-sun" },
             { name: "Polarized UV400 Sunglasses", icon: "fa-solid fa-glasses" },
@@ -1832,7 +1845,7 @@ function renderPackingChecklist(data) {
             { name: "Anti Slip Beach Slippers Water Shoes", icon: "fa-solid fa-shoe-prints" }
         );
     } else if (dest.includes('mainpat') || dest.includes('tawang') || dest.includes('monastery') || dest.includes('mountain') || dest.includes('hill') || dest.includes('shimla') || dest.includes('rishikesh')) {
-        commonItems.push(
+        allItems.push(
             { name: "Thermal Inner Wear Set Fleece Lined", icon: "fa-solid fa-shirt" },
             { name: "Waterproof Windproof Winter Jacket", icon: "fa-solid fa-person-snowboarding" },
             { name: "Waterproof Hiking Backpack 50L", icon: "fa-solid fa-backpack" },
@@ -1840,7 +1853,7 @@ function renderPackingChecklist(data) {
             { name: "Polarized Hiking Sunglasses", icon: "fa-solid fa-glasses" }
         );
     } else if (dest.includes('forest') || dest.includes('bubble') || dest.includes('falls') || dest.includes('waterfall') || dest.includes('chitrakote') || dest.includes('jungle') || dest.includes('valley')) {
-        commonItems.push(
+        allItems.push(
             { name: "Waterproof Rain Poncho Raincoat", icon: "fa-solid fa-cloud-showers-water" },
             { name: "Natural Insect Mosquito Repellent Spray", icon: "fa-solid fa-spray-can" },
             { name: "Waterproof Dry Bag for Electronics", icon: "fa-solid fa-bag-shopping" },
@@ -1849,26 +1862,11 @@ function renderPackingChecklist(data) {
         );
     }
 
-    const menItems = [
-        { name: "Travel Beard Trimmer & Shaving Kit", icon: "fa-solid fa-scissors" },
-        { name: "Quick-Dry Men's Polo Shirts", icon: "fa-solid fa-shirt" },
-        { name: "Lightweight Travel Cargo Shorts", icon: "fa-solid fa-person-shelter" },
-        { name: "Men's Deodorant Stick & Grooming Wax", icon: "fa-solid fa-user" }
-    ];
-
-    const womenItems = [
-        { name: "Female Hygiene Products & Disposal Bags", icon: "fa-solid fa-pump-soap" },
-        { name: "Personal Safety Alarm Whistle / Spray", icon: "fa-solid fa-bell" },
-        { name: "Cotton Dupatta / Scarf (for religious entries)", icon: "fa-solid fa-feather" },
-        { name: "Hydrating Moisturizer & Lip Balm SPF", icon: "fa-solid fa-sparkles" },
-        { name: "Hair Ties, Bobby Pins & Compact Brush", icon: "fa-solid fa-wand-magic" }
-    ];
-
     const amazonTag = localStorage.getItem('amazon_affiliate_tag') || 'offbeatyatra2-21';
 
     function getBadgeForItem(name) {
         const n = name.toLowerCase();
-        if (n.includes("safety") || n.includes("alarm")) return { text: "⚠️ Safety Essential", class: "safety" };
+        if (n.includes("safety") || n.includes("alarm") || n.includes("spray")) return { text: "⚠️ Safety Essential", class: "safety" };
         if (n.includes("adapter") || n.includes("power bank")) return { text: "⚡ Tech Essential", class: "essential" };
         if (n.includes("first aid") || n.includes("hygiene")) return { text: "🩺 Must Have", class: "high-rated" };
         if (n.includes("rain") || n.includes("poncho")) return { text: "🌧️ Rain Ready", class: "weather" };
@@ -1878,65 +1876,58 @@ function renderPackingChecklist(data) {
         return { text: "⭐️ Highly Rated", class: "recommended" };
     }
 
-    function createGroup(title, iconClass, items, itemOffsetId) {
-        const groupDiv = document.createElement('div');
-        groupDiv.className = 'packing-category-group';
+    const groupDiv = document.createElement('div');
+    groupDiv.className = 'packing-category-group';
+    
+    const header = document.createElement('h4');
+    header.innerHTML = `<i class="fa-solid fa-suitcase-rolling"></i> Essential Travel Packing Checklist (For All Travelers)`;
+    groupDiv.appendChild(header);
+    
+    const grid = document.createElement('div');
+    grid.className = 'packing-grid';
+    
+    allItems.forEach((item, index) => {
+        const card = document.createElement('div');
+        card.className = 'packing-item-card';
         
-        const header = document.createElement('h4');
-        header.innerHTML = `<i class="${iconClass}"></i> ${title}`;
-        groupDiv.appendChild(header);
+        const itemId = `pack-item-unified-${index}`;
+        const searchUrl = `https://www.amazon.in/s?k=${encodeURIComponent(item.name)}&tag=${amazonTag}`;
+        const badge = getBadgeForItem(item.name);
         
-        const grid = document.createElement('div');
-        grid.className = 'packing-grid';
+        card.innerHTML = `
+            <div class="packing-card-header-row">
+                <span class="packing-item-badge ${badge.class}">${badge.text}</span>
+            </div>
+            <div class="packing-card-body-row">
+                <div class="packing-item-icon">
+                    <i class="${item.icon}"></i>
+                </div>
+                <div class="packing-card-title-container">
+                    <input type="checkbox" id="${itemId}" class="packing-checkbox">
+                    <label class="packing-card-title" for="${itemId}">${item.name}</label>
+                </div>
+            </div>
+            <div class="packing-card-action-row">
+                <a href="${searchUrl}" target="_blank" class="amazon-buy-btn">
+                    <i class="fa-brands fa-amazon"></i> Buy on Amazon ➔
+                </a>
+            </div>
+        `;
         
-        items.forEach((item, index) => {
-            const card = document.createElement('div');
-            card.className = 'packing-item-card';
-            
-            const itemId = `pack-item-${itemOffsetId}-${index}`;
-            const searchUrl = `https://www.amazon.in/s?k=${encodeURIComponent(item.name)}&tag=${amazonTag}`;
-            const badge = getBadgeForItem(item.name);
-            
-            card.innerHTML = `
-                <div class="packing-card-header-row">
-                    <span class="packing-item-badge ${badge.class}">${badge.text}</span>
-                </div>
-                <div class="packing-card-body-row">
-                    <div class="packing-item-icon">
-                        <i class="${item.icon}"></i>
-                    </div>
-                    <div class="packing-card-title-container">
-                        <input type="checkbox" id="${itemId}" class="packing-checkbox">
-                        <label class="packing-card-title" for="${itemId}">${item.name}</label>
-                    </div>
-                </div>
-                <div class="packing-card-action-row">
-                    <a href="${searchUrl}" target="_blank" class="amazon-buy-btn">
-                        <i class="fa-brands fa-amazon"></i> Buy on Amazon ➔
-                    </a>
-                </div>
-            `;
-            
-            const checkbox = card.querySelector('.packing-checkbox');
-            checkbox.addEventListener('change', (e) => {
-                if (e.target.checked) {
-                    card.classList.add('checked');
-                } else {
-                    card.classList.remove('checked');
-                }
-            });
-            
-            grid.appendChild(card);
+        const checkbox = card.querySelector('.packing-checkbox');
+        checkbox.addEventListener('change', (e) => {
+            if (e.target.checked) {
+                card.classList.add('checked');
+            } else {
+                card.classList.remove('checked');
+            }
         });
         
-        groupDiv.appendChild(grid);
-        return groupDiv;
-    }
-
-    // Append groups in order: Men, Women, Both
-    container.appendChild(createGroup("Men's Specific Essentials", "fa-solid fa-mars", menItems, "men"));
-    container.appendChild(createGroup("Women's Specific & Safety Essentials", "fa-solid fa-venus", womenItems, "women"));
-    container.appendChild(createGroup("Shared Travel Essentials (For Both)", "fa-solid fa-people-arrows", commonItems, "both"));
+        grid.appendChild(card);
+    });
+    
+    groupDiv.appendChild(grid);
+    container.appendChild(groupDiv);
 }
 
 function renderPartnersTable() {
