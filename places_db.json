@@ -17,6 +17,8 @@
     "cons": ["Ghat roads can be narrow and winding.", "Limited luxury hotels; mostly homestays and state tourism resorts.", "Public transportation is infrequent; renting a vehicle is advised."],
     "warnings": ["Daldali (bouncing land) can be slippery during monsoons; avoid stepping deep into swampy pockets without local guides.", "Mobile network coverage can be weak in deep forest points.", "Drive carefully on ghat roads during winters due to thick morning fog."],
     "extra_tips": ["Try traditional Tibetan momos and thukpa at local refugee shops near the monastery.", "Visit the Dhakpo Shedupling Monastery early in the morning.", "Buy authentic hand-woven woolen carpets made by the Tibetan cooperatives."],
+    "hotels": ["Saila Tourist Resort (Chhattisgarh Tourism)", "Mercury Homestay Tibetan Camp 3", "Mainpat Highland Heights Homestay"],
+    "restaurants": ["Tibetan Camp 2 Momo Kitchen", "Snow Lion Cafe", "Tashi Dhapa local Tibetan food corner"],
     "itineraries": {
       "3": [
         {"day": 1, "title": "Arrival & Tibetan Monasteries", "activities": ["Drive up the scenic Mainpat Ghats.", "Visit the central Dhakpo Shedupling Monastery.", "Spend a peaceful evening walking around the Tibetan camp markets."], "sights": ["Mainpat Ghats", "Dhakpo Shedupling Monastery"]},
