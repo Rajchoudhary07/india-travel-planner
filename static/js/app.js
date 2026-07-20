@@ -308,6 +308,13 @@ function bindEvents() {
             widgetChat.classList.remove('hidden');
         });
     }
+
+    const janhawkSettingsToggle = document.getElementById('janhawk-settings-toggle');
+    if (janhawkSettingsToggle) {
+        janhawkSettingsToggle.addEventListener('click', () => {
+            elements.settingsPanel.classList.remove('hidden');
+        });
+    }
     
     elements.saveSettings.addEventListener('click', () => {
         const keyVal = elements.userApiKey.value.trim();
