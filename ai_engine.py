@@ -234,7 +234,7 @@ def get_or_create_custom_place(custom_name, state_name, starting_city, api_key=N
             """
             
             response = client.models.generate_content(
-                model='gemini-2.5-flash',
+                model='gemini-1.5-flash',
                 contents=prompt
             )
             
@@ -703,7 +703,7 @@ def generate_ai_itinerary(place_data, home_city, starting_city, days, budget, tr
         logger.info(f"Calling Gemini API to generate itinerary starting from home {home_city} to {place_data['name']}...")
         
         response = client.models.generate_content(
-            model='gemini-3.5-flash',
+            model='gemini-1.5-flash',
             contents=prompt,
             config=types.GenerateContentConfig(
                 response_mime_type="application/json",
