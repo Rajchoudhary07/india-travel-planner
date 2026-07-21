@@ -353,20 +353,28 @@ def generate_local_itinerary_fallback(place_data, home_city, starting_city, days
         home_transit_rate = 2.8 # AC Train / Express bus
         
     # Calculate travel transport cost: Round trip transit from starting city + daily local travel
-    local_transit_cost = int((local_distance * 2 * km_rate) + (local_daily * days))
+    nights = max(1, days - 1)
+    
+    # Calculate vehicle transit units based on comfort tier & travelers count
     if travel_style == 'budget':
-        local_transit_cost = local_transit_cost * total_travelers
-    elif travel_style == 'mid_range':
-        auto_count = math.ceil(total_travelers / 3)
-        local_transit_cost = local_transit_cost * auto_count
+        transit_units = total_travelers  # tickets per person for local buses
+        local_transit_cost = int((local_distance * 2 * km_rate * transit_units) + (local_daily * days * transit_units))
+        room_count = math.ceil(total_travelers / 3)  # 3 people share a room for budget stays
+    elif travel_style == 'luxury':
+        transit_units = math.ceil(total_travelers / 4)  # 4 people per cab
+        local_transit_cost = int((local_distance * 2 * km_rate * transit_units) + (local_daily * days * transit_units))
+        room_count = math.ceil(total_travelers / 2)  # 2 people per room
+    else:
+        transit_units = math.ceil(total_travelers / 3)  # 3 people per auto
+        local_transit_cost = int((local_distance * 2 * km_rate * transit_units) + (local_daily * days * transit_units))
+        room_count = math.ceil(total_travelers / 2)  # 2 people per room
     
     # Calculate Home to Starting City travel cost
     home_transit_cost = 0
     if home_city != starting_city:
-        home_transit_cost = int(home_distance * home_transit_rate * 2) * total_travelers # Round trip home transit
+        home_transit_cost = int(home_distance * home_transit_rate * 2) * total_travelers  # Round trip home transit
         
-    room_count = math.ceil(total_travelers / 2)
-    total_lodging = stay_cost_per_night * days * room_count
+    total_lodging = stay_cost_per_night * nights * room_count
     total_food = place_data['food_cost_per_day'] * days * total_travelers
     
     # 5. Calculate entry ticket costs
@@ -630,7 +638,11 @@ def generate_ai_itinerary(place_data, home_city, starting_city, days, budget, tr
 
         CONSTRAINTS:
         1. All calculations must be in INR. The total estimated cost in 'cost_summary' must fit the budget ({budget} INR).
-        2. All lodging, food, and local activity ticket prices must be multiplied dynamically for {total_travelers} travelers (i.e. 'lodging_cost' = stay_cost_per_night * days * room_count, etc.). Adjust lodging based on total travelers assuming 2-3 people per room.
+        2. All calculations must scale dynamically with the number of travelers ({total_travelers}) and the duration of stay ({days} Days / {max(1, days - 1)} Nights):
+           - 'lodging_cost' must be calculated based on {max(1, days - 1)} nights of stay (as checkout happens on the final day). The formula is stay_cost_per_night * {max(1, days - 1)} * room_count, where room_count = math.ceil({total_travelers} / 2) for standard/luxury (assuming 2 people per room) or math.ceil({total_travelers} / 3) for budget (assuming 3 people per room).
+           - 'food_cost' must be base_food_cost_per_day * {days} * {total_travelers}.
+           - 'transport_cost' (local travel within destination) must scale with vehicle capacity: luxury/private cab handles up to 4 people (units = math.ceil({total_travelers}/4)), mid-range/auto handles up to 3 people (units = math.ceil({total_travelers}/3)), and budget/public bus is per traveler. Local transport is (starting_city_to_dest_distance * 2 * km_rate * units) + (daily_local_fee * {days} * units).
+           - 'tickets_cost' must be total_entry_tickets_per_person * {total_travelers}.
         3. Calculate the 'home_transit_cost' for round-trip travel from {home_city} to {starting_city} for ALL {total_travelers} travelers (approx rates per km per traveler: luxury=7.5, mid_range=2.8, budget=1.2). If {home_city} equals {starting_city}, set 'home_transit_cost' to 0.
         4. Day 1 should describe leaving from {home_city} (flight/train) and arriving at {place_data['name']} via {starting_city}. Day {days} (the final day) must describe local morning sightseeing/shopping, checking out of the lodging, and returning back home via {starting_city} (Departure).
         5. Integrate a comprehensive 'women_safety' review based on the ground-truth data.
