@@ -788,6 +788,100 @@
         </main>
     </div>
 
+    <!-- Compliance Footer -->
+    <footer style="margin-top: 60px; padding: 40px 20px; border-top: 1px solid var(--border-light); text-align: center; background: rgba(10, 4, 3, 0.4); backdrop-filter: blur(10px); position: relative; z-index: 10;">
+        <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 20px;">
+            <div style="display: flex; gap: 25px; flex-wrap: wrap; justify-content: center; font-size: 13px; font-weight: 500;">
+                <a href="#" id="link-privacy" style="color: var(--text-muted); text-decoration: none; transition: color 0.3s;">Privacy Policy</a>
+                <a href="#" id="link-terms" style="color: var(--text-muted); text-decoration: none; transition: color 0.3s;">Terms & Conditions</a>
+                <a href="#" id="link-disclaimer" style="color: var(--text-muted); text-decoration: none; transition: color 0.3s;">Disclaimer & Affiliate Disclosure</a>
+                <a href="#" id="link-about" style="color: var(--text-muted); text-decoration: none; transition: color 0.3s;">About Us</a>
+                <a href="#" id="link-contact" style="color: var(--text-muted); text-decoration: none; transition: color 0.3s;">Contact Us</a>
+            </div>
+            <p style="margin: 0; font-size: 12px; color: var(--text-muted); font-family: var(--font-body);">&copy; 2026 Offbeat Yatra. All Rights Reserved. Curation of sustainable, offbeat exploration tracks across India.</p>
+        </div>
+    </footer>
+
+    <!-- Policy Modal Overlays (AdSense / Legal Compliance) -->
+    <!-- Privacy Policy Modal -->
+    <div id="modal-privacy" class="settings-panel hidden" style="background: rgba(10, 4, 3, 0.95); display: flex; align-items: center; justify-content: center; z-index: 10000; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;">
+        <div style="background: rgba(20, 10, 8, 0.96); border: 1px solid var(--border-glow); border-radius: 20px; width: 90%; max-width: 600px; max-height: 80vh; overflow-y: auto; padding: 30px; position: relative; box-shadow: 0 10px 40px rgba(0,0,0,0.6); box-sizing: border-box; text-align: left;">
+            <span class="close-policy-btn" style="position: absolute; top: 20px; right: 20px; font-size: 24px; color: var(--text-muted); cursor: pointer; transition: color 0.3s;"><i class="fa-solid fa-xmark"></i></span>
+            <h2 style="font-family: var(--font-heading); color: var(--accent-sunset); margin-top: 0; font-size: 22px; margin-bottom: 20px;"><i class="fa-solid fa-user-shield"></i> Privacy Policy</h2>
+            <div style="color: var(--text-secondary); font-size: 14px; line-height: 1.6; display: flex; flex-direction: column; gap: 12px;">
+                <p>Last updated: July 21, 2026</p>
+                <p>Welcome to Offbeat Yatra (offbeatyatra.online). We respect your privacy and are committed to protecting your personal data.</p>
+                <h4 style="color: #fff; margin: 10px 0 2px 0;">1. Information We Collect</h4>
+                <p>We may collect information you provide directly to us when generating itineraries or submitting inquiry forms, including your name, email address, WhatsApp contact information, and travel style preferences. We also collect automated usage data via browser cookies to analyze platform traffic.</p>
+                <h4 style="color: #fff; margin: 10px 0 2px 0;">2. Cookies & Google AdSense Disclosures</h4>
+                <p>We use Google AdSense to serve advertisements on our platform. Google, as a third-party vendor, uses cookies to serve ads based on your prior visits to our website or other sites. Google's use of advertising cookies enables it and its partners to serve ads based on your visit history. You may opt out of personalized advertising by visiting Google Ad Settings.</p>
+                <h4 style="color: #fff; margin: 10px 0 2px 0;">3. Data Security & Storage</h4>
+                <p>All data is processed securely. We implement industry-standard encryption protocols. We do not sell, rent, or distribute your private travel metadata to unsolicited marketing companies.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Terms & Conditions Modal -->
+    <div id="modal-terms" class="settings-panel hidden" style="background: rgba(10, 4, 3, 0.95); display: flex; align-items: center; justify-content: center; z-index: 10000; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;">
+        <div style="background: rgba(20, 10, 8, 0.96); border: 1px solid var(--border-glow); border-radius: 20px; width: 90%; max-width: 600px; max-height: 80vh; overflow-y: auto; padding: 30px; position: relative; box-shadow: 0 10px 40px rgba(0,0,0,0.6); box-sizing: border-box; text-align: left;">
+            <span class="close-policy-btn" style="position: absolute; top: 20px; right: 20px; font-size: 24px; color: var(--text-muted); cursor: pointer; transition: color 0.3s;"><i class="fa-solid fa-xmark"></i></span>
+            <h2 style="font-family: var(--font-heading); color: var(--accent-sunset); margin-top: 0; font-size: 22px; margin-bottom: 20px;"><i class="fa-solid fa-gavel"></i> Terms & Conditions</h2>
+            <div style="color: var(--text-secondary); font-size: 14px; line-height: 1.6; display: flex; flex-direction: column; gap: 12px;">
+                <p>Last updated: July 21, 2026</p>
+                <p>By accessing or using Offbeat Yatra (offbeatyatra.online), you agree to comply with and be bound by these Terms and Conditions.</p>
+                <h4 style="color: #fff; margin: 10px 0 2px 0;">1. Intellectual Property</h4>
+                <p>The layout, design, calculations, programmatic rules, and local database content hosted on this application are the exclusive property of Offbeat Yatra. You may not copy, reverse-engineer, or scrape our structured database without express authorization.</p>
+                <h4 style="color: #fff; margin: 10px 0 2px 0;">2. Acceptable Use</h4>
+                <p>You agree to use our dynamic travel generator only for legitimate personal itinerary planning. Spamming our lead generation forms, payment verification portals, or partner agreements with false credentials will result in permanent IP blocks.</p>
+                <h4 style="color: #fff; margin: 10px 0 2px 0;">3. Limitation of Liability</h4>
+                <p>All itineraries, route mappings, local prices, and travel hacks are generated programmatically for convenience. We are not responsible for transport delays, safety incidences, seasonal road closures, or transaction discrepancies with third-party lodging partners.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Disclaimer & Affiliate Disclosure Modal -->
+    <div id="modal-disclaimer" class="settings-panel hidden" style="background: rgba(10, 4, 3, 0.95); display: flex; align-items: center; justify-content: center; z-index: 10000; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;">
+        <div style="background: rgba(20, 10, 8, 0.96); border: 1px solid var(--border-glow); border-radius: 20px; width: 90%; max-width: 600px; max-height: 80vh; overflow-y: auto; padding: 30px; position: relative; box-shadow: 0 10px 40px rgba(0,0,0,0.6); box-sizing: border-box; text-align: left;">
+            <span class="close-policy-btn" style="position: absolute; top: 20px; right: 20px; font-size: 24px; color: var(--text-muted); cursor: pointer; transition: color 0.3s;"><i class="fa-solid fa-xmark"></i></span>
+            <h2 style="font-family: var(--font-heading); color: var(--accent-sunset); margin-top: 0; font-size: 22px; margin-bottom: 20px;"><i class="fa-solid fa-triangle-exclamation"></i> Disclaimer & Affiliate Disclosure</h2>
+            <div style="color: var(--text-secondary); font-size: 14px; line-height: 1.6; display: flex; flex-direction: column; gap: 12px;">
+                <p>Last updated: July 21, 2026</p>
+                <h4 style="color: #fff; margin: 10px 0 2px 0;">1. General Travel Disclaimer</h4>
+                <p>Offbeat Yatra operates as an educational and utility-based itinerary builder. All recommendations, transit routes, hotel price indexes, ticket costs, and women safety rankings are calculated based on historical local data. Actual conditions (weather, political situations, landslides, local hotel pricing spikes) may vary. Travelers are strongly advised to perform independent checks before departure.</p>
+                <h4 style="color: #fff; margin: 10px 0 2px 0;">2. Amazon Affiliate Program Disclosure</h4>
+                <p>In compliance with FTC guidelines, please note that we participate in the Amazon Services LLC Associates Program, an affiliate advertising program designed to provide a source of income for sites by advertising and linking to Amazon.in/Amazon.com. When you click our customized Amazon checklist links to buy recommended gear, we earn a tiny advertising commission at no additional cost to you. This support helps fund our server costs.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Us Modal -->
+    <div id="modal-about" class="settings-panel hidden" style="background: rgba(10, 4, 3, 0.95); display: flex; align-items: center; justify-content: center; z-index: 10000; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;">
+        <div style="background: rgba(20, 10, 8, 0.96); border: 1px solid var(--border-glow); border-radius: 20px; width: 90%; max-width: 600px; max-height: 80vh; overflow-y: auto; padding: 30px; position: relative; box-shadow: 0 10px 40px rgba(0,0,0,0.6); box-sizing: border-box; text-align: left;">
+            <span class="close-policy-btn" style="position: absolute; top: 20px; right: 20px; font-size: 24px; color: var(--text-muted); cursor: pointer; transition: color 0.3s;"><i class="fa-solid fa-xmark"></i></span>
+            <h2 style="font-family: var(--font-heading); color: var(--accent-sunset); margin-top: 0; font-size: 22px; margin-bottom: 20px;"><i class="fa-solid fa-users"></i> About Us</h2>
+            <div style="color: var(--text-secondary); font-size: 14px; line-height: 1.6; display: flex; flex-direction: column; gap: 12px;">
+                <p>Welcome to <b>Offbeat Yatra</b>!</p>
+                <p>Our mission is to help travelers step away from crowded tourist hubs (overtourism) and explore the breathtaking, lesser-known gems of India. We design customizable itineraries that direct economic benefits to remote, local communities while giving travelers authentic, unforgettable experiences.</p>
+                <p>From the bouncing lands of Mainpat to the crystal-clear streams of Mawlynnong, India houses magical sights that deserve responsible tourism. We combine AI technology and verified local rules to structure safe, realistic travel plans.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Us Modal -->
+    <div id="modal-contact" class="settings-panel hidden" style="background: rgba(10, 4, 3, 0.95); display: flex; align-items: center; justify-content: center; z-index: 10000; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;">
+        <div style="background: rgba(20, 10, 8, 0.96); border: 1px solid var(--border-glow); border-radius: 20px; width: 90%; max-width: 600px; padding: 30px; position: relative; box-shadow: 0 10px 40px rgba(0,0,0,0.6); box-sizing: border-box; text-align: left;">
+            <span class="close-policy-btn" style="position: absolute; top: 20px; right: 20px; font-size: 24px; color: var(--text-muted); cursor: pointer; transition: color 0.3s;"><i class="fa-solid fa-xmark"></i></span>
+            <h2 style="font-family: var(--font-heading); color: var(--accent-sunset); margin-top: 0; font-size: 22px; margin-bottom: 15px;"><i class="fa-solid fa-envelope"></i> Contact Us</h2>
+            <p style="color: var(--text-secondary); font-size: 14px; line-height: 1.6; margin-bottom: 20px;">
+                Have questions, feature requests, or stay partnership suggestions? Feel free to reach out to us. We will get back to you within 24–48 hours.
+            </p>
+            <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-light); border-radius: 10px; padding: 15px; display: flex; flex-direction: column; gap: 8px;">
+                <span style="font-size: 12px; color: var(--text-muted);">📧 Email Inquiry Support</span>
+                <a href="mailto:contact@offbeatyatra.online" style="color: var(--accent-cyan); font-size: 16px; font-weight: bold; text-decoration: none;">contact@offbeatyatra.online</a>
+            </div>
+        </div>
+    </div>
+
     <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
