@@ -266,6 +266,24 @@ function bindEvents() {
         generateItinerary();
     });
 
+    // Custom Destination input toggle
+    const toggleCustomDest = document.getElementById('toggle-custom-dest');
+    const customDestGroup = document.getElementById('custom-dest-group');
+    if (toggleCustomDest && customDestGroup) {
+        toggleCustomDest.addEventListener('click', (e) => {
+            e.preventDefault();
+            customDestGroup.classList.toggle('hidden');
+            if (!customDestGroup.classList.contains('hidden')) {
+                toggleCustomDest.innerHTML = '<i class="fa-solid fa-circle-minus"></i> Use standard list instead';
+                elements.destinationHiddenInput.value = 'custom';
+            } else {
+                toggleCustomDest.innerHTML = '<i class="fa-solid fa-circle-plus"></i> Can\'t find your destination? Type any custom place!';
+                elements.destinationHiddenInput.value = '';
+                document.getElementById('custom-dest-input').value = '';
+            }
+        });
+    }
+
     // Settings panel toggles (Safe Check)
     if (elements.settingsToggle) {
         elements.settingsToggle.addEventListener('click', () => {
@@ -845,7 +863,7 @@ function populatePreviewTags(places) {
 }
 
 async function generateItinerary() {
-    const placeId = elements.destinationHiddenInput.value;
+    let placeId = elements.destinationHiddenInput.value;
     const startingCity = elements.citySelect.value;
     const homeCity = elements.homeSelect.value;
     const days = parseInt(elements.daysInput.value);
@@ -855,8 +873,24 @@ async function generateItinerary() {
     const totalTravelers = parseInt(document.getElementById('travelers-input').value) || 1;
     const femaleTravelers = parseInt(document.getElementById('female-travelers-input').value) || 0;
     
-    if (!placeId || !startingCity) {
-        showNotification('Input Needed', 'Please complete State, City, and Destination selections.', 'info');
+    // Check if custom destination is active
+    const customDestGroup = document.getElementById('custom-dest-group');
+    const customDestInput = document.getElementById('custom-dest-input');
+    const isCustomActive = customDestGroup && !customDestGroup.classList.contains('hidden');
+    let customName = '';
+    
+    if (isCustomActive && customDestInput && customDestInput.value.trim()) {
+        placeId = 'custom';
+        customName = customDestInput.value.trim();
+    }
+    
+    if (!placeId || (placeId === 'custom' && !customName)) {
+        showNotification('Input Needed', 'Please select a destination from the list or type a custom place.', 'info');
+        return;
+    }
+    
+    if (!startingCity) {
+        showNotification('Input Needed', 'Please select a starting city/gateway.', 'info');
         return;
     }
 
@@ -887,6 +921,8 @@ async function generateItinerary() {
             },
             body: JSON.stringify({
                 place_id: placeId,
+                custom_name: customName,
+                state: elements.stateSelect.value,
                 starting_city: startingCity,
                 home_city: homeCity,
                 days: days,

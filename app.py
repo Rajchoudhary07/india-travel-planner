@@ -1,7 +1,7 @@
 import os
 from flask import Flask, jsonify, request, render_template, send_from_directory
 
-from ai_engine import load_places_database, get_place_by_id, generate_ai_itinerary
+from ai_engine import load_places_database, get_place_by_id, generate_ai_itinerary, get_or_create_custom_place
 
 # Initialize Flask app
 app = Flask(
@@ -89,13 +89,21 @@ def handle_generate_itinerary():
         if not budget or not isinstance(budget, (int, float)) or budget <= 0:
             return jsonify({"error": "Valid budget in INR is required"}), 400
             
-        # Get place information from database
-        place_data = get_place_by_id(place_id)
+        # Get place information from database or dynamically create it
+        if place_id == "custom":
+            custom_name = data.get("custom_name")
+            state_name = data.get("state")
+            if not custom_name or not state_name:
+                return jsonify({"error": "custom_name and state are required when place_id is 'custom'"}), 400
+            place_data = get_or_create_custom_place(custom_name, state_name, starting_city, api_key)
+        else:
+            place_data = get_place_by_id(place_id)
+            
         if not place_data:
             return jsonify({"error": f"Destination with ID '{place_id}' not found in database"}), 404
             
         # Verify starting city is valid for this destination
-        if starting_city not in place_data["starting_cities"]:
+        if starting_city not in place_data.get("starting_cities", []):
             return jsonify({"error": f"Starting city '{starting_city}' is not linked to destination '{place_data['name']}'"}), 400
             
         # Generate the itinerary using our AI engine (with fallback)

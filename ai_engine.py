@@ -111,6 +111,165 @@ def load_places_database():
         logger.error(f"Error loading database: {e}")
         return []
 
+def save_places_database(db):
+    """
+    Saves the database list back to places_db.json.
+    """
+    try:
+        with open(DB_PATH, 'w', encoding='utf-8') as f:
+            json.dump(db, f, indent=2, ensure_ascii=False)
+        return True
+    except Exception as e:
+        logger.error(f"Error saving database: {e}")
+        return False
+
+def generate_local_place_data_fallback(place_name, state_name):
+    """
+    Generates a localized fallback template schema if Gemini API fails.
+    """
+    return {
+        "id": place_name.lower().strip().replace(' ', '_'),
+        "name": place_name,
+        "state": state_name,
+        "is_popular": False,
+        "starting_cities": ["Closest Hub"],
+        "starting_city_distances": {"Closest Hub": 50},
+        "description": f"A beautiful offbeat destination in {state_name} waiting to be explored.",
+        "lat": 20.0, "lon": 78.0,
+        "best_season": "October to March",
+        "entry_tickets": {},
+        "transportation": {"local_auto": 500, "private_cab": 2000, "public_bus": 100},
+        "accommodation": {"budget": 1000, "mid_range": 2200, "luxury": 4500},
+        "food_cost_per_day": 400,
+        "women_safety": "Generally safe. Warm local hospitality. Standard night travel precautions apply.",
+        "pros": ["Pristine natural beauty", "Quiet environment", "Authentic culture"],
+        "cons": ["Limited public transit", "Homestays only", "Weak mobile signals"],
+        "warnings": ["Carry cash", "Check weather updates"],
+        "extra_tips": ["Hire local guides", "Taste local dishes"],
+        "hotels": ["Local Homestays"],
+        "restaurants": ["Local Family Dhaba"],
+        "itineraries": {
+            "3": [
+                {"day": 1, "title": "Arrival & Settlement", "activities": ["Reach the valley and check into your homestay.", "Explore local markets."], "sights": ["Local markets"]},
+                {"day": 2, "title": "Scenic Sightseeing", "activities": ["Visit scenic viewpoints and main waterfalls.", "Enjoy village walks."], "sights": ["Scenic viewpoints"]},
+                {"day": 3, "title": "Local Souvenirs & Departure", "activities": ["Pack your luggage.", "Depart for gateway station."], "sights": ["Departure"]}
+            ]
+        }
+    }
+
+def get_or_create_custom_place(custom_name, state_name, starting_city, api_key=None):
+    """
+    Resolves the custom destination. Returns existing one if found, or queries
+    Gemini to generate a full structured place profile in real-time.
+    """
+    slug_id = custom_name.lower().strip().replace(' ', '_')
+    db = load_places_database()
+    
+    # Check if place is already in database
+    for place in db:
+        if place['id'] == slug_id:
+            # Safe-check starting city compatibility
+            if starting_city not in place.get("starting_cities", []):
+                place["starting_cities"].append(starting_city)
+                if "starting_city_distances" not in place:
+                    place["starting_city_distances"] = {}
+                place["starting_city_distances"][starting_city] = 60
+                save_places_database(db)
+            return place
+            
+    # Not found, generate dynamically
+    key = api_key or os.environ.get("GEMINI_API_KEY")
+    place_profile = None
+    
+    if key:
+        try:
+            client = genai.Client(api_key=key)
+            prompt = f"""
+            You are an expert Indian travel geographer and database manager.
+            Generate a highly accurate, structured database profile for the destination: '{custom_name}' located in the state of '{state_name}', India.
+            
+            You must return STRICTLY a JSON object matching this schema. Do not output markdown, notes, or explanations outside the JSON.
+            
+            JSON SCHEMA:
+            {{
+                "id": "{slug_id}",
+                "name": "{custom_name}",
+                "state": "{state_name}",
+                "is_popular": false,
+                "starting_cities": ["{starting_city}"],
+                "starting_city_distances": {{
+                    "{starting_city}": 65
+                }},
+                "description": "<detailed description of the place, its charm, and geography>",
+                "lat": 20.0,
+                "lon": 78.0,
+                "best_season": "October to March",
+                "entry_tickets": {{}},
+                "transportation": {{
+                    "local_auto": 600,
+                    "private_cab": 2500,
+                    "public_bus": 150
+                }},
+                "accommodation": {{
+                    "budget": 1200,
+                    "mid_range": 2600,
+                    "luxury": 5000
+                }},
+                "food_cost_per_day": 450,
+                "women_safety": "<comprehensive 2-3 sentence guide on safety profile, local dress norms, safe travel times, and emergency index>",
+                "pros": ["Pristine natural beauty", "Quiet environment", "Authentic culture"],
+                "cons": ["Limited public transit", "Homestays only", "Weak mobile signals"],
+                "warnings": ["Carry cash", "Check weather updates"],
+                "extra_tips": ["Hire local guides", "Taste local dishes"],
+                "hotels": ["Local Stays"],
+                "restaurants": ["Local Eatery"],
+                "itineraries": {{
+                    "3": [
+                        {{"day": 1, "title": "Arrival & Settlement", "activities": ["Reach the valley and check into your homestay.", "Explore local markets."], "sights": ["Local markets"]}},
+                        {{"day": 2, "title": "Scenic Sightseeing", "activities": ["Visit scenic viewpoints and main waterfalls.", "Enjoy village walks."], "sights": ["Scenic viewpoints"]}},
+                        {{"day": 3, "title": "Local Souvenirs & Departure", "activities": ["Pack your luggage.", "Depart for gateway station."], "sights": ["Departure"]}}
+                    ]
+                }}
+            }}
+            """
+            
+            response = client.models.generate_content(
+                model='gemini-2.5-flash',
+                contents=prompt
+            )
+            
+            clean_text = response.text.strip()
+            if clean_text.startswith("```json"):
+                clean_text = clean_text[7:]
+            elif clean_text.startswith("```"):
+                clean_text = clean_text[3:]
+            if clean_text.endswith("```"):
+                clean_text = clean_text[:-3]
+            clean_text = clean_text.strip()
+            
+            place_profile = json.loads(clean_text)
+            
+        except Exception as e:
+            logger.error(f"Failed dynamic place generation for {custom_name}: {e}. Using local fallback.")
+            place_profile = None
+
+    if not place_profile:
+        place_profile = generate_local_place_data_fallback(custom_name, state_name)
+        
+    # Ensure slug_id compatibility and required starting_city
+    place_profile["id"] = slug_id
+    if starting_city not in place_profile.get("starting_cities", []):
+        place_profile["starting_cities"] = [starting_city]
+        if "starting_city_distances" not in place_profile:
+            place_profile["starting_city_distances"] = {}
+        place_profile["starting_city_distances"][starting_city] = 60
+        
+    # Append to database and save
+    db.append(place_profile)
+    save_places_database(db)
+    
+    return place_profile
+
 def get_place_by_id(place_id):
     """
     Helper to fetch a specific place's data from the database.
