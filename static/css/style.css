@@ -2,23 +2,23 @@
    Design Tokens & Root Variables (Default Dark Mode)
    ========================================================================== */
 :root {
-    --bg-dark: #0a0403;
-    --bg-card: rgba(22, 11, 9, 0.45);
-    --bg-card-hover: rgba(35, 17, 14, 0.55);
-    --border-light: rgba(255, 235, 230, 0.12);
-    --border-glow: rgba(255, 159, 67, 0.45);
+    --bg-dark: #f8fafc;
+    --bg-card: rgba(255, 255, 255, 0.75);
+    --bg-card-hover: rgba(240, 253, 244, 0.85);
+    --border-light: rgba(16, 185, 129, 0.18);
+    --border-glow: rgba(16, 185, 129, 0.45);
     
     /* Core Palettes */
-    --accent-cyan: #ff9f43;
-    --accent-blue: #ee5253;
-    --accent-gold: #f39c12;
-    --accent-sunset: #ff9f43;
-    --accent-green: #1dd1a1;
+    --accent-cyan: #0284c7;
+    --accent-blue: #10b981;
+    --accent-gold: #ffbe0b;
+    --accent-sunset: #059669;
+    --accent-green: #10b981;
     
     /* Typography Colors */
-    --text-primary: #fffbf9;
-    --text-secondary: #ebdcd7;
-    --text-muted: #bc9f98;
+    --text-primary: #0f172a;
+    --text-secondary: #334155;
+    --text-muted: #64748b;
     
     /* Fonts */
     --font-heading: 'Outfit', sans-serif;
@@ -30,35 +30,39 @@
     --transition-smooth: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     
     /* Neon Blur Orbs Color */
-    --orb-color-1: rgba(255, 159, 67, 0.18);
-    --orb-color-2: rgba(238, 82, 83, 0.12);
-    --orb-color-3: rgba(243, 156, 18, 0.12);
+    --orb-color-1: rgba(16, 185, 129, 0.08);
+    --orb-color-2: rgba(245, 158, 11, 0.04);
+    --orb-color-3: rgba(14, 165, 233, 0.04);
     
-    /* Dynamic 3D background (Highly visible background) */
-    --bg-terracotta: linear-gradient(rgba(10, 4, 3, 0.22), rgba(10, 4, 3, 0.22)), url('/static/img/bg-terracotta.png');
+    /* Travel-friendly Green and White Gradient Background - Light Green */
+    --bg-terracotta: radial-gradient(circle at 15% 20%, rgba(16, 185, 129, 0.12) 0%, transparent 60%),
+                     radial-gradient(circle at 85% 80%, rgba(0, 114, 255, 0.08) 0%, transparent 65%),
+                     linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
 }
 
 /* ==========================================================================
    Light Mode Theme Variables
    ========================================================================== */
 body.light-theme {
-    --bg-dark: #faf5f3;
-    --bg-card: rgba(255, 255, 255, 0.38);
-    --bg-card-hover: rgba(255, 255, 255, 0.52);
-    --border-light: rgba(255, 255, 255, 0.3);
-    --border-glow: rgba(226, 88, 62, 0.35);
+    --bg-dark: #f0f6fa;
+    --bg-card: rgba(255, 255, 255, 0.45);
+    --bg-card-hover: rgba(255, 255, 255, 0.6);
+    --border-light: rgba(15, 23, 42, 0.08);
+    --border-glow: rgba(0, 114, 255, 0.25);
     
     /* Typography Colors */
-    --text-primary: #2d1612;
-    --text-secondary: #5c3b35;
-    --text-muted: #8c6a63;
+    --text-primary: #0f172a;
+    --text-secondary: #334155;
+    --text-muted: #64748b;
     
     /* Neon Blur Orb Color (Light Mode Variant) */
-    --orb-color-1: rgba(255, 126, 95, 0.08);
-    --orb-color-2: rgba(226, 88, 62, 0.06);
-    --orb-color-3: rgba(255, 210, 105, 0.06);
+    --orb-color-1: rgba(29, 209, 161, 0.08);
+    --orb-color-2: rgba(0, 114, 255, 0.08);
+    --orb-color-3: rgba(0, 229, 255, 0.06);
     
-    --bg-terracotta: linear-gradient(rgba(250, 245, 243, 0.15), rgba(250, 245, 243, 0.15)), url('/static/img/bg-terracotta.png');
+    --bg-terracotta: radial-gradient(circle at 15% 20%, rgba(29, 209, 161, 0.12) 0%, transparent 60%),
+                     radial-gradient(circle at 85% 80%, rgba(0, 114, 255, 0.1) 0%, transparent 65%),
+                     linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
 }
 
 /* Light Theme Component Overrides */
@@ -249,14 +253,9 @@ body {
     z-index: -1;
     opacity: 0.28;
     pointer-events: none;
-    mix-blend-mode: screen;
+    mix-blend-mode: multiply;
     transform: translate3d(var(--tilt-x, 0px), var(--tilt-y, 0px), 0);
     transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-body.light-theme .orb {
-    mix-blend-mode: multiply;
-    opacity: 0.45;
 }
 
 .orb-1 {
@@ -529,7 +528,7 @@ body.light-theme .orb {
 }
 
 .form-input {
-    background: rgba(13, 20, 38, 0.8);
+    background: rgba(255, 255, 255, 0.85);
     border: 1px solid var(--border-light);
     border-radius: var(--border-radius-md);
     padding: 12px 14px;
@@ -541,13 +540,13 @@ body.light-theme .orb {
 }
 
 .form-input:focus {
-    border-color: var(--accent-cyan);
-    box-shadow: 0 0 10px rgba(0, 242, 254, 0.15);
-    background: rgba(13, 20, 38, 0.95);
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
+    background: #ffffff;
 }
 
 .form-input option {
-    background-color: var(--bg-dark);
+    background-color: #ffffff;
     color: var(--text-primary);
 }
 
@@ -619,7 +618,7 @@ body.light-theme .orb {
     align-items: center;
     gap: 6px;
     padding: 12px 6px;
-    background: rgba(13, 20, 38, 0.8);
+    background: rgba(255, 255, 255, 0.85);
     border: 1px solid var(--border-light);
     border-radius: var(--border-radius-md);
     text-align: center;
@@ -639,13 +638,13 @@ body.light-theme .orb {
 }
 
 .style-option input:checked + .option-card {
-    background: rgba(0, 242, 254, 0.08);
-    border-color: var(--accent-cyan);
-    box-shadow: 0 0 12px rgba(0, 242, 254, 0.15);
+    background: rgba(16, 185, 129, 0.12);
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 12px rgba(16, 185, 129, 0.20);
 }
 
 .style-option input:checked + .option-card i {
-    color: var(--accent-cyan);
+    color: var(--accent-blue);
     transform: scale(1.1);
 }
 
