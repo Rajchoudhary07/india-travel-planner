@@ -3,10 +3,10 @@
    ========================================================================== */
 :root {
     --bg-dark: #f8fafc;
-    --bg-card: rgba(255, 255, 255, 0.75);
-    --bg-card-hover: rgba(240, 253, 244, 0.85);
-    --border-light: rgba(16, 185, 129, 0.18);
-    --border-glow: rgba(16, 185, 129, 0.45);
+    --bg-card: rgba(255, 255, 255, 0.22);
+    --bg-card-hover: rgba(255, 255, 255, 0.38);
+    --border-light: rgba(16, 185, 129, 0.25);
+    --border-glow: rgba(16, 185, 129, 0.55);
     
     /* Core Palettes */
     --accent-cyan: #0284c7;
@@ -34,8 +34,8 @@
     --orb-color-2: rgba(245, 158, 11, 0.04);
     --orb-color-3: rgba(14, 165, 233, 0.04);
     
-    /* Travel-friendly Green and White Gradient Background with Forest watermark */
-    --bg-terracotta: linear-gradient(135deg, rgba(255, 255, 255, 0.94) 0%, rgba(240, 253, 244, 0.94) 100%),
+    /* Travel-friendly Green and White Gradient Background with Forest watermark (high visibility) */
+    --bg-terracotta: linear-gradient(135deg, rgba(255, 255, 255, 0.45) 0%, rgba(240, 253, 244, 0.45) 100%),
                      url('/static/img/bg-forest.jpg');
 }
 
@@ -527,7 +527,7 @@ body {
 }
 
 .form-input {
-    background: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.25);
     border: 1px solid var(--border-light);
     border-radius: var(--border-radius-md);
     padding: 12px 14px;
@@ -541,7 +541,7 @@ body {
 .form-input:focus {
     border-color: var(--accent-blue);
     box-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.65);
 }
 
 .form-input option {
@@ -617,7 +617,7 @@ body {
     align-items: center;
     gap: 6px;
     padding: 12px 6px;
-    background: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.25);
     border: 1px solid var(--border-light);
     border-radius: var(--border-radius-md);
     text-align: center;
