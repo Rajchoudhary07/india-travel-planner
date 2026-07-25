@@ -798,7 +798,7 @@ function populatePreviewTags(places) {
     // Sort them according to our array order
     featuredPlaces.sort((a, b) => featuredIds.indexOf(a.id) - featuredIds.indexOf(b.id));
 
-    featuredPlaces.forEach(place => {
+    featuredPlaces.forEach((place, idx) => {
         const ratingInfo = GEM_RATINGS[place.id] || { beauty: 4.5, trip: 4.5, category: "Hidden Gem" };
         
         const card = document.createElement('div');
@@ -859,6 +859,35 @@ function populatePreviewTags(places) {
         });
 
         elements.featuredGemsGrid.appendChild(card);
+
+        // Inject in-feed AdSense card after the second card (idx === 1)
+        if (idx === 1) {
+            const adCard = document.createElement('div');
+            adCard.className = 'gem-card adsense-feed-card';
+            adCard.style.background = 'rgba(230, 248, 235, 0.18)';
+            adCard.style.borderColor = 'var(--border-light)';
+            adCard.style.borderStyle = 'dashed';
+            adCard.style.display = 'flex';
+            adCard.style.flexDirection = 'column';
+            adCard.style.justifyContent = 'center';
+            adCard.style.padding = '20px';
+            adCard.innerHTML = `
+                <div style="font-size: 10px; color: var(--text-muted); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; font-weight: bold;">Sponsored Suggestion</div>
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-format="fluid"
+                     data-ad-layout-key="-ej+6l-2v-aq+u1"
+                     data-ad-client="ca-pub-5830823262791349"
+                     data-ad-slot="5467890577"></ins>
+            `;
+            elements.featuredGemsGrid.appendChild(adCard);
+            
+            try {
+                (window.adsbygoogle = window.adsbygoogle || []).push({});
+            } catch (e) {
+                console.warn("AdSense push postponed (crawling or sandbox mode)");
+            }
+        }
     });
 }
 
@@ -1301,6 +1330,33 @@ function renderTimeline(daysList) {
                     }
                 });
             });
+        }
+
+        // Inject in-feed AdSense slot in the Day-by-Day schedule timeline after Day 2 (idx === 1)
+        if (idx === 1 && daysList.length >= 2) {
+            const adStep = document.createElement('div');
+            adStep.className = 'timeline-step adsense-timeline-ad';
+            adStep.style.display = 'block';
+            adStep.style.marginBottom = '25px';
+            adStep.innerHTML = `
+                <div class="timeline-marker" style="background: var(--accent-cyan);"></div>
+                <div class="timeline-content" style="padding: 15px; background: rgba(230, 248, 235, 0.18); border: 1px dashed var(--border-light); border-radius: var(--border-radius-md);">
+                    <div style="font-size: 10px; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; font-weight: bold;">Sponsored Suggestion</div>
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-format="fluid"
+                         data-ad-layout-key="-ej+6l-2v-aq+u1"
+                         data-ad-client="ca-pub-5830823262791349"
+                         data-ad-slot="5467890577"></ins>
+                </div>
+            `;
+            elements.timelineContainer.appendChild(adStep);
+            
+            try {
+                (window.adsbygoogle = window.adsbygoogle || []).push({});
+            } catch (e) {
+                console.warn("AdSense push postponed (crawling or sandbox mode)");
+            }
         }
     });
 }
