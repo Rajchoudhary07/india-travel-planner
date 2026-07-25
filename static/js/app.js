@@ -216,10 +216,10 @@ function initApp() {
     if (savedKey) {
         elements.userApiKey.value = savedKey;
     }
-    const savedUpi = localStorage.getItem('admin_upi_id') || 'janhawk2907@axl';
+    const savedUpi = localStorage.getItem('admin_upi_id') || 'Craj40215@axl';
     elements.userUpiId.value = savedUpi;
     if (!localStorage.getItem('admin_upi_id')) {
-        localStorage.setItem('admin_upi_id', 'janhawk2907@axl');
+        localStorage.setItem('admin_upi_id', 'Craj40215@axl');
     }
     const savedTag = localStorage.getItem('amazon_affiliate_tag') || 'offbeatyatra2-21';
     elements.userAmazonTag.value = savedTag;
@@ -489,7 +489,7 @@ function bindEvents() {
             
             // 1. Dispatch to FormSubmit email relay
             promises.push(
-                fetch('https://formsubmit.co/ajax/dramaticjanhawk@gmail.com', {
+                fetch('https://formsubmit.co/ajax/Craj40215@gmail.com', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
