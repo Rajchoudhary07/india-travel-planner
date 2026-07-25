@@ -34,10 +34,9 @@
     --orb-color-2: rgba(245, 158, 11, 0.04);
     --orb-color-3: rgba(14, 165, 233, 0.04);
     
-    /* Travel-friendly Green and White Gradient Background - Light Green */
-    --bg-terracotta: radial-gradient(circle at 15% 20%, rgba(16, 185, 129, 0.12) 0%, transparent 60%),
-                     radial-gradient(circle at 85% 80%, rgba(0, 114, 255, 0.08) 0%, transparent 65%),
-                     linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+    /* Travel-friendly Green and White Gradient Background with Forest watermark */
+    --bg-terracotta: linear-gradient(135deg, rgba(255, 255, 255, 0.94) 0%, rgba(240, 253, 244, 0.94) 100%),
+                     url('/static/img/bg-forest.jpg');
 }
 
 /* ==========================================================================
