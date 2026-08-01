@@ -297,35 +297,7 @@ function bindEvents() {
         });
     }
 
-    // Compliance Policy Footer Links & Modals
-    const policyLinks = [
-        { linkId: 'link-privacy', modalId: 'modal-privacy' },
-        { linkId: 'link-terms', modalId: 'modal-terms' },
-        { linkId: 'link-disclaimer', modalId: 'modal-disclaimer' },
-        { linkId: 'link-about', modalId: 'modal-about' },
-        { linkId: 'link-contact', modalId: 'modal-contact' }
-    ];
-
-    policyLinks.forEach(item => {
-        const link = document.getElementById(item.linkId);
-        const modal = document.getElementById(item.modalId);
-        if (link && modal) {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                modal.classList.remove('hidden');
-            });
-        }
-    });
-
-    document.querySelectorAll('.close-policy-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            const modal = e.target.closest('.settings-panel');
-            if (modal) {
-                modal.classList.add('hidden');
-            }
-        });
-    });
-    
+    // Settings Panel Save Action
     elements.saveSettings.addEventListener('click', () => {
         const keyVal = elements.userApiKey.value.trim();
         const upiVal = elements.userUpiId.value.trim();

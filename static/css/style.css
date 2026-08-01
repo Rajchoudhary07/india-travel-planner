@@ -2,23 +2,23 @@
    Design Tokens & Root Variables (Default Dark Mode)
    ========================================================================== */
 :root {
-    --bg-dark: #f8fafc;
-    --bg-card: rgba(255, 255, 255, 0.22);
-    --bg-card-hover: rgba(255, 255, 255, 0.38);
-    --border-light: rgba(16, 185, 129, 0.25);
-    --border-glow: rgba(16, 185, 129, 0.55);
+    --bg-dark: #04120c;
+    --bg-card: rgba(230, 248, 235, 0.24);
+    --bg-card-hover: rgba(210, 245, 220, 0.36);
+    --border-light: rgba(16, 185, 129, 0.24);
+    --border-glow: rgba(255, 183, 3, 0.55);
     
     /* Core Palettes */
-    --accent-cyan: #0284c7;
+    --accent-cyan: #ffb703;
     --accent-blue: #10b981;
-    --accent-gold: #ffbe0b;
+    --accent-gold: #f39c12;
     --accent-sunset: #059669;
     --accent-green: #10b981;
     
-    /* Typography Colors */
-    --text-primary: #0f172a;
-    --text-secondary: #334155;
-    --text-muted: #64748b;
+    /* Typography Colors (Deep Forest Pine Green for High Readability) */
+    --text-primary: #06241a;
+    --text-secondary: #163a2c;
+    --text-muted: #3d584c;
     
     /* Fonts */
     --font-heading: 'Outfit', sans-serif;
@@ -31,11 +31,11 @@
     
     /* Neon Blur Orbs Color */
     --orb-color-1: rgba(16, 185, 129, 0.08);
-    --orb-color-2: rgba(245, 158, 11, 0.04);
+    --orb-color-2: rgba(255, 183, 3, 0.05);
     --orb-color-3: rgba(14, 165, 233, 0.04);
     
     /* Travel-friendly Green and White Gradient Background with Forest watermark (high visibility) */
-    --bg-terracotta: linear-gradient(135deg, rgba(255, 255, 255, 0.45) 0%, rgba(240, 253, 244, 0.45) 100%),
+    --bg-terracotta: linear-gradient(135deg, rgba(255, 255, 255, 0.42) 0%, rgba(240, 253, 244, 0.38) 50%, rgba(255, 248, 225, 0.35) 100%),
                      url('/static/img/bg-forest.jpg');
 }
 
@@ -527,7 +527,7 @@ body {
 }
 
 .form-input {
-    background: rgba(255, 255, 255, 0.25);
+    background: rgba(230, 248, 235, 0.28);
     border: 1px solid var(--border-light);
     border-radius: var(--border-radius-md);
     padding: 12px 14px;
@@ -541,7 +541,7 @@ body {
 .form-input:focus {
     border-color: var(--accent-blue);
     box-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
-    background: rgba(255, 255, 255, 0.65);
+    background: rgba(230, 248, 235, 0.65);
 }
 
 .form-input option {

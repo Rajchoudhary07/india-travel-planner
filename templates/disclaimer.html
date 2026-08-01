@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disclaimer & Affiliate Disclosure | Yatra AI</title>
+    <meta name="description" content="Official disclaimers, safety guidelines, and FTC affiliate disclosures for Yatra AI.">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        body {
+            background: var(--bg-terracotta);
+            background-size: cover;
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: var(--text-primary);
+        }
+        .compliance-wrapper {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            width: 100%;
+            box-sizing: border-box;
+            flex: 1;
+        }
+        .compliance-card {
+            background: rgba(230, 248, 235, 0.85);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-light);
+            border-radius: var(--border-radius-lg);
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(4, 18, 12, 0.1);
+        }
+        .back-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--accent-sunset);
+            text-decoration: none;
+            font-weight: 600;
+            font-family: var(--font-heading);
+            margin-bottom: 25px;
+            transition: transform 0.3s;
+        }
+        .back-home:hover {
+            transform: translateX(-4px);
+        }
+        h1 {
+            font-family: var(--font-heading);
+            color: var(--text-primary);
+            font-size: 28px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        h3 {
+            font-family: var(--font-heading);
+            color: var(--text-primary);
+            font-size: 18px;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+        p, li {
+            font-family: var(--font-body);
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 15px;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        .meta-date {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="compliance-wrapper">
+        <a href="/" class="back-home"><i class="fa-solid fa-arrow-left"></i> Back to Planner</a>
+        <div class="compliance-card">
+            <h1><i class="fa-solid fa-triangle-exclamation" style="color: var(--accent-gold);"></i> Disclaimer & Disclosures</h1>
+            <div class="meta-date">Last updated: August 1, 2026</div>
+
+            <h3>1. General Travel & Safety Disclaimer</h3>
+            <p>Yatra AI is designed strictly as an educational and utility-based itinerary builder for offbeat destinations in India. All recommendations, transit maps, average tariffs, ticket expenses, and regional safety ratings are estimated using local historical database arrays. Real-world parameters—such as weather conditions, mountain road blockages, landslide risks, local homestay occupancy, and state law updates—will vary. We strongly recommend all travelers perform separate checks with local departments and maps prior to departure.</p>
+
+            <h3>2. Amazon Affiliate Program Disclosure</h3>
+            <p>In full compliance with FTC guidelines, please note that we participate in the Amazon Services LLC Associates Program. This program is designed to provide a means for publishers to earn advertising fees by linking to Amazon.in and its affiliate sites. When you click our suggested Amazon packing checklist items and finalize a purchase, we earn a tiny advertising commission from Amazon at no extra cost to you. This support assists in funding our server costs and keeping the planning engine free for all travelers.</p>
+
+            <h3>3. AdSense and Third-Party Links</h3>
+            <p>This website serves third-party advertisements via the Google AdSense network. We do not personally review, endorse, or stand liable for the products or services advertised in the banner blocks. Users should verify credentials before making purchases on third-party sites.</p>
+        </div>
+    </div>
+</body>
+</html>

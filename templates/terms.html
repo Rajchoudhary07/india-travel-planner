@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms & Conditions | Yatra AI</title>
+    <meta name="description" content="Official Terms & Conditions of use for the Yatra AI itinerary building platform.">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        body {
+            background: var(--bg-terracotta);
+            background-size: cover;
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: var(--text-primary);
+        }
+        .compliance-wrapper {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            width: 100%;
+            box-sizing: border-box;
+            flex: 1;
+        }
+        .compliance-card {
+            background: rgba(230, 248, 235, 0.85);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-light);
+            border-radius: var(--border-radius-lg);
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(4, 18, 12, 0.1);
+        }
+        .back-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--accent-sunset);
+            text-decoration: none;
+            font-weight: 600;
+            font-family: var(--font-heading);
+            margin-bottom: 25px;
+            transition: transform 0.3s;
+        }
+        .back-home:hover {
+            transform: translateX(-4px);
+        }
+        h1 {
+            font-family: var(--font-heading);
+            color: var(--text-primary);
+            font-size: 28px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        h3 {
+            font-family: var(--font-heading);
+            color: var(--text-primary);
+            font-size: 18px;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+        p, li {
+            font-family: var(--font-body);
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 15px;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        .meta-date {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="compliance-wrapper">
+        <a href="/" class="back-home"><i class="fa-solid fa-arrow-left"></i> Back to Planner</a>
+        <div class="compliance-card">
+            <h1><i class="fa-solid fa-gavel" style="color: var(--accent-gold);"></i> Terms & Conditions</h1>
+            <div class="meta-date">Last updated: August 1, 2026</div>
+
+            <p>By accessing or using Yatra AI (offbeatyatra.online), you agree to comply with and be bound by these Terms and Conditions. Please review them carefully before generating plans.</p>
+
+            <h3>1. Intellectual Property & Database Protection</h3>
+            <p>The visual components, styling coordinates, mathematical cost multipliers, and database schemas contained on this web application are the exclusive property of Yatra AI. You may not scrape, frame, or replicate our structured database in bulk without written permission.</p>
+
+            <h3>2. Acceptable Use Policy</h3>
+            <p>You agree to use our dynamic travel generator only for legitimate personal itinerary planning. You must not: (a) submit automated requests designed to exhaust our server quotas, (b) input malicious code or execute payload injection queries in the custom place search modules, or (c) abuse the WhatsApp booking console with fake credentials.</p>
+
+            <h3>3. Disclaimer of Content & Reliability</h3>
+            <p>All itineraries, distance calculations, lodging prices, and guidelines are generated using historical parameters and large language model templates for educational purposes. We make no guarantees regarding transit status, road conditions, availability of local Homestay slots, or safety details. Travelers are solely responsible for verifying travel status with local administrators before departure.</p>
+
+            <h3>4. Limitation of Liability</h3>
+            <p>In no event shall Yatra AI, its developer Raj Choudhary, or Raipur Institute of Technology be held liable for any direct or indirect damages, travel losses, accidents, or transaction disputes arising from your use of this software tool.</p>
+        </div>
+    </div>
+</body>
+</html>

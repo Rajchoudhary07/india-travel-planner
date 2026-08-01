@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy | Yatra AI</title>
+    <meta name="description" content="Official privacy policy and cookie disclosures for Yatra AI travel planning platform.">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        body {
+            background: var(--bg-terracotta);
+            background-size: cover;
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: var(--text-primary);
+        }
+        .compliance-wrapper {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            width: 100%;
+            box-sizing: border-box;
+            flex: 1;
+        }
+        .compliance-card {
+            background: rgba(230, 248, 235, 0.85);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-light);
+            border-radius: var(--border-radius-lg);
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(4, 18, 12, 0.1);
+        }
+        .back-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--accent-sunset);
+            text-decoration: none;
+            font-weight: 600;
+            font-family: var(--font-heading);
+            margin-bottom: 25px;
+            transition: transform 0.3s;
+        }
+        .back-home:hover {
+            transform: translateX(-4px);
+        }
+        h1 {
+            font-family: var(--font-heading);
+            color: var(--text-primary);
+            font-size: 28px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        h3 {
+            font-family: var(--font-heading);
+            color: var(--text-primary);
+            font-size: 18px;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+        p, li {
+            font-family: var(--font-body);
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 15px;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        .meta-date {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="compliance-wrapper">
+        <a href="/" class="back-home"><i class="fa-solid fa-arrow-left"></i> Back to Planner</a>
+        <div class="compliance-card">
+            <h1><i class="fa-solid fa-user-shield" style="color: var(--accent-gold);"></i> Privacy Policy</h1>
+            <div class="meta-date">Last updated: August 1, 2026</div>
+            
+            <p>Welcome to Yatra AI (offbeatyatra.online). We respect your privacy and are committed to protecting your personal data. This privacy policy explains how we collect, protect, and use information when you interact with our travel planner interface.</p>
+
+            <h3>1. Information We Collect</h3>
+            <p>We may collect information you provide directly to us when generating custom itineraries, including:</p>
+            <ul>
+                <li>Your travel preferences, group details (such as traveler counts and demographic flags).</li>
+                <li>Your email address and WhatsApp contact info when seeking Homestay Partnership opportunities.</li>
+                <li>API Keys that you supply in the frontend form to access custom model instances. These keys remain strictly client-side in your local browser store (LocalStorage) and are never stored on our servers.</li>
+            </ul>
+
+            <h3>2. Cookies & Google AdSense Disclosures</h3>
+            <p>We use Google AdSense to serve advertisements on our platform. Google, as a third-party vendor, uses cookies to serve ads based on your prior visits to our website or other sites. Google's use of advertising cookies enables it and its partners to serve ads to users based on their visit history to this site and other websites on the Internet.</p>
+            <p>You can opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank" style="color: var(--accent-sunset);">Google Ad Settings</a>. Alternatively, you can opt out of a third-party vendor's use of cookies for personalized advertising by visiting <a href="https://www.aboutads.info" target="_blank" style="color: var(--accent-sunset);">www.aboutads.info</a>.</p>
+
+            <h3>3. Data Security & Storage</h3>
+            <p>All travel budget and coordinate queries processed through our APIs utilize standard encryption. We do not sell, rent, or distribute your email records or transit logs to marketing databases. Your safety coordinates and search parameters are utilized solely to generate dynamic itineraries and expand the local place catalog.</p>
+
+            <h3>4. Changes to This Policy</h3>
+            <p>We reserves the right to modify this privacy policy at any time. Changes will be posted here with an updated revision timestamp. We recommend visiting this page frequently to monitor updates.</p>
+
+            <h3>5. Contact Details</h3>
+            <p>For questions or feedback regarding our privacy practices, contact us at <a href="mailto:contact@offbeatyatra.online" style="color: var(--accent-sunset); font-weight: bold; text-decoration: none;">contact@offbeatyatra.online</a>.</p>
+        </div>
+    </div>
+</body>
+</html>

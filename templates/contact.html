@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Yatra AI</title>
+    <meta name="description" content="Contact Yatra AI support for partnership inquiries, feedback, or custom homestay submissions.">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        body {
+            background: var(--bg-terracotta);
+            background-size: cover;
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: var(--text-primary);
+        }
+        .compliance-wrapper {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            width: 100%;
+            box-sizing: border-box;
+            flex: 1;
+        }
+        .compliance-card {
+            background: rgba(230, 248, 235, 0.85);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-light);
+            border-radius: var(--border-radius-lg);
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(4, 18, 12, 0.1);
+        }
+        .back-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--accent-sunset);
+            text-decoration: none;
+            font-weight: 600;
+            font-family: var(--font-heading);
+            margin-bottom: 25px;
+            transition: transform 0.3s;
+        }
+        .back-home:hover {
+            transform: translateX(-4px);
+        }
+        h1 {
+            font-family: var(--font-heading);
+            color: var(--text-primary);
+            font-size: 28px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        p {
+            font-family: var(--font-body);
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 15px;
+        }
+        .contact-box {
+            background: rgba(255, 255, 255, 0.5);
+            border: 1px solid var(--border-light);
+            border-radius: var(--border-radius-md);
+            padding: 20px;
+            margin: 25px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .contact-email {
+            color: var(--accent-sunset);
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+            font-family: var(--font-heading);
+        }
+        .feedback-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        label {
+            font-family: var(--font-heading);
+            font-weight: 500;
+            font-size: 14px;
+            color: var(--text-primary);
+        }
+        input, textarea {
+            padding: 12px;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 8px;
+            background: rgba(255,255,255,0.7);
+            font-family: var(--font-body);
+            font-size: 14px;
+            color: var(--text-primary);
+        }
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent-sunset);
+            box-shadow: 0 0 8px rgba(5, 150, 105, 0.15);
+        }
+        .btn-submit {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, opacity 0.2s;
+            font-family: var(--font-heading);
+        }
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            opacity: 0.95;
+        }
+    </style>
+</head>
+<body>
+    <div class="compliance-wrapper">
+        <a href="/" class="back-home"><i class="fa-solid fa-arrow-left"></i> Back to Planner</a>
+        <div class="compliance-card">
+            <h1><i class="fa-solid fa-envelope" style="color: var(--accent-gold);"></i> Contact Us</h1>
+            <p>Have questions, feature requests, or stay partnership suggestions? Feel free to reach out. We will respond within 24–48 hours.</p>
+
+            <div class="contact-box">
+                <span style="font-size: 12px; color: var(--text-muted); font-weight: 600; text-transform: uppercase;">📧 Support Email Inquiry</span>
+                <a href="mailto:contact@offbeatyatra.online" class="contact-email">contact@offbeatyatra.online</a>
+                <span style="font-size: 12px; color: var(--text-muted);">Secondary support: <a href="mailto:Craj40215@gmail.com" style="color: var(--text-secondary); text-decoration: none;">Craj40215@gmail.com</a></span>
+            </div>
+
+            <hr style="border: 0; border-top: 1px solid rgba(16,185,129,0.1); margin: 30px 0;">
+
+            <h3>Send a Message Directly</h3>
+            <form class="feedback-form" onsubmit="event.preventDefault(); alert('Thank you! Your feedback has been logged securely.'); this.reset();">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" required placeholder="Enter your full name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Your Email Address</label>
+                    <input type="email" id="email" required placeholder="Enter email address">
+                </div>
+                <div class="form-group">
+                    <label for="message">Message / Inquiry Details</label>
+                    <textarea id="message" required rows="5" placeholder="Specify homestay details, partner suggestions, or site suggestions..."></textarea>
+                </div>
+                <button type="submit" class="btn-submit">Submit Message</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

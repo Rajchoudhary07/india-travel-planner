@@ -134,6 +134,26 @@ def not_found_error(error):
 def internal_error(error):
     return jsonify({"error": "Internal server error"}), 500
 
+@app.route('/privacy-policy')
+def privacy_policy():
+    return render_template('privacy.html')
+
+@app.route('/terms-of-service')
+def terms_of_service():
+    return render_template('terms.html')
+
+@app.route('/disclaimer')
+def disclaimer():
+    return render_template('disclaimer.html')
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
+
 @app.route('/ads.txt')
 def ads_txt():
     """
