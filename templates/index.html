@@ -364,15 +364,10 @@
                     <div class="form-group">
                         <label for="home-select"><i class="fa-solid fa-house-user"></i> Origin / Home City</label>
                         <select id="home-select" class="form-input" required>
-                            <option value="Colombo">Colombo (Sri Lanka)</option>
-                            <option value="Kathmandu">Kathmandu (Nepal)</option>
-                            <option value="Thimphu">Thimphu (Bhutan)</option>
-                            <option value="Yangon">Yangon (Myanmar)</option>
-                            <option value="Dhaka">Dhaka (Bangladesh)</option>
-                            <option value="Male">Male (Maldives)</option>
+                            <option value="" disabled selected>-- Choose Origin City --</option>
                             <option value="Delhi">Delhi</option>
                             <option value="Mumbai">Mumbai</option>
-                            <option value="Kolkata" selected>Kolkata</option>
+                            <option value="Kolkata">Kolkata</option>
                             <option value="Chennai">Chennai</option>
                             <option value="Bangalore">Bangalore</option>
                             <option value="Hyderabad">Hyderabad</option>
@@ -386,15 +381,36 @@
                             <option value="Bhopal">Bhopal</option>
                             <option value="Bhubaneswar">Bhubaneswar</option>
                             <option value="Ranchi">Ranchi</option>
+                            <option value="Colombo">Colombo (Sri Lanka)</option>
+                            <option value="Kathmandu">Kathmandu (Nepal)</option>
+                            <option value="Thimphu">Thimphu (Bhutan)</option>
+                            <option value="Yangon">Yangon (Myanmar)</option>
+                            <option value="Dhaka">Dhaka (Bangladesh)</option>
+                            <option value="Male">Male (Maldives)</option>
                         </select>
                         <span class="field-info">Long-distance travel costs will be estimated from this origin</span>
                     </div>
 
-                    <!-- State Selection -->
+                    <!-- Country Selection -->
                     <div class="form-group">
-                        <label for="state-select"><i class="fa-solid fa-map"></i> Select State / Country</label>
-                        <select id="state-select" class="form-input" required>
-                            <option value="" disabled selected>Loading states...</option>
+                        <label for="country-select"><i class="fa-solid fa-globe"></i> Select Country</label>
+                        <select id="country-select" class="form-input" required>
+                            <option value="" disabled selected>-- Choose Country --</option>
+                            <option value="India">India</option>
+                            <option value="Sri Lanka">Sri Lanka</option>
+                            <option value="Nepal">Nepal</option>
+                            <option value="Bhutan">Bhutan</option>
+                            <option value="Myanmar">Myanmar</option>
+                            <option value="Bangladesh">Bangladesh</option>
+                            <option value="Maldives">Maldives</option>
+                        </select>
+                    </div>
+
+                    <!-- State Selection (Visible only for India) -->
+                    <div id="state-select-container" class="form-group hidden">
+                        <label for="state-select"><i class="fa-solid fa-map"></i> Select State</label>
+                        <select id="state-select" class="form-input">
+                            <option value="" disabled selected>-- Choose State --</option>
                         </select>
                     </div>
 
@@ -402,7 +418,7 @@
                     <div class="form-group">
                         <label for="city-select"><i class="fa-solid fa-city"></i> Starting City</label>
                         <select id="city-select" class="form-input" required disabled>
-                            <option value="" disabled selected>Choose state first</option>
+                            <option value="" disabled selected>Choose country first</option>
                         </select>
                         <span class="field-info">Transit cost will be calculated from this hub</span>
                     </div>

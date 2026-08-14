@@ -85,6 +85,8 @@ const startingCityCoordinates = {
 // DOM Elements
 const elements = {
     homeSelect: document.getElementById('home-select'),
+    countrySelect: document.getElementById('country-select'),
+    stateSelectContainer: document.getElementById('state-select-container'),
     stateSelect: document.getElementById('state-select'),
     citySelect: document.getElementById('city-select'),
     destinationHiddenInput: document.getElementById('destination-hidden-input'),
@@ -257,6 +259,7 @@ function bindEvents() {
     });
 
     // Cascading Dropdown Listeners
+    elements.countrySelect.addEventListener('change', handleCountryChange);
     elements.stateSelect.addEventListener('change', handleStateChange);
     elements.citySelect.addEventListener('change', handleCityChange);
 
@@ -596,28 +599,75 @@ function bindEvents() {
 // Cascading Dropdowns Logic
 // ==========================================================================
 
-function handleStateChange() {
-    const selectedState = elements.stateSelect.value;
+const internationalCountries = ["Sri Lanka", "Nepal", "Bhutan", "Myanmar", "Bangladesh", "Maldives"];
+
+function handleCountryChange() {
+    const selectedCountry = elements.countrySelect.value;
     
-    // Clear and disable child dropdowns
-    elements.citySelect.innerHTML = `<option value="" disabled selected>-- Select City --</option>`;
-    elements.citySelect.removeAttribute('disabled');
-    
-    // Reset columns select state
+    // Reset inputs
+    elements.stateSelect.innerHTML = `<option value="" disabled selected>-- Choose State --</option>`;
+    elements.citySelect.innerHTML = `<option value="" disabled selected>-- Choose country first --</option>`;
+    elements.citySelect.setAttribute('disabled', 'true');
     elements.destinationHiddenInput.value = '';
     elements.popularDestList.innerHTML = `<div class="dest-list-placeholder">Choose starting city first</div>`;
     elements.popularDestList.classList.add('disabled');
     elements.hiddenDestList.innerHTML = `<div class="dest-list-placeholder">Choose starting city first</div>`;
     elements.hiddenDestList.classList.add('disabled');
     
-    // Find all starting cities for places in the selected state
+    if (selectedCountry === "India") {
+        elements.stateSelectContainer.classList.remove('hidden');
+        elements.stateSelect.setAttribute('required', 'true');
+        elements.citySelect.innerHTML = `<option value="" disabled selected>-- Choose state first --</option>`;
+        
+        // Populate Indian States
+        const uniqueStates = [...new Set(placesData.filter(p => !internationalCountries.includes(p.state)).map(p => p.state))].sort();
+        uniqueStates.forEach(state => {
+            const option = document.createElement('option');
+            option.value = state;
+            option.textContent = state;
+            elements.stateSelect.appendChild(option);
+        });
+    } else {
+        elements.stateSelectContainer.classList.add('hidden');
+        elements.stateSelect.removeAttribute('required');
+        elements.stateSelect.value = "";
+        
+        elements.citySelect.innerHTML = `<option value="" disabled selected>-- Select Starting City --</option>`;
+        elements.citySelect.removeAttribute('disabled');
+        
+        // Populate Starting Cities for selected Country
+        const matchingPlaces = placesData.filter(place => place.state === selectedCountry);
+        const uniqueCities = new Set();
+        matchingPlaces.forEach(place => {
+            place.starting_cities.forEach(city => uniqueCities.add(city));
+        });
+        
+        Array.from(uniqueCities).sort().forEach(city => {
+            const option = document.createElement('option');
+            option.value = city;
+            option.textContent = city;
+            elements.citySelect.appendChild(option);
+        });
+    }
+}
+
+function handleStateChange() {
+    const selectedState = elements.stateSelect.value;
+    
+    elements.citySelect.innerHTML = `<option value="" disabled selected>-- Select Starting City --</option>`;
+    elements.citySelect.removeAttribute('disabled');
+    elements.destinationHiddenInput.value = '';
+    elements.popularDestList.innerHTML = `<div class="dest-list-placeholder">Choose starting city first</div>`;
+    elements.popularDestList.classList.add('disabled');
+    elements.hiddenDestList.innerHTML = `<div class="dest-list-placeholder">Choose starting city first</div>`;
+    elements.hiddenDestList.classList.add('disabled');
+    
     const matchingPlaces = placesData.filter(place => place.state === selectedState);
     const uniqueCities = new Set();
     matchingPlaces.forEach(place => {
         place.starting_cities.forEach(city => uniqueCities.add(city));
     });
     
-    // Populate Starting Cities
     Array.from(uniqueCities).sort().forEach(city => {
         const option = document.createElement('option');
         option.value = city;
@@ -627,22 +677,23 @@ function handleStateChange() {
 }
 
 function handleCityChange() {
+    const selectedCountry = elements.countrySelect.value;
     const selectedState = elements.stateSelect.value;
     const selectedCity = elements.citySelect.value;
     
     elements.destinationHiddenInput.value = '';
-    
-    // Enable list columns
     elements.popularDestList.classList.remove('disabled');
     elements.hiddenDestList.classList.remove('disabled');
     elements.popularDestList.innerHTML = '';
     elements.hiddenDestList.innerHTML = '';
     
-    // Filter places in selected state that have selected starting city
-    const matchingPlaces = placesData.filter(place => 
-        place.state === selectedState && 
-        place.starting_cities.includes(selectedCity)
-    );
+    const matchingPlaces = placesData.filter(place => {
+        if (selectedCountry === "India") {
+            return place.state === selectedState && place.starting_cities.includes(selectedCity);
+        } else {
+            return place.state === selectedCountry && place.starting_cities.includes(selectedCity);
+        }
+    });
     
     // Split into categories
     const popularPlaces = matchingPlaces.filter(place => place.is_popular);
@@ -706,7 +757,6 @@ async function fetchDestinations() {
         if (!response.ok) throw new Error("Failed to load destinations.");
         
         placesData = await response.json();
-        populateStatesDropdown(placesData);
         populatePreviewTags(placesData);
         
     } catch (error) {
@@ -716,19 +766,7 @@ async function fetchDestinations() {
     }
 }
 
-function populateStatesDropdown(places) {
-    elements.stateSelect.innerHTML = `<option value="" disabled selected>-- Select State --</option>`;
-    
-    // Get unique sorted states list
-    const uniqueStates = [...new Set(places.map(p => p.state))].sort();
-    
-    uniqueStates.forEach(state => {
-        const option = document.createElement('option');
-        option.value = state;
-        option.textContent = state;
-        elements.stateSelect.appendChild(option);
-    });
-}
+
 
 function populatePreviewTags(places) {
     if (!elements.featuredGemsGrid) return;
