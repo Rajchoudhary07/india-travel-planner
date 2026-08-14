@@ -30,11 +30,28 @@ HOME_COORDINATES = {
     "Kochi": (9.93, 76.26),
     "Bhopal": (23.25, 77.41),
     "Bhubaneswar": (20.29, 85.82),
-    "Ranchi": (23.34, 85.30)
+    "Ranchi": (23.34, 85.30),
+    "Colombo": (6.93, 79.86),
+    "Kathmandu": (27.72, 85.32),
+    "Thimphu": (27.47, 89.64),
+    "Yangon": (16.87, 96.20),
+    "Dhaka": (23.81, 90.41),
+    "Male": (4.18, 73.51)
 }
 
 # Coordinates for all potential Starting Cities
 STARTING_CITY_COORDINATES = {
+    "Colombo": (6.93, 79.86),
+    "Kandy": (7.29, 80.63),
+    "Kathmandu": (27.72, 85.32),
+    "Pokhara": (28.21, 83.99),
+    "Thimphu": (27.47, 89.64),
+    "Paro": (27.43, 89.42),
+    "Yangon": (16.87, 96.20),
+    "Mandalay": (21.96, 96.09),
+    "Dhaka": (23.81, 90.41),
+    "Chittagong": (22.36, 91.78),
+    "Male": (4.18, 73.51),
     "Raipur": (21.25, 81.63),
     "Jagdalpur": (19.07, 82.03),
     "Bilaspur": (22.08, 82.14),
