@@ -7368,5 +7368,2427 @@
         }
       ]
     }
+  },
+  {
+    "id": "haputale",
+    "name": "Haputale Tea Cliffs",
+    "state": "Sri Lanka",
+    "is_popular": false,
+    "starting_cities": [
+      "Colombo",
+      "Kandy"
+    ],
+    "starting_city_distances": {
+      "Colombo": 195,
+      "Kandy": 110
+    },
+    "description": "High-altitude mountain hamlet perched on a sheer cliff edge, surrounded by clouds and early colonial tea plantations.",
+    "lat": 6.78,
+    "lon": 80.95,
+    "best_season": "January to April",
+    "entry_tickets": {
+      "lipton_seat_entry": 250,
+      "adisham_bungalow": 500
+    },
+    "transportation": {
+      "local_auto": 700,
+      "private_cab": 4000,
+      "public_bus": 180
+    },
+    "accommodation": {
+      "budget": 1000,
+      "mid_range": 2800,
+      "luxury": 7000
+    },
+    "food_cost_per_day": 750,
+    "women_safety": "High safety. Haputale is a peaceful, close-knit tea community. Stays are family-run. Safe for women solo travelers during daytime; avoid hiking remote forest cliffs alone late in the evening due to heavy fog.",
+    "pros": [
+      "Spectacular panoramic views of the southern plains.",
+      "Chilly, pleasant mountain climate.",
+      "Much quieter and more authentic than Ella."
+    ],
+    "cons": [
+      "Thick mist can roll in quickly and block views.",
+      "Limited choice of fine-dining options."
+    ],
+    "warnings": [
+      "Carry warm clothing as night temperatures drop rapidly.",
+      "Be careful when walking near cliff edges or train tracks during heavy mist."
+    ],
+    "extra_tips": [
+      "Visit Lipton\u2019s Seat early in the morning (before 7:00 AM) to catch the view before the fog rolls in.",
+      "Walk through the beautiful orchards at Adisham Benedictine Monastery."
+    ],
+    "hotels": [
+      "Haputale Rest House",
+      "Sherwood Highlands",
+      "Melheim Resort"
+    ],
+    "restaurants": [
+      "Lipton View Point Cafe",
+      "Adisham Bungalow tea room",
+      "Risara local food corner"
+    ],
+    "itineraries": {
+      "3": [
+        {
+          "day": 1,
+          "title": "Arrival & Adisham Bungalow",
+          "activities": [
+            "Arrive at Haputale, check-in.",
+            "Visit the stone-built Adisham Benedictine Monastery.",
+            "Walk through the quiet pine forest paths."
+          ],
+          "sights": [
+            "Adisham Monastery"
+          ]
+        },
+        {
+          "day": 2,
+          "title": "Lipton\u2019s Seat Sunrise & Tea Fields",
+          "activities": [
+            "Early morning drive to Lipton\u2019s Seat for sunrise.",
+            "Walk down through the lush Dambatenne Tea Estate.",
+            "Visit the historic Dambatenne Tea Factory."
+          ],
+          "sights": [
+            "Lipton's Seat",
+            "Dambatenne Tea Factory"
+          ]
+        },
+        {
+          "day": 3,
+          "title": "Diyaluma Falls Excursion & Depart",
+          "activities": [
+            "Excursion to Diyaluma Falls (second highest in Sri Lanka) to swim in natural upper pools.",
+            "Depart to Colombo/Kandy."
+          ],
+          "sights": [
+            "Diyaluma Falls",
+            "Departure"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "negombo",
+    "name": "Negombo Beach & Canals",
+    "state": "Sri Lanka",
+    "is_popular": true,
+    "starting_cities": [
+      "Colombo"
+    ],
+    "starting_city_distances": {
+      "Colombo": 37
+    },
+    "description": "Charming coastal city adjacent to the international airport, famous for Dutch colonial canals, sandy beaches, and fish markets.",
+    "lat": 7.21,
+    "lon": 79.84,
+    "best_season": "December to April",
+    "entry_tickets": {
+      "dutch_canal_boat": 1500,
+      "fish_market_walk": 0
+    },
+    "transportation": {
+      "local_auto": 400,
+      "private_cab": 2000,
+      "public_bus": 100
+    },
+    "accommodation": {
+      "budget": 1200,
+      "mid_range": 3200,
+      "luxury": 8500
+    },
+    "food_cost_per_day": 800,
+    "women_safety": "High safety. Active beach destination close to the capital. Safe for solo female travelers; standard nightlife precautions apply.",
+    "pros": [
+      "Very close to Bandaranaike International Airport (CMB).",
+      "Lively beach strip with many restaurants.",
+      "Interesting Dutch canal tours."
+    ],
+    "cons": [
+      "Beach sand is coarser and water is less clear than the southern coast.",
+      "Can get hot and humid."
+    ],
+    "warnings": [
+      "Be cautious of strong sea currents when swimming.",
+      "Negotiate auto rates beforehand."
+    ],
+    "extra_tips": [
+      "Visit the Negombo Fish Market (Lellama) early in the morning to see the local catch and wooden catamarans.",
+      "Take a boat tour on the Hamilton Canal."
+    ],
+    "hotels": [
+      "Jetwing Blue Negombo",
+      "Heritance Negombo",
+      "Camelot Beach Hotel"
+    ],
+    "restaurants": [
+      "The Beach Negombo",
+      "King Coconut Restaurant",
+      "Lords Restaurant Complex"
+    ],
+    "itineraries": {
+      "3": [
+        {
+          "day": 1,
+          "title": "Arrival & Beach Leisure",
+          "activities": [
+            "Arrive at Negombo from airport, check-in.",
+            "Relax at the sandy beach.",
+            "Enjoy sunset dining at a beachside cafe."
+          ],
+          "sights": [
+            "Negombo Beach"
+          ]
+        },
+        {
+          "day": 2,
+          "title": "Lellama Fish Market & Canals",
+          "activities": [
+            "Visit the early morning Lellama Fish Market.",
+            "Explore the Dutch Fort and St. Mary\u2019s Church.",
+            "Take a scenic boat tour along the Hamilton Canal."
+          ],
+          "sights": [
+            "Lellama Fish Market",
+            "Hamilton Canal",
+            "St. Mary's Church"
+          ]
+        },
+        {
+          "day": 3,
+          "title": "Muthurajawela Marsh & Depart",
+          "activities": [
+            "Morning boat safari in Muthurajawela Wetlands to see crocodiles and birds.",
+            "Depart to Airport."
+          ],
+          "sights": [
+            "Muthurajawela Marsh",
+            "Departure"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "kalpitiya",
+    "name": "Kalpitiya Lagoon",
+    "state": "Sri Lanka",
+    "is_popular": false,
+    "starting_cities": [
+      "Colombo"
+    ],
+    "starting_city_distances": {
+      "Colombo": 165
+    },
+    "description": "Marine peninsula famous for kitesurfing, dolphin watching, and pristine sandbar beaches.",
+    "lat": 8.23,
+    "lon": 79.76,
+    "best_season": "May to October (Surfing), November to April (Dolphins)",
+    "entry_tickets": {
+      "dolphin_boat_safari": 4500,
+      "kitesurfing_lesson": 8000
+    },
+    "transportation": {
+      "local_auto": 500,
+      "private_cab": 3500,
+      "public_bus": 200
+    },
+    "accommodation": {
+      "budget": 1500,
+      "mid_range": 3500,
+      "luxury": 9000
+    },
+    "food_cost_per_day": 850,
+    "women_safety": "High safety. Quiet fishing and surfing villages. Safe for solo women. Standard water sports safety guidelines apply.",
+    "pros": [
+      "One of the best kitesurfing destinations in Asia.",
+      "Hundreds of spinner dolphins visible close to shore.",
+      "Raw, uncrowded beaches."
+    ],
+    "cons": [
+      "Limited luxury facilities.",
+      "Long dusty drives to the tip of the peninsula."
+    ],
+    "warnings": [
+      "Check wind forecasts before planning kitesurfing.",
+      "Always wear life jackets on dolphin boat safaris."
+    ],
+    "extra_tips": [
+      "Book a boat safari to Bar Reef for excellent coral snorkeling.",
+      "Try local dry fish curry, a regional specialty."
+    ],
+    "hotels": [
+      "Kitesurfing Lanka",
+      "Dolphin Beach Resort",
+      "Valampuri Resort Kalpitiya"
+    ],
+    "restaurants": [
+      "Surf Cabin Kitchen",
+      "Dolphin View Restaurant",
+      "Lagoon Side Cafe"
+    ],
+    "itineraries": {
+      "3": [
+        {
+          "day": 1,
+          "title": "Arrival & Sunset Beach",
+          "activities": [
+            "Drive to Kalpitiya peninsula, check-in.",
+            "Relax at the quiet Kudawa Beach.",
+            "Watch sunset at the lagoon."
+          ],
+          "sights": [
+            "Kudawa Beach"
+          ]
+        },
+        {
+          "day": 2,
+          "title": "Dolphin Watching & Bar Reef",
+          "activities": [
+            "Early morning boat safari to watch pods of spinner dolphins.",
+            "Snorkel at Bar Reef marine reserve.",
+            "Watch kitesurfers at the lagoon."
+          ],
+          "sights": [
+            "Dolphin Safari",
+            "Bar Reef"
+          ]
+        },
+        {
+          "day": 3,
+          "title": "Dutch Fort & Depart",
+          "activities": [
+            "Visit the historic Dutch Fort in Kalpitiya town.",
+            "Depart to Colombo."
+          ],
+          "sights": [
+            "Kalpitiya Dutch Fort",
+            "Departure"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mannar_island",
+    "name": "Mannar Island",
+    "state": "Sri Lanka",
+    "is_popular": false,
+    "starting_cities": [
+      "Colombo"
+    ],
+    "starting_city_distances": {
+      "Colombo": 315
+    },
+    "description": "Quiet, dry-zone peninsula hosting ancient baobab trees, historic forts, and bird sanctuaries at the edge of Adam\u2019s Bridge.",
+    "lat": 9.05,
+    "lon": 79.91,
+    "best_season": "November to April (Birding)",
+    "entry_tickets": {
+      "mannar_fort": 0,
+      "baobab_tree_visit": 0
+    },
+    "transportation": {
+      "local_auto": 500,
+      "private_cab": 3800,
+      "public_bus": 220
+    },
+    "accommodation": {
+      "budget": 1000,
+      "mid_range": 2600,
+      "luxury": 6500
+    },
+    "food_cost_per_day": 700,
+    "women_safety": "High safety. Peaceful, quiet fishing villages. Very safe for solo female travelers. Modest clothing is recommended in rural villages.",
+    "pros": [
+      "Unique dry landscapes with African-style baobab trees.",
+      "Pristine bird-watching sites (thousands of flamingos).",
+      "Historical significance near Adam's Bridge."
+    ],
+    "cons": [
+      "Fewer tourist facilities and restaurants.",
+      "Very hot and dry climate."
+    ],
+    "warnings": [
+      "Do not attempt to walk onto the sandbanks of Adam's Bridge during high tide or strong winds.",
+      "Carry cash as ATM services are limited on the island."
+    ],
+    "extra_tips": [
+      "See the ancient Baobab Tree, planted by Arab merchants over 700 years ago.",
+      "Visit the giant Talaimannar Pier, the closest point to India."
+    ],
+    "hotels": [
+      "Shell Coast Resort",
+      "Hotel Agape Mannar",
+      "Mannar Guest House"
+    ],
+    "restaurants": [
+      "Mannar Town local eateries",
+      "Talaimannar Beach snack shacks"
+    ],
+    "itineraries": {
+      "3": [
+        {
+          "day": 1,
+          "title": "Arrival & Baobab Tree",
+          "activities": [
+            "Arrive at Mannar via train/bus.",
+            "Check-in.",
+            "Visit the giant Baobab Tree and the historic Mannar Fort."
+          ],
+          "sights": [
+            "Baobab Tree",
+            "Mannar Fort"
+          ]
+        },
+        {
+          "day": 2,
+          "title": "Adam\u2019s Bridge & Flamingos",
+          "activities": [
+            "Drive to Talaimannar Pier to view the sandbanks of Adam\u2019s Bridge.",
+            "Visit the Vankalai Sanctuary to see thousands of migratory flamingos.",
+            "Watch sunset at the beach."
+          ],
+          "sights": [
+            "Talaimannar Pier",
+            "Adam's Bridge View",
+            "Vankalai Sanctuary"
+          ]
+        },
+        {
+          "day": 3,
+          "title": "Thiruketheeswaram & Depart",
+          "activities": [
+            "Visit the ancient Thiruketheeswaram Kovil Hindu temple.",
+            "Depart to Colombo."
+          ],
+          "sights": [
+            "Thiruketheeswaram Kovil",
+            "Departure"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "ratnapura",
+    "name": "Ratnapura Gem Valley",
+    "state": "Sri Lanka",
+    "is_popular": false,
+    "starting_cities": [
+      "Colombo"
+    ],
+    "starting_city_distances": {
+      "Colombo": 100
+    },
+    "description": "Traditional gem-mining capital of Sri Lanka, surrounded by lush rain forests, tea hills, and waterfalls.",
+    "lat": 6.68,
+    "lon": 80.4,
+    "best_season": "January to April",
+    "entry_tickets": {
+      "gem_museum_entry": 500,
+      "bopath_ella": 100
+    },
+    "transportation": {
+      "local_auto": 500,
+      "private_cab": 2800,
+      "public_bus": 120
+    },
+    "accommodation": {
+      "budget": 900,
+      "mid_range": 2400,
+      "luxury": 6000
+    },
+    "food_cost_per_day": 650,
+    "women_safety": "High safety. Ratnapura is a busy commercial town with helpful locals. Safe for solo female travelers during the day; avoid visiting gem mines alone without an authorized guide.",
+    "pros": [
+      "Fascinating gem mining and cutting culture.",
+      "Close to Sinharaja Rainforest.",
+      "Beautiful surrounding waterfalls."
+    ],
+    "cons": [
+      "Heavy rainfall throughout the year.",
+      "Traffic in the town center can be busy."
+    ],
+    "warnings": [
+      "Be cautious when buying gems; only purchase from certified dealers with national certificates.",
+      "Leeches are active in the surrounding rainforest trails."
+    ],
+    "extra_tips": [
+      "Visit a traditional gem mine to see how miners extract sapphires from clay.",
+      "Try local palm treacle (sweet syrup) with curd."
+    ],
+    "hotels": [
+      "Ratnaland Hotel",
+      "Centauria Hill Resort",
+      "Sapphire Holiday Home"
+    ],
+    "restaurants": [
+      "Ratnapura Town Cafe",
+      "Gem View Restaurant",
+      "Nilani Food Palace"
+    ],
+    "itineraries": {
+      "3": [
+        {
+          "day": 1,
+          "title": "Gem Mines & Museum",
+          "activities": [
+            "Arrive at Ratnapura, check-in.",
+            "Visit the National Gem and Jewellery Museum.",
+            "Tour an active traditional gem mine."
+          ],
+          "sights": [
+            "Gem Museum",
+            "Traditional Gem Mine"
+          ]
+        },
+        {
+          "day": 2,
+          "title": "Bopath Ella & Maha Saman Devalaya",
+          "activities": [
+            "Visit the historic Maha Saman Devalaya temple.",
+            "Spend afternoon at Bopath Ella waterfall.",
+            "Enjoy a walk through the surrounding tea gardens."
+          ],
+          "sights": [
+            "Maha Saman Devalaya",
+            "Bopath Ella"
+          ]
+        },
+        {
+          "day": 3,
+          "title": "Katugas Ella & Depart",
+          "activities": [
+            "Short hike to Katugas Ella waterfall.",
+            "Depart to Colombo."
+          ],
+          "sights": [
+            "Katugas Ella",
+            "Departure"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "badulla",
+    "name": "Badulla Highlands",
+    "state": "Sri Lanka",
+    "is_popular": false,
+    "starting_cities": [
+      "Kandy",
+      "Colombo"
+    ],
+    "starting_city_distances": {
+      "Kandy": 115,
+      "Colombo": 230
+    },
+    "description": "Scenic highland valley terminus of the Main Line railway, famous for cascading waterfalls, old temples, and tea hills.",
+    "lat": 6.99,
+    "lon": 81.05,
+    "best_season": "January to May",
+    "entry_tickets": {
+      "dunhinda_falls": 200,
+      "muthiyangana_temple": 0
+    },
+    "transportation": {
+      "local_auto": 600,
+      "private_cab": 3500,
+      "public_bus": 150
+    },
+    "accommodation": {
+      "budget": 900,
+      "mid_range": 2500,
+      "luxury": 6500
+    },
+    "food_cost_per_day": 700,
+    "women_safety": "High safety. Friendly, traditional town. Safe for solo female travelers during the day. Modest dress is required at temples.",
+    "pros": [
+      "Beautiful mountain and railway views.",
+      "Spectacular waterfalls (Dunhinda).",
+      "Highly budget-friendly stays."
+    ],
+    "cons": [
+      "Limited luxury hotels; mostly homestays.",
+      "Long travel times on winding mountain roads."
+    ],
+    "warnings": [
+      "The trail to Dunhinda falls can be slippery; wear good grip shoes.",
+      "Watch out for monkeys along the path."
+    ],
+    "extra_tips": [
+      "Visit the historic Muthiyangana Raja Maha Viharaya, a sacred Buddhist temple in the town center.",
+      "Take the scenic train from Badulla to Ella."
+    ],
+    "hotels": [
+      "Hotel Dunhinda Falls",
+      "Grand Badulla Hotel",
+      "Highland Guest House Badulla"
+    ],
+    "restaurants": [
+      "Badulla Railway Cafe",
+      "Muthiyangana local buffet",
+      "Highland Bakers"
+    ],
+    "itineraries": {
+      "3": [
+        {
+          "day": 1,
+          "title": "Arrival & Muthiyangana Temple",
+          "activities": [
+            "Arrive in Badulla via train.",
+            "Check-in.",
+            "Visit the ancient Muthiyangana temple in the evening."
+          ],
+          "sights": [
+            "Muthiyangana Temple"
+          ]
+        },
+        {
+          "day": 2,
+          "title": "Dunhinda Falls Trek",
+          "activities": [
+            "Trek through the forest path to Dunhinda Falls.",
+            "Enjoy local ginger beer at trailside stalls.",
+            "Visit Bogoda Wooden Bridge (oldest wooden bridge)."
+          ],
+          "sights": [
+            "Dunhinda Falls",
+            "Bogoda Wooden Bridge"
+          ]
+        },
+        {
+          "day": 3,
+          "title": "Scenic Train to Ella & Depart",
+          "activities": [
+            "Take the scenic railway ride from Badulla to Ella.",
+            "Depart to Colombo."
+          ],
+          "sights": [
+            "Scenic Main Line Train",
+            "Departure"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "unawatuna",
+    "name": "Unawatuna Beach",
+    "state": "Sri Lanka",
+    "is_popular": true,
+    "starting_cities": [
+      "Colombo"
+    ],
+    "starting_city_distances": {
+      "Colombo": 125
+    },
+    "description": "Picturesque banana-shaped sandy bay with calm waters, coral reefs, and a hilltop Japanese Peace Pagoda.",
+    "lat": 6.01,
+    "lon": 80.25,
+    "best_season": "November to April",
+    "entry_tickets": {
+      "peace_pagoda_visit": 0,
+      "jungle_beach_walk": 0
+    },
+    "transportation": {
+      "local_auto": 400,
+      "private_cab": 2200,
+      "public_bus": 100
+    },
+    "accommodation": {
+      "budget": 1200,
+      "mid_range": 3200,
+      "luxury": 8500
+    },
+    "food_cost_per_day": 850,
+    "women_safety": "Highly safe. Lively beach town with active street patrols and high lighting. Safe for solo women travelers at all hours.",
+    "pros": [
+      "Calm water, ideal for swimming.",
+      "Great selection of beachside restaurants.",
+      "Close to Galle Fort."
+    ],
+    "cons": [
+      "Can get crowded during peak winter weekends.",
+      "Beachfront is highly commercialized."
+    ],
+    "warnings": [
+      "Always check flag colors on the beach before swimming.",
+      "Negotiate auto rates before boarding."
+    ],
+    "extra_tips": [
+      "Hike through the forest trail to the hidden Jungle Beach.",
+      "Visit the Japanese Peace Pagoda for panoramic views of Galle harbor."
+    ],
+    "hotels": [
+      "Coco Bay Unawatuna",
+      "Lady Hill Resort",
+      "Unawatuna Beach Resort"
+    ],
+    "restaurants": [
+      "The Kingfisher",
+      "Black & White Restaurant",
+      "Jungle Beach Cafe"
+    ],
+    "itineraries": {
+      "3": [
+        {
+          "day": 1,
+          "title": "Arrival & Beach Leisure",
+          "activities": [
+            "Arrive at Unawatuna, check-in.",
+            "Relax at the main sandy beach.",
+            "Enjoy beachfront dining with live acoustic music."
+          ],
+          "sights": [
+            "Unawatuna Beach"
+          ]
+        },
+        {
+          "day": 2,
+          "title": "Jungle Beach & Peace Pagoda",
+          "activities": [
+            "Trek through the forest to Jungle Beach.",
+            "Snorkel in the calm waters.",
+            "Visit the Japanese Peace Pagoda at sunset."
+          ],
+          "sights": [
+            "Jungle Beach",
+            "Japanese Peace Pagoda"
+          ]
+        },
+        {
+          "day": 3,
+          "title": "Galle Fort Excursion & Depart",
+          "activities": [
+            "Morning visit to the nearby Galle Dutch Fort.",
+            "Depart to Colombo."
+          ],
+          "sights": [
+            "Galle Fort",
+            "Departure"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "hambantota",
+    "name": "Hambantota Dry Zone",
+    "state": "Sri Lanka",
+    "is_popular": true,
+    "starting_cities": [
+      "Colombo"
+    ],
+    "starting_city_distances": {
+      "Colombo": 240
+    },
+    "description": "Modern port region featuring dry-zone botanical gardens, salt pans, and safari parks.",
+    "lat": 6.12,
+    "lon": 81.12,
+    "best_season": "December to April",
+    "entry_tickets": {
+      "ridiyagama_safari": 2500,
+      "botanical_garden": 1000
+    },
+    "transportation": {
+      "local_auto": 600,
+      "private_cab": 3800,
+      "public_bus": 200
+    },
+    "accommodation": {
+      "budget": 1200,
+      "mid_range": 3500,
+      "luxury": 9000
+    },
+    "food_cost_per_day": 800,
+    "women_safety": "High safety. Modern infrastructure and secure resorts. Respect park rules during safari tracks.",
+    "pros": [
+      "Unique dry-zone flora and landscapes.",
+      "Exciting open-jeep lion safari at Ridiyagama.",
+      "Great highway connectivity from Colombo."
+    ],
+    "cons": [
+      "Very hot and arid climate.",
+      "Fewer budget tourist hotels outside resorts."
+    ],
+    "warnings": [
+      "Use sunscreen and hats during outdoor visits.",
+      "Keep distance from wild elephants on highway borders."
+    ],
+    "extra_tips": [
+      "Visit the Mirijjawila Botanical Garden, the first dry-zone garden in Sri Lanka.",
+      "See the vast Hambantota Salt Pans."
+    ],
+    "hotels": [
+      "Shangri-La Hambantota",
+      "The Peacock Beach Hotel",
+      "Hambantota Rest House"
+    ],
+    "restaurants": [
+      "Shangri-La Dining Room",
+      "Salt Pan View Restaurant",
+      "Local street rice cafes"
+    ],
+    "itineraries": {
+      "3": [
+        {
+          "day": 1,
+          "title": "Arrival & Dry Zone Gardens",
+          "activities": [
+            "Drive to Hambantota via southern expressway.",
+            "Check-in.",
+            "Visit the Mirijjawila Dry Zone Botanical Garden."
+          ],
+          "sights": [
+            "Mirijjawila Botanical Garden"
+          ]
+        },
+        {
+          "day": 2,
+          "title": "Ridiyagama Safari & Salt Pans",
+          "activities": [
+            "Morning open-jeep safari at Ridiyagama Safari Park.",
+            "Visit the local Salt Pans in the afternoon.",
+            "Watch sunset at the port beach."
+          ],
+          "sights": [
+            "Ridiyagama Safari Park",
+            "Salt Pans"
+          ]
+        },
+        {
+          "day": 3,
+          "title": "Kataragama Temple & Depart",
+          "activities": [
+            "Visit the nearby sacred Kataragama multi-religious temple complex.",
+            "Depart to Colombo."
+          ],
+          "sights": [
+            "Kataragama Temple",
+            "Departure"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "matara",
+    "name": "Matara & Dondra Head",
+    "state": "Sri Lanka",
+    "is_popular": false,
+    "starting_cities": [
+      "Colombo"
+    ],
+    "starting_city_distances": {
+      "Colombo": 160
+    },
+    "description": "Coastal town featuring a Dutch Star Fort and the Dondra Head Lighthouse, the southernmost point of Sri Lanka.",
+    "lat": 5.92,
+    "lon": 80.59,
+    "best_season": "November to April",
+    "entry_tickets": {
+      "star_fort_museum": 0,
+      "dondra_lighthouse": 500
+    },
+    "transportation": {
+      "local_auto": 400,
+      "private_cab": 2800,
+      "public_bus": 120
+    },
+    "accommodation": {
+      "budget": 1000,
+      "mid_range": 2800,
+      "luxury": 7000
+    },
+    "food_cost_per_day": 750,
+    "women_safety": "High safety. Matara is a quiet residential coastal town. Safe for solo female travelers. Modest clothing is recommended at temples.",
+    "pros": [
+      "Stand at the southernmost point of Sri Lanka.",
+      "Beautiful star-shaped Dutch fort.",
+      "Quiet beaches."
+    ],
+    "cons": [
+      "Limited tourist-focused cafes compared to Mirissa.",
+      "Humid weather."
+    ],
+    "warnings": [
+      "Climbing the lighthouse stairs requires permission from the authority.",
+      "Be careful on slippery rocks near Dondra Head."
+    ],
+    "extra_tips": [
+      "Visit the Star Fort, a unique star-shaped fort built by the Dutch in 1761.",
+      "See the Dondra Head Lighthouse, the tallest lighthouse in Sri Lanka."
+    ],
+    "hotels": [
+      "Cinnamon Bey Beruwela",
+      "Talalla Retreat",
+      "The Dondra Point Lodge"
+    ],
+    "restaurants": [
+      "Matara Beach Restaurant",
+      "Star Fort cafe corner",
+      "Dondra local fish dining"
+    ],
+    "itineraries": {
+      "3": [
+        {
+          "day": 1,
+          "title": "Matara Star Fort & Beach",
+          "activities": [
+            "Arrive at Matara via train/bus.",
+            "Check-in.",
+            "Visit the unique Dutch Star Fort and the beach temple (Parevi Duwa)."
+          ],
+          "sights": [
+            "Star Fort",
+            "Parevi Duwa Temple"
+          ]
+        },
+        {
+          "day": 2,
+          "title": "Dondra Head Lighthouse",
+          "activities": [
+            "Drive to Dondra Head, the southernmost point of Sri Lanka.",
+            "Visit the Dondra Lighthouse.",
+            "Relax at Talalla Beach in the afternoon."
+          ],
+          "sights": [
+            "Dondra Lighthouse",
+            "Talalla Beach"
+          ]
+        },
+        {
+          "day": 3,
+          "title": "Polhena Beach & Depart",
+          "activities": [
+            "Snorkel with green turtles at Polhena Beach.",
+            "Depart to Colombo."
+          ],
+          "sights": [
+            "Polhena Beach",
+            "Departure"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "welimada",
+    "name": "Welimada Vegetable Valley",
+    "state": "Sri Lanka",
+    "is_popular": false,
+    "starting_cities": [
+      "Kandy",
+      "Colombo"
+    ],
+    "starting_city_distances": {
+      "Kandy": 90,
+      "Colombo": 210
+    },
+    "description": "Lush vegetable-growing valley surrounded by terraced farms, ancient temples, and pine hills.",
+    "lat": 6.9,
+    "lon": 80.91,
+    "best_season": "January to May",
+    "entry_tickets": {
+      "temple_visit": 0
+    },
+    "transportation": {
+      "local_auto": 500,
+      "private_cab": 3200,
+      "public_bus": 150
+    },
+    "accommodation": {
+      "budget": 800,
+      "mid_range": 2200,
+      "luxury": 5500
+    },
+    "food_cost_per_day": 600,
+    "women_safety": "High safety. Deeply traditional farming community. Safe for solo female travelers during the day; avoid traveling on dark rural roads late at night.",
+    "pros": [
+      "Stunning terraced vegetable farm views.",
+      "Quiet rural atmosphere.",
+      "Highly budget-friendly homestays."
+    ],
+    "cons": [
+      "Limited English speakers compared to tourist hubs.",
+      "No luxury resort options."
+    ],
+    "warnings": [
+      "Check road conditions during heavy rains; rural tracks can be muddy.",
+      "Carry cash as ATMs are sparse outside Welimada town."
+    ],
+    "extra_tips": [
+      "Visit the Divrumpola Buddhist temple, believed to be the place where Sita performed her ordeal by fire.",
+      "Try fresh farm-to-table organic vegetables."
+    ],
+    "hotels": [
+      "Welimada Homestay Camp",
+      "Highland Valley Farmstay",
+      "Divrumpola Lodge"
+    ],
+    "restaurants": [
+      "Divrumpola temple tea house",
+      "Welimada junction local dining"
+    ],
+    "itineraries": {
+      "3": [
+        {
+          "day": 1,
+          "title": "Arrival & Terraced Farms Walk",
+          "activities": [
+            "Drive to Welimada, check-in at a farmstay.",
+            "Stroll through terraced cabbage and carrot farms.",
+            "Enjoy organic local vegetable dinner."
+          ],
+          "sights": [
+            "Terraced Farms"
+          ]
+        },
+        {
+          "day": 2,
+          "title": "Divrumpola Temple & Pine Hills",
+          "activities": [
+            "Visit the historic Divrumpola Temple.",
+            "Hike up the surrounding pine hills for valley views.",
+            "Interact with local farmers."
+          ],
+          "sights": [
+            "Divrumpola Temple",
+            "Pine Hills"
+          ]
+        },
+        {
+          "day": 3,
+          "title": "Keppetipola & Depart",
+          "activities": [
+            "Visit the nearby Keppetipola historical monument.",
+            "Depart to Kandy."
+          ],
+          "sights": [
+            "Keppetipola Monument",
+            "Departure"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "bhaktapur",
+    "name": "Bhaktapur Ancient City",
+    "state": "Nepal",
+    "is_popular": true,
+    "starting_cities": [
+      "Kathmandu"
+    ],
+    "starting_city_distances": {
+      "Kathmandu": 15
+    },
+    "description": "UNESCO walled royal capital famous for red brick architecture, pottery squares, and woodcarving details.",
+    "lat": 27.67,
+    "lon": 85.43,
+    "best_season": "October to December",
+    "entry_tickets": {
+      "bhaktapur_zone_fee": 1500
+    },
+    "transportation": {
+      "local_auto": 300,
+      "private_cab": 1500,
+      "public_bus": 60
+    },
+    "accommodation": {
+      "budget": 1000,
+      "mid_range": 2800,
+      "luxury": 7500
+    },
+    "food_cost_per_day": 700,
+    "women_safety": "High safety. Very safe and secure. Well-patrolled by tourist police. Safe for solo female travelers at all hours.",
+    "pros": [
+      "Beautiful, pedestrian-only brick streets.",
+      "Rich Newari cultural insights.",
+      "Incredible details on wood carvings."
+    ],
+    "cons": [
+      "High entry zone ticket fee for foreign visitors.",
+      "Can get crowded during daytime tour bus arrivals."
+    ],
+    "warnings": [
+      "Check the date of local festivals (like Bisket Jatra) as roads get extremely crowded.",
+      "Vehicles are restricted inside the historic gates."
+    ],
+    "extra_tips": [
+      "Try Juju Dhau (King Curd), a sweet, creamy yogurt served in clay pots.",
+      "Visit the Pottery Square to see traditional clay pots being made."
+    ],
+    "hotels": [
+      "Peacock Guest House",
+      "Hotel Heritage Bhaktapur",
+      "Shiva Guest House"
+    ],
+    "restaurants": [
+      "Nyatapola Restaurant",
+      "Watatsumi Newari Caf\u00e9",
+      "Pottery Square local food stall"
+    ],
+    "itineraries": {
+      "3": [
+        {
+          "day": 1,
+          "title": "Bhaktapur Durbar Square",
+          "activities": [
+            "Arrive at Bhaktapur, check-in heritage hotel.",
+            "Explore the Durbar Square, Golden Gate, and Palace of 55 Windows.",
+            "Dinner overlooking Nyatapola Temple."
+          ],
+          "sights": [
+            "Bhaktapur Durbar Square",
+            "Palace of 55 Windows"
+          ]
+        },
+        {
+          "day": 2,
+          "title": "Pottery Square & Dattatreya",
+          "activities": [
+            "Visit Pottery Square to try making a clay pot.",
+            "Stroll to Dattatreya Square to view the peacock window.",
+            "Walk around the ancient ponds (Pokhari) at the edge of town."
+          ],
+          "sights": [
+            "Pottery Square",
+            "Dattatreya Square",
+            "Siddha Pokhari"
+          ]
+        },
+        {
+          "day": 3,
+          "title": "Changu Narayan & Depart",
+          "activities": [
+            "Drive to nearby Changu Narayan Temple (oldest temple in Nepal).",
+            "Depart to Kathmandu."
+          ],
+          "sights": [
+            "Changu Narayan Temple",
+            "Departure"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "nagarkot",
+    "name": "Nagarkot Sunrise Hills",
+    "state": "Nepal",
+    "is_popular": true,
+    "starting_cities": [
+      "Kathmandu"
+    ],
+    "starting_city_distances": {
+      "Kathmandu": 32
+    },
+    "description": "Hill station on the northern rim of Kathmandu Valley, famous for panoramic sunrise views over the Himalayas, including Mount Everest.",
+    "lat": 27.72,
+    "lon": 85.52,
+    "best_season": "October to December, March to May",
+    "entry_tickets": {
+      "nagarkot_viewpoint_fee": 300
+    },
+    "transportation": {
+      "local_auto": 600,
+      "private_cab": 2200,
+      "public_bus": 100
+    },
+    "accommodation": {
+      "budget": 1000,
+      "mid_range": 3000,
+      "luxury": 8500
+    },
+    "food_cost_per_day": 800,
+    "women_safety": "High safety. Quiet, scenic resort town. Safe for solo female travelers; carry warm clothes for cool mountain nights.",
+    "pros": [
+      "Panoramic views of 8 Himalayan ranges on a clear day.",
+      "Pleasant, cool mountain air.",
+      "Easy getaway from Kathmandu traffic."
+    ],
+    "cons": [
+      "Views are highly weather-dependent; heavy clouds can block everything.",
+      "Limited activities besides hiking and relaxing."
+    ],
+    "warnings": [
+      "Check weather forecasts before traveling; winter mornings can be very foggy.",
+      "The road to Nagarkot can be winding and bumpy."
+    ],
+    "extra_tips": [
+      "Book a hotel room with a balcony facing east so you can watch the sunrise directly from your bed.",
+      "Hike the Nagarkot Nature Trail through pine forests."
+    ],
+    "hotels": [
+      "Club Himalaya Nagarkot",
+      "Mystic Mountain Resort",
+      "Hotel Country Villa"
+    ],
+    "restaurants": [
+      "Nagarkot View Restaurant",
+      "Sherpa Cafe",
+      "Country Villa Dining Room"
+    ],
+    "itineraries": {
+      "3": [
+        {
+          "day": 1,
+          "title": "Arrival & Sunset View",
+          "activities": [
+            "Drive up to Nagarkot ridge from Kathmandu.",
+            "Check-in.",
+            "Watch sunset over the hills from the hotel deck."
+          ],
+          "sights": [
+            "Nagarkot Ridge"
+          ]
+        },
+        {
+          "day": 2,
+          "title": "Himalayan Sunrise & Nature Hike",
+          "activities": [
+            "Wake up at 5:00 AM for the spectacular Himalayan sunrise view.",
+            "Hike the Nagarkot Panoramic Hiking Trail through local villages and pine forests.",
+            "Relax in the evening."
+          ],
+          "sights": [
+            "Himalayan Viewpoint",
+            "Nature Trail"
+          ]
+        },
+        {
+          "day": 3,
+          "title": "Changu Narayan Hike & Depart",
+          "activities": [
+            "Trek down to Changu Narayan Temple.",
+            "Depart to Kathmandu."
+          ],
+          "sights": [
+            "Changu Narayan Trail",
+            "Departure"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "ghandruk",
+    "name": "Ghandruk Gurung Village",
+    "state": "Nepal",
+    "is_popular": false,
+    "starting_cities": [
+      "Pokhara",
+      "Kathmandu"
+    ],
+    "starting_city_distances": {
+      "Pokhara": 55,
+      "Kathmandu": 255
+    },
+    "description": "Traditional Gurung heritage village offering close-up views of Annapurna South and Machapuchare peaks.",
+    "lat": 28.38,
+    "lon": 83.73,
+    "best_season": "October to December, March to May",
+    "entry_tickets": {
+      "acap_permit": 3000,
+      "gurung_museum": 100
+    },
+    "transportation": {
+      "local_auto": 800,
+      "private_cab": 4500,
+      "public_bus": 250
+    },
+    "accommodation": {
+      "budget": 600,
+      "mid_range": 1800,
+      "luxury": 4500
+    },
+    "food_cost_per_day": 500,
+    "women_safety": "High safety. Traditional Gurung culture. Very safe and supportive for solo female travelers. The village homestays are managed by local families.",
+    "pros": [
+      "Incredible panoramic mountain views.",
+      "Authentic Gurung stone-house village architecture.",
+      "Great starting point for treks."
+    ],
+    "cons": [
+      "Reached via rough dirt roads from Pokhara.",
+      "Limited luxury stays."
+    ],
+    "warnings": [
+      "Carry water purification tablets.",
+      "Verify trekking permit papers at ACAP check posts."
+    ],
+    "extra_tips": [
+      "Rent traditional Gurung dress at the local museum for photographs.",
+      "Try local Gurung bread and honey."
+    ],
+    "hotels": [
+      "Ghandruk Guest House",
+      "Hotel Milan Ghandruk",
+      "Gurung Heritage Farmstay"
+    ],
+    "restaurants": [
+      "Ghandruk View Caf\u00e9",
+      "Himalayan Bakery",
+      "Homestay organic dining rooms"
+    ],
+    "itineraries": {
+      "3": [
+        {
+          "day": 1,
+          "title": "Drive to Ghandruk & Walk",
+          "activities": [
+            "Drive from Pokhara to Nayapul and hike/jeep up to Ghandruk.",
+            "Check-in.",
+            "Explore the stone-paved paths of the village."
+          ],
+          "sights": [
+            "Ghandruk Village Trails"
+          ]
+        },
+        {
+          "day": 2,
+          "title": "Sunrise & Gurung Museum",
+          "activities": [
+            "Watch sunrise over Machapuchare (Fishtail) peak.",
+            "Visit the Old Gurung Museum.",
+            "Hike to nearby tea gardens."
+          ],
+          "sights": [
+            "Annapurna Sunrise",
+            "Gurung Museum"
+          ]
+        },
+        {
+          "day": 3,
+          "title": "Landruk Trail & Depart",
+          "activities": [
+            "Morning walk towards Landruk trail.",
+            "Depart to Pokhara."
+          ],
+          "sights": [
+            "Landruk views",
+            "Departure"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "langtang",
+    "name": "Langtang Valley",
+    "state": "Nepal",
+    "is_popular": false,
+    "starting_cities": [
+      "Kathmandu"
+    ],
+    "starting_city_distances": {
+      "Kathmandu": 120
+    },
+    "description": "Glacial mountain valley bordering Tibet, famous for yak pastures, local cheese factories, and spectacular peaks.",
+    "lat": 28.21,
+    "lon": 85.5,
+    "best_season": "October to November, March to May",
+    "entry_tickets": {
+      "langtang_park_permit": 3000,
+      "local_guide_trek": 2500
+    },
+    "transportation": {
+      "local_auto": 1200,
+      "private_cab": 5000,
+      "public_bus": 300
+    },
+    "accommodation": {
+      "budget": 600,
+      "mid_range": 1600,
+      "luxury": 4000
+    },
+    "food_cost_per_day": 550,
+    "women_safety": "High safety. Deeply isolated mountain valley. Standard hiking safety guidelines apply. Trekking with a local guide is mandatory.",
+    "pros": [
+      "Spectacular glaciers and yak pastures.",
+      "Less crowded than Annapurna or Everest.",
+      "Rich Tibetan-influenced culture."
+    ],
+    "cons": [
+      "Only accessible by walking (no roads inside valley).",
+      "Limited electricity and wifi."
+    ],
+    "warnings": [
+      "Acclimatize properly; watch out for symptoms of altitude sickness.",
+      "Leeches can be active during wet seasons."
+    ],
+    "extra_tips": [
+      "Visit the local Kyanjin Gompa cheese factory to buy fresh yak cheese.",
+      "Hike up to Kyanjin Ri peak for panoramic glacial views."
+    ],
+    "hotels": [
+      "Kyanjin Lodge",
+      "Langtang View Tea House",
+      "Gompa Homestay"
+    ],
+    "restaurants": [
+      "Tea house dining rooms",
+      "Kyanjin Bakery"
+    ],
+    "itineraries": {
+      "3": [
+        {
+          "day": 1,
+          "title": "Syabrubesi to Lama Hotel",
+          "activities": [
+            "Drive from Kathmandu to Syabrubesi base.",
+            "Trek up through dense bamboo forests to Lama Hotel tea house."
+          ],
+          "sights": [
+            "Syabrubesi Base",
+            "Langtang River Trails"
+          ]
+        },
+        {
+          "day": 2,
+          "title": "Trek to Langtang Village",
+          "activities": [
+            "Trek through yak pastures to the rebuilt Langtang Village.",
+            "Interact with local Tibetan-descendant communities.",
+            "Sleep at local tea house."
+          ],
+          "sights": [
+            "Langtang Village"
+          ]
+        },
+        {
+          "day": 3,
+          "title": "Kyanjin Gompa & Depart",
+          "activities": [
+            "Trek to Kyanjin Gompa.",
+            "Visit Kyanjin Monastery.",
+            "Depart back to Kathmandu via helicopter (or return trek)."
+          ],
+          "sights": [
+            "Kyanjin Gompa",
+            "Departure"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "dhulikhel",
+    "name": "Dhulikhel Heritage Town",
+    "state": "Nepal",
+    "is_popular": false,
+    "starting_cities": [
+      "Kathmandu"
+    ],
+    "starting_city_distances": {
+      "Kathmandu": 30
+    },
+    "description": "Historic Newar town on the eastern rim of the valley, famous for heritage brick streets and sunset mountain vistas.",
+    "lat": 27.62,
+    "lon": 85.55,
+    "best_season": "October to March",
+    "entry_tickets": {
+      "temple_visit": 0,
+      "namobuddha_visit": 100
+    },
+    "transportation": {
+      "local_auto": 400,
+      "private_cab": 1800,
+      "public_bus": 80
+    },
+    "accommodation": {
+      "budget": 800,
+      "mid_range": 2200,
+      "luxury": 6500
+    },
+    "food_cost_per_day": 500,
+    "women_safety": "High safety. Quiet, traditional town. Safe for solo female travelers.",
+    "pros": [
+      "Stunning brick-paved historic core.",
+      "Panoramic views of the eastern Himalayas.",
+      "Excellent hiking routes to Namobuddha."
+    ],
+    "cons": [
+      "Limited nightlife.",
+      "Chilly mornings in winter."
+    ],
+    "warnings": [
+      "Respect local temple customs.",
+      "Carry cash as cards are not widely accepted in small local shops."
+    ],
+    "extra_tips": [
+      "Hike to Namobuddha Stupa, one of Nepal's most sacred Buddhist sites.",
+      "Try local Newari delicacies."
+    ],
+    "hotels": [
+      "Dhulikhel Mountain Resort",
+      "Himalayan Horizon",
+      "Ganga Ghar Guest House"
+    ],
+    "restaurants": [
+      "Dhulikhel View Caf\u00e9",
+      "Newar Food Cabin",
+      "Resort Dining Hall"
+    ],
+    "itineraries": {
+      "3": [
+        {
+          "day": 1,
+          "title": "Arrival & Old Town Walk",
+          "activities": [
+            "Drive from Kathmandu to Dhulikhel.",
+            "Check-in.",
+            "Walk through the historic Newar brick streets."
+          ],
+          "sights": [
+            "Dhulikhel Old Town"
+          ]
+        },
+        {
+          "day": 2,
+          "title": "Namobuddha Stupa Hike",
+          "activities": [
+            "Hike through local farming villages to Namobuddha Stupa.",
+            "Explore the sacred monastery complex.",
+            "Return to Dhulikhel for sunset."
+          ],
+          "sights": [
+            "Namobuddha Stupa",
+            "Village Trails"
+          ]
+        },
+        {
+          "day": 3,
+          "title": "Kali Temple Sunrise & Depart",
+          "activities": [
+            "Hike up to Kali Temple hill for sunrise views.",
+            "Depart to Kathmandu."
+          ],
+          "sights": [
+            "Kali Temple Peak",
+            "Departure"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "wangdue",
+    "name": "Wangdue Phodrang",
+    "state": "Bhutan",
+    "is_popular": true,
+    "starting_cities": [
+      "Thimphu",
+      "Paro"
+    ],
+    "starting_city_distances": {
+      "Thimphu": 70,
+      "Paro": 120
+    },
+    "description": "Lush valley famous for stone carvings, local bamboo crafts, and the majestic Wangdue Phodrang Dzong.",
+    "lat": 27.48,
+    "lon": 89.9,
+    "best_season": "October to April",
+    "entry_tickets": {
+      "wangdue_dzong": 500
+    },
+    "transportation": {
+      "local_auto": 500,
+      "private_cab": 3000,
+      "public_bus": 150
+    },
+    "accommodation": {
+      "budget": 1200,
+      "mid_range": 3200,
+      "luxury": 8000
+    },
+    "food_cost_per_day": 800,
+    "women_safety": "Extremely safe. Law-abiding, peaceful community. Safe for solo female travelers.",
+    "pros": [
+      "Warm pleasant climate.",
+      "Beautiful river vistas.",
+      "Interesting local bamboo markets."
+    ],
+    "cons": [
+      "Limited dining options outside hotels.",
+      "Road checks require valid permits."
+    ],
+    "warnings": [
+      "Always dress formally when visiting the Dzong.",
+      "Do not photograph military checkpoints."
+    ],
+    "extra_tips": [
+      "Buy local hand-woven bamboo mats and baskets.",
+      "Try traditional Bhutanese red rice."
+    ],
+    "hotels": [
+      "Dragon Nest Resort",
+      "Hotel Kuenphen",
+      "Wangdue Eco Lodge"
+    ],
+    "restaurants": [
+      "Wangdue Junction Cafe",
+      "Eco Lodge Dining Hall",
+      "Local Dzong Eatery"
+    ],
+    "itineraries": {
+      "3": [
+        {
+          "day": 1,
+          "title": "Arrival & River Sunset",
+          "activities": [
+            "Drive from Thimphu to Wangdue.",
+            "Check-in.",
+            "Watch sunset by the Punatsangchhu River."
+          ],
+          "sights": [
+            "Punatsangchhu River"
+          ]
+        },
+        {
+          "day": 2,
+          "title": "Wangdue Dzong & Craft Market",
+          "activities": [
+            "Visit the majestic Wangdue Phodrang Dzong.",
+            "Explore the local bamboo craft market.",
+            "Hike to nearby farming villages."
+          ],
+          "sights": [
+            "Wangdue Dzong",
+            "Bamboo Market"
+          ]
+        },
+        {
+          "day": 3,
+          "title": "Dochula Pass View & Depart",
+          "activities": [
+            "Stop at Dochula Pass for panoramic views.",
+            "Depart to Thimphu."
+          ],
+          "sights": [
+            "Dochula Pass",
+            "Departure"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "haa_valley",
+    "name": "Haa Valley",
+    "state": "Bhutan",
+    "is_popular": false,
+    "starting_cities": [
+      "Paro",
+      "Thimphu"
+    ],
+    "starting_city_distances": {
+      "Paro": 65,
+      "Thimphu": 115
+    },
+    "description": "Isolated glacial valley showcasing untouched traditional Bhutanese lifestyles, alpine forests, and ancient temples.",
+    "lat": 27.28,
+    "lon": 89.28,
+    "best_season": "October to December, March to May",
+    "entry_tickets": {
+      "lakhang_karpo": 300
+    },
+    "transportation": {
+      "local_auto": 800,
+      "private_cab": 3800,
+      "public_bus": 200
+    },
+    "accommodation": {
+      "budget": 1200,
+      "mid_range": 3500,
+      "luxury": 9000
+    },
+    "food_cost_per_day": 850,
+    "women_safety": "Extremely safe. Highly welcoming local farming community. Ideal for solo female travelers seeking quiet nature.",
+    "pros": [
+      "Untouched, pristine mountain valley.",
+      "Authentic farmhouse stays.",
+      "Stunning drives over Chele La Pass."
+    ],
+    "cons": [
+      "Very cold during winter nights.",
+      "Fewer restaurant options."
+    ],
+    "warnings": [
+      "Check road conditions on Chele La Pass during winter as snow can block transit.",
+      "Dress warmly in layers."
+    ],
+    "extra_tips": [
+      "Walk to Lhakhang Karpo (White Temple) and Lhakhang Nagpo (Black Temple).",
+      "Stay in a traditional wooden farmstay."
+    ],
+    "hotels": [
+      "Haa Valley Farmstay",
+      "Soe Guest House Haa",
+      "Highland Eco Lodge"
+    ],
+    "restaurants": [
+      "Farmstay dining rooms",
+      "Haa Town local caf\u00e9s"
+    ],
+    "itineraries": {
+      "3": [
+        {
+          "day": 1,
+          "title": "Dochula & Chele La Pass Drive",
+          "activities": [
+            "Drive from Paro over Chele La Pass (highest motorable road in Bhutan).",
+            "Check-in at Haa farmhouse.",
+            "Stroll through the local village."
+          ],
+          "sights": [
+            "Chele La Pass",
+            "Haa Village"
+          ]
+        },
+        {
+          "day": 2,
+          "title": "White & Black Temples",
+          "activities": [
+            "Visit the ancient Lhakhang Karpo (White Temple).",
+            "Walk to Lhakhang Nagpo (Black Temple).",
+            "Trek the local nature trail."
+          ],
+          "sights": [
+            "Lhakhang Karpo",
+            "Lhakhang Nagpo",
+            "Haa Nature Trail"
+          ]
+        },
+        {
+          "day": 3,
+          "title": "Farmhouse Life & Depart",
+          "activities": [
+            "Enjoy traditional farmhouse breakfast.",
+            "Depart to Paro."
+          ],
+          "sights": [
+            "Farmhouse Breakfast",
+            "Departure"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "trongsa",
+    "name": "Trongsa Dzong",
+    "state": "Bhutan",
+    "is_popular": true,
+    "starting_cities": [
+      "Thimphu"
+    ],
+    "starting_city_distances": {
+      "Thimphu": 200
+    },
+    "description": "Ancestral home of the Royal Family, perched on a sheer cliff overlooking a deep canyon gorge.",
+    "lat": 27.5,
+    "lon": 90.5,
+    "best_season": "October to April",
+    "entry_tickets": {
+      "trongsa_dzong": 500,
+      "ta_dzong_museum": 300
+    },
+    "transportation": {
+      "local_auto": 600,
+      "private_cab": 4000,
+      "public_bus": 250
+    },
+    "accommodation": {
+      "budget": 1000,
+      "mid_range": 3000,
+      "luxury": 8000
+    },
+    "food_cost_per_day": 800,
+    "women_safety": "Extremely safe. Peaceful mountain community. Safe for solo female travelers.",
+    "pros": [
+      "Spectacular cliffside architecture.",
+      "Rich royal history.",
+      "Panoramic canyon views."
+    ],
+    "cons": [
+      "Long transit times on winding mountain highways.",
+      "Limited shopping options."
+    ],
+    "warnings": [
+      "Check road conditions on Pele La Pass before traveling.",
+      "Dress formally inside the Dzong."
+    ],
+    "extra_tips": [
+      "Visit the Ta Dzong, a watchtower converted into a museum of royal heritage.",
+      "Photograph the Dzong from the viewpoint across the gorge."
+    ],
+    "hotels": [
+      "Yangkhil Resort",
+      "Sherabling Hotel",
+      "Trongsa Rest House"
+    ],
+    "restaurants": [
+      "Trongsa View Cafe",
+      "Yangkhil Dining Hall",
+      "Local Dzong Eatery"
+    ],
+    "itineraries": {
+      "3": [
+        {
+          "day": 1,
+          "title": "Pele La Pass & Canyon Drive",
+          "activities": [
+            "Drive from Thimphu past Pele La Pass.",
+            "Check-in.",
+            "Watch sunset from the Dzong viewpoint."
+          ],
+          "sights": [
+            "Pele La Pass",
+            "Trongsa Viewpoint"
+          ]
+        },
+        {
+          "day": 2,
+          "title": "Trongsa Dzong & Watchtower",
+          "activities": [
+            "Explore the massive Trongsa Dzong.",
+            "Visit the Ta Dzong museum.",
+            "Walk through the local market."
+          ],
+          "sights": [
+            "Trongsa Dzong",
+            "Ta Dzong Museum"
+          ]
+        },
+        {
+          "day": 3,
+          "title": "Return to Thimphu",
+          "activities": [
+            "Drive back to Thimphu."
+          ],
+          "sights": [
+            "Departure"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "rangamati",
+    "name": "Rangamati Lake Town",
+    "state": "Bangladesh",
+    "is_popular": false,
+    "starting_cities": [
+      "Chittagong",
+      "Dhaka"
+    ],
+    "starting_city_distances": {
+      "Chittagong": 77,
+      "Dhaka": 320
+    },
+    "description": "Hill tract district centered around Kaptai Lake, famous for tribal culture, hanging bridges, and boat cruises.",
+    "lat": 22.65,
+    "lon": 92.18,
+    "best_season": "November to February",
+    "entry_tickets": {
+      "hanging_bridge": 50,
+      "tribal_museum": 100,
+      "lake_boat_hire_hour": 1000
+    },
+    "transportation": {
+      "local_auto": 400,
+      "private_cab": 2500,
+      "public_bus": 120
+    },
+    "accommodation": {
+      "budget": 800,
+      "mid_range": 2200,
+      "luxury": 5000
+    },
+    "food_cost_per_day": 500,
+    "women_safety": "Medium-High safety. Deeply traditional community. Safe for solo female travelers; respect local customs and dress modestly.",
+    "pros": [
+      "Beautiful Kaptai Lake boat rides.",
+      "Unique Chakma and Marma tribal culture.",
+      "Quiet, green hill landscapes."
+    ],
+    "cons": [
+      "Foreign visitors require official permits to enter the Hill Tracts.",
+      "Fewer luxury hotel choices."
+    ],
+    "warnings": [
+      "Apply for the necessary Hill Tracts entry permit at least 1-2 weeks in advance.",
+      "Always wear life jackets on Kaptai Lake boat cruises."
+    ],
+    "extra_tips": [
+      "Buy hand-woven tribal textiles at the local market.",
+      "Dine at a restaurant on a small island in Kaptai Lake."
+    ],
+    "hotels": [
+      "Parjatan Motel Rangamati",
+      "Hotel Sufia",
+      "Green Castle Hotel"
+    ],
+    "restaurants": [
+      "Lake View Restaurant",
+      "Peda Ting Ting island dining",
+      "Rangamati Town local cafes"
+    ],
+    "itineraries": {
+      "3": [
+        {
+          "day": 1,
+          "title": "Hanging Bridge & Museum",
+          "activities": [
+            "Arrive at Rangamati from Chittagong.",
+            "Check-in.",
+            "Visit the iconic Hanging Bridge (Jhulonto Bridge) and the Tribal Cultural Museum."
+          ],
+          "sights": [
+            "Hanging Bridge",
+            "Tribal Museum"
+          ]
+        },
+        {
+          "day": 2,
+          "title": "Kaptai Lake Boat Cruise",
+          "activities": [
+            "Charter a wooden boat for a full day Kaptai Lake cruise.",
+            "Visit Rajban Vihara Buddhist temple.",
+            "Stop at Peda Ting Ting island for lunch."
+          ],
+          "sights": [
+            "Kaptai Lake Cruise",
+            "Rajban Vihara",
+            "Peda Ting Ting"
+          ]
+        },
+        {
+          "day": 3,
+          "title": "Shuvolong Falls & Depart",
+          "activities": [
+            "Morning boat ride to Shuvolong Waterfall.",
+            "Depart to Chittagong."
+          ],
+          "sights": [
+            "Shuvolong Waterfall",
+            "Departure"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "bandarban",
+    "name": "Bandarban Hills",
+    "state": "Bangladesh",
+    "is_popular": false,
+    "starting_cities": [
+      "Chittagong",
+      "Dhaka"
+    ],
+    "starting_city_distances": {
+      "Chittagong": 90,
+      "Dhaka": 330
+    },
+    "description": "Hill tracts region featuring peaks, the Golden Temple, and traditional indigenous villages.",
+    "lat": 22.19,
+    "lon": 92.22,
+    "best_season": "November to February",
+    "entry_tickets": {
+      "golden_temple": 100,
+      "nilgiri_entry": 200
+    },
+    "transportation": {
+      "local_auto": 500,
+      "private_cab": 3200,
+      "public_bus": 150
+    },
+    "accommodation": {
+      "budget": 800,
+      "mid_range": 2500,
+      "luxury": 6000
+    },
+    "food_cost_per_day": 550,
+    "women_safety": "Medium-High safety. Foreign visitors require permits. Peaceful tribal communities. Safe for solo female travelers during the day; avoid remote jungle treks alone.",
+    "pros": [
+      "Dramatic hill landscapes and rivers.",
+      "Fascinating Golden Temple architecture.",
+      "Rich indigenous culture."
+    ],
+    "cons": [
+      "Requires advance permit papers for foreign travelers.",
+      "Hilly roads can be steep and winding."
+    ],
+    "warnings": [
+      "Check road conditions during heavy rains; landslides are possible.",
+      "Respect local temple dress codes at the Golden Temple."
+    ],
+    "extra_tips": [
+      "Visit Nilgiri, a high peak offering spectacular views of clouds and hills.",
+      "Take a boat ride on the Sangu River."
+    ],
+    "hotels": [
+      "Sairu Hill Resort",
+      "Parjatan Motel Bandarban",
+      "Hotel Plaza Bandarban"
+    ],
+    "restaurants": [
+      "Sairu Restaurant",
+      "Bandarban Town local cafes",
+      "Sangu Riverbank food stalls"
+    ],
+    "itineraries": {
+      "3": [
+        {
+          "day": 1,
+          "title": "Golden Temple & Town Walk",
+          "activities": [
+            "Arrive at Bandarban, check-in.",
+            "Visit the Buddha Dhatu Jadi (Golden Temple) in Balaghata.",
+            "Walk along the Sangu River."
+          ],
+          "sights": [
+            "Buddha Dhatu Jadi",
+            "Sangu River"
+          ]
+        },
+        {
+          "day": 2,
+          "title": "Nilgiri Peak & Chimbuk Hill",
+          "activities": [
+            "Drive up to Nilgiri Peak to see clouds.",
+            "Stop at Chimbuk Hill viewpoint.",
+            "Visit a local Bawm tribal village on the way back."
+          ],
+          "sights": [
+            "Nilgiri Peak",
+            "Chimbuk Hill",
+            "Bawm Village"
+          ]
+        },
+        {
+          "day": 3,
+          "title": "Shoilo Prapot & Depart",
+          "activities": [
+            "Visit Shoilo Prapot waterfall.",
+            "Depart to Chittagong."
+          ],
+          "sights": [
+            "Shoilo Prapot Waterfall",
+            "Departure"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "saint_martins",
+    "name": "Saint Martin Island",
+    "state": "Bangladesh",
+    "is_popular": true,
+    "starting_cities": [
+      "Chittagong",
+      "Dhaka"
+    ],
+    "starting_city_distances": {
+      "Chittagong": 280,
+      "Dhaka": 430
+    },
+    "description": "Only coral island in Bangladesh, famous for clear blue waters, coconut groves, and fresh seafood.",
+    "lat": 20.62,
+    "lon": 92.32,
+    "best_season": "November to February (Ferry season)",
+    "entry_tickets": {
+      "ferry_round_trip": 1500,
+      "chera_dwip_boat": 500
+    },
+    "transportation": {
+      "local_auto": 300,
+      "private_cab": 1500,
+      "public_bus": 100
+    },
+    "accommodation": {
+      "budget": 1500,
+      "mid_range": 3500,
+      "luxury": 8000
+    },
+    "food_cost_per_day": 800,
+    "women_safety": "High safety. Small, peaceful island. Safe for solo female travelers. Modest swimwear is recommended.",
+    "pros": [
+      "Beautiful clear blue sea.",
+      "Delicious fresh lobster and fish.",
+      "Quiet, relaxing island lifestyle."
+    ],
+    "cons": [
+      "Only accessible by ferry from Teknaf (ferries run only in winter).",
+      "Limited electricity (mostly generators)."
+    ],
+    "warnings": [
+      "Check ferry schedules; rough weather can suspend ferry transits.",
+      "Respect the delicate coral ecosystem; do not collect corals."
+    ],
+    "extra_tips": [
+      "Take a local boat to Chera Dwip, the southernmost point of the island.",
+      "Try fresh coconut water, famous on the island."
+    ],
+    "hotels": [
+      "Mermaid Eco Resort",
+      "Music Eco Resort St. Martins",
+      "Blue Marine Resort"
+    ],
+    "restaurants": [
+      "Beachside fresh seafood stalls",
+      "Blue Marine Dining Hall"
+    ],
+    "itineraries": {
+      "3": [
+        {
+          "day": 1,
+          "title": "Teknaf Ferry & Arrival",
+          "activities": [
+            "Take morning ferry from Teknaf to St. Martin\u2019s.",
+            "Check-in.",
+            "Walk through coconut groves on the beach at sunset."
+          ],
+          "sights": [
+            "Teknaf Ferry Route",
+            "St. Martin's Beach"
+          ]
+        },
+        {
+          "day": 2,
+          "title": "Chera Dwip Coral Point",
+          "activities": [
+            "Walk or take a boat to Chera Dwip coral reef point.",
+            "Snorkel in the clear water.",
+            "Fresh seafood dinner by the beach."
+          ],
+          "sights": [
+            "Chera Dwip",
+            "Coral Snorkel"
+          ]
+        },
+        {
+          "day": 3,
+          "title": "Island Market & Depart",
+          "activities": [
+            "Browse the local fish and shell market.",
+            "Take the afternoon ferry back to Teknaf."
+          ],
+          "sights": [
+            "Local Island Market",
+            "Departure"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "fuvahmulah",
+    "name": "Fuvahmulah Island",
+    "state": "Maldives",
+    "is_popular": false,
+    "starting_cities": [
+      "Male"
+    ],
+    "starting_city_distances": {
+      "Male": 500
+    },
+    "description": "Unique one-island atoll featuring freshwater lakes, volcanic pebble beaches, and diverse dive sites for tiger sharks.",
+    "lat": -0.29,
+    "lon": 73.42,
+    "best_season": "January to April",
+    "entry_tickets": {
+      "tiger_shark_dive": 12000,
+      "mud_bath_fee": 1000
+    },
+    "transportation": {
+      "local_auto": 300,
+      "private_cab": 1500,
+      "public_bus": 200
+    },
+    "accommodation": {
+      "budget": 4000,
+      "mid_range": 7500,
+      "luxury": 16000
+    },
+    "food_cost_per_day": 2000,
+    "women_safety": "High safety. Friendly, close-knit local island. Safe for solo female travelers. Modest clothing is required in public areas outside tourist beach zones.",
+    "pros": [
+      "Exceptional dive sites with tiger sharks.",
+      "Unique freshwater lakes and marsh parks.",
+      "Stunning black pebble beaches."
+    ],
+    "cons": [
+      "Requires domestic flight from Male to reach the island.",
+      "Strong sea currents make beach swimming risky."
+    ],
+    "warnings": [
+      "Tiger shark diving must be guided by certified local dive centers.",
+      "Strict dress codes apply in local villages."
+    ],
+    "extra_tips": [
+      "Visit Dhadimagi Kilhi, a scenic freshwater lake in the middle of the island.",
+      "Take a mud bath at the local marsh park."
+    ],
+    "hotels": [
+      "Fuvahmulah Inn",
+      "Tiger Shark Residence",
+      "Marina Boutique Hotel"
+    ],
+    "restaurants": [
+      "Fuvahmulah Harbour Cafe",
+      "Lake Side View Cafe",
+      "Local curry shacks"
+    ],
+    "itineraries": {
+      "3": [
+        {
+          "day": 1,
+          "title": "Domestic Flight & Arrival",
+          "activities": [
+            "Fly from Male to Fuvahmulah.",
+            "Check-in.",
+            "Walk on the unique Thoondu pebble beach at sunset."
+          ],
+          "sights": [
+            "Thoondu Beach"
+          ]
+        },
+        {
+          "day": 2,
+          "title": "Tiger Shark Diving & Freshwater Lake",
+          "activities": [
+            "Morning tiger shark scuba dive at Tiger Zoo.",
+            "Visit Dhadimagi Kilhi freshwater lake.",
+            "Enjoy mud bath at the wetlands."
+          ],
+          "sights": [
+            "Tiger Zoo Dive Point",
+            "Dhadimagi Kilhi Lake"
+          ]
+        },
+        {
+          "day": 3,
+          "title": "Island Tour & Depart",
+          "activities": [
+            "Bicycle tour around the historical island points.",
+            "Fly back to Male."
+          ],
+          "sights": [
+            "Fuvahmulah Village Paths",
+            "Departure"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "ukulhas",
+    "name": "Ukulhas Eco Island",
+    "state": "Maldives",
+    "is_popular": false,
+    "starting_cities": [
+      "Male"
+    ],
+    "starting_city_distances": {
+      "Male": 72
+    },
+    "description": "Eco-friendly local island famous for waste management models, sandy bikini beaches, and snorkeling reefs.",
+    "lat": 4.21,
+    "lon": 72.86,
+    "best_season": "December to April",
+    "entry_tickets": {
+      "manta_snorkel": 5000,
+      "turtle_reef_safari": 4500
+    },
+    "transportation": {
+      "local_auto": 200,
+      "private_cab": 1000,
+      "public_bus": 120
+    },
+    "accommodation": {
+      "budget": 3500,
+      "mid_range": 6000,
+      "luxury": 13000
+    },
+    "food_cost_per_day": 1800,
+    "women_safety": "High safety. Award-winning clean eco-island. Extremely safe for solo female travelers. Bikini bans apply outside the designated tourist beach.",
+    "pros": [
+      "Award-winning clean eco-environment.",
+      "Beautiful long bikini beach.",
+      "Excellent snorkeling reef close to shore."
+    ],
+    "cons": [
+      "Daily speedboats run on fixed schedules.",
+      "Alcohol is prohibited on the island."
+    ],
+    "warnings": [
+      "Respect local waste sorting rules; do not litter.",
+      "Swim only in designated tourist lagoons."
+    ],
+    "extra_tips": [
+      "Book a snorkeling safari to see sea turtles and manta rays.",
+      "Try local grilled tuna fish."
+    ],
+    "hotels": [
+      "Ukulhas Villa",
+      "West Sands Ukulhas",
+      "SeaLaVie Inn"
+    ],
+    "restaurants": [
+      "Celeste Restaurant",
+      "SeaLaVie Cafe",
+      "Local harbor beach diner"
+    ],
+    "itineraries": {
+      "3": [
+        {
+          "day": 1,
+          "title": "Speedboat & Bikini Beach",
+          "activities": [
+            "Take speedboat from Male to Ukulhas.",
+            "Check-in.",
+            "Sunset swim at Bikini Beach."
+          ],
+          "sights": [
+            "Ukulhas Bikini Beach"
+          ]
+        },
+        {
+          "day": 2,
+          "title": "Manta Snorkeling Safari",
+          "activities": [
+            "Morning boat trip to snorkel with Manta Rays.",
+            "Picnic lunch on a sandbank.",
+            "Night fishing excursion."
+          ],
+          "sights": [
+            "Manta Reef",
+            "Sandbank Picnic"
+          ]
+        },
+        {
+          "day": 3,
+          "title": "Island Tour & Depart",
+          "activities": [
+            "Learn about the island's organic waste management program.",
+            "Depart to Male via speedboat."
+          ],
+          "sights": [
+            "Eco Park",
+            "Departure"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "thoddoo",
+    "name": "Thoddoo Island",
+    "state": "Maldives",
+    "is_popular": false,
+    "starting_cities": [
+      "Male"
+    ],
+    "starting_city_distances": {
+      "Male": 67
+    },
+    "description": "Lush local agricultural island famous for watermelon plantations, sandy bikini beaches, and snorkeling reefs.",
+    "lat": 4.43,
+    "lon": 72.96,
+    "best_season": "December to April",
+    "entry_tickets": {
+      "farm_tour_guide": 1000,
+      "turtle_snorkel": 4000
+    },
+    "transportation": {
+      "local_auto": 200,
+      "private_cab": 1200,
+      "public_bus": 150
+    },
+    "accommodation": {
+      "budget": 3000,
+      "mid_range": 5500,
+      "luxury": 11000
+    },
+    "food_cost_per_day": 1600,
+    "women_safety": "High safety. Quiet agricultural island. Safe for solo female travelers. Bikini bans apply outside the tourist beach.",
+    "pros": [
+      "Beautiful fruit farm landscapes.",
+      "Lesser commercial crowds.",
+      "Excellent snorkeling reef close to shore."
+    ],
+    "cons": [
+      "Speedboats from Male run on fixed schedules.",
+      "Alcohol is prohibited on the island."
+    ],
+    "warnings": [
+      "Respect local dress codes when walking through the village.",
+      "Do not pick fruits from farms without permission."
+    ],
+    "extra_tips": [
+      "Take a guided bicycle tour through the watermelon and papaya farms.",
+      "Buy fresh fruit directly from farmers."
+    ],
+    "hotels": [
+      "Thoddoo Retreat",
+      "Coco Villa Thoddoo",
+      "Summer Inn Thoddoo"
+    ],
+    "restaurants": [
+      "Black Anchor Restaurant",
+      "Priano Italian Restaurant",
+      "Local farm juice stalls"
+    ],
+    "itineraries": {
+      "3": [
+        {
+          "day": 1,
+          "title": "Speedboat & Farm Tour",
+          "activities": [
+            "Take speedboat from Male.",
+            "Check-in.",
+            "Guided bicycle tour through watermelon farms."
+          ],
+          "sights": [
+            "Watermelon Farms"
+          ]
+        },
+        {
+          "day": 2,
+          "title": "Bikini Beach & Snorkeling",
+          "activities": [
+            "Morning snorkeling at Thoddoo Bikini Beach reef.",
+            "Watch sunset at the beach.",
+            "Fresh seafood dinner."
+          ],
+          "sights": [
+            "Thoddoo Bikini Beach",
+            "House Reef Snorkel"
+          ]
+        },
+        {
+          "day": 3,
+          "title": "Turtle Safari & Depart",
+          "activities": [
+            "Morning swim with sea turtles.",
+            "Speedboat depart to Male."
+          ],
+          "sights": [
+            "Turtle Reef",
+            "Departure"
+          ]
+        }
+      ]
+    }
   }
 ]
