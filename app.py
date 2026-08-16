@@ -134,6 +134,10 @@ def not_found_error(error):
 def internal_error(error):
     return jsonify({"error": "Internal server error"}), 500
 
+@app.route('/itinerary')
+def view_itinerary_page():
+    return render_template('itinerary.html')
+
 @app.route('/privacy-policy')
 def privacy_policy():
     return render_template('privacy.html')
@@ -226,7 +230,7 @@ def itinerary_page(place_id):
     preloaded_json = json.dumps(itinerary)
     
     return render_template(
-        'index.html',
+        'itinerary.html',
         adsense_id=adsense_id,
         preloaded_itinerary=itinerary,
         preloaded_itinerary_json=preloaded_json

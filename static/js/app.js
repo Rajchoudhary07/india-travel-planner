@@ -225,382 +225,491 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function initApp() {
     // 1. Load saved API key and UPI ID if they exist
-    const savedKey = localStorage.getItem('gemini_api_key');
-    if (savedKey) {
+    const savedKey = localStorage.getItem("gemini_api_key");
+    if (savedKey && elements.userApiKey) {
         elements.userApiKey.value = savedKey;
     }
-    const savedUpi = localStorage.getItem('admin_upi_id') || 'Craj40215@axl';
-    elements.userUpiId.value = savedUpi;
-    if (!localStorage.getItem('admin_upi_id')) {
-        localStorage.setItem('admin_upi_id', 'Craj40215@axl');
+    const savedUpi = localStorage.getItem("admin_upi_id") || "Craj40215@axl";
+    if (elements.userUpiId) {
+        elements.userUpiId.value = savedUpi;
     }
-    const savedTag = localStorage.getItem('amazon_affiliate_tag') || 'offbeatyatra2-21';
-    elements.userAmazonTag.value = savedTag;
-    if (!localStorage.getItem('amazon_affiliate_tag')) {
-        localStorage.setItem('amazon_affiliate_tag', 'offbeatyatra2-21');
+    if (!localStorage.getItem("admin_upi_id")) {
+        localStorage.setItem("admin_upi_id", "Craj40215@axl");
     }
-    const savedSheet = localStorage.getItem('google_sheet_api_url');
-    if (savedSheet) {
+    const savedTag = localStorage.getItem("amazon_affiliate_tag") || "offbeatyatra2-21";
+    if (elements.userAmazonTag) {
+        elements.userAmazonTag.value = savedTag;
+    }
+    if (!localStorage.getItem("amazon_affiliate_tag")) {
+        localStorage.setItem("amazon_affiliate_tag", "offbeatyatra2-21");
+    }
+    const savedSheet = localStorage.getItem("google_sheet_api_url");
+    if (savedSheet && elements.userSheetUrl) {
         elements.userSheetUrl.value = savedSheet;
     }
-    const savedBookingAid = localStorage.getItem('booking_affiliate_id');
-    if (savedBookingAid) {
+    const savedBookingAid = localStorage.getItem("booking_affiliate_id");
+    if (savedBookingAid && elements.userBookingAid) {
         elements.userBookingAid.value = savedBookingAid;
     }
     
-    // Load saved Theme mode (Forced Dark Mode Only)
-    document.body.classList.remove('light-theme');
-    localStorage.setItem('theme', 'dark');
+    // Default Voyager Light Theme settings
+    document.body.classList.add("light-theme");
+    localStorage.setItem("theme", "light");
     
     // 2. Fetch available destinations list
-    fetchDestinations();
+    fetchDestinations().then(() => {
+        // If we are on the itinerary page
+        const isItineraryPath = window.location.pathname.includes("/itinerary") || window.location.search.includes("place_id");
+        if (isItineraryPath) {
+            if (window.PRELOADED_ITINERARY) {
+                activeItinerary = window.PRELOADED_ITINERARY;
+                renderItinerary(activeItinerary);
+                if (elements.loadingState) elements.loadingState.classList.add("hidden");
+                if (elements.itineraryShowcase) elements.itineraryShowcase.classList.remove("hidden");
+            } else {
+                // Try generating from URL query params
+                const params = new URLSearchParams(window.location.search);
+                if (params.has("place_id") || params.has("custom_name")) {
+                    fetchAndGenerateItineraryFromUrl(params);
+                } else {
+                    // Redirect back to home since no itinerary requested
+                    window.location.href = "/";
+                }
+            }
+        }
+    });
+}
 
-    // 3. If page contains a preloaded itinerary (programmatic SEO), show it instantly
-    if (window.PRELOADED_ITINERARY) {
-        activeItinerary = window.PRELOADED_ITINERARY;
-        renderItinerary(activeItinerary);
-        showState('itinerary');
+async function fetchAndGenerateItineraryFromUrl(params) {
+    if (elements.loadingState) {
+        elements.loadingState.classList.remove("hidden");
+    }
+    if (elements.emptyState) {
+        elements.emptyState.classList.add("hidden");
+    }
+    if (elements.itineraryShowcase) {
+        elements.itineraryShowcase.classList.add("hidden");
+    }
+
+    const placeId = params.get("place_id");
+    const customName = params.get("custom_name") || "";
+    const startingCity = params.get("starting_city") || "Raipur";
+    const homeCity = params.get("home_city") || "Delhi";
+    const days = parseInt(params.get("days")) || 4;
+    const budget = parseFloat(params.get("budget")) || 12000;
+    const travelStyle = params.get("travel_style") || "mid_range";
+    const totalTravelers = parseInt(params.get("total_travelers")) || 1;
+    const femaleTravelers = parseInt(params.get("female_travelers")) || 0;
+    const apiKey = localStorage.getItem("gemini_api_key") || "";
+
+    const payload = {
+        destination: placeId,
+        custom_destination: customName,
+        starting_city: startingCity,
+        home_city: homeCity,
+        days: days,
+        budget: budget,
+        travel_style: travelStyle,
+        total_travelers: totalTravelers,
+        female_travelers: femaleTravelers,
+        api_key: apiKey
+    };
+
+    try {
+        const response = await fetch("/api/generate-itinerary", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+            throw new Error("Failed to generate itinerary. Please try again.");
+        }
+
+        const data = await response.json();
+        activeItinerary = data;
+        renderItinerary(data);
+        
+        if (elements.loadingState) elements.loadingState.classList.add("hidden");
+        if (elements.itineraryShowcase) elements.itineraryShowcase.classList.remove("hidden");
+        showNotification("Itinerary Generated", `Successfully created your route plan to ${data.destination}!`, "success");
+    } catch (err) {
+        console.error(err);
+        if (elements.loadingState) elements.loadingState.classList.add("hidden");
+        showNotification("Generation Failed", err.message || "Server error occurred.", "error");
     }
 }
 
 function bindEvents() {
     // Update days counter in form when slider is adjusted
-    elements.daysInput.addEventListener('input', (e) => {
-        elements.daysVal.textContent = `${e.target.value} Days`;
-    });
+    if (elements.daysInput && elements.daysVal) {
+        elements.daysInput.addEventListener("input", (e) => {
+            elements.daysVal.textContent = `${e.target.value} Days`;
+        });
+    }
 
     // Cascading Dropdown Listeners
-    elements.countrySelect.addEventListener('change', handleCountryChange);
-    elements.stateSelect.addEventListener('change', handleStateChange);
-    elements.citySelect.addEventListener('change', handleCityChange);
+    if (elements.countrySelect) {
+        elements.countrySelect.addEventListener("change", handleCountryChange);
+    }
+    if (elements.stateSelect) {
+        elements.stateSelect.addEventListener("change", handleStateChange);
+    }
+    if (elements.citySelect) {
+        elements.citySelect.addEventListener("change", handleCityChange);
+    }
 
     // Form submission
-    elements.itineraryForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        generateItinerary();
-    });
+    if (elements.itineraryForm) {
+        elements.itineraryForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            generateItinerary();
+        });
+    }
 
     // Custom Destination input toggle
-    const toggleCustomDest = document.getElementById('toggle-custom-dest');
-    const customDestGroup = document.getElementById('custom-dest-group');
+    const toggleCustomDest = document.getElementById("toggle-custom-dest");
+    const customDestGroup = document.getElementById("custom-dest-group");
     if (toggleCustomDest && customDestGroup) {
-        toggleCustomDest.addEventListener('click', (e) => {
+        toggleCustomDest.addEventListener("click", (e) => {
             e.preventDefault();
-            customDestGroup.classList.toggle('hidden');
-            if (!customDestGroup.classList.contains('hidden')) {
+            customDestGroup.classList.toggle("hidden");
+            if (!customDestGroup.classList.contains("hidden")) {
                 toggleCustomDest.innerHTML = '<i class="fa-solid fa-circle-minus"></i> Use standard list instead';
-                elements.destinationHiddenInput.value = 'custom';
+                if (elements.destinationHiddenInput) elements.destinationHiddenInput.value = "custom";
             } else {
-                toggleCustomDest.innerHTML = '<i class="fa-solid fa-circle-plus"></i> Can\'t find your destination? Type any custom place!';
-                elements.destinationHiddenInput.value = '';
-                document.getElementById('custom-dest-input').value = '';
+                toggleCustomDest.innerHTML = '<i class="fa-solid fa-circle-plus"></i> Can\x27t find your destination? Type any custom place!';
+                if (elements.destinationHiddenInput) elements.destinationHiddenInput.value = "";
+                const customInput = document.getElementById("custom-dest-input");
+                if (customInput) customInput.value = "";
             }
         });
     }
 
     // Settings panel toggles (Safe Check)
-    if (elements.settingsToggle) {
-        elements.settingsToggle.addEventListener('click', () => {
-            elements.settingsPanel.classList.remove('hidden');
+    if (elements.settingsToggle && elements.settingsPanel) {
+        elements.settingsToggle.addEventListener("click", () => {
+            elements.settingsPanel.classList.remove("hidden");
         });
     }
     
-    if (elements.closeSettings) {
-        elements.closeSettings.addEventListener('click', () => {
-            elements.settingsPanel.classList.add('hidden');
+    if (elements.closeSettings && elements.settingsPanel) {
+        elements.closeSettings.addEventListener("click", () => {
+            elements.settingsPanel.classList.add("hidden");
         });
     }
 
     // Settings Panel Save Action
-    elements.saveSettings.addEventListener('click', () => {
-        const keyVal = elements.userApiKey.value.trim();
-        const upiVal = elements.userUpiId.value.trim();
-        const tagVal = elements.userAmazonTag.value.trim();
-        const sheetVal = elements.userSheetUrl.value.trim();
-        const bookingAidVal = elements.userBookingAid.value.trim();
-        
-        if (keyVal) {
-            localStorage.setItem('gemini_api_key', keyVal);
-        } else {
-            localStorage.removeItem('gemini_api_key');
-        }
-        
-        if (upiVal) {
-            localStorage.setItem('admin_upi_id', upiVal);
-        } else {
-            localStorage.removeItem('admin_upi_id');
-        }
+    if (elements.saveSettings) {
+        elements.saveSettings.addEventListener("click", () => {
+            const keyVal = elements.userApiKey ? elements.userApiKey.value.trim() : "";
+            const upiVal = elements.userUpiId ? elements.userUpiId.value.trim() : "";
+            const tagVal = elements.userAmazonTag ? elements.userAmazonTag.value.trim() : "";
+            const sheetVal = elements.userSheetUrl ? elements.userSheetUrl.value.trim() : "";
+            const bookingAidVal = elements.userBookingAid ? elements.userBookingAid.value.trim() : "";
+            
+            if (keyVal) {
+                localStorage.setItem("gemini_api_key", keyVal);
+            } else {
+                localStorage.removeItem("gemini_api_key");
+            }
+            
+            if (upiVal) {
+                localStorage.setItem("admin_upi_id", upiVal);
+            } else {
+                localStorage.removeItem("admin_upi_id");
+            }
 
-        if (tagVal) {
-            localStorage.setItem('amazon_affiliate_tag', tagVal);
-        } else {
-            localStorage.removeItem('amazon_affiliate_tag');
-        }
+            if (tagVal) {
+                localStorage.setItem("amazon_affiliate_tag", tagVal);
+            } else {
+                localStorage.removeItem("amazon_affiliate_tag");
+            }
 
-        if (sheetVal) {
-            localStorage.setItem('google_sheet_api_url', sheetVal);
-        } else {
-            localStorage.removeItem('google_sheet_api_url');
-        }
+            if (sheetVal) {
+                localStorage.setItem("google_sheet_api_url", sheetVal);
+            } else {
+                localStorage.removeItem("google_sheet_api_url");
+            }
 
-        if (bookingAidVal) {
-            localStorage.setItem('booking_affiliate_id', bookingAidVal);
-        } else {
-            localStorage.removeItem('booking_affiliate_id');
-        }
-        
-        showNotification('Settings Saved', 'Configurations updated successfully.', 'success');
-        elements.settingsPanel.classList.add('hidden');
-    });
-
-
+            if (bookingAidVal) {
+                localStorage.setItem("booking_affiliate_id", bookingAidVal);
+            } else {
+                localStorage.removeItem("booking_affiliate_id");
+            }
+            
+            showNotification("Settings Saved", "Configurations updated successfully.", "success");
+            if (elements.settingsPanel) elements.settingsPanel.classList.add("hidden");
+        });
+    }
 
     // 3D Parallax & Cursor Spotlight tracking
-    document.addEventListener('mousemove', (e) => {
+    document.addEventListener("mousemove", (e) => {
         const x = e.clientX;
         const y = e.clientY;
         
-        document.documentElement.style.setProperty('--mouse-x', `${x}px`);
-        document.documentElement.style.setProperty('--mouse-y', `${y}px`);
+        document.documentElement.style.setProperty("--mouse-x", `${x}px`);
+        document.documentElement.style.setProperty("--mouse-y", `${y}px`);
         
         // 3D Parallax offsets relative to screen center
         const centerX = window.innerWidth / 2;
         const centerY = window.innerHeight / 2;
-        const tiltX = (x - centerX) / centerX * 16; // Shift range: -16px to +16px
+        const tiltX = (x - centerX) / centerX * 16;
         const tiltY = (y - centerY) / centerY * 16;
         
-        document.documentElement.style.setProperty('--tilt-x', `${tiltX}px`);
-        document.documentElement.style.setProperty('--tilt-y', `${tiltY}px`);
+        document.documentElement.style.setProperty("--tilt-x", `${tiltX}px`);
+        document.documentElement.style.setProperty("--tilt-y", `${tiltY}px`);
     });
 
     // Lead Form triggers
-    elements.leadFormTrigger.addEventListener('click', () => {
-        showNotification('Coming Soon!', 'We are currently onboarding verified local tour & taxi operators in this region. Direct custom quotes will be live soon!', 'info');
-    });
+    if (elements.leadFormTrigger) {
+        elements.leadFormTrigger.addEventListener("click", () => {
+            showNotification("Coming Soon!", "We are currently onboarding verified local tour & taxi operators in this region. Direct custom quotes will be live soon!", "info");
+        });
+    }
     
-    elements.closeLeadModal.addEventListener('click', () => {
-        elements.leadModal.classList.add('hidden');
-    });
+    if (elements.closeLeadModal && elements.leadModal) {
+        elements.closeLeadModal.addEventListener("click", () => {
+            elements.leadModal.classList.add("hidden");
+        });
+    }
     
     // Quick Plan listeners
-    elements.closeQuickPlan.addEventListener('click', () => {
-        elements.quickPlanModal.classList.add('hidden');
-    });
+    if (elements.closeQuickPlan && elements.quickPlanModal) {
+        elements.closeQuickPlan.addEventListener("click", () => {
+            elements.quickPlanModal.classList.add("hidden");
+        });
+    }
     
-    elements.quickPlanForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        const placeId = elements.quickPlanPlaceId.value;
-        const startingCity = elements.quickPlanStart.value;
-        const homeCity = elements.quickPlanHome.value;
-        const days = parseInt(elements.quickPlanDays.value);
-        const budget = parseFloat(elements.quickPlanBudget.value);
-        const travelStyle = elements.quickPlanStyle.value;
-        const travelers = parseInt(document.getElementById('quick-plan-travelers').value) || 1;
-        const female = parseInt(document.getElementById('quick-plan-female').value) || 0;
-        
-        elements.quickPlanModal.classList.add('hidden');
-        
-        // Populate inputs in the sidebar for consistency
-        const matchedPlace = placesData.find(p => p.id === placeId);
-        if (matchedPlace) {
-            elements.stateSelect.value = matchedPlace.state;
-            handleStateChange();
+    if (elements.quickPlanForm && elements.quickPlanModal) {
+        elements.quickPlanForm.addEventListener("submit", (e) => {
+            e.preventDefault();
             
-            // Set destinationHiddenInput value AFTER state change because handleStateChange resets it!
-            elements.destinationHiddenInput.value = placeId;
+            const placeId = elements.quickPlanPlaceId.value;
+            const startingCity = elements.quickPlanStart.value;
+            const homeCity = elements.quickPlanHome.value;
+            const days = parseInt(elements.quickPlanDays.value);
+            const budget = parseFloat(elements.quickPlanBudget.value);
+            const travelStyle = elements.quickPlanStyle.value;
+            const travelers = parseInt(document.getElementById("quick-plan-travelers").value) || 1;
+            const female = parseInt(document.getElementById("quick-plan-female").value) || 0;
             
-            elements.citySelect.value = startingCity;
-            elements.homeSelect.value = homeCity;
-            elements.daysInput.value = days;
-            elements.daysVal.textContent = `${days} Days`;
-            elements.budgetInput.value = budget;
-            document.getElementById('travelers-input').value = travelers;
-            document.getElementById('female-travelers-input').value = female;
+            elements.quickPlanModal.classList.add("hidden");
             
-            // Select the active radio button for style
-            const radio = document.querySelector(`input[name="travel-style"][value="${travelStyle}"]`);
-            if (radio) radio.checked = true;
-            
-            // Generate the plan
-            generateItinerary();
-        }
-    });
+            // Redirect directly to itinerary page!
+            const queryParams = new URLSearchParams({
+                place_id: placeId,
+                starting_city: startingCity,
+                home_city: homeCity,
+                days: days,
+                budget: budget,
+                travel_style: travelStyle,
+                total_travelers: travelers,
+                female_travelers: female
+            });
+            window.location.href = `/itinerary?${queryParams.toString()}`;
+        });
+    }
     
     // Submit Lead Inquiry
-    elements.leadInquiryForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        submitLeadInquiry();
-    });
+    if (elements.leadInquiryForm) {
+        elements.leadInquiryForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            submitLeadInquiry();
+        });
+    }
     
     // Partner Modal event listeners
-    elements.closePartnerModal.addEventListener('click', () => {
-        elements.partnerModal.classList.add('hidden');
-    });
+    if (elements.closePartnerModal && elements.partnerModal) {
+        elements.closePartnerModal.addEventListener("click", () => {
+            elements.partnerModal.classList.add("hidden");
+        });
+    }
     
-    elements.sponsoredStayContainer.addEventListener('click', (e) => {
-        const link = e.target.closest('#partner-billboard-link');
-        if (link) {
-            e.preventDefault();
-            if (activeItinerary) {
-                document.getElementById('partner-dest').value = activeItinerary.destination;
+    if (elements.sponsoredStayContainer && elements.partnerModal) {
+        elements.sponsoredStayContainer.addEventListener("click", (e) => {
+            const link = e.target.closest("#partner-billboard-link");
+            if (link) {
+                e.preventDefault();
+                if (activeItinerary) {
+                    const partnerDestInput = document.getElementById("partner-dest");
+                    if (partnerDestInput) partnerDestInput.value = activeItinerary.destination;
+                }
+                elements.partnerModal.classList.remove("hidden");
             }
-            elements.partnerModal.classList.remove('hidden');
-        }
-    });
+        });
+    }
     
-    elements.partnerInquiryForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        const submitBtn = elements.partnerInquiryForm.querySelector('button[type="submit"]');
-        const origText = submitBtn.innerHTML;
-        submitBtn.setAttribute('disabled', 'true');
-        submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Submitting Proposal...`;
-        
-        const payload = {
-            hotel_name: document.getElementById('partner-hotel-name').value.trim(),
-            destination: document.getElementById('partner-dest').value.trim(),
-            manager_name: document.getElementById('partner-name').value.trim(),
-            whatsapp: document.getElementById('partner-phone').value.trim(),
-            email: document.getElementById('partner-email').value.trim(),
-            promo_code: document.getElementById('partner-promo').value.trim(),
-            discount_percent: document.getElementById('partner-discount').value.trim(),
-            description: document.getElementById('partner-desc').value.trim(),
-            agreement_signed: document.getElementById('partner-agree').checked ? "Agreed to 10% Discount & No Scams Terms" : "No"
-        };
-        
-        try {
-            const sheetUrl = localStorage.getItem('google_sheet_api_url');
-            const promises = [];
+    if (elements.partnerInquiryForm && elements.partnerModal) {
+        elements.partnerInquiryForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
             
-            // 1. Dispatch to FormSubmit email relay
-            promises.push(
-                fetch('https://formsubmit.co/ajax/Craj40215@gmail.com', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify(payload)
-                })
-            );
+            const submitBtn = elements.partnerInquiryForm.querySelector('button[type="submit"]');
+            const origText = submitBtn.innerHTML;
+            submitBtn.setAttribute("disabled", "true");
+            submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Submitting Proposal...`;
             
-            // 2. If Google Sheet API URL is set, POST there live in background
-            if (sheetUrl) {
+            const payload = {
+                hotel_name: document.getElementById("partner-hotel-name").value.trim(),
+                destination: document.getElementById("partner-dest").value.trim(),
+                manager_name: document.getElementById("partner-name").value.trim(),
+                whatsapp: document.getElementById("partner-phone").value.trim(),
+                email: document.getElementById("partner-email").value.trim(),
+                promo_code: document.getElementById("partner-promo").value.trim(),
+                discount_percent: document.getElementById("partner-discount").value.trim(),
+                description: document.getElementById("partner-desc").value.trim(),
+                agreement_signed: document.getElementById("partner-agree").checked ? "Agreed to 10% Discount & No Scams Terms" : "No"
+            };
+            
+            try {
+                const sheetUrl = localStorage.getItem("google_sheet_api_url");
+                const promises = [];
+                
                 promises.push(
-                    fetch(sheetUrl, {
-                        method: 'POST',
-                        mode: 'no-cors',
+                    fetch("https://formsubmit.co/ajax/Craj40215@gmail.com", {
+                        method: "POST",
                         headers: {
-                            'Content-Type': 'application/json'
+                            "Content-Type": "application/json",
+                            "Accept": "application/json"
                         },
                         body: JSON.stringify(payload)
-                    }).catch(err => console.warn('Google Sheet submission error:', err))
+                    })
                 );
+                
+                if (sheetUrl) {
+                    promises.push(
+                        fetch(sheetUrl, {
+                            method: "POST",
+                            mode: "no-cors",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify(payload)
+                        }).catch(err => console.warn("Google Sheet submission error:", err))
+                    );
+                }
+                
+                const responses = await Promise.all(promises);
+                const mainResponse = responses[0];
+                
+                if (mainResponse && mainResponse.ok) {
+                    const currentPartners = JSON.parse(localStorage.getItem("hotel_partnerships") || "[]");
+                    currentPartners.push({
+                        id: Date.now(),
+                        dateSubmitted: new Date().toLocaleDateString("en-IN"),
+                        ...payload
+                    });
+                    localStorage.setItem("hotel_partnerships", JSON.stringify(currentPartners));
+    
+                    showNotification("Proposal Submitted!", "Your partnership details and discount agreement have been saved & emailed.", "success");
+                    elements.partnerInquiryForm.reset();
+                    elements.partnerModal.classList.add("hidden");
+                } else {
+                    throw new Error("Failed to dispatch proposal mail");
+                }
+            } catch (err) {
+                console.error(err);
+                showNotification("Dispatch Error", "Failed to submit proposal email. Please try again.", "error");
+            } finally {
+                submitBtn.removeAttribute("disabled");
+                submitBtn.innerHTML = origText;
             }
-            
-            const responses = await Promise.all(promises);
-            const mainResponse = responses[0]; // Email response
-            
-            if (mainResponse && mainResponse.ok) {
-                // Save to local storage for backup and admin dashboard viewing
-                const currentPartners = JSON.parse(localStorage.getItem('hotel_partnerships') || '[]');
-                currentPartners.push({
-                    id: Date.now(),
-                    dateSubmitted: new Date().toLocaleDateString('en-IN'),
-                    ...payload
-                });
-                localStorage.setItem('hotel_partnerships', JSON.stringify(currentPartners));
-
-                showNotification('Proposal Submitted!', 'Your partnership details and discount agreement have been saved & emailed.', 'success');
-                elements.partnerInquiryForm.reset();
-                elements.partnerModal.classList.add('hidden');
-            } else {
-                throw new Error('Failed to dispatch proposal mail');
-            }
-        } catch (err) {
-            console.error(err);
-            showNotification('Dispatch Error', 'Failed to submit proposal email. Please try again.', 'error');
-        } finally {
-            submitBtn.removeAttribute('disabled');
-            submitBtn.innerHTML = origText;
-        }
-    });
+        });
+    }
     
     // Admin Dashboard triggers
-    elements.viewLeadsDashboard.addEventListener('click', () => {
-        elements.settingsPanel.classList.add('hidden');
-        renderLeadsTable();
-        renderPartnersTable();
-        elements.leadsDashboardModal.classList.remove('hidden');
-    });
-    
-    elements.closeLeadsDashboard.addEventListener('click', () => {
-        elements.leadsDashboardModal.classList.add('hidden');
-    });
-    
-    elements.clearLeadsBtn.addEventListener('click', () => {
-        if (confirm("Are you sure you want to delete all collected leads? This action is permanent.")) {
-            localStorage.removeItem('travel_leads');
+    if (elements.viewLeadsDashboard && elements.leadsDashboardModal) {
+        elements.viewLeadsDashboard.addEventListener("click", () => {
+            if (elements.settingsPanel) elements.settingsPanel.classList.add("hidden");
             renderLeadsTable();
-            showNotification('Database Cleared', 'All travel leads have been deleted.', 'info');
-        }
-    });
-
-    elements.clearPartners.addEventListener('click', () => {
-        if (confirm("Are you sure you want to delete all partner agreements? This action is permanent.")) {
-            localStorage.removeItem('hotel_partnerships');
             renderPartnersTable();
-            showNotification('Database Cleared', 'All partner agreements have been deleted.', 'info');
-        }
-    });
+            elements.leadsDashboardModal.classList.remove("hidden");
+        });
+    }
+    
+    if (elements.closeLeadsDashboard && elements.leadsDashboardModal) {
+        elements.closeLeadsDashboard.addEventListener("click", () => {
+            elements.leadsDashboardModal.classList.add("hidden");
+        });
+    }
+    
+    if (elements.clearLeadsBtn) {
+        elements.clearLeadsBtn.addEventListener("click", () => {
+            if (confirm("Are you sure you want to delete all collected leads? This action is permanent.")) {
+                localStorage.removeItem("travel_leads");
+                renderLeadsTable();
+                showNotification("Database Cleared", "All travel leads have been deleted.", "info");
+            }
+        });
+    }
 
-    elements.exportPartnersCsv.addEventListener('click', () => {
-        exportPartnersCsvData();
-    });
+    if (elements.clearPartners) {
+        elements.clearPartners.addEventListener("click", () => {
+            if (confirm("Are you sure you want to delete all partner agreements? This action is permanent.")) {
+                localStorage.removeItem("hotel_partnerships");
+                renderPartnersTable();
+                showNotification("Database Cleared", "All partner agreements have been deleted.", "info");
+            }
+        });
+    }
 
-    elements.exportLeadsCsvBtn.addEventListener('click', () => {
-        exportLeadsToCSV();
-    });
+    if (elements.exportPartnersCsv) {
+        elements.exportPartnersCsv.addEventListener("click", () => {
+            exportPartnersCsvData();
+        });
+    }
+
+    if (elements.exportLeadsCsvBtn) {
+        elements.exportLeadsCsvBtn.addEventListener("click", () => {
+            exportLeadsToCSV();
+        });
+    }
 
     // Premium Paywall triggers
-    elements.premiumPdfBtn.addEventListener('click', () => {
-        if (!activeItinerary) return;
-        
-        const upiId = localStorage.getItem('admin_upi_id');
-        if (!upiId) {
-            showNotification('Setup Required', 'Please set your UPI ID in the Settings gear (⚙️) first to receive payments!', 'warning');
-            elements.settingsPanel.classList.remove('hidden');
-            return;
-        }
-        
-        // Populate paywall info
-        elements.paywallDestName.textContent = activeItinerary.destination;
-        
-        // Generate QR code link
-        // upi://pay?pa=address&pn=name&am=amount&cu=currency&tn=note
-        const upiUrl = `upi://pay?pa=${encodeURIComponent(upiId)}&pn=YatraAI&am=49&cu=INR&tn=Premium%20PDF%20${encodeURIComponent(activeItinerary.destination)}`;
-        const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(upiUrl)}`;
-        
-        elements.paywallQrContainer.innerHTML = `<img src="${qrUrl}" alt="UPI QR Code" style="width: 100%; height: 100%; object-fit: contain;">`;
-        elements.premiumPaywallModal.classList.remove('hidden');
-    });
+    if (elements.premiumPdfBtn && elements.premiumPaywallModal) {
+        elements.premiumPdfBtn.addEventListener("click", () => {
+            if (!activeItinerary) return;
+            
+            const upiId = localStorage.getItem("admin_upi_id");
+            if (!upiId) {
+                showNotification("Setup Required", "Please set your UPI ID in the Settings gear (⚙️) first to receive payments!", "warning");
+                if (elements.settingsPanel) elements.settingsPanel.classList.remove("hidden");
+                return;
+            }
+            
+            if (elements.paywallDestName) elements.paywallDestName.textContent = activeItinerary.destination;
+            
+            const upiUrl = `upi://pay?pa=${encodeURIComponent(upiId)}&pn=YatraAI&am=49&cu=INR&tn=Premium%20PDF%20${encodeURIComponent(activeItinerary.destination)}`;
+            const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(upiUrl)}`;
+            
+            if (elements.paywallQrContainer) {
+                elements.paywallQrContainer.innerHTML = `<img src="${qrUrl}" alt="UPI QR Code" style="width: 100%; height: 100%; object-fit: contain;">`;
+            }
+            elements.premiumPaywallModal.classList.remove("hidden");
+        });
+    }
     
-    elements.closePaywallModal.addEventListener('click', () => {
-        elements.premiumPaywallModal.classList.add('hidden');
-    });
+    if (elements.closePaywallModal && elements.premiumPaywallModal) {
+        elements.closePaywallModal.addEventListener("click", () => {
+            elements.premiumPaywallModal.classList.add("hidden");
+        });
+    }
     
-    elements.paywallVerifyForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        verifyAndUnlockPremiumPDF();
-    });
+    if (elements.paywallVerifyForm) {
+        elements.paywallVerifyForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            verifyAndUnlockPremiumPDF();
+        });
+    }
     
     // Lightbox modal close listeners
-    const lightboxModal = document.getElementById('lightbox-modal');
+    const lightboxModal = document.getElementById("lightbox-modal");
     if (lightboxModal) {
-        lightboxModal.addEventListener('click', (e) => {
-            if (e.target === lightboxModal || e.target.closest('#close-lightbox') || e.target.id === 'close-lightbox') {
-                lightboxModal.classList.add('hidden');
+        lightboxModal.addEventListener("click", (e) => {
+            if (e.target === lightboxModal || e.target.closest("#close-lightbox") || e.target.id === "close-lightbox") {
+                lightboxModal.classList.add("hidden");
             }
         });
     }
@@ -772,7 +881,9 @@ async function fetchDestinations() {
         
     } catch (error) {
         console.error("Error fetching places:", error);
-        elements.stateSelect.innerHTML = `<option value="" disabled>Error loading states</option>`;
+        if (elements.stateSelect) {
+            elements.stateSelect.innerHTML = `<option value="" disabled>Error loading states</option>`;
+        }
         showNotification('Network Error', 'Could not load destinations from the backend server.', 'error');
     }
 }
@@ -919,7 +1030,6 @@ async function generateItinerary() {
     const days = parseInt(elements.daysInput.value);
     const budget = parseFloat(elements.budgetInput.value);
     const travelStyle = document.querySelector('input[name="travel-style"]:checked').value;
-    const apiKey = localStorage.getItem('gemini_api_key') || '';
     const totalTravelers = parseInt(document.getElementById('travelers-input').value) || 1;
     const femaleTravelers = parseInt(document.getElementById('female-travelers-input').value) || 0;
     
@@ -927,83 +1037,37 @@ async function generateItinerary() {
     const customDestGroup = document.getElementById('custom-dest-group');
     const customDestInput = document.getElementById('custom-dest-input');
     const isCustomActive = customDestGroup && !customDestGroup.classList.contains('hidden');
-    let customName = '';
+    let customName = "";
     
     if (isCustomActive && customDestInput && customDestInput.value.trim()) {
-        placeId = 'custom';
+        placeId = "custom";
         customName = customDestInput.value.trim();
     }
     
-    if (!placeId || (placeId === 'custom' && !customName)) {
-        showNotification('Input Needed', 'Please select a destination from the list or type a custom place.', 'info');
+    if (!placeId || (placeId === "custom" && !customName)) {
+        showNotification("Input Needed", "Please select a destination from the list or type a custom place.", "info");
         return;
     }
     
     if (!startingCity) {
-        showNotification('Input Needed', 'Please select a starting city/gateway.', 'info');
+        showNotification("Input Needed", "Please select a starting city/gateway.", "info");
         return;
     }
 
-    // Toggle loading states
-    showState('loading');
+    // Redirect to the dedicated itinerary results page!
+    const queryParams = new URLSearchParams({
+        place_id: placeId,
+        custom_name: customName,
+        starting_city: startingCity,
+        home_city: homeCity,
+        days: days,
+        budget: budget,
+        travel_style: travelStyle,
+        total_travelers: totalTravelers,
+        female_travelers: femaleTravelers
+    });
     
-    // Dynamic loading texts
-    const loadingHeadings = [
-        "Consulting local databases...",
-        "Measuring starting city distances...",
-        "Checking safety parameters...",
-        "Balancing cost allocations..."
-    ];
-    let headingIndex = 0;
-    const headingInterval = setInterval(() => {
-        const headingEl = document.getElementById('loading-heading');
-        if (headingEl) {
-            headingEl.textContent = loadingHeadings[headingIndex];
-            headingIndex = (headingIndex + 1) % loadingHeadings.length;
-        }
-    }, 2500);
-
-    try {
-        const response = await fetch('/api/generate-itinerary', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                place_id: placeId,
-                custom_name: customName,
-                state: elements.stateSelect.value,
-                starting_city: startingCity,
-                home_city: homeCity,
-                days: days,
-                budget: budget,
-                travel_style: travelStyle,
-                total_travelers: totalTravelers,
-                female_travelers: femaleTravelers,
-                api_key: apiKey
-            })
-        });
-
-        clearInterval(headingInterval);
-
-        if (!response.ok) {
-            const errData = await response.json();
-            throw new Error(errData.error || "Itinerary generation failed.");
-        }
-
-        const data = await response.json();
-        activeItinerary = data;
-        
-        // Render outputs
-        renderItinerary(data, budget);
-        showState('itinerary');
-        
-    } catch (error) {
-        clearInterval(headingInterval);
-        console.error("Error generating itinerary:", error);
-        showState('empty');
-        showNotification('Generation Failed', error.message || 'An error occurred during calculations.', 'error');
-    }
+    window.location.href = `/itinerary?${queryParams.toString()}`;
 }
 
 // ==========================================================================
@@ -1652,22 +1716,31 @@ function renderSafetyAndWarnings(data) {
 // ==========================================================================
 
 function showState(state) {
-    elements.emptyState.classList.add('hidden');
-    elements.loadingState.classList.add('hidden');
-    elements.itineraryShowcase.classList.add('hidden');
+    if (elements.emptyState) elements.emptyState.classList.add("hidden");
+    if (elements.loadingState) elements.loadingState.classList.add("hidden");
+    if (elements.itineraryShowcase) elements.itineraryShowcase.classList.add("hidden");
     
-    if (state === 'empty') {
-        elements.emptyState.classList.remove('hidden');
-        elements.submitBtn.removeAttribute('disabled');
-        elements.submitBtn.querySelector('span').textContent = 'Generate Itinerary';
-    } else if (state === 'loading') {
-        elements.loadingState.classList.remove('hidden');
-        elements.submitBtn.setAttribute('disabled', 'true');
-        elements.submitBtn.querySelector('span').textContent = 'Planning...';
-    } else if (state === 'itinerary') {
-        elements.itineraryShowcase.classList.remove('hidden');
-        elements.submitBtn.removeAttribute('disabled');
-        elements.submitBtn.querySelector('span').textContent = 'Regenerate Itinerary';
+    if (state === "empty") {
+        if (elements.emptyState) elements.emptyState.classList.remove("hidden");
+        if (elements.submitBtn) {
+            elements.submitBtn.removeAttribute("disabled");
+            const span = elements.submitBtn.querySelector("span");
+            if (span) span.textContent = "Generate Itinerary";
+        }
+    } else if (state === "loading") {
+        if (elements.loadingState) elements.loadingState.classList.remove("hidden");
+        if (elements.submitBtn) {
+            elements.submitBtn.setAttribute("disabled", "true");
+            const span = elements.submitBtn.querySelector("span");
+            if (span) span.textContent = "Planning...";
+        }
+    } else if (state === "itinerary") {
+        if (elements.itineraryShowcase) elements.itineraryShowcase.classList.remove("hidden");
+        if (elements.submitBtn) {
+            elements.submitBtn.removeAttribute("disabled");
+            const span = elements.submitBtn.querySelector("span");
+            if (span) span.textContent = "Regenerate Itinerary";
+        }
         
         // Force Leaflet to recalculate container dimensions once it becomes visible
         if (travelMap) {

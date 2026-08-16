@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% if preloaded_itinerary %}
+    <title>Yatra AI | {{ preloaded_itinerary.destination }} Itinerary Planner ({{ preloaded_itinerary.duration_days }} Days)</title>
+    <meta name="description" content="Official Yatra AI: Get a detailed {{ preloaded_itinerary.duration_days }}-day offbeat travel plan to {{ preloaded_itinerary.destination }}, {{ preloaded_itinerary.state }}. View cost breakdown, map routes, and gear recommendations.">
+    <meta name="keywords" content="Yatra AI, Yātrā AI, Yatra travel planner, {{ preloaded_itinerary.destination }} itinerary, offbeat India travel">
+    {% else %}
+    <title>Yatra AI | Official Site - Offbeat India Itinerary & Route Planner</title>
+    <meta name="description" content="Official Yatra AI website. Generate cost-effective, personalized, and AI-powered travel itineraries for the most beautiful offbeat destinations in India. Discover hidden gems, stays, and route maps.">
+    <meta name="keywords" content="Yatra AI, Yātrā AI, Yatra travel planner, offbeat India, India itinerary planner, road trips India, hidden gems India, custom travel planner">
+    {% endif %}
+    
+    <script>
+        window.PRELOADED_ITINERARY = {% if preloaded_itinerary_json %}{{ preloaded_itinerary_json|safe }}{% else %}null{% endif %};
+    </script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Leaflet.js CSS (Interactive Maps) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    
+    <!-- Google AdSense In-feed Ad Script -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5830823262791349" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Background Decorative Orbs -->
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+
+        <!-- Cute 3D Floating Travel Elements -->
+        <div class="cute-3d-container">
+            <div class="floater floater-plane" title="Adventure Awaits!">🛩️</div>
+            <div class="floater floater-cloud" title="Floating High">☁️</div>
+            <div class="floater floater-balloon" title="Wanderlust">🎈</div>
+            <div class="floater floater-camera" title="Capture Memories">📷</div>
+            <div class="floater floater-compass" title="Find Your Route">🧭</div>
+        </div>
+
+        <!-- App Header -->
+        <header class="main-header">
+            <div class="logo">
+                <img src="/static/img/logo.svg" alt="Yatra AI Logo" class="brand-logo-img" style="height: 48px; width: auto; display: block;">
+            </div>
+            <div class="header-tagline">Offbeat India Travel Planner</div>
+
+        </header>
+
+        <!-- API Settings Modal/Overlay -->
+        <div id="settings-panel" class="settings-panel hidden">
+            <div class="settings-content">
+                <h3><i class="fa-solid fa-key"></i> Gemini API Settings</h3>
+                <p>Provide a Google Gemini API Key to enable advanced, personalized AI travel recommendations. If left empty, the app runs on a smart local rules-engine.</p>
+                <div class="form-group">
+                    <label for="user-api-key">Gemini API Key</label>
+                    <input type="password" id="user-api-key" placeholder="AIzaSy..." class="form-input">
+                </div>
+                <div class="form-group">
+                    <label for="user-upi-id"><i class="fa-solid fa-indian-rupee-sign"></i> Admin UPI ID (for receiving ₹49 PDF payments)</label>
+                    <input type="text" id="user-upi-id" placeholder="e.g. yourname@upi" value="Craj40215@axl" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label for="user-amazon-tag"><i class="fa-brands fa-amazon"></i> Amazon Affiliate Tag (for gear recommendations)</label>
+                    <input type="text" id="user-amazon-tag" placeholder="e.g. offbeatyatra2-21" value="offbeatyatra2-21" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label for="user-sheet-url"><i class="fa-solid fa-file-spreadsheet"></i> Google Sheet API URL (for live partnership records)</label>
+                    <input type="text" id="user-sheet-url" placeholder="https://script.google.com/macros/s/.../exec" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label for="user-booking-aid"><i class="fa-solid fa-percent"></i> Booking.com Affiliate ID (aid)</label>
+                    <input type="text" id="user-booking-aid" placeholder="e.g. 20261234" class="form-input">
+                </div>
+                <div class="settings-actions">
+                    <button id="view-leads-dashboard" class="btn btn-secondary btn-sm" style="color: var(--accent-gold); border-color: rgba(255, 210, 105, 0.4);"><i class="fa-solid fa-database"></i> Leads Dashboard</button>
+                    <button id="save-settings" class="btn btn-primary btn-sm">Save Key</button>
+                    <button id="close-settings" class="btn btn-secondary btn-sm">Close</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lead Form Modal -->
+        <div id="lead-modal" class="settings-panel hidden">
+            <div class="settings-content lead-modal-content">
+                <h3><i class="fa-solid fa-file-invoice-dollar"></i> Get Free Local Quote</h3>
+                <p>Our travel partners in <strong id="lead-start-city">starting city</strong> will build a customized package for your trip to <strong id="lead-dest-name">destination</strong>.</p>
+                <form id="lead-inquiry-form" style="margin-top: 15px; display: flex; flex-direction: column; gap: 12px;">
+                    <div class="form-group" style="text-align: left;">
+                        <label for="lead-name" style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase;">Your Full Name</label>
+                        <input type="text" id="lead-name" required placeholder="e.g. Rohan Sharma" class="form-input" style="margin-top: 4px;">
+                    </div>
+                    <div class="form-group" style="text-align: left;">
+                        <label for="lead-whatsapp" style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase;">WhatsApp Number</label>
+                        <input type="tel" id="lead-whatsapp" required placeholder="e.g. +91 9876543210" class="form-input" style="margin-top: 4px;">
+                    </div>
+                    <div class="form-group" style="text-align: left;">
+                        <label for="lead-email" style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase;">Email Address</label>
+                        <input type="email" id="lead-email" required placeholder="e.g. name@example.com" class="form-input" style="margin-top: 4px;">
+                    </div>
+                    <div class="form-group" style="text-align: left;">
+                        <label for="lead-date" style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase;">Approx Date of Travel</label>
+                        <input type="date" id="lead-date" required class="form-input" style="margin-top: 4px;">
+                    </div>
+                    <div class="form-group" style="text-align: left;">
+                        <label for="lead-notes" style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase;">Special Requests (Optional)</label>
+                        <textarea id="lead-notes" placeholder="e.g. Need a private cab for 4 people..." class="form-input" rows="2" style="margin-top: 4px; resize: none;"></textarea>
+                    </div>
+                    <div class="settings-actions" style="margin-top: 8px;">
+                        <button type="submit" class="btn btn-primary btn-sm">Submit Request</button>
+                        <button type="button" id="close-lead-modal" class="btn btn-secondary btn-sm">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Leads Dashboard Modal -->
+        <div id="leads-dashboard-modal" class="settings-panel hidden">
+            <div class="settings-content dashboard-content" style="max-width: 650px; width: 90%;">
+                <div class="dashboard-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid var(--border-light); padding-bottom: 8px;">
+                    <h3 style="margin: 0;"><i class="fa-solid fa-table-list"></i> Leads Database</h3>
+                    <button id="export-leads-csv" class="btn btn-primary btn-sm"><i class="fa-solid fa-file-csv"></i> Export to CSV</button>
+                </div>
+                <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px; text-align: left;">Captured customer inquiries requesting travel package quotes.</p>
+                <div class="leads-table-wrapper" style="max-height: 180px; overflow-y: auto; border: 1px solid var(--border-light); border-radius: 6px; background: rgba(0,0,0,0.2); margin-bottom: 20px;">
+                    <table style="width: 100%; border-collapse: collapse; font-size: 11.5px; text-align: left;">
+                        <thead>
+                           <tr style="background: rgba(255,255,255,0.05); border-bottom: 1px solid var(--border-light);">
+                               <th style="padding: 8px; border-right: 1px solid var(--border-light);">Date</th>
+                               <th style="padding: 8px; border-right: 1px solid var(--border-light);">Name</th>
+                               <th style="padding: 8px; border-right: 1px solid var(--border-light);">Contact</th>
+                               <th style="padding: 8px; border-right: 1px solid var(--border-light);">Trip Details</th>
+                               <th style="padding: 8px;">Budget</th>
+                           </tr>
+                        </thead>
+                        <tbody id="leads-table-body">
+                           <!-- Leads rendered dynamically by JS -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Partnerships Database Section -->
+                <div class="dashboard-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid var(--border-light); padding-bottom: 8px; padding-top: 10px;">
+                    <h3 style="margin: 0; color: var(--accent-gold);"><i class="fa-solid fa-hotel"></i> Stay Partnerships (Agreements)</h3>
+                    <button id="export-partners-csv" class="btn btn-primary btn-sm" style="background: linear-gradient(135deg, var(--accent-gold) 0%, #ff7e5f 100%); border-color: var(--accent-gold); color: #000; font-weight: 700;"><i class="fa-solid fa-file-csv"></i> Export to CSV</button>
+                </div>
+                <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px; text-align: left;">Hotel partnership agreements submitted directly by owners and managers.</p>
+                <div class="leads-table-wrapper" style="max-height: 180px; overflow-y: auto; border: 1px solid var(--border-light); border-radius: 6px; background: rgba(0,0,0,0.2);">
+                    <table style="width: 100%; border-collapse: collapse; font-size: 11.5px; text-align: left;">
+                        <thead>
+                           <tr style="background: rgba(255,255,255,0.05); border-bottom: 1px solid var(--border-light);">
+                               <th style="padding: 8px; border-right: 1px solid var(--border-light);">Date</th>
+                               <th style="padding: 8px; border-right: 1px solid var(--border-light);">Hotel Name</th>
+                               <th style="padding: 8px; border-right: 1px solid var(--border-light);">Contact Details</th>
+                               <th style="padding: 8px; border-right: 1px solid var(--border-light);">Promo/Discount</th>
+                               <th style="padding: 8px;">Agreement Status</th>
+                           </tr>
+                        </thead>
+                        <tbody id="partners-table-body">
+                           <!-- Partnerships rendered dynamically by JS -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="settings-actions" style="margin-top: 20px; display: flex; justify-content: space-between; gap: 8px;">
+                    <div style="display: flex; gap: 8px;">
+                        <button id="clear-leads" class="btn btn-danger btn-sm" style="background: #ef4444; border-color: #dc2626;"><i class="fa-solid fa-trash-can"></i> Clear Leads</button>
+                        <button id="clear-partners" class="btn btn-danger btn-sm" style="background: #ef4444; border-color: #dc2626;"><i class="fa-solid fa-trash-can"></i> Clear Partners</button>
+                    </div>
+                    <button id="close-leads-dashboard" class="btn btn-secondary btn-sm">Close</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Premium Paywall Modal -->
+        <div id="premium-paywall-modal" class="settings-panel hidden">
+            <div class="settings-content paywall-content" style="max-width: 420px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 15px;">
+                <div style="font-size: 40px; color: var(--accent-gold); text-shadow: 0 0 15px rgba(255, 210, 105, 0.4); margin-bottom: 5px;"><i class="fa-solid fa-crown"></i></div>
+                <h3 style="margin: 0;">Unlock Premium PDF Guide</h3>
+                <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.4; margin: 0;">Scan the UPI QR Code below to pay <strong>₹49</strong> directly and download the detailed offline travel pack for <strong id="paywall-dest-name">Destination</strong>, complete with hotel guides, budget checklists, and secret viewpoints.</p>
+                
+                <!-- Dynamic QR Code Container -->
+                <div id="paywall-qr-container" style="padding: 10px; background: white; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); display: flex; justify-content: center; align-items: center; width: 190px; height: 190px; margin: 10px 0;">
+                    <!-- QR code image injected here by JS -->
+                </div>
+                
+                <p style="font-size: 11.5px; color: var(--accent-gold); font-weight: 600; margin: 0;"><i class="fa-solid fa-circle-info"></i> Automatically configured for your UPI ID and ₹49.</p>
+                
+                <!-- Verification Form -->
+                <form id="paywall-verify-form" style="width: 100%; display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
+                    <div class="form-group" style="text-align: left; width: 100%;">
+                        <label for="paywall-ref" style="font-size: 10px; text-transform: uppercase; color: var(--text-secondary);">Enter Transaction ID / UTR Number</label>
+                        <input type="text" id="paywall-ref" required placeholder="e.g. 12-digit UPI Transaction Ref" class="form-input" style="margin-top: 4px;">
+                    </div>
+                    <div class="settings-actions" style="margin-top: 5px; width: 100%; display: flex; justify-content: center; gap: 8px;">
+                        <button type="submit" class="btn btn-primary btn-sm" style="flex: 1;">Verify & Unlock</button>
+                        <button type="button" id="close-paywall-modal" class="btn btn-secondary btn-sm" style="flex: 1;">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Quick Plan Modal -->
+        <div id="quick-plan-modal" class="settings-panel hidden">
+            <div class="settings-content" style="max-width: 420px; text-align: left;">
+                <h3 style="margin-bottom: 8px; display: flex; align-items: center; gap: 8px; color: var(--accent-cyan); font-family: var(--font-heading); font-size: 18px;">
+                    <i class="fa-solid fa-plane-departure"></i> Quick Plan: <span id="quick-plan-dest-name">Destination</span>
+                </h3>
+                <p style="font-size: 12.5px; color: var(--text-secondary); margin-bottom: 15px;">Configure your parameters to instantly generate your custom travel itinerary.</p>
+                
+                <form id="quick-plan-form" style="display: flex; flex-direction: column; gap: 12px;">
+                    <input type="hidden" id="quick-plan-place-id">
+                    
+                    <div class="form-group">
+                        <label for="quick-plan-home"><i class="fa-solid fa-house-user"></i> Origin / Home City</label>
+                        <select id="quick-plan-home" class="form-input" required>
+                            <option value="Delhi">Delhi</option>
+                            <option value="Mumbai">Mumbai</option>
+                            <option value="Kolkata" selected>Kolkata</option>
+                            <option value="Chennai">Chennai</option>
+                            <option value="Bangalore">Bangalore</option>
+                            <option value="Hyderabad">Hyderabad</option>
+                            <option value="Raipur">Raipur</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="quick-plan-start"><i class="fa-solid fa-city"></i> Starting City</label>
+                        <select id="quick-plan-start" class="form-input" required>
+                            <!-- Dynamically populated by JS -->
+                        </select>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div class="form-group">
+                            <label for="quick-plan-days"><i class="fa-solid fa-calendar-days"></i> Duration (Days)</label>
+                            <input type="number" id="quick-plan-days" class="form-input" min="1" max="15" value="4" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="quick-plan-style"><i class="fa-solid fa-wallet"></i> Travel Style</label>
+                            <select id="quick-plan-style" class="form-input">
+                                <option value="budget">Budget</option>
+                                <option value="mid_range" selected>Mid-Range</option>
+                                <option value="luxury">Luxury</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div class="form-group">
+                            <label for="quick-plan-travelers"><i class="fa-solid fa-users"></i> Total People</label>
+                            <input type="number" id="quick-plan-travelers" class="form-input" min="1" max="20" value="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="quick-plan-female"><i class="fa-solid fa-venus"></i> Female Travelers</label>
+                            <input type="number" id="quick-plan-female" class="form-input" min="0" max="20" value="0" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="quick-plan-budget"><i class="fa-solid fa-indian-rupee-sign"></i> Total Budget (INR)</label>
+                        <input type="number" id="quick-plan-budget" class="form-input" min="2000" max="100000" value="12000" required>
+                    </div>
+                    
+                    <div class="settings-actions" style="margin-top: 15px; display: flex; gap: 8px;">
+                        <button type="submit" class="btn btn-primary btn-sm" style="flex: 2; font-weight: 700;"><i class="fa-solid fa-wand-magic-sparkles"></i> Generate Itinerary</button>
+                        <button type="button" id="close-quick-plan" class="btn btn-secondary btn-sm" style="flex: 1;">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Hotel Partnership Modal -->
+        <div id="partner-modal" class="settings-panel hidden">
+            <div class="settings-content" style="max-width: 480px; text-align: left;">
+                <h3 style="margin-bottom: 8px; display: flex; align-items: center; gap: 8px; color: var(--accent-gold); font-family: var(--font-heading); font-size: 18px;">
+                    <i class="fa-solid fa-hotel"></i> Stay Partnership Proposal
+                </h3>
+                <p style="font-size: 12.5px; color: var(--text-secondary); margin-bottom: 15px;">Submit your property details. Once approved, your recommended stay banner will be listed live.</p>
+                
+                <form id="partner-inquiry-form" style="display: flex; flex-direction: column; gap: 12px;">
+                    <div class="form-group">
+                        <label for="partner-hotel-name">Property/Hotel Name</label>
+                        <input type="text" id="partner-hotel-name" class="form-input" required placeholder="e.g. Tiger Point Swiss Cottages">
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div class="form-group">
+                            <label for="partner-dest">Destination Region</label>
+                            <input type="text" id="partner-dest" class="form-input" required placeholder="e.g. Mainpat">
+                        </div>
+                        <div class="form-group">
+                            <label for="partner-name">Owner/Manager Name</label>
+                            <input type="text" id="partner-name" class="form-input" required placeholder="e.g. Amit Sharma">
+                        </div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div class="form-group">
+                            <label for="partner-phone">WhatsApp Number</label>
+                            <input type="tel" id="partner-phone" class="form-input" required placeholder="e.g. +91 98765 43210">
+                        </div>
+                        <div class="form-group">
+                            <label for="partner-email">Email Address</label>
+                            <input type="email" id="partner-email" class="form-input" required placeholder="e.g. contact@hotel.com">
+                        </div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div class="form-group">
+                            <label for="partner-promo">Custom Promo Code</label>
+                            <input type="text" id="partner-promo" class="form-input" required placeholder="e.g. OFFBEATYATRA">
+                        </div>
+                        <div class="form-group">
+                            <label for="partner-discount">Discount Offered (%)</label>
+                            <input type="number" id="partner-discount" class="form-input" min="5" max="30" value="10" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="partner-desc">Short Description (Max 150 chars)</label>
+                        <textarea id="partner-desc" class="form-input" style="height: 60px; resize: none;" required placeholder="e.g. Cozy luxury tents overlooking the pine valleys with home cooked meals..."></textarea>
+                    </div>
+                    
+                    <!-- Legal Agreement Section -->
+                    <div style="background: rgba(255, 210, 105, 0.05); border: 1px solid rgba(255, 210, 105, 0.15); padding: 10px; border-radius: 6px; font-size: 11.5px; color: var(--text-secondary); line-height: 1.35; display: flex; gap: 8px;">
+                        <input type="checkbox" id="partner-agree" required style="margin-top: 2px;">
+                        <label for="partner-agree" style="cursor: pointer; line-height: 1.4;">
+                            I hereby agree to offer a flat <strong>10% (or specified) discount</strong> to all OffbeatYatra customers using our promo code. I declare that our services are genuine, free of scams, and comply with all safety regulations.
+                        </label>
+                    </div>
+                    
+                    <div class="settings-actions" style="margin-top: 10px; display: flex; gap: 8px;">
+                        <button type="submit" class="btn btn-primary btn-sm" style="flex: 2; font-weight: 700;"><i class="fa-solid fa-file-contract"></i> Submit Agreement</button>
+                        <button type="button" id="close-partner-modal" class="btn btn-secondary btn-sm" style="flex: 1;">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <main class="main-content">
+            <!-- Sidebar Panel: Action controls -->
+            <section class="planner-sidebar card">
+                <div class="sidebar-header" style="border-bottom: 2px solid var(--text-primary); padding-bottom: 12px; margin-bottom: 20px;">
+                    <h2><i class="fa-solid fa-compass"></i> Trip Blueprint</h2>
+                    <p>Manage, share, and export your generated travel itinerary.</p>
+                </div>
+
+                <div class="form-group" style="gap: 15px;">
+                    <!-- Back button -->
+                    <a href="/" class="btn btn-secondary" style="width: 100%; text-decoration: none; display: inline-flex; justify-content: center; gap: 8px;">
+                        <i class="fa-solid fa-arrow-left"></i> Edit Parameters
+                    </a>
+                    
+                    <!-- Action controls -->
+                    <button id="premium-pdf-btn" class="btn btn-primary" style="width: 100%; margin-top: 10px;">
+                        <i class="fa-solid fa-file-pdf"></i> Export PDF Guide
+                    </button>
+                    
+                    <button onclick="window.print()" class="btn btn-secondary" style="width: 100%;">
+                        <i class="fa-solid fa-print"></i> Print Itinerary
+                    </button>
+                </div>
+                
+                <div class="sidebar-header" style="border-top: 2px dashed var(--border-light); margin-top: 30px; padding-top: 20px;">
+                    <h3><i class="fa-solid fa-shield-halved" style="color: var(--accent-cyan);"></i> Safe Travels</h3>
+                    <p style="font-size: 12px; line-height: 1.5; color: var(--text-secondary); margin-top: 8px;">Our AI models verify local weather advisories, emergency hospital networks, and tourist safety indexes before charting coordinates.</p>
+                </div>
+            </section>
+
+            <!-- Main Panel: Output Display -->
+            <section class="planner-display">
+                <!-- Welcome / Empty State -->
+                <div id="empty-state" class="empty-state card hidden">
+                    <div class="welcome-visual">
+                        <i class="fa-solid fa-earth-asia globe-spin"></i>
+                    </div>
+                    <h2>Explore Undiscovered India</h2>
+                    <p>Enter your details and let YātrāAI craft a seamless, pocket-friendly travel blueprint. Our customized itineraries cover starting city transport costs, ticket fees, women safety analysis, and local guidelines.</p>
+                    <div class="featured-gems-section">
+                        <h3><i class="fa-solid fa-wand-magic-sparkles" style="color: var(--accent-gold); margin-right: 6px;"></i> Curated Hidden Gems & Ratings</h3>
+                        <p class="gems-subtext">Click on any card to instantly plan your itinerary with customized local ratings!</p>
+                        <div class="gems-grid" id="featured-gems-grid">
+                            <!-- Populated dynamically by JS -->
+                        </div>
+                    </div>
+                    <!-- Static Guidebooks Grid for Crawlers and Users -->
+                    <div class="static-guidebooks-section" style="margin-top: 40px; padding-top: 25px; border-top: 1px dashed var(--border-light); text-align: left;">
+                        <h3 style="font-family: var(--font-heading); color: var(--text-primary); font-size: 18px; margin: 0 0 10px 0; display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-book-open" style="color: var(--accent-sunset);"></i> Explore Curated Offbeat Guidebooks</h3>
+                        <p style="color: var(--text-secondary); font-size: 13.5px; line-height: 1.5; margin: 0 0 20px 0;">Read detailed travel plans, distance estimates, transit costs, and safety indexes for popular offbeat regions in India:</p>
+                        <div class="guidebooks-links-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px;">
+                            <a href="/itinerary/ella" style="display: flex; flex-direction: column; padding: 15px; background: rgba(255,255,255,0.06); border: 1px solid var(--border-light); border-radius: var(--border-radius-md); text-decoration: none; color: var(--text-primary); transition: transform 0.3s, border-color 0.3s; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+                                <strong style="font-family: var(--font-heading); font-size: 14px; color: var(--accent-sunset);">Ella (Hills & Bridges)</strong>
+                                <span style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Ella Rock & Ravana, Sri Lanka</span>
+                            </a>
+                            <a href="/itinerary/sigiriya" style="display: flex; flex-direction: column; padding: 15px; background: rgba(255,255,255,0.06); border: 1px solid var(--border-light); border-radius: var(--border-radius-md); text-decoration: none; color: var(--text-primary); transition: transform 0.3s, border-color 0.3s; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+                                <strong style="font-family: var(--font-heading); font-size: 14px; color: var(--accent-sunset);">Sigiriya Rock Fortress</strong>
+                                <span style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Ancient ruins & Pidurangala, Sri Lanka</span>
+                            </a>
+                            <a href="/itinerary/pokhara" style="display: flex; flex-direction: column; padding: 15px; background: rgba(255,255,255,0.06); border: 1px solid var(--border-light); border-radius: var(--border-radius-md); text-decoration: none; color: var(--text-primary); transition: transform 0.3s, border-color 0.3s; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+                                <strong style="font-family: var(--font-heading); font-size: 14px; color: var(--accent-sunset);">Pokhara Valley</strong>
+                                <span style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Phewa Lake & Mountains, Nepal</span>
+                            </a>
+                            <a href="/itinerary/mainpat" style="display: flex; flex-direction: column; padding: 15px; background: rgba(255,255,255,0.06); border: 1px solid var(--border-light); border-radius: var(--border-radius-md); text-decoration: none; color: var(--text-primary); transition: transform 0.3s, border-color 0.3s; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+                                <strong style="font-family: var(--font-heading); font-size: 14px; color: var(--accent-sunset);">Mainpat (Mini Tibet)</strong>
+                                <span style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Hill Station, Chhattisgarh</span>
+                            </a>
+                            <a href="/itinerary/gandikota" style="display: flex; flex-direction: column; padding: 15px; background: rgba(255,255,255,0.06); border: 1px solid var(--border-light); border-radius: var(--border-radius-md); text-decoration: none; color: var(--text-primary); transition: transform 0.3s, border-color 0.3s; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+                                <strong style="font-family: var(--font-heading); font-size: 14px; color: var(--accent-sunset);">Gandikota Grand Canyon</strong>
+                                <span style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Gorge & Fort, Andhra Pradesh</span>
+                            </a>
+                            <a href="/itinerary/chitrakote_falls" style="display: flex; flex-direction: column; padding: 15px; background: rgba(255,255,255,0.06); border: 1px solid var(--border-light); border-radius: var(--border-radius-md); text-decoration: none; color: var(--text-primary); transition: transform 0.3s, border-color 0.3s; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+                                <strong style="font-family: var(--font-heading); font-size: 14px; color: var(--accent-sunset);">Chitrakote Falls</strong>
+                                <span style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Niagara of India, Chhattisgarh</span>
+                            </a>
+                            <a href="/itinerary/munnar" style="display: flex; flex-direction: column; padding: 15px; background: rgba(255,255,255,0.06); border: 1px solid var(--border-light); border-radius: var(--border-radius-md); text-decoration: none; color: var(--text-primary); transition: transform 0.3s, border-color 0.3s; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+                                <strong style="font-family: var(--font-heading); font-size: 14px; color: var(--accent-sunset);">Munnar Tea Hills</strong>
+                                <span style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Western Ghats, Kerala</span>
+                            </a>
+                            <a href="/itinerary/chamoli_auli" style="display: flex; flex-direction: column; padding: 15px; background: rgba(255,255,255,0.06); border: 1px solid var(--border-light); border-radius: var(--border-radius-md); text-decoration: none; color: var(--text-primary); transition: transform 0.3s, border-color 0.3s; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+                                <strong style="font-family: var(--font-heading); font-size: 14px; color: var(--accent-sunset);">Auli Ski Resort</strong>
+                                <span style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Snow Slopes, Uttarakhand</span>
+                            </a>
+                            <a href="/itinerary/tawang" style="display: flex; flex-direction: column; padding: 15px; background: rgba(255,255,255,0.06); border: 1px solid var(--border-light); border-radius: var(--border-radius-md); text-decoration: none; color: var(--text-primary); transition: transform 0.3s, border-color 0.3s; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+                                <strong style="font-family: var(--font-heading); font-size: 14px; color: var(--accent-sunset);">Tawang Valley</strong>
+                                <span style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Monastery, Arunachal Pradesh</span>
+                            </a>
+                            <a href="/itinerary/mawlynnong" style="display: flex; flex-direction: column; padding: 15px; background: rgba(255,255,255,0.06); border: 1px solid var(--border-light); border-radius: var(--border-radius-md); text-decoration: none; color: var(--text-primary); transition: transform 0.3s, border-color 0.3s; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+                                <strong style="font-family: var(--font-heading); font-size: 14px; color: var(--accent-sunset);">Mawlynnong Village</strong>
+                                <span style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Cleanest Village, Meghalaya</span>
+                            </a>
+                            <a href="/itinerary/ziro_valley" style="display: flex; flex-direction: column; padding: 15px; background: rgba(255,255,255,0.06); border: 1px solid var(--border-light); border-radius: var(--border-radius-md); text-decoration: none; color: var(--text-primary); transition: transform 0.3s, border-color 0.3s; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+                                <strong style="font-family: var(--font-heading); font-size: 14px; color: var(--accent-sunset);">Ziro Valley</strong>
+                                <span style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Music & Pine Hills, Arunachal</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                {% if preloaded_itinerary %}
+                <!-- Pre-rendered Static travel guide block for search crawlers -->
+                <div class="preloaded-seo-container card" style="margin-bottom: 25px; padding: 30px; text-align: left; background: rgba(230, 248, 235, 0.85); backdrop-filter: blur(20px); border: 1px solid var(--border-light); border-radius: var(--border-radius-lg); position: relative; z-index: 5;">
+                    <article style="color: var(--text-primary);">
+                        <h1 style="font-family: var(--font-heading); color: var(--accent-sunset); font-size: 26px; margin: 0 0 15px 0;"><i class="fa-solid fa-map-location-dot"></i> Detailed Travel Guide & Itinerary for {{ preloaded_itinerary.destination }}</h1>
+                        <p style="font-family: var(--font-body); font-size: 14px; line-height: 1.6; color: var(--text-secondary); margin-bottom: 20px;">
+                            Welcome to the official, dynamically preloaded travel guidebook for <strong>{{ preloaded_itinerary.destination }}, {{ preloaded_itinerary.state }}</strong>. This customized guide estimates local capacities, lodging, and transport cost thresholds for travelers starting their journey.
+                        </p>
+
+                        <h3 style="font-family: var(--font-heading); font-size: 18px; color: var(--text-primary); margin-top: 25px; margin-bottom: 10px;">Itinerary Summary</h3>
+                        <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 14px;">
+                            <tr style="border-bottom: 1px solid rgba(16,185,129,0.15); height: 35px;">
+                                <td style="font-weight: bold; color: var(--text-muted);">Destination</td>
+                                <td style="text-align: right; color: var(--text-primary);">{{ preloaded_itinerary.destination }}</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid rgba(16,185,129,0.15); height: 35px;">
+                                <td style="font-weight: bold; color: var(--text-muted);">State / Region</td>
+                                <td style="text-align: right; color: var(--text-primary);">{{ preloaded_itinerary.state }}</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid rgba(16,185,129,0.15); height: 35px;">
+                                <td style="font-weight: bold; color: var(--text-muted);">Duration</td>
+                                <td style="text-align: right; color: var(--text-primary);">{{ preloaded_itinerary.duration_days }} Days</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid rgba(16,185,129,0.15); height: 35px;">
+                                <td style="font-weight: bold; color: var(--text-muted);">Origin City</td>
+                                <td style="text-align: right; color: var(--text-primary);">{{ preloaded_itinerary.home_city }}</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid rgba(16,185,129,0.15); height: 35px;">
+                                <td style="font-weight: bold; color: var(--text-muted);">Travel Style</td>
+                                <td style="text-align: right; color: var(--text-primary);">{{ preloaded_itinerary.travel_style|capitalize }} Comfort</td>
+                            </tr>
+                        </table>
+
+                        <h3 style="font-family: var(--font-heading); font-size: 18px; color: var(--text-primary); margin-top: 25px; margin-bottom: 10px;">Estimated Budget Splits</h3>
+                        <ul style="font-family: var(--font-body); font-size: 14px; line-height: 1.7; color: var(--text-secondary); padding-left: 20px;">
+                            <li><strong>Origin to Starting Hub Travel:</strong> ₹{{ preloaded_itinerary.cost_summary.home_to_hub_transit }}</li>
+                            <li><strong>Local Hill Transportation:</strong> ₹{{ preloaded_itinerary.cost_summary.local_transport }}</li>
+                            <li><strong>Accommodation / Stays:</strong> ₹{{ preloaded_itinerary.cost_summary.accommodation }}</li>
+                            <li><strong>Dining & Food:</strong> ₹{{ preloaded_itinerary.cost_summary.food }}</li>
+                            <li><strong>Activity Tickets & Sights:</strong> ₹{{ preloaded_itinerary.cost_summary.tickets }}</li>
+                            <li><strong>Total Estimated Cost:</strong> <strong>₹{{ preloaded_itinerary.cost_summary.total_estimated }}</strong></li>
+                        </ul>
+
+                        <h3 style="font-family: var(--font-heading); font-size: 18px; color: var(--text-primary); margin-top: 25px; margin-bottom: 10px;">Day-by-Day Schedule</h3>
+                        <div style="display: flex; flex-direction: column; gap: 20px; margin-top: 15px;">
+                            {% for day in preloaded_itinerary.itinerary %}
+                            <div style="padding: 15px; border-left: 3px solid var(--accent-sunset); background: rgba(255,255,255,0.4); border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0;">
+                                <h4 style="margin: 0 0 8px 0; font-family: var(--font-heading); color: var(--accent-sunset); font-size: 16px;">Day {{ day.day }}: {{ day.title }}</h4>
+                                <p style="font-size: 13.5px; line-height: 1.6; color: var(--text-secondary); margin: 0 0 10px 0;">{{ day.description }}</p>
+                                <h5 style="margin: 10px 0 5px 0; font-size: 12px; font-weight: bold; color: var(--text-muted); text-transform: uppercase;">Key Sights & Activities</h5>
+                                <ul style="margin: 0; padding-left: 20px; font-size: 13px; color: var(--text-secondary); line-height: 1.6;">
+                                    {% for sight in day.sights %}
+                                    <li><strong>{{ sight.name }}</strong>: {{ sight.activity }} (Time: {{ sight.duration_hours }} hours)</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            {% endfor %}
+                        </div>
+
+                        <h3 style="font-family: var(--font-heading); font-size: 18px; color: var(--text-primary); margin-top: 25px; margin-bottom: 10px;">Safety Advisory & Curfews</h3>
+                        <div style="background: rgba(255, 183, 3, 0.1); border: 1px solid rgba(255, 183, 3, 0.3); border-radius: var(--border-radius-md); padding: 15px;">
+                            <p style="margin: 0; font-size: 13.5px; color: var(--text-secondary); line-height: 1.6;">
+                                <strong>Women Safety Status:</strong> <span style="color: var(--accent-sunset); font-weight: bold;">{{ preloaded_itinerary.women_safety.status }}</span>
+                            </p>
+                            <p style="margin: 10px 0 0 0; font-size: 13px; color: var(--text-muted); line-height: 1.5;">
+                                {{ preloaded_itinerary.women_safety.advisory }}
+                            </p>
+                        </div>
+
+                        <h3 style="font-family: var(--font-heading); font-size: 18px; color: var(--text-primary); margin-top: 25px; margin-bottom: 10px;">Regional Warnings & Advice</h3>
+                        <ul style="font-family: var(--font-body); font-size: 13.5px; line-height: 1.7; color: var(--text-secondary); padding-left: 20px;">
+                            {% for warning in preloaded_itinerary.warnings %}
+                            <li>{{ warning }}</li>
+                            {% endfor %}
+                        </ul>
+
+                        <h3 style="font-family: var(--font-heading); font-size: 18px; color: var(--text-primary); margin-top: 25px; margin-bottom: 10px;">Recommended Packing Checklist</h3>
+                        <ul style="font-family: var(--font-body); font-size: 13.5px; line-height: 1.7; color: var(--text-secondary); padding-left: 20px;">
+                            {% for item in preloaded_itinerary.packing_checklist %}
+                            <li>{{ item }}</li>
+                            {% endfor %}
+                        </ul>
+                    </article>
+                </div>
+                {% endif %}
+
+                <!-- Loading State -->
+                <div id="loading-state" class="loading-state card">
+                    <div class="spinner-container">
+                        <div class="spinner"></div>
+                        <div class="spinner-inner"></div>
+                    </div>
+                    <h2 id="loading-heading">Consulting local databases...</h2>
+                    <p id="loading-subtext">Generating day-by-day maps and calculating starting city transits...</p>
+                </div>
+
+                <!-- Itinerary Showcase (Hidden initially) -->
+                <div id="itinerary-showcase" class="itinerary-showcase hidden">
+                    <!-- Print-only Cover Page (Visible only in Premium PDF prints) -->
+                    <div class="print-only-cover">
+                        <div class="print-brand">
+                            <i class="fa-solid fa-compass-drafting"></i> Yātrā<span>AI</span>
+                        </div>
+                        <div class="print-cover-tag">OFFICIAL PREMIUM TRAVEL GUIDE</div>
+                        <h1 id="print-guide-dest">Destination Travel Plan</h1>
+                        <div class="print-meta-grid">
+                            <div class="print-meta-item">
+                                <span class="label">State / Region</span>
+                                <span class="value" id="print-meta-state">State</span>
+                            </div>
+                            <div class="print-meta-item">
+                                <span class="label">Duration</span>
+                                <span class="value" id="print-meta-days">5 Days</span>
+                            </div>
+                            <div class="print-meta-item">
+                                <span class="label">Starting From</span>
+                                <span class="value" id="print-meta-start">Start City</span>
+                            </div>
+                            <div class="print-meta-item">
+                                <span class="label">Travel Style</span>
+                                <span class="value" id="print-meta-style">Balanced</span>
+                            </div>
+                            <div class="print-meta-item">
+                                <span class="label">Total Budget</span>
+                                <span class="value" id="print-meta-budget">₹15,000</span>
+                            </div>
+                        </div>
+                        <div class="print-cover-footer">
+                            <p>This premium travel guide has been customized and compiled dynamically for you by Yātrā AI.</p>
+                            <p class="url">https://offbeatyatra.online &bull; Your Offbeat India Guide</p>
+                        </div>
+                        <div class="page-break"></div>
+                    </div>
+                    <!-- Overview Card -->
+                    <div class="overview-card card">
+                        <div class="itinerary-header">
+                            <div class="itinerary-title-area">
+                                <span class="tag-badge" id="state-badge">State</span>
+                                <h2 id="itinerary-dest-name">Destination Name</h2>
+                                <p id="itinerary-description" class="lead">Description of the place goes here...</p>
+                                
+                                <!-- Sponsored Stay Container -->
+                                <div id="sponsored-stay-container" style="margin-top: 12px; padding: 12px 16px; border-radius: 8px; border: 1px dashed var(--accent-gold); background: rgba(255, 210, 105, 0.03); font-size: 13px; text-align: left; display: none; line-height: 1.4;">
+                                    <!-- Injected dynamically by JS -->
+                                </div>
+                            </div>
+                            <div class="header-metadata">
+                                <div class="meta-item">
+                                    <span class="meta-label">Starting Point</span>
+                                    <span class="meta-value" id="itinerary-starting-point">City Name</span>
+                                </div>
+                                <div class="meta-item">
+                                    <span class="meta-label">Best Season</span>
+                                    <span class="meta-value" id="itinerary-season">Oct - Mar</span>
+                                </div>
+                                <div class="meta-item">
+                                    <span class="meta-label">AI Status</span>
+                                    <span class="meta-value" id="itinerary-ai-status">Local Heuristics</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Visual Split Layout: Map & Cost -->
+                    <div class="layout-grid-2">
+                        <!-- Interactive Map Card -->
+                        <div class="map-card card" style="position: relative;">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-map-location-dot"></i> Geographical Map</h3>
+                                <p>Interactive route line and sightseeing plotting</p>
+                            </div>
+                            <div id="map-container" class="map-container" style="position: relative;"></div>
+                            
+                            <!-- Floating Route Info Panel -->
+                            <div id="map-route-info" class="map-route-info" style="display: none;">
+                                <div class="route-info-header">
+                                    <h4><i class="fa-solid fa-route"></i> Travel Route Summary</h4>
+                                </div>
+                                <div class="route-info-stats">
+                                    <div class="stat-box">
+                                        <span class="stat-label">Total Distance</span>
+                                        <span class="stat-val" id="map-distance">-- km</span>
+                                    </div>
+                                    <div class="stat-box">
+                                        <span class="stat-label">Est. Travel Time</span>
+                                        <span class="stat-val" id="map-time">-- hrs</span>
+                                    </div>
+                                </div>
+                                <div class="route-info-instructions" id="map-instructions">
+                                    Enter details to plot route.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Budget & Costs Breakdown Card -->
+                        <div class="cost-card card">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-chart-pie"></i> Cost Allocation</h3>
+                                <p>Detailed estimates based on travel style</p>
+                            </div>
+                            <div class="budget-progress-container">
+                                <div class="budget-text">
+                                    <span>Target Budget: <strong id="val-target-budget">₹0</strong></span>
+                                    <span>Est. Total: <strong id="val-est-total">₹0</strong></span>
+                                </div>
+                                <div class="progress-bar-bg">
+                                    <div id="budget-progress-fill" class="progress-bar-fill"></div>
+                                </div>
+                                <div id="budget-status-message" class="budget-status">Perfectly within limits!</div>
+                            </div>
+                            <div class="chart-and-table">
+                                <div class="chart-wrapper">
+                                    <canvas id="costDoughnutChart"></canvas>
+                                </div>
+                                <div class="cost-list">
+                                    <div class="cost-list-item">
+                                        <span class="cost-color-box lodging"></span>
+                                        <span class="cost-category">Stay Accommodation</span>
+                                        <span class="cost-val" id="val-cost-lodging">₹0</span>
+                                    </div>
+                                    <div class="cost-list-item">
+                                        <span class="cost-color-box home-transit" style="background: var(--accent-gold);"></span>
+                                        <span class="cost-category">Home-to-Destination Travel</span>
+                                        <span class="cost-val" id="val-cost-home-transit">₹0</span>
+                                    </div>
+                                    <div class="cost-list-item">
+                                        <span class="cost-color-box transport"></span>
+                                        <span class="cost-category">Local & Transit Transport</span>
+                                        <span class="cost-val" id="val-cost-transport">₹0</span>
+                                    </div>
+                                    <div class="cost-list-item">
+                                        <span class="cost-color-box tickets"></span>
+                                        <span class="cost-category">Sights Entry Tickets</span>
+                                        <span class="cost-val" id="val-cost-tickets">₹0</span>
+                                    </div>
+                                    <div class="cost-list-item">
+                                        <span class="cost-color-box food"></span>
+                                        <span class="cost-category">Food Expense</span>
+                                        <span class="cost-val" id="val-cost-food">₹0</span>
+                                    </div>
+                                    <div class="cost-list-item">
+                                        <span class="cost-color-box misc"></span>
+                                        <span class="cost-category">Buffer / Contingency</span>
+                                        <span class="cost-val" id="val-cost-misc">₹0</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Affiliate Deals Section -->
+                            <div class="affiliate-deals-section">
+                                <div class="deals-title"><i class="fa-solid fa-plane-departure"></i> Best Booking Options</div>
+                                <div id="deals-container" class="deals-container">
+                                    <!-- Populated dynamically by JS -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Women Safety Evaluation & Local Warnings -->
+                    <div class="layout-grid-2">
+                        <!-- Women Safety Card -->
+                        <div class="safety-card card">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-venus"></i> Women Safety Assessment</h3>
+                                <p>Insights and specific solo travel advisory</p>
+                            </div>
+                            <div class="safety-content" id="safety-container">
+                                <!-- Populated by JS -->
+                            </div>
+                        </div>
+
+                        <!-- Warnings & Hazards Card -->
+                        <div class="warnings-card card">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-triangle-exclamation"></i> Things to Be Aware Of</h3>
+                                <p>Important precautions and local conditions</p>
+                            </div>
+                            <ul class="warnings-list" id="warnings-container">
+                                <!-- Populated by JS -->
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Pros & Cons Comparison -->
+                    <div class="pros-cons-card card">
+                        <div class="card-header">
+                            <h3><i class="fa-solid fa-balance-scale"></i> Strengths & Challenges</h3>
+                            <p>Pros and cons comparison of the destination</p>
+                        </div>
+                        <div class="pros-cons-grid">
+                            <div class="pros-section">
+                                <h4><i class="fa-solid fa-circle-check text-success"></i> Pros</h4>
+                                <ul class="pros-list" id="pros-container">
+                                    <!-- Populated by JS -->
+                                </ul>
+                            </div>
+                            <div class="cons-section">
+                                <h4><i class="fa-solid fa-circle-xmark text-danger"></i> Cons</h4>
+                                <ul class="cons-list" id="cons-container">
+                                    <!-- Populated by JS -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Daily Itinerary Timeline -->
+                    <div class="timeline-card card">
+                        <div class="card-header timeline-header-flex">
+                            <div>
+                                <h3><i class="fa-solid fa-route"></i> Day-by-Day Schedule</h3>
+                                <p>Sequential route planning for your excursion</p>
+                            </div>
+                            <div>
+                                <button id="premium-pdf-btn" class="btn btn-primary btn-sm" style="background: linear-gradient(135deg, var(--accent-gold) 0%, #ff7e5f 100%); border-color: var(--accent-gold); color: #000; font-weight: 700;">
+                                    <i class="fa-solid fa-file-pdf"></i> Get PDF Itinerary (₹49)
+                                </button>
+                            </div>
+                        </div>
+                        <div class="timeline" id="timeline-container">
+                            <!-- Day steps loaded here by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Local Tips & Fun Facts -->
+                    <div class="layout-grid-2">
+                        <!-- Cost Saving Tips -->
+                        <div class="tips-card card">
+                            <h3><i class="fa-solid fa-piggy-bank"></i> Budget Optimization Hacks</h3>
+                            <ul class="tips-list" id="tips-container">
+                                <!-- Populated by JS -->
+                            </ul>
+                        </div>
+
+                        <!-- Fun Facts -->
+                        <div class="facts-card card">
+                            <h3><i class="fa-solid fa-lightbulb"></i> Did You Know?</h3>
+                            <div class="facts-slider" id="facts-container">
+                                <!-- Populated by JS -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Lead Generation Panel -->
+                    <div class="lead-generation-card card" style="display: flex; align-items: center; justify-content: space-between; gap: 20px; background: linear-gradient(135deg, rgba(255, 210, 105, 0.04) 0%, rgba(255, 126, 95, 0.04) 100%); border: 1px dashed rgba(255, 210, 105, 0.2); padding: 22px 28px; margin-top: 20px; border-radius: var(--border-radius-lg);">
+                        <div style="display: flex; align-items: center; gap: 20px;">
+                            <div style="font-size: 32px; color: var(--accent-gold); text-shadow: 0 0 10px rgba(255, 210, 105, 0.3);"><i class="fa-solid fa-headset"></i></div>
+                            <div style="text-align: left;">
+                                <h3 style="margin: 0 0 4px 0; font-family: var(--font-heading); color: var(--text-primary); font-size: 17px; display: flex; align-items: center; gap: 8px;">Want this exact trip custom arranged? <span style="font-size: 10px; background: rgba(0, 242, 254, 0.12); color: var(--accent-cyan); padding: 2px 8px; border-radius: 4px; font-weight: bold; border: 1px solid rgba(0, 242, 254, 0.2); text-transform: uppercase;">Coming Soon</span></h3>
+                                <p style="margin: 0; font-size: 13px; color: var(--text-secondary);">Soon you will be able to request a free customized package quote from our verified local private cab drivers, guides, and hotels.</p>
+                            </div>
+                        </div>
+                        <button id="lead-form-trigger" class="btn btn-primary" style="white-space: nowrap; flex-shrink: 0; background: rgba(255, 255, 255, 0.03); border-color: rgba(255, 255, 255, 0.08); color: var(--text-muted); cursor: not-allowed;"><i class="fa-solid fa-clock-rotate-left"></i> Onboarding Partners</button>
+                    </div>
+
+                    <!-- Travel Packing Checklist Card -->
+                    <div class="packing-checklist-card card" style="margin-top: 20px;">
+                        <div class="card-header" style="border-bottom: 1px solid var(--border-light); padding-bottom: 10px; margin-bottom: 15px; text-align: left;">
+                            <h3 style="margin: 0 0 4px 0;"><i class="fa-solid fa-clipboard-check"></i> 🎒 Essential Gear Packing Checklist</h3>
+                            <p style="margin: 0; font-size: 13px; color: var(--text-secondary);">Gear up for your adventure! Select the items you've packed and grab any missing essentials on Amazon.</p>
+                        </div>
+                        <div id="packing-checklist-container">
+                            <!-- Populated dynamically by JS -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Compliance Footer -->
+    <footer style="margin-top: 60px; padding: 40px 20px; border-top: 2px solid var(--text-primary); text-align: center; background: var(--bg-card); position: relative; z-index: 10;">
+        <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 20px;">
+            <div style="display: flex; gap: 25px; flex-wrap: wrap; justify-content: center; font-size: 13px; font-weight: 500;">
+                <a href="/privacy-policy" style="color: var(--text-muted); text-decoration: none; transition: color 0.3s;">Privacy Policy</a>
+                <a href="/terms-of-service" style="color: var(--text-muted); text-decoration: none; transition: color 0.3s;">Terms & Conditions</a>
+                <a href="/disclaimer" style="color: var(--text-muted); text-decoration: none; transition: color 0.3s;">Disclaimer & Affiliate Disclosure</a>
+                <a href="/about" style="color: var(--text-muted); text-decoration: none; transition: color 0.3s;">About Us</a>
+                <a href="/contact" style="color: var(--text-muted); text-decoration: none; transition: color 0.3s;">Contact Us</a>
+            </div>
+            <p style="margin: 0; font-size: 12px; color: var(--text-muted); font-family: var(--font-body);">&copy; 2026 Offbeat Yatra. All Rights Reserved. Curation of sustainable, offbeat exploration tracks across India.</p>
+        </div>
+    </footer>
+
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Leaflet.js CDN (Interactive Maps) -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    
+    <!-- Lightbox Modal for Fullscreen Sights Images -->
+    <div id="lightbox-modal" class="settings-panel hidden" style="background: rgba(10, 4, 3, 0.95); display: flex; align-items: center; justify-content: center; z-index: 10000; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;">
+        <span id="close-lightbox" style="position: absolute; top: 20px; right: 20px; font-size: 32px; color: #fff; cursor: pointer; transition: all 0.3s;"><i class="fa-solid fa-xmark"></i></span>
+        <div style="text-align: center; max-width: 90%; max-height: 85%;">
+            <img id="lightbox-img" src="" alt="Fullscreen Sight" style="max-width: 100%; max-height: 75vh; border-radius: 18px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); object-fit: contain;">
+            <h3 id="lightbox-title" style="margin-top: 15px; color: #fff; font-family: var(--font-heading); font-size: 20px; letter-spacing: 0.5px;">Sight Name</h3>
+        </div>
+    </div>
+
+    <!-- Custom JS -->
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
