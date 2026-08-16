@@ -293,6 +293,7 @@ async function fetchAndGenerateItineraryFromUrl(params) {
 
     const placeId = params.get("place_id");
     const customName = params.get("custom_name") || "";
+    const stateName = params.get("state") || "";
     const startingCity = params.get("starting_city") || "Raipur";
     const homeCity = params.get("home_city") || "Delhi";
     const days = parseInt(params.get("days")) || 4;
@@ -303,8 +304,9 @@ async function fetchAndGenerateItineraryFromUrl(params) {
     const apiKey = localStorage.getItem("gemini_api_key") || "";
 
     const payload = {
-        destination: placeId,
-        custom_destination: customName,
+        place_id: placeId,
+        custom_name: customName,
+        state: stateName,
         starting_city: startingCity,
         home_city: homeCity,
         days: days,
@@ -325,7 +327,8 @@ async function fetchAndGenerateItineraryFromUrl(params) {
         });
 
         if (!response.ok) {
-            throw new Error("Failed to generate itinerary. Please try again.");
+            const errData = await response.json();
+            throw new Error(errData.error || "Failed to generate itinerary.");
         }
 
         const data = await response.json();
@@ -1058,6 +1061,7 @@ async function generateItinerary() {
     const queryParams = new URLSearchParams({
         place_id: placeId,
         custom_name: customName,
+        state: elements.stateSelect ? elements.stateSelect.value : "",
         starting_city: startingCity,
         home_city: homeCity,
         days: days,
