@@ -944,23 +944,36 @@ function getPlaceImageUrl(placeId, placeName) {
         return imageLookup[placeId];
     }
     
-    const fallbacks = [
-        "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=800&q=80"
-    ];
+    // Dynamic real landscape categories detection based on place name/keywords to prevent fake images
+    const name = placeName ? placeName.toLowerCase() : "";
     
-    let hash = 0;
-    for (let i = 0; i < placeId.length; i++) {
-        hash += placeId.charCodeAt(i);
+    // 1. Waterfalls
+    if (name.includes("falls") || name.includes("waterfall") || name.includes("waterfalls") || name.includes("cascade")) {
+        return "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=800&q=80"; // Real scenic waterfall
     }
-    const index = hash % fallbacks.length;
-    return fallbacks[index];
+    // 2. Beach, Island, Maldives
+    if (name.includes("beach") || name.includes("island") || name.includes("sand") || name.includes("coast") || name.includes("maldives") || name.includes("unawatuna") || name.includes("kalpitiya") || name.includes("reef")) {
+        return "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80"; // Real tropical beach
+    }
+    // 3. Mountains, Peaks, Passes, Valley
+    if (name.includes("mountain") || name.includes("peak") || name.includes("valley") || name.includes("pass") || name.includes("trek") || name.includes("hills") || name.includes("sikkim") || name.includes("himalaya")) {
+        return "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80"; // Real alpine peaks
+    }
+    // 4. Lake, River, Reservoir
+    if (name.includes("lake") || name.includes("river") || name.includes("dam") || name.includes("water") || name.includes("reservoir") || name.includes("backwaters")) {
+        return "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80"; // Real serene lake
+    }
+    // 5. Fort, Palace, Caves, Ruins, Ancient
+    if (name.includes("fort") || name.includes("palace") || name.includes("cave") || name.includes("caves") || name.includes("temple") || name.includes("monastery") || name.includes("ruins") || name.includes("historical") || name.includes("castle") || name.includes("unakoti")) {
+        return "https://images.unsplash.com/photo-1580977259142-63b7e411f5fa?auto=format&fit=crop&w=800&q=80"; // Real heritage ruins
+    }
+    // 6. Forest, National Park, Wildlife
+    if (name.includes("forest") || name.includes("park") || name.includes("wildlife") || name.includes("sanctuary") || name.includes("jungle")) {
+        return "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?auto=format&fit=crop&w=800&q=80"; // Real green forest track
+    }
+
+    // Ultimate real travel default (A beautiful real mountain valley)
+    return "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80";
 }
 
 
