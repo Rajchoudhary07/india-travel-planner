@@ -582,6 +582,10 @@
                         </div>
                         <div class="page-break"></div>
                     </div>
+                    <!-- Hero Image Banner -->
+                    <div id="itinerary-hero-container" class="card" style="padding: 0; overflow: hidden; margin-bottom: 24px; height: 320px;">
+                        <img id="itinerary-hero-img" src="" alt="Destination Banner" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                    </div>
                     <!-- Overview Card -->
                     <div class="overview-card card">
                         <div class="itinerary-header">
@@ -805,11 +809,17 @@
 
                     <!-- Travel Packing Checklist Card -->
                     <div class="packing-checklist-card card" style="margin-top: 20px;">
-                        <div class="card-header" style="border-bottom: 1px solid var(--border-light); padding-bottom: 10px; margin-bottom: 15px; text-align: left;">
-                            <h3 style="margin: 0 0 4px 0;"><i class="fa-solid fa-clipboard-check"></i> 🎒 Essential Gear Packing Checklist</h3>
-                            <p style="margin: 0; font-size: 13px; color: var(--text-secondary);">Gear up for your adventure! Select the items you've packed and grab any missing essentials on Amazon.</p>
+                        <div class="card-header" style="border-bottom: 1px solid var(--border-light); padding-bottom: 10px; margin-bottom: 15px; text-align: left; display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <h3 style="margin: 0 0 4px 0;"><i class="fa-solid fa-clipboard-check"></i> 🎒 Essential Gear Packing Checklist</h3>
+                                <p style="margin: 0; font-size: 13px; color: var(--text-secondary);">Gear up for your adventure! Select the items you've packed and grab any missing essentials on Amazon.</p>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 8px; font-family: var(--font-body); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; background: var(--accent-bg); border: 2px solid var(--text-primary); padding: 8px 12px; border-radius: 6px; cursor: pointer; box-shadow: 2px 2px 0px var(--text-primary);">
+                                <input type="checkbox" id="toggle-packing-grid" style="cursor: pointer; width: 16px; height: 16px;">
+                                <label for="toggle-packing-grid" style="cursor: pointer; margin: 0; color: var(--text-primary);">Show Items</label>
+                            </div>
                         </div>
-                        <div id="packing-checklist-container">
+                        <div id="packing-checklist-container" class="hidden">
                             <!-- Populated dynamically by JS -->
                         </div>
                     </div>

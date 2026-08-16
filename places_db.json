@@ -9790,5 +9790,590 @@
         }
       ]
     }
+  },
+  {
+    "id": "zuluk",
+    "name": "Zuluk (Sikkim Loops)",
+    "state": "Sikkim",
+    "is_popular": false,
+    "starting_cities": [
+      "Gangtok",
+      "Siliguri"
+    ],
+    "starting_city_distances": {
+      "Gangtok": 90,
+      "Siliguri": 140
+    },
+    "description": "Historic Silk Route village featuring zig-zag mountain loops and snow valley viewpoints.",
+    "lat": 27.25,
+    "lon": 88.78,
+    "best_season": "October to April",
+    "entry_tickets": {
+      "silk_route_permit": 200,
+      "thambi_viewpoint": 50
+    },
+    "transportation": {
+      "local_auto": 400,
+      "private_cab": 3500,
+      "public_bus": 250
+    },
+    "accommodation": {
+      "budget": 1200,
+      "mid_range": 2500,
+      "luxury": 4500
+    },
+    "food_cost_per_day": 500,
+    "women_safety": "High safety. Peaceful border village run mostly by hospitable homestay families. Extremely secure.",
+    "pros": [
+      "Unbelievable sunset views over the zig-zag curves.",
+      "Untouched Himalayan wilderness.",
+      "Hospitable local families."
+    ],
+    "cons": [
+      "Requires restricted area permits in advance.",
+      "High altitude sickness risks.",
+      "Extremely cold winters."
+    ],
+    "tips": [
+      "Carry passport-size photos and ID copies for permits.",
+      "Book local homestays in advance.",
+      "Pack thermal layers."
+    ],
+    "warnings": [
+      "Heavy fog can reduce visibility to near zero.",
+      "Landslides can temporarily block route."
+    ],
+    "cost_saving_tips": [
+      "Share private cabs from Gangtok.",
+      "Choose full-board homestay packages."
+    ]
+  },
+  {
+    "id": "kalimpong",
+    "name": "Kalimpong (Hill Station)",
+    "state": "West Bengal",
+    "is_popular": true,
+    "starting_cities": [
+      "Siliguri",
+      "Darjeeling"
+    ],
+    "starting_city_distances": {
+      "Siliguri": 70,
+      "Darjeeling": 50
+    },
+    "description": "Quiet hill town famous for orchid nurseries, historic monasteries, and Kanchenjunga panoramas.",
+    "lat": 27.06,
+    "lon": 88.47,
+    "best_season": "September to May",
+    "entry_tickets": {
+      "pine_view_nursery": 50,
+      "durpin_monastery": 0
+    },
+    "transportation": {
+      "local_auto": 200,
+      "private_cab": 2200,
+      "public_bus": 100
+    },
+    "accommodation": {
+      "budget": 1000,
+      "mid_range": 2200,
+      "luxury": 5000
+    },
+    "food_cost_per_day": 400,
+    "women_safety": "High safety. Quiet, family-oriented town with friendly locals and secure streets.",
+    "pros": [
+      "Stunning views of Mount Kanchenjunga.",
+      "Mild weather compared to freezing Darjeeling.",
+      "Bustling local handicraft markets."
+    ],
+    "cons": [
+      "Frequent traffic jams on narrow hill roads.",
+      "Water shortages during summer peak months."
+    ],
+    "tips": [
+      "Visit the Durpin Dara monastery for views.",
+      "Try local spiced cheese (chhurpi)."
+    ],
+    "warnings": [
+      "Monsoon brings heavy downpours and landslides."
+    ],
+    "cost_saving_tips": [
+      "Use shared jeeps instead of renting private cabs.",
+      "Eat local momos and thukpa at street joints."
+    ]
+  },
+  {
+    "id": "valparai",
+    "name": "Valparai (Tea Estates)",
+    "state": "Tamil Nadu",
+    "is_popular": false,
+    "starting_cities": [
+      "Coimbatore",
+      "Kochi"
+    ],
+    "starting_city_distances": {
+      "Coimbatore": 100,
+      "Kochi": 150
+    },
+    "description": "Lush green hill station covered with tea estates, waterfalls, and home to endemic Nilgiri tahr.",
+    "lat": 10.37,
+    "lon": 76.97,
+    "best_season": "September to March",
+    "entry_tickets": {
+      "sholayar_dam": 20,
+      "aliyar_park": 30
+    },
+    "transportation": {
+      "local_auto": 300,
+      "private_cab": 2800,
+      "public_bus": 120
+    },
+    "accommodation": {
+      "budget": 1200,
+      "mid_range": 2500,
+      "luxury": 6000
+    },
+    "food_cost_per_day": 350,
+    "women_safety": "High safety. Secure plantation town. Avoid walking alone in remote forest edges at night due to wild animal presence.",
+    "pros": [
+      "Incredibly scenic hair-pin bend drive.",
+      "Cool breeze and pleasant climates.",
+      "Excellent birdwatching opportunities."
+    ],
+    "cons": [
+      "Limited cell network connectivity in deep woods.",
+      "Leech bites during rainy seasons."
+    ],
+    "tips": [
+      "Apply salt or oil to prevent leech bites.",
+      "Carry cash as ATMs are sparse."
+    ],
+    "warnings": [
+      "Elephants and leopards are common in forest tracts."
+    ],
+    "cost_saving_tips": [
+      "Stay in estate bungalows or homestays.",
+      "Utilize state government buses for commuting."
+    ]
+  },
+  {
+    "id": "laknavaram",
+    "name": "Laknavaram Lake",
+    "state": "Telangana",
+    "is_popular": false,
+    "starting_cities": [
+      "Warangal",
+      "Hyderabad"
+    ],
+    "starting_city_distances": {
+      "Warangal": 70,
+      "Hyderabad": 210
+    },
+    "description": "Stunning water reservoir featuring suspension bridges connecting small forest islands.",
+    "lat": 18.15,
+    "lon": 80.08,
+    "best_season": "October to March",
+    "entry_tickets": {
+      "suspension_bridge": 50,
+      "boating_ride": 100
+    },
+    "transportation": {
+      "local_auto": 250,
+      "private_cab": 2500,
+      "public_bus": 150
+    },
+    "accommodation": {
+      "budget": 1500,
+      "mid_range": 3000,
+      "luxury": 5000
+    },
+    "food_cost_per_day": 400,
+    "women_safety": "Medium-High safety. Tourist area is secure. Avoid wandering remote forest trails alone after dark.",
+    "pros": [
+      "Picturesque suspension bridges.",
+      "Camping options directly on lake islands.",
+      "Very calm lake boating experience."
+    ],
+    "cons": [
+      "Can get extremely hot in summer.",
+      "Limited food varieties available locally."
+    ],
+    "tips": [
+      "Plan your trip around sunset for photos.",
+      "Try the Haritha lakeside resort stay."
+    ],
+    "warnings": [
+      "Deep waters; strictly avoid swimming outside safe zones."
+    ],
+    "cost_saving_tips": [
+      "Bring your own snacks and water.",
+      "Group travel helps reduce cab rent from Warangal."
+    ]
+  },
+  {
+    "id": "anandpur_sahib",
+    "name": "Anandpur Sahib (Holy City)",
+    "state": "Punjab",
+    "is_popular": true,
+    "starting_cities": [
+      "Chandigarh",
+      "Amritsar"
+    ],
+    "starting_city_distances": {
+      "Chandigarh": 80,
+      "Amritsar": 190
+    },
+    "description": "Historical holy city, home to majestic white gurdwaras and the state-of-the-art Virasat-e-Khalsa museum.",
+    "lat": 31.23,
+    "lon": 76.5,
+    "best_season": "October to March",
+    "entry_tickets": {
+      "museum_entry": 0,
+      "special_exhibit": 20
+    },
+    "transportation": {
+      "local_auto": 150,
+      "private_cab": 2000,
+      "public_bus": 90
+    },
+    "accommodation": {
+      "budget": 800,
+      "mid_range": 2000,
+      "luxury": 4000
+    },
+    "food_cost_per_day": 300,
+    "women_safety": "Very High safety. Holy city with extremely helpful locals, high respect, and secure community kitchen (Langar) areas.",
+    "pros": [
+      "Spiritual and peaceful atmosphere.",
+      "Virasat-e-Khalsa is one of Asia's best museums.",
+      "Free community kitchens serve delicious meals."
+    ],
+    "cons": [
+      "Extremely crowded during Hola Mohalla festival.",
+      "Strict vegetarian food only throughout the city."
+    ],
+    "tips": [
+      "Cover your head before entering gurdwaras.",
+      "Wear decent full clothing."
+    ],
+    "warnings": [
+      "Cameras and photography are restricted inside prayer halls."
+    ],
+    "cost_saving_tips": [
+      "Utilize free lodging (sarai) options if on strict budget.",
+      "Enjoy traditional Langar meals."
+    ]
+  },
+  {
+    "id": "dzukou_valley",
+    "name": "Dz\u00fckou Valley",
+    "state": "Nagaland",
+    "is_popular": false,
+    "starting_cities": [
+      "Kohima",
+      "Dimapur"
+    ],
+    "starting_city_distances": {
+      "Kohima": 25,
+      "Dimapur": 95
+    },
+    "description": "High-altitude green valley on border, famous for seasonal endemic lilies, deep gorges, and clean trekking trails.",
+    "lat": 25.58,
+    "lon": 94.07,
+    "best_season": "June to September",
+    "entry_tickets": {
+      "valley_entry_fee": 100,
+      "tent_pitching": 200
+    },
+    "transportation": {
+      "local_auto": 200,
+      "private_cab": 1800,
+      "public_bus": 100
+    },
+    "accommodation": {
+      "budget": 500,
+      "mid_range": 1500,
+      "luxury": 3000
+    },
+    "food_cost_per_day": 400,
+    "women_safety": "High safety. Safe tribal communities, respectful trekkers, and low crime rates. Local guides are protective.",
+    "pros": [
+      "Breathtaking visual scenery of dwarf bamboo hills.",
+      "Peaceful camping under clear skies.",
+      "Lesser crowded than commercial treks."
+    ],
+    "cons": [
+      "Strenuous uphill climb required to reach valley.",
+      "Basic dorm lodging only in valley rest houses."
+    ],
+    "tips": [
+      "Carry your own light sleeping bag.",
+      "Hire a local guide from Viswema village."
+    ],
+    "warnings": [
+      "Temperature can drop sharply at night.",
+      "Trek path is slippery during monsoon."
+    ],
+    "cost_saving_tips": [
+      "Bring dry packaged food from Kohima.",
+      "Rent camping gear in Kohima instead of the valley."
+    ]
+  },
+  {
+    "id": "loktak_lake",
+    "name": "Loktak Lake (Keibul Lamjao)",
+    "state": "Manipur",
+    "is_popular": false,
+    "starting_cities": [
+      "Imphal"
+    ],
+    "starting_city_distances": {
+      "Imphal": 50
+    },
+    "description": "The largest freshwater lake in Northeast India, featuring unique floating organic rings (Phumdis).",
+    "lat": 24.52,
+    "lon": 93.8,
+    "best_season": "November to March",
+    "entry_tickets": {
+      "national_park": 100,
+      "boating_tour": 300
+    },
+    "transportation": {
+      "local_auto": 300,
+      "private_cab": 1500,
+      "public_bus": 80
+    },
+    "accommodation": {
+      "budget": 1000,
+      "mid_range": 2200,
+      "luxury": 4500
+    },
+    "food_cost_per_day": 350,
+    "women_safety": "High safety. Hospitable lakeside fishing villages with highly secure, peaceful environments.",
+    "pros": [
+      "Witness Keibul Lamjao - the world's only floating national park.",
+      "See the rare dancing Sangai deer.",
+      "Lakeside homestay experiences."
+    ],
+    "cons": [
+      "Limited upscale hotel properties around the lake.",
+      "Mosquitoes are common in evening hours."
+    ],
+    "tips": [
+      "Stay in floating huts for authentic local feel.",
+      "Carry insect repellent."
+    ],
+    "warnings": [
+      "Strictly avoid boating in the lake during storms."
+    ],
+    "cost_saving_tips": [
+      "Use shared public wing cabs from Imphal.",
+      "Enjoy traditional Manipuri meals at local shacks."
+    ]
+  },
+  {
+    "id": "hmuifang",
+    "name": "Hmuifang Hill",
+    "state": "Mizoram",
+    "is_popular": false,
+    "starting_cities": [
+      "Aizawl"
+    ],
+    "starting_city_distances": {
+      "Aizawl": 50
+    },
+    "description": "Scenic cloud-covered mountain resort offering dense virgin forests and lush grassland slopes.",
+    "lat": 23.45,
+    "lon": 92.75,
+    "best_season": "October to March",
+    "entry_tickets": {
+      "hmuifang_park": 20
+    },
+    "transportation": {
+      "local_auto": 250,
+      "private_cab": 1800,
+      "public_bus": 120
+    },
+    "accommodation": {
+      "budget": 1000,
+      "mid_range": 2200,
+      "luxury": 4000
+    },
+    "food_cost_per_day": 350,
+    "women_safety": "Very High safety. Mizo society is highly progressive, egalitarian, and extremely safe for solo women travelers.",
+    "pros": [
+      "Pristine, pollution-free atmosphere.",
+      "Stunning forest walking tracks.",
+      "Traditional Mizo village tours nearby."
+    ],
+    "cons": [
+      "Fog can completely block views in monsoons.",
+      "Very few dining options outside tourist lodge."
+    ],
+    "tips": [
+      "Stay at the government-run tourist cottages.",
+      "Visit the nearby heritage village."
+    ],
+    "warnings": [
+      "Roads from Aizawl are winding and steep."
+    ],
+    "cost_saving_tips": [
+      "Utilize local Mizoram tourism buses.",
+      "Eat at local food stalls (Chhum)."
+    ]
+  },
+  {
+    "id": "unakoti",
+    "name": "Unakoti Rock Carvings",
+    "state": "Tripura",
+    "is_popular": false,
+    "starting_cities": [
+      "Agartala"
+    ],
+    "starting_city_distances": {
+      "Agartala": 140
+    },
+    "description": "Forest pilgrimage site showcasing colossal rock-cut carvings of Hindu gods and waterfalls.",
+    "lat": 24.32,
+    "lon": 92.16,
+    "best_season": "October to March",
+    "entry_tickets": {
+      "archaeology_fee": 25
+    },
+    "transportation": {
+      "local_auto": 300,
+      "private_cab": 3500,
+      "public_bus": 180
+    },
+    "accommodation": {
+      "budget": 900,
+      "mid_range": 2000,
+      "luxury": 3500
+    },
+    "food_cost_per_day": 300,
+    "women_safety": "High safety. Secure archaeological park with warm local community.",
+    "pros": [
+      "Spectacular rock art in dense jungle.",
+      "Mystical, historical vibes.",
+      "Very low tourist crowds."
+    ],
+    "cons": [
+      "Long travel distance from the capital Agartala.",
+      "Requires walking up many steep stairs."
+    ],
+    "tips": [
+      "Wear good walking shoes.",
+      "Combine this trip with Dharmanagar city stay."
+    ],
+    "warnings": [
+      "Monkeys are common; secure your belongings."
+    ],
+    "cost_saving_tips": [
+      "Take a train from Agartala to Kumarghat, then take auto.",
+      "Eat at local dhabas along the highway."
+    ]
+  },
+  {
+    "id": "gurez_valley",
+    "name": "Gurez Valley",
+    "state": "Jammu & Kashmir",
+    "is_popular": false,
+    "starting_cities": [
+      "Srinagar"
+    ],
+    "starting_city_distances": {
+      "Srinagar": 120
+    },
+    "description": "Breathtaking valley with wooden log houses, roaring river streams, and the majestic Habba Khatoon peak.",
+    "lat": 34.63,
+    "lon": 74.84,
+    "best_season": "May to September",
+    "entry_tickets": {
+      "permit_check": 0
+    },
+    "transportation": {
+      "local_auto": 300,
+      "private_cab": 4000,
+      "public_bus": 250
+    },
+    "accommodation": {
+      "budget": 1000,
+      "mid_range": 2500,
+      "luxury": 5000
+    },
+    "food_cost_per_day": 400,
+    "women_safety": "High safety. High presence of security forces and extremely warm, hospitable Dard-Shin locals who treat guests as family.",
+    "pros": [
+      "Untouched, alpine landscape beauty.",
+      "Pristine rivers and mountain hiking tracks.",
+      "Hospitable homestay culture."
+    ],
+    "cons": [
+      "Winding high altitude pass drive (Razdan Pass).",
+      "Closed in winters due to heavy snow."
+    ],
+    "tips": [
+      "Keep ID cards handy for security checkpoints.",
+      "Stay in Dawar town for basic facilities."
+    ],
+    "warnings": [
+      "Check weather alerts before crossing Razdan Pass."
+    ],
+    "cost_saving_tips": [
+      "Take shared cabs from Bandipora.",
+      "Rent local rooms/homestays instead of hotels."
+    ]
+  },
+  {
+    "id": "nubra_valley",
+    "name": "Nubra Valley",
+    "state": "Ladakh",
+    "is_popular": true,
+    "starting_cities": [
+      "Leh"
+    ],
+    "starting_city_distances": {
+      "Leh": 120
+    },
+    "description": "High altitude cold desert famous for sand dunes, double-humped camels, and deep monasteries.",
+    "lat": 34.68,
+    "lon": 77.56,
+    "best_season": "May to September",
+    "entry_tickets": {
+      "permit_fee": 600,
+      "camel_ride": 300
+    },
+    "transportation": {
+      "local_auto": 400,
+      "private_cab": 4500,
+      "public_bus": 300
+    },
+    "accommodation": {
+      "budget": 1200,
+      "mid_range": 3000,
+      "luxury": 7000
+    },
+    "food_cost_per_day": 500,
+    "women_safety": "Very High safety. Peaceful Buddhist culture, very high safety index, and highly supportive local population.",
+    "pros": [
+      "Unbelievable mountain desert landscape.",
+      "Hunder sand dunes and double-humped camels.",
+      "Cross the famous Khardung La Pass."
+    ],
+    "cons": [
+      "High altitude acclimation is necessary.",
+      "Requires Inner Line Permits (ILP)."
+    ],
+    "tips": [
+      "Spend a day in Leh to acclimatize before visiting.",
+      "Carry enough cash as network for online payments is erratic."
+    ],
+    "warnings": [
+      "Acclimatization warning: carry portable oxygen cylinders."
+    ],
+    "cost_saving_tips": [
+      "Book seat-in-coach or shared tourist buses from Leh.",
+      "Choose homestays in Hunder or Diskit."
+    ]
   }
 ]

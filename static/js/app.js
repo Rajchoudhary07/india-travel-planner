@@ -716,6 +716,18 @@ function bindEvents() {
             }
         });
     }
+
+    // Toggle packing checklist grid visibility on checkbox click
+    const togglePackingGrid = document.getElementById("toggle-packing-grid");
+    if (togglePackingGrid && elements.packingChecklistContainer) {
+        togglePackingGrid.addEventListener("change", (e) => {
+            if (e.target.checked) {
+                elements.packingChecklistContainer.classList.remove("hidden");
+            } else {
+                elements.packingChecklistContainer.classList.add("hidden");
+            }
+        });
+    }
 }
 
 // ==========================================================================
@@ -891,6 +903,66 @@ async function fetchDestinations() {
     }
 }
 
+function getPlaceImageUrl(placeId, placeName) {
+    const imageLookup = {
+        "mainpat": "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=800&q=80",
+        "chitrakote_falls": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=800&q=80",
+        "gandikota": "https://images.unsplash.com/photo-1508873696983-2df519f0397e?auto=format&fit=crop&w=800&q=80",
+        "tawang": "https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=800&q=80",
+        "ziro_valley": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80",
+        "araku_valley": "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80",
+        "mawlynnong": "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?auto=format&fit=crop&w=800&q=80",
+        "chopta_valley": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80",
+        "ella": "https://images.unsplash.com/photo-1546708973-b339540b5162?auto=format&fit=crop&w=800&q=80",
+        "sigiriya": "https://images.unsplash.com/photo-1578593139811-292ee14190b4?auto=format&fit=crop&w=800&q=80",
+        "haputale": "https://images.unsplash.com/photo-1563294329-a1c6a2e99e29?auto=format&fit=crop&w=800&q=80",
+        "negombo": "https://images.unsplash.com/photo-1552083375-1447ce886485?auto=format&fit=crop&w=800&q=80",
+        "kalpitiya": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=800&q=80",
+        "unawatuna": "https://images.unsplash.com/photo-1542856391-010fb87dcfed?auto=format&fit=crop&w=800&q=80",
+        "hambantota": "https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?auto=format&fit=crop&w=800&q=80",
+        "pokhara": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=800&q=80",
+        "bhaktapur": "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=800&q=80",
+        "nagarkot": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80",
+        "thimphu": "https://images.unsplash.com/photo-1580977259142-63b7e411f5fa?auto=format&fit=crop&w=800&q=80",
+        "haa_valley": "https://images.unsplash.com/photo-1540959733332-eab4deceeaf7?auto=format&fit=crop&w=800&q=80",
+        "male": "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=800&q=80",
+        "ukulhas": "https://images.unsplash.com/photo-1439066615861-d1af74d74000?auto=format&fit=crop&w=800&q=80",
+        "zuluk": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=800&q=80",
+        "kalimpong": "https://images.unsplash.com/photo-1580977259142-63b7e411f5fa?auto=format&fit=crop&w=800&q=80",
+        "valparai": "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80",
+        "laknavaram": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=800&q=80",
+        "anandpur_sahib": "https://images.unsplash.com/photo-1508873696983-2df519f0397e?auto=format&fit=crop&w=800&q=80",
+        "dzukou_valley": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80",
+        "loktak_lake": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80",
+        "hmuifang": "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=800&q=80",
+        "unakoti": "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?auto=format&fit=crop&w=800&q=80",
+        "gurez_valley": "https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=800&q=80",
+        "nubra_valley": "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=800&q=80"
+    };
+    
+    if (imageLookup[placeId]) {
+        return imageLookup[placeId];
+    }
+    
+    const fallbacks = [
+        "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=800&q=80"
+    ];
+    
+    let hash = 0;
+    for (let i = 0; i < placeId.length; i++) {
+        hash += placeId.charCodeAt(i);
+    }
+    const index = hash % fallbacks.length;
+    return fallbacks[index];
+}
+
 
 
 function populatePreviewTags(places) {
@@ -939,36 +1011,42 @@ function populatePreviewTags(places) {
         const card = document.createElement('div');
         card.className = 'gem-card';
         
+        const imageUrl = getPlaceImageUrl(place.id, place.name);
         card.innerHTML = `
-            <div class="gem-card-header">
-                <div class="gem-card-title-group">
-                    <span class="gem-card-state">${place.state}</span>
-                    <h4 class="gem-card-title">${place.name}</h4>
-                </div>
-                <span class="gem-card-category">${ratingInfo.category}</span>
+            <div class="gem-card-image" style="height: 160px; overflow: hidden; border-bottom: 2px solid var(--text-primary); border-radius: 6px 6px 0 0; position: relative;">
+                <img src="${imageUrl}" alt="${place.name}" style="width: 100%; height: 100%; object-fit: cover;">
+                <span class="gem-card-category" style="position: absolute; top: 10px; right: 10px; background: var(--bg-card); border: 2px solid var(--text-primary); padding: 4px 10px; font-size: 10px; font-weight: 700; border-radius: 4px; text-transform: uppercase;">${ratingInfo.category}</span>
             </div>
-            <p class="gem-card-desc">${place.description}</p>
-            <div class="gem-card-ratings">
-                <div class="rating-row">
-                    <span>Beauty Index:</span>
-                    <div class="rating-stars">
-                        ${generateStarsHtml(ratingInfo.beauty)}
-                        <span class="rating-num">${ratingInfo.beauty.toFixed(1)}</span>
+            <div class="gem-card-content" style="padding: 16px;">
+                <div class="gem-card-header" style="margin-bottom: 12px;">
+                    <div class="gem-card-title-group">
+                        <span class="gem-card-state" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; font-family: var(--font-mono); color: var(--text-muted);">${place.state}</span>
+                        <h4 class="gem-card-title" style="font-size: 18px; font-family: var(--font-heading); margin-top: 4px; font-weight: 800;">${place.name}</h4>
                     </div>
                 </div>
-                <div class="rating-row">
-                    <span>Adventure Value:</span>
-                    <div class="rating-stars">
-                        ${generateStarsHtml(ratingInfo.trip)}
-                        <span class="rating-num">${ratingInfo.trip.toFixed(1)}</span>
+                <p class="gem-card-desc" style="font-size: 13px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 15px;">${place.description}</p>
+                <div class="gem-card-ratings" style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 15px;">
+                    <div class="rating-row" style="display: flex; justify-content: space-between; font-size: 12px;">
+                        <span>Beauty Index:</span>
+                        <div class="rating-stars" style="color: var(--accent-gold);">
+                            ${generateStarsHtml(ratingInfo.beauty)}
+                            <span class="rating-num" style="color: var(--text-primary); font-weight: 700; margin-left: 6px;">${ratingInfo.beauty.toFixed(1)}</span>
+                        </div>
+                    </div>
+                    <div class="rating-row" style="display: flex; justify-content: space-between; font-size: 12px;">
+                        <span>Adventure Value:</span>
+                        <div class="rating-stars" style="color: var(--accent-gold);">
+                            ${generateStarsHtml(ratingInfo.trip)}
+                            <span class="rating-num" style="color: var(--text-primary); font-weight: 700; margin-left: 6px;">${ratingInfo.trip.toFixed(1)}</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="gem-card-footer">
-                <span class="gem-card-season">
-                    <i class="fa-regular fa-calendar"></i> ${place.best_season.split(' to ')[0]}
-                </span>
-                <button class="gem-card-action">Plan Trip <i class="fa-solid fa-arrow-right"></i></button>
+                <div class="gem-card-footer" style="display: flex; justify-content: space-between; align-items: center; border-top: 1px dashed var(--border-light); padding-top: 12px;">
+                    <span class="gem-card-season" style="font-size: 12px; color: var(--text-muted);">
+                        <i class="fa-regular fa-calendar"></i> ${place.best_season.split(' to ')[0]}
+                    </span>
+                    <button class="gem-card-action btn btn-primary" style="padding: 6px 12px; font-size: 11px;">Plan Trip <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
             </div>
         `;
 
@@ -1079,6 +1157,14 @@ async function generateItinerary() {
 // ==========================================================================
 
 function renderItinerary(data, targetBudget) {
+    // Set Hero Banner Image dynamically
+    const heroImg = document.getElementById("itinerary-hero-img");
+    if (heroImg) {
+        const pId = data.id || data.destination.toLowerCase().replace(/[^a-z0-9]/g, "_");
+        heroImg.src = getPlaceImageUrl(pId, data.destination);
+        heroImg.alt = `${data.destination} Banner`;
+    }
+
     // 1. Base Metadata
     elements.stateBadge.innerHTML = `${data.state} <span style="opacity: 0.5; margin: 0 4px;">|</span> ${data.is_popular ? '<i class="fa-solid fa-star" style="color: var(--accent-sunset);"></i> Popular Hotspot' : '<i class="fa-solid fa-wand-magic-sparkles" style="color: var(--accent-cyan);"></i> Hidden Gem'}`;
     elements.destName.textContent = data.destination;
