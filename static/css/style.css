@@ -1,170 +1,61 @@
-/* ==========================================================================
-   Design Tokens & Root Variables (Default Dark Mode)
-   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700;800&family=Oxanium:wght@600;700;800&family=Space+Mono:wght@400;700&display=swap');
+
 :root {
-    --bg-dark: #eef4f0;
-    --bg-card: rgba(255, 255, 255, 0.88);
-    --bg-card-hover: rgba(255, 255, 255, 0.98);
-    --border-light: rgba(16, 185, 129, 0.16);
-    --border-glow: rgba(16, 185, 129, 0.38);
+    --bg-dark: #fbfaf6; /* Warm cream/paper background */
+    --bg-card: #ffffff; /* Clean white card container */
+    --bg-card-hover: #fdfdfc;
+    --border-light: #e8e2d5;
+    --border-glow: #f26b21;
     
     /* Core Palettes */
-    --accent-cyan: #d97706;
-    --accent-blue: #059669;
-    --accent-gold: #d97706;
-    --accent-sunset: #059669;
-    --accent-green: #059669;
+    --accent-cyan: #0dbc9d;     /* e-Yantra Teal */
+    --accent-blue: #0dbc9d;
+    --accent-gold: #f26b21;     /* e-Yantra Orange */
+    --accent-sunset: #f26b21;
+    --accent-green: #0dbc9d;
     
     /* Typography Colors */
-    --text-primary: #0f172a;
-    --text-secondary: #334155;
-    --text-muted: #64748b;
+    --text-primary: #181a21;    /* Clean ink color */
+    --text-secondary: #4a4f63;
+    --text-muted: #80869a;
     
     /* Fonts */
-    --font-heading: 'Outfit', sans-serif;
-    --font-body: 'Inter', sans-serif;
+    --font-heading: 'Oxanium', 'JetBrains Mono', monospace;
+    --font-body: 'Fira Code', 'Space Mono', monospace;
     
     /* Layout */
-    --border-radius-lg: 24px;
-    --border-radius-md: 14px;
-    --transition-smooth: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    --border-radius-lg: 8px;    /* Blockier, retro corners */
+    --border-radius-md: 6px;
+    --transition-smooth: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
     
-    /* Neon Blur Orbs Color */
-    --orb-color-1: rgba(16, 185, 129, 0.08);
-    --orb-color-2: rgba(255, 183, 3, 0.05);
-    --orb-color-3: rgba(14, 165, 233, 0.04);
-    
-    /* Travel-friendly Green and White Gradient Background with Forest watermark (high visibility) */
-    --bg-terracotta: linear-gradient(135deg, rgba(255, 255, 255, 0.88) 0%, rgba(240, 253, 244, 0.82) 50%, rgba(255, 255, 255, 0.85) 100%),
-                     url('/static/img/bg-forest.jpg');
+    /* Subtle background grid pattern mimicking engineering draft paper */
+    --bg-terracotta: radial-gradient(circle at 15% 20%, rgba(242, 107, 33, 0.05) 0%, transparent 60%),
+                     radial-gradient(circle at 85% 80%, rgba(13, 188, 157, 0.05) 0%, transparent 65%),
+                     linear-gradient(to right, #e8e2d5 1px, transparent 1px),
+                     linear-gradient(to bottom, #e8e2d5 1px, transparent 1px),
+                     linear-gradient(135deg, #fbfaf6 0%, #f7f4eb 100%);
 }
 
-/* ==========================================================================
-   Light Mode Theme Variables
-   ========================================================================== */
 body.light-theme {
-    --bg-dark: #f0f6fa;
-    --bg-card: rgba(255, 255, 255, 0.45);
-    --bg-card-hover: rgba(255, 255, 255, 0.6);
-    --border-light: rgba(15, 23, 42, 0.08);
-    --border-glow: rgba(0, 114, 255, 0.25);
+    --bg-dark: #fbfaf6;
+    --bg-card: #ffffff;
+    --bg-card-hover: #fdfdfc;
+    --border-light: #e8e2d5;
+    --border-glow: #f26b21;
     
     /* Typography Colors */
-    --text-primary: #0f172a;
-    --text-secondary: #334155;
-    --text-muted: #64748b;
+    --text-primary: #181a21;
+    --text-secondary: #4a4f63;
+    --text-muted: #80869a;
     
-    /* Neon Blur Orb Color (Light Mode Variant) */
-    --orb-color-1: rgba(29, 209, 161, 0.08);
-    --orb-color-2: rgba(0, 114, 255, 0.08);
-    --orb-color-3: rgba(0, 229, 255, 0.06);
-    
-    --bg-terracotta: radial-gradient(circle at 15% 20%, rgba(29, 209, 161, 0.12) 0%, transparent 60%),
-                     radial-gradient(circle at 85% 80%, rgba(0, 114, 255, 0.1) 0%, transparent 65%),
-                     linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    --bg-terracotta: radial-gradient(circle at 15% 20%, rgba(242, 107, 33, 0.05) 0%, transparent 60%),
+                     radial-gradient(circle at 85% 80%, rgba(13, 188, 157, 0.05) 0%, transparent 65%),
+                     linear-gradient(to right, #e8e2d5 1px, transparent 1px),
+                     linear-gradient(to bottom, #e8e2d5 1px, transparent 1px),
+                     linear-gradient(135deg, #fbfaf6 0%, #f7f4eb 100%);
 }
 
-/* Light Theme Component Overrides */
-body.light-theme .form-input {
-    background: #ffffff;
-    color: var(--text-primary);
-    border-color: rgba(15, 23, 42, 0.15);
-}
 
-body.light-theme .form-input:focus {
-    background: #ffffff;
-    border-color: var(--accent-blue);
-    box-shadow: 0 0 10px rgba(79, 172, 254, 0.2);
-}
-
-body.light-theme .form-input option {
-    background-color: #ffffff;
-    color: var(--text-primary);
-}
-
-body.light-theme .card {
-    box-shadow: 0 8px 32px 0 rgba(45, 22, 18, 0.08), 
-                inset 0 1px 0 0 rgba(255, 255, 255, 0.45);
-}
-
-body.light-theme .btn-icon {
-    color: var(--text-primary);
-    background: rgba(15, 23, 42, 0.05);
-    border-color: rgba(15, 23, 42, 0.1);
-}
-
-body.light-theme .btn-icon:hover {
-    background: rgba(15, 23, 42, 0.1);
-}
-
-/* Light Theme Destination Selectors & Style Options Overrides */
-body.light-theme .option-card {
-    background: #ffffff;
-    color: var(--text-secondary);
-    border-color: rgba(15, 23, 42, 0.15);
-}
-
-body.light-theme .option-card i {
-    color: var(--text-secondary);
-}
-
-body.light-theme .option-card span {
-    color: var(--text-secondary);
-}
-
-body.light-theme .style-option input:checked + .option-card {
-    background: rgba(79, 172, 254, 0.08);
-    border-color: var(--accent-blue);
-    box-shadow: 0 0 12px rgba(79, 172, 254, 0.15);
-}
-
-body.light-theme .style-option input:checked + .option-card i {
-    color: var(--accent-blue);
-}
-
-body.light-theme .style-option input:checked + .option-card span {
-    color: var(--text-primary);
-}
-
-body.light-theme .dest-list-items {
-    background: #ffffff;
-    border-color: rgba(15, 23, 42, 0.15);
-}
-
-body.light-theme .dest-card-item {
-    background: rgba(15, 23, 42, 0.03);
-    border-color: rgba(15, 23, 42, 0.08);
-    color: var(--text-secondary);
-}
-
-body.light-theme .dest-card-item:hover {
-    background: rgba(15, 23, 42, 0.06);
-    border-color: var(--text-secondary);
-    color: var(--text-primary);
-}
-
-body.light-theme .dest-card-item.active {
-    background: rgba(79, 172, 254, 0.08);
-    border-color: var(--accent-blue);
-    color: var(--text-primary);
-    box-shadow: 0 0 8px rgba(79, 172, 254, 0.15);
-}
-
-body.light-theme .dest-card-item.active i {
-    color: var(--accent-blue);
-    opacity: 1;
-}
-
-body.light-theme .popular-col .dest-card-item.active {
-    background: rgba(255, 126, 95, 0.08);
-    border-color: var(--accent-sunset);
-    box-shadow: 0 0 8px rgba(255, 126, 95, 0.15);
-}
-
-body.light-theme .popular-col .dest-card-item.active i {
-    color: var(--accent-sunset);
-    opacity: 1;
-}
 
 /* ==========================================================================
    Reset & Core Styling
@@ -204,9 +95,9 @@ body.light-theme::before {
 body {
     background-color: var(--bg-dark);
     background-image: var(--bg-terracotta);
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-position: center center, center center, top left, top left, center center;
+    background-repeat: no-repeat, no-repeat, repeat, repeat, no-repeat;
+    background-size: cover, cover, 24px 24px, 24px 24px, cover;
     background-attachment: fixed;
     color: var(--text-primary);
     font-family: var(--font-body);
@@ -223,10 +114,10 @@ body {
     height: 8px;
 }
 ::-webkit-scrollbar-track {
-    background: #090e1c;
+    background: var(--bg-dark);
 }
 ::-webkit-scrollbar-thumb {
-    background: #1e294b;
+    background: var(--border-light);
     border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
@@ -310,12 +201,11 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 16px 24px;
-    background: rgba(10, 17, 39, 0.4);
-    backdrop-filter: blur(16px);
-    border: 1px solid var(--border-light);
+    background: var(--bg-card);
+    border: 2px solid var(--text-primary);
     border-radius: var(--border-radius-lg);
     margin-bottom: 24px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+    box-shadow: 6px 6px 0px var(--text-primary);
 }
 
 .logo {
@@ -326,17 +216,14 @@ body {
 
 .brand-icon {
     font-size: 28px;
-    background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-blue) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 2px 10px rgba(0, 242, 254, 0.3));
+    color: var(--accent-gold);
 }
 
 .logo h1 {
     font-family: var(--font-heading);
     font-size: 26px;
     font-weight: 800;
-    letter-spacing: -0.5px;
+    letter-spacing: 0.05em;
 }
 
 .logo h1 span {
@@ -369,19 +256,18 @@ body {
    ========================================================================== */
 .card {
     background: var(--bg-card);
-    backdrop-filter: blur(28px) saturate(220%);
-    -webkit-backdrop-filter: blur(28px) saturate(220%);
-    border: 1px solid var(--border-light);
+    border: 2px solid var(--text-primary);
     border-radius: var(--border-radius-lg);
     padding: 24px;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.22), 
-                inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
+    box-shadow: 6px 6px 0px var(--text-primary);
     transition: var(--transition-smooth);
+    position: relative;
 }
 
 .card:hover {
-    border-color: var(--border-glow);
-    box-shadow: 0 12px 40px rgba(255, 126, 95, 0.12);
+    border-color: var(--accent-gold);
+    box-shadow: 8px 8px 0px var(--text-primary);
+    transform: translate(-2px, -2px);
 }
 
 .card-header {
@@ -417,37 +303,39 @@ body {
     align-items: center;
     justify-content: center;
     gap: 8px;
-    padding: 10px 20px;
+    padding: 10px 22px;
     border-radius: var(--border-radius-md);
     font-family: var(--font-heading);
-    font-size: 14px;
-    font-weight: 600;
+    font-size: 13.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
     cursor: pointer;
     transition: var(--transition-smooth);
-    border: none;
+    border: 2px solid var(--text-primary);
     outline: none;
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-blue) 100%);
-    color: #040814;
-    box-shadow: 0 4px 15px rgba(0, 242, 254, 0.25);
+    background: var(--accent-gold);
+    color: white;
+    box-shadow: 4px 4px 0px var(--text-primary);
 }
 
 .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 242, 254, 0.4);
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px var(--text-primary);
 }
 
 .btn-secondary {
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--bg-card);
     color: var(--text-primary);
-    border: 1px solid var(--border-light);
+    box-shadow: 4px 4px 0px var(--text-primary);
 }
 
 .btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: var(--text-secondary);
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px var(--text-primary);
 }
 
 .btn-icon {
@@ -512,23 +400,25 @@ body {
 }
 
 .form-group label {
-    font-family: var(--font-heading);
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 11.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-secondary);
     display: flex;
     align-items: center;
     gap: 6px;
 }
 
 .form-group label i {
-    color: var(--text-secondary);
-    font-size: 14px;
+    color: var(--accent-cyan);
+    font-size: 13px;
 }
 
 .form-input {
-    background: rgba(230, 248, 235, 0.28);
-    border: 1px solid var(--border-light);
+    background: var(--bg-card);
+    border: 2px solid var(--text-primary);
     border-radius: var(--border-radius-md);
     padding: 12px 14px;
     color: var(--text-primary);
@@ -539,9 +429,9 @@ body {
 }
 
 .form-input:focus {
-    border-color: var(--accent-blue);
-    box-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
-    background: rgba(230, 248, 235, 0.65);
+    border-color: var(--accent-gold);
+    box-shadow: 3px 3px 0px var(--text-primary);
+    background: var(--bg-card);
 }
 
 .form-input option {
@@ -617,8 +507,8 @@ body {
     align-items: center;
     gap: 6px;
     padding: 12px 6px;
-    background: rgba(255, 255, 255, 0.25);
-    border: 1px solid var(--border-light);
+    background: var(--bg-card);
+    border: 2px solid var(--border-light);
     border-radius: var(--border-radius-md);
     text-align: center;
     transition: var(--transition-smooth);
@@ -631,15 +521,18 @@ body {
 }
 
 .option-card span {
-    font-size: 11px;
+    font-size: 11.5px;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
     font-weight: 500;
     color: var(--text-secondary);
 }
 
 .style-option input:checked + .option-card {
-    background: rgba(16, 185, 129, 0.12);
-    border-color: var(--accent-blue);
-    box-shadow: 0 0 12px rgba(16, 185, 129, 0.20);
+    background: var(--accent-bg);
+    border-color: var(--accent-gold);
+    box-shadow: 3px 3px 0px var(--text-primary);
 }
 
 .style-option input:checked + .option-card i {
@@ -655,16 +548,20 @@ body {
 .btn-submit {
     width: 100%;
     padding: 14px;
-    background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-blue) 100%);
-    color: #040814;
+    background: var(--accent-gold);
+    color: white;
     font-size: 15px;
-    box-shadow: 0 4px 20px rgba(0, 242, 254, 0.25);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border: 2px solid var(--text-primary);
+    box-shadow: 4px 4px 0px var(--text-primary);
     margin-top: 10px;
 }
 
 .btn-submit:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 25px rgba(0, 242, 254, 0.45);
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px var(--text-primary);
 }
 
 /* ==========================================================================

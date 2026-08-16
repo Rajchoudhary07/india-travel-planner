@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="48" height="48">
+  <!-- Outer retro tech bracket box -->
+  <rect x="6" y="6" width="88" height="88" rx="8" fill="#fbfaf6" stroke="#181a21" stroke-width="6"/>
+  <!-- Main Y Pathway & Compass needle -->
+  <path d="M50 78 V50 L26 26 H40 L50 38 L60 26 H74 L50 50" fill="#f26b21" stroke="#181a21" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+  <!-- Teal compass directional node -->
+  <polygon points="50,38 60,26 50,26" fill="#0dbc9d" stroke="#181a21" stroke-width="4" stroke-linejoin="round"/>
+  <!-- Central explorer node -->
+  <circle cx="50" cy="50" r="6" fill="#fbfaf6" stroke="#181a21" stroke-width="4"/>
+</svg>

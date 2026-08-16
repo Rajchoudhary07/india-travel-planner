@@ -1396,10 +1396,8 @@ function renderMap(data) {
         scrollWheelZoom: false
     }).setView([centerLat, centerLon], 10);
     
-    const isLightTheme = document.body.classList.contains('light-theme');
-    const tileUrl = isLightTheme 
-        ? 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png'
-        : 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png';
+    const isLightTheme = true;
+    const tileUrl = 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
         
     L.tileLayer(tileUrl, {
         attribution: '&copy; OpenStreetMap &copy; CARTO',
