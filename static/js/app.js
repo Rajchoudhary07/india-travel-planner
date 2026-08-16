@@ -1111,19 +1111,30 @@ function renderItinerary(data, targetBudget) {
 
     // 2. Budget status & progress bar
     const totalEst = data.cost_summary.total_estimated;
-    elements.valTargetBudget.textContent = `₹${targetBudget.toLocaleString('en-IN')}`;
+    
+    // Safely parse parsedTarget with multiple fallback layers
+    let parsedTarget = parseFloat(targetBudget);
+    if (isNaN(parsedTarget) || parsedTarget <= 0) {
+        const params = new URLSearchParams(window.location.search);
+        parsedTarget = parseFloat(params.get("budget"));
+    }
+    if (isNaN(parsedTarget) || parsedTarget <= 0) {
+        parsedTarget = totalEst;
+    }
+    
+    elements.valTargetBudget.textContent = `₹${parsedTarget.toLocaleString('en-IN')}`;
     elements.valEstTotal.textContent = `₹${totalEst.toLocaleString('en-IN')}`;
     
-    const pct = Math.min((totalEst / targetBudget) * 100, 100);
+    const pct = Math.min((totalEst / parsedTarget) * 100, 100);
     elements.progressFill.style.width = `${pct}%`;
     
-    if (totalEst <= targetBudget) {
+    if (totalEst <= parsedTarget) {
         elements.progressFill.className = "progress-bar-fill";
-        elements.budgetStatusMsg.textContent = `Excellent! You save ₹${(targetBudget - totalEst).toLocaleString('en-IN')} within budget limit.`;
+        elements.budgetStatusMsg.textContent = `Excellent! You save ₹${(parsedTarget - totalEst).toLocaleString('en-IN')} within budget limit.`;
         elements.budgetStatusMsg.className = "budget-status under";
     } else {
         elements.progressFill.className = "progress-bar-fill warning";
-        elements.budgetStatusMsg.textContent = `Caution: Exceeds budget by ₹${(totalEst - targetBudget).toLocaleString('en-IN')}. Consider shifting comfort style.`;
+        elements.budgetStatusMsg.textContent = `Caution: Exceeds budget by ₹${(totalEst - parsedTarget).toLocaleString('en-IN')}. Consider shifting comfort style.`;
         elements.budgetStatusMsg.className = "budget-status over";
     }
 
