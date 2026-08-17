@@ -1,0 +1,16 @@
+name: Keep Website Alive
+
+on:
+  schedule:
+    # Run every 10 minutes to prevent Render free tier from sleeping (15 min limit)
+    - cron: '*/10 * * * *'
+  workflow_dispatch: # Allows manual triggering
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Travel Planner Website
+        run: |
+          curl -s https://offbeatyatra.online > /dev/null
+          echo "Keep-alive ping sent successfully at $(date)"
